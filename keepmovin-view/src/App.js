@@ -1,24 +1,18 @@
-
+import WelcomePageTitle from "./components/WelcomePage/WelcomePageTitle";
+import {Route, Routes} from "react-router-dom";
+import Layout from "./components/Layout";
 import './App.css';
+import WelcomePage from "./components/WelcomePage/WelcomePage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+            <Route index element={< WelcomePage />}/>
+            <Route path="home" element={<WelcomePage />}/>
+            
+        </Route>
+      </Routes>
   );
 }
-
 export default App;
