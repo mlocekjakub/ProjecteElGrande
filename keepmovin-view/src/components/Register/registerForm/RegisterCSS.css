@@ -1,0 +1,26 @@
+.body {
+ 
+    overflow: hidden; 
+
+}
+
+.FormContainerCSS {
+    right: -30%;
+    margin-top: 8%;
+
+}
+
+.Centered {
+    text-align: center;
+    align-content: center;
+}
+
+.SignNow
+{
+    color:blue;
+
+}
+
+.etwas {
+    max-width: 60%;
+}
