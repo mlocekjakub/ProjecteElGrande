@@ -1,4 +1,3 @@
-import WelcomePageTitle from "./components/WelcomePage/WelcomePageTitle";
 import {Route, Routes} from "react-router-dom";
 import Layout from "./components/Layout";
 import './App.css';
