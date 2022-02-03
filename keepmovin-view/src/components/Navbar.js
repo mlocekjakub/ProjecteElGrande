@@ -11,7 +11,12 @@ export default function Navbar() {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                    <Link to="/home"><a className="nav-item nav-link active" href="#">Home</a></Link>
+                    <Link to="/home">
+                        Home
+                    </Link>
+                    <Link to="/profile">
+                        Profile
+                    </Link>
                 </div>
                 <div className="navbar-nav">
                     <Link to="/register"><a className="nav-item nav-link active" href="/register">Register</a></Link>
