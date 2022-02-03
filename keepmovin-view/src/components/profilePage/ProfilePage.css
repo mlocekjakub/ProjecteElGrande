@@ -1,0 +1,23 @@
+﻿.flex-row-container {
+    background: #aaa;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.flex-row-container > .flex-row-item {
+    flex: 1 1 30%; /*grow | shrink | basis */
+    height: 265px;
+    border: solid 2px black;
+    justify-content: center;
+}
+
+.flex-row-item {
+    background-color: #1C1F23;
+    border: 1px solid rgba(247, 103, 7, 0);
+}
+
+.profile-page {
+    background: rgba(128, 120, 120, 0.63);
+    height: 100%
+}
