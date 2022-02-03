@@ -1,0 +1,31 @@
+﻿#background {
+    background-image: url(/public/img/main-page-background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+.welcome-page{
+    justify-content: center;
+    margin-top: 10%;
+    height: 100%;
+}
+.welcome-page-title{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.9);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.welcome-text{
+    display: flex;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
