@@ -10,16 +10,17 @@ export default function Navbar() {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="navbar-nav">
-                    <Link to="/home">
-                        Home
-                    </Link>
-                    <Link to="/profile">
-                        Profile
-                    </Link>
+                <div className="nav-item nav-link">
+                    <Link to="/home">Home</Link>
                 </div>
-                <div className="navbar-nav">
-                    <Link to="/register"><a className="nav-item nav-link active" href="/register">Register</a></Link>
+                <div className="nav-item nav-link active">
+                    <Link to="/profile">Profile</Link>
+                </div>
+                <div className="nav-item nav-link active">
+                    <Link to="/register">Register</Link>
+                </div>
+                <div className="nav-item nav-link active">
+                    <Link to="/event/create">Create Event</Link>
                 </div>
             </div>
         </nav>

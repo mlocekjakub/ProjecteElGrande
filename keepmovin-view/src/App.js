@@ -5,6 +5,8 @@ import './App.css';
 import WelcomePage from "./components/WelcomePage/WelcomePage";
 import ProfilePage from "./components/profilePage/ProfilePage"
 import RegisterForm from "./components/Register/RegisterForm";
+import EventForm from "./components/Event/EventForm";
+
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
             <Route path="home" element={<WelcomePage />}/>
             <Route path="profile" element={<ProfilePage />}/>
               <Route path="home" element={<WelcomePage />} />
-              <Route path="register" element={<RegisterForm />} />           
+              <Route path="register" element={<RegisterForm />} />
+            <Route path="event/create" element={<EventForm />} />
         </Route>
       </Routes>
   );
