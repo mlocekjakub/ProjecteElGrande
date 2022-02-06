@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
@@ -17,7 +18,12 @@ namespace KeepMovinAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        /// <summary>
+        /// /Event/1
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
         public Event Get(int id)
         {
             EventDao dao = new EventDao();
@@ -25,13 +31,13 @@ namespace KeepMovinAPI.Controllers
             return eventModel;
         }
         
-        // [HttpGet]
-        // public IEnumerable<Event> GetAll()
-        // {
-        //     EventDao dao = new EventDao();
-        //     var listOfEvents = dao.GetAll();
-        //     return listOfEvents;
-        // }
+        [HttpGet]
+        public IEnumerable<Event> GetAll()
+        {
+            EventDao dao = new EventDao();
+            var listOfEvents = dao.GetAll();
+            return listOfEvents;
+        }
         
         [HttpPost]
         public void Add(Event eventModel)
