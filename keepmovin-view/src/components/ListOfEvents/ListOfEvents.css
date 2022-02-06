@@ -38,7 +38,7 @@
 .event-1 {
     display: grid;
     grid-gap: 20px;
-    background: var(--background);
+    background: #F3F3F3;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(1, 1fr);
     -webkit-transition: 0.3s;
@@ -89,7 +89,6 @@
     border-bottom-right-radius: 0.75em;
 }
 .create-event-button {
-    /*grid-row: 1/2;*/
     display: grid;
     border: 2px solid rgba(255, 255, 255, 0.18);
     border-radius: 0.75em;
@@ -118,6 +117,23 @@
     font-size: 4rem;
     margin-bottom: 0;
     color: #fff;
+}
+@media (max-width: 1000px) {
+    .event-1 {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .go-to {
+        display: grid;
+        grid-column: 1/5;
+    }
+    .image {
+        display: grid;
+        grid-column: 1/5;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+    
 }
 
 

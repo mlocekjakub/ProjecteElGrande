@@ -45,7 +45,7 @@ function EventCard() {
                 <ButtonCard name="join" />
                 <ButtonCard name="details" />
                 <section className="price">
-                    <h4>600$</h4>
+                    <h5>600$</h5>
                 </section>
             </article>
         </div>
