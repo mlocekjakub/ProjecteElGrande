@@ -13,16 +13,16 @@ import LoginHyperLink from "../Login/loginForm/LoginHyperLink"
 export default function RegisterForm() {
 
     return (
-        <div class="image">
-            <div className="Centered">
-                <div className="FormContainerCSS">
-                    <RegistrationHyperLink />
-                    <LoginHyperLink />
-                    <TextBoxes />
-                    <SignUpButton />
-                </div>
+
+        <div className="Centered">
+            <div className="FormContainerCSS">
+                <RegistrationHyperLink />
+                <LoginHyperLink />
+                <TextBoxes />
+                <SignUpButton />
             </div>
         </div>
+
     )
 }
 

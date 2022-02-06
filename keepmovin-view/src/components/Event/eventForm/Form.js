@@ -19,7 +19,7 @@ export default function FormPropsTextFields() {
 
     return (
         <div class="grid-container">
-            <input type="image">Yo</input>
+
         </div>
     );
 }
