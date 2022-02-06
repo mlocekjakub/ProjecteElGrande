@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepMovinAPI", "KeepMovinAPI\KeepMovinAPI.csproj", "{0CD85859-9C05-4439-9CD6-76873DE7B3A4}"
 EndProject
 Global
@@ -12,5 +15,11 @@ Global
 		{0CD85859-9C05-4439-9CD6-76873DE7B3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CD85859-9C05-4439-9CD6-76873DE7B3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CD85859-9C05-4439-9CD6-76873DE7B3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F92990C3-928E-4F5C-B03B-8BB354695971}
 	EndGlobalSection
 EndGlobal

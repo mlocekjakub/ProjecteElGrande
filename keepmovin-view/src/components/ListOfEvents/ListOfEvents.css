@@ -1,0 +1,106 @@
+﻿:root {
+    --primary: #ddd;
+    --dark: #333;
+    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+    --background: #ffffff;
+    --buttonColor: #242626;
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    height: 100%;
+    margin: 90px 250px;
+    background: #FFFFFF;
+    padding: 25px;
+    box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+}
+.searchbar-container {
+    display: grid;
+    grid-row: 2/3;
+    
+}
+.filter-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-column: 1;
+    grid-row: 3/10;
+}
+.events-container {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-rows: repeat(5, 1fr);
+    grid-column: span 4;
+    grid-row: span 30;
+}
+.event-1 {
+    display: grid;
+    grid-gap: 20px;
+    background: var(--background);
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border-radius: 0.75em;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+}
+.event-1:hover {
+    box-shadow: 0 8px 12px 0 rgba(255, 255, 255, 0.2)
+}
+.filter-1 {
+    background: var(--background);
+    box-shadow: var(--shadow);
+}
+
+.item {
+}
+.image {
+    grid-column: span 2;
+    background: url(./News-Trailer-Web-4Sep20.png);
+    border-bottom-left-radius: 0.75em;
+    border-top-left-radius: 0.75em;
+}
+.description {
+    grid-column: span 4;
+}
+.go-to {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+.details {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.join {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.price {
+    display: flex;
+    background: var(--buttonColor);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    border-bottom-right-radius: 0.75em;
+}
+.create-event-button {
+    /*grid-row: 1/2;*/
+    display: grid;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 0.75em;
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header {
+    background: red;
+}
+
+
