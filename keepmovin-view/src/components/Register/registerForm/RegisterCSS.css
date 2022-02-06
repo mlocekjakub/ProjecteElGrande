@@ -24,3 +24,15 @@
 .etwas {
     max-width: 60%;
 }
+
+.Correct {
+
+    color:green;
+}
+
+.InCorrect{
+
+    color:red;
+
+}
+
