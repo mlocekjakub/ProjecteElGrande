@@ -1,5 +1,5 @@
 import * as React from "react";
-import Form from "./EventForm/Form"
+import Form from "./eventForm/Form"
 
 
 
