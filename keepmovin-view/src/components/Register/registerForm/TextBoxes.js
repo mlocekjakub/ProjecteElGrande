@@ -30,7 +30,7 @@ export default function FormPropsTextFields() {
             }
             else {
                 setColor1("secondary");
-                setInput1("Min. 6  Max. 25 signs plus '&'");
+                setInput1("Min. 6  Max. 25 signs plus '@'");
             }
         }
         else if (targetId === "outlined-required-password") {

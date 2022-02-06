@@ -1,8 +1,3 @@
-.body {
- 
-    overflow: hidden; 
-
-}
 
 .FormContainerCSS {
     right: -30%;
@@ -11,28 +6,10 @@
 }
 
 .Centered {
+    
     text-align: center;
     align-content: center;
 }
 
-.SignNow
-{
-    color:blue;
 
-}
-
-.etwas {
-    max-width: 60%;
-}
-
-.Correct {
-
-    color:green;
-}
-
-.InCorrect{
-
-    color:red;
-
-}
 
