@@ -1,5 +1,5 @@
 export function validateEmail(x) {
-    if(x.length >5 && x.length < 61)
+    if(x.length >5 && x.length < 61 && x.includes("@"))
         return true;
     else return false;
 
