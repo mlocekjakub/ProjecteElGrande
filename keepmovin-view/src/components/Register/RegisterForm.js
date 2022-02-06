@@ -2,18 +2,22 @@ import * as React from "react";
 import TextBoxes from "./registerForm/TextBoxes"
 import SignInButton from "./registerForm/SignInButton"
 import './registerForm/RegisterCSS.css';
-import TextBox from "./registerForm/TextBox";
+import SignInText from "./registerForm/SignInText";
+
+
 
 
 
 export default function RegisterForm() {
+
     return (
         <div className="Centered">
                 <div className="FormContainerCSS">
-                    <TextBox/>
+                    <SignInText/>
                     <TextBoxes />
                     <SignInButton />
                 </div>
         </div>
     )
 }
+

@@ -1,17 +1,19 @@
 import * as React from "react";
 import './RegisterCSS.css';
 import { Button } from "@mui/material";
+import { SendForm } from "./RegistrationFormAPI";
 
 
 export default function SignInButton() {
-    const SendForm = () => {           
-        let x = document.getElementById("outlined-required-mail").value;
-        alert(x);
 
-        
+    const CollectInfo = () => {
+        let email = document.getElementById('outlined-required-mail').value;
+        let password = document.getElementById('outlined-required-password').value;
+        let passwordConfirmation = document.getElementById('outlined-required-password1').value;
+        SendForm(email,password,passwordConfirmation);        
     }
     return (
-        <Button onClick={SendForm} variant="contained" disableElevation sx={{
+        <Button id="confirmButton" onClick={CollectInfo} variant="contained" disableElevation sx={{
         top:'6ch'}}>
             Sign Up
         </Button>
