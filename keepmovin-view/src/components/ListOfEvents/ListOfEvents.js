@@ -35,7 +35,7 @@ function ListOfEvents() {
                 <EventCard />
                 <EventCard />
                 <EventCard />
-                <Pagination className="pagination" count={10} color="success" />
+                <Pagination className="pagination" count={10} color="primary" />
             </div>
         </div>
     )
