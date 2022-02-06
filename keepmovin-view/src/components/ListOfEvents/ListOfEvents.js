@@ -4,14 +4,16 @@ import "./ListOfEvents.css"
 import Filter from "./filters/Filter";
 import SearchBar from "./filters/SearchBar";
 import ButtonCard from "./eventCard/ButtonCard";
-import SportFilter from "./filters/SportFilter";
 import {Pagination} from "@mui/material";
 
 
 function ListOfEvents() {
     return (
         <div className="wrapper">
-            <div className="searchbar-container">\
+            <header className="header">
+                <h1>Events</h1>
+            </header>
+            <div className="searchbar-container">
                 <SearchBar />
             </div>
             <div className="create-event-button">
