@@ -19,9 +19,6 @@ export default function ProfileCard() {
     return (
         <div className="container d-flex flex-row justify-content-center">
             <div className="p-2">
-                <OrganiserInfo/>
-            </div>
-            <div className="p-2">
                 <div className="card" style={cardStyle}>
                     <div className="user text-center">
                         <div className="profile"><ProfileImage/></div>
@@ -46,6 +43,9 @@ export default function ProfileCard() {
             </div>
             <div className="p-2">
                 <Description/>
+            </div>
+            <div className="p-2">
+                <OrganiserInfo/>
             </div>
         </div>
     )

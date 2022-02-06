@@ -16,6 +16,6 @@ export default function OrganiserInfo()
         boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)"
     }
     return (
-        <div style={cardStyle}><h3>Organiser Rating: ({rateCount}) <HoverRating/> </h3></div>
+        <div style={cardStyle}><h3> :) </h3></div>
     )
 }

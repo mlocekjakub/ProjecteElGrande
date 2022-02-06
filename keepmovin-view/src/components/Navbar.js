@@ -14,8 +14,15 @@ export default function Navbar() {
                     <Link to="/home">
                         Home
                     </Link>
+                </div>
+                <div className="navbar-nav">
                     <Link to="/profile">
                         Profile
+                    </Link>
+                </div>
+                <div className="navbar-nav">
+                    <Link to="/list-of-events">
+                        List Of Events
                     </Link>
                 </div>
             </div>
