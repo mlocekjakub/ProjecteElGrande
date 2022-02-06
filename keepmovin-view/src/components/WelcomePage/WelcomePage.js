@@ -1,13 +1,16 @@
 ﻿import * as React from "react";
-import RegisterButton from "./RegisterButton";
-import WelcomePageTitle from "./WelcomePageTitle";
-/*import './src/WelcomePage.css';*/
+import './WelcomePageStyles.css';
+import WelcomePageTitle from "./components/WelcomePageTitle";
+import RegisterButton from "./components/RegisterButton";
+import EventScroll from "./components/EventsScroll";
 
 export default function WelcomePage() {
     return (
         <div className="welcome-page">
             <WelcomePageTitle />
             <RegisterButton />
+            <EventScroll />
+            <div id="background" />
         </div>
     )
 }
