@@ -1,7 +1,7 @@
-﻿import ProfileImage from "./profileCard/ProfileImage";
-import "./ProfileCard.css"
-import OrganiserInfo from "./profileCard/OrganiserInfo";
-import Description from "./profileCard/Description";
+﻿import ProfileImage from "./profileCardComponents/ProfileImage";
+import OrganiserInfo from "./profileCardComponents/OrganiserInfo";
+import Description from "./profileCardComponents/Description";
+import "./ProfileCard.css";
 
 
 export default function ProfileCard() {

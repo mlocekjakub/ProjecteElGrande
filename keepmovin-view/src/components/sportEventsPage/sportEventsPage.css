@@ -58,7 +58,7 @@
 }
 .image {
     grid-column: span 2;
-    background: url(./News-Trailer-Web-4Sep20.png);
+    background: url(../../Images/News-Trailer-Web-4Sep20.png);
     border-bottom-left-radius: 0.75em;
     border-top-left-radius: 0.75em;
 }
@@ -104,7 +104,7 @@
 .header {
     grid-row: span 3;
     grid-column: span 5;
-    background: url(../profilePage/profilePageComponents/profileCard/a9f990e6b096f439d7c2b89bd1ee174c_XL.jpg);
+    background: url(../../Images/a9f990e6b096f439d7c2b89bd1ee174c_XL.jpg);
     background-size: cover;
     background-position: center;
     min-height: 300px;

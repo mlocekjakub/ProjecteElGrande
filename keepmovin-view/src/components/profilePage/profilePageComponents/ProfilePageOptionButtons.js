@@ -1,8 +1,7 @@
-﻿import {Button, ButtonGroup} from "@mui/material";
-import ReactDOM from "react-dom";
+﻿import ReactDOM from "react-dom";
 import React from "react";
-import CalendarUpcoming from "./profileCard/CalendarUpcoming";
-import CalendarPrevious from "./profileCard/CalendarPrevious";
+import CalendarUpcoming from "./profileCardComponents/CalendarUpcoming";
+import CalendarPrevious from "./profileCardComponents/CalendarPrevious";
 import Diagrams from "./Diagrams";
 
 export default function ProfilePageOptionButtons() {
