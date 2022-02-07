@@ -8,7 +8,7 @@ function ButtonCard(props) {
     const theme = createTheme({
         palette: {
             join: {
-                main: '#27AB69',
+                main: '#4285F4',
                 contrastText: '#ffffff',
             },
             details: {

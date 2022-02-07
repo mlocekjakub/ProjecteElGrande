@@ -3,7 +3,7 @@
 export default function WelcomePageTitle() {
     return (
         <div className="welcome-page-title">
-            <span className="welcome-text">Welcome to Keep Movin'</span>
+            Welcome to Keep Movin'
         </div>
     )
 }

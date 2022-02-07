@@ -12,14 +12,16 @@ import SearchIcon from '@mui/icons-material/Search';
 function SearchBar() {
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
-        backgroundColor: '#fff',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
         '&:hover': {
-            backgroundColor: '#fff',
+            backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: 'auto'
+            marginLeft: theme.spacing(1),
+            width: 'auto',
         },
     }));
 
@@ -32,6 +34,7 @@ function SearchBar() {
         alignItems: 'center',
         justifyContent: 'center',
     }));
+
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
@@ -46,6 +49,7 @@ function SearchBar() {
                     width: '20ch',
                 },
             },
+            marginTop: "27px"
         },
     }));
     
