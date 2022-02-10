@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,16 +10,20 @@ namespace KeepMovinAPI.DAOs.Implementations
     
     public class EventDao : IEventDao
     {
-        private const string connectionString =
-            "Server=DESKTOP-HIN6P6S\\MSSQLSERVER01;Database=KeepMovin;Trusted_Connection=True";
-        private KeepMovinDbContext context = new KeepMovinDbContext(connectionString);
+
+        private readonly KeepMovinDbContext _context;
+
+        public EventDao(KeepMovinDbContext context)
+        {
+            _context = context;
+        }
 
         public void Add(Event eventModel)
         {
-            using (context)
+            using (_context)
             {
-                context.Event.Add(eventModel);
-                context.SaveChanges();
+                _context.Event.Add(eventModel);
+                _context.SaveChanges();
             }
         }
 
@@ -29,16 +34,20 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Event Get(int id)
         {
-            using (context)
+            Console.WriteLine("->"+_context);
+
+            using (_context)
             {
-                var query = context.Event.Where(e => e.EventId == id);
-                return query.FirstOrDefault();
+                var query = _context.Event.Find(id);
+                // query.Include(events => events.Price);
+                // context.Event.Find(8);
+                return query;
             }
         }
 
         public IEnumerable<Event> GetAll()
         {
-            var query = context.Event.ToList();
+            var query = _context.Event.ToList();
             return query;
         }
     }
