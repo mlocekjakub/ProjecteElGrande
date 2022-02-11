@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { SendForm } from "./RegistrationFormAPI";
 
 
-export default function SignInButton() {
+export default function SignInButton(props) {
 
     const CollectInfo = () => {
         let email = document.getElementById('outlined-required-mail').value;
@@ -14,8 +14,8 @@ export default function SignInButton() {
     }
     return (
         <Button id="confirmButton" onClick={CollectInfo} variant="contained" disableElevation sx={{
-        top:'6ch'}}>
-            Sign Up
+            top: '30ch', width: '80ch'}}>
+            {props.title}
         </Button>
 
     )

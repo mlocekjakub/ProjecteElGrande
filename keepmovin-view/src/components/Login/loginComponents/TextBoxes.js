@@ -10,7 +10,7 @@ export default function FormPropsTextFields() {
             component="form"
             sx={{
                 '& .MuiTextField-root': {
-                    m: 1, width: '35ch', top: '1ch'
+                    m: 1, width: '80ch', top: '20ch'
                 },
             }}
             noValidate
