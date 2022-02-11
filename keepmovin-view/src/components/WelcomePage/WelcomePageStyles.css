@@ -10,22 +10,19 @@
     z-index: -1;
 }
 .welcome-page{
-    justify-content: center;
+    justify-content: center; 
+    align-content: center;
+    text-align: center;
     margin-top: 10%;
     height: 100%;
 }
 .welcome-page-title{
-    display: flex;
     justify-content: center;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 50%;
+    width: 32%;
+    margin: auto;
+    font-size: 50px;
+    color: #ffffff;
     background: rgba(0, 0, 0, 0.9);
     box-sizing: border-box;
     border-radius: 10px;
-}
-.welcome-text{
-    display: flex;
-    color: rgb(255, 255, 255);
-    font-size: 25px;
 }

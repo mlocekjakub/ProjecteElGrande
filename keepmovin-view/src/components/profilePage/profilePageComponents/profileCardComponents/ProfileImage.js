@@ -1,4 +1,4 @@
-﻿import profileImage from './pexels-photo-771742.jpeg';
+﻿import profileImage from '../../../../Images/pexels-photo-771742.jpeg';
 import {useState} from "react";
 
 export default function ProfileImage() {

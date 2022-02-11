@@ -1,5 +1,4 @@
 ﻿import "./Calendar.css";
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {Button} from "@mui/material";
 
 export default function CalendarCard(props) {

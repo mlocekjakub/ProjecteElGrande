@@ -6,7 +6,7 @@
         padding: "8px",
         backgroundColor: "#FFFFFF",
         position: "relative",
-        height: "320px",
+        height: "375px",
         boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)"
     }
     return (

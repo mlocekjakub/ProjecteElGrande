@@ -3,10 +3,8 @@ import Box from "@mui/material/Box";
 
 export default function RegisterButton() {
     return (
-        <Box textAlign='center'>
-            <Button variant="contained" disableElevation>
-                Join Now
-            </Button>
-        </Box>
+        <Button variant="light" disableElevation style={{ marginTop: "30px", marginBottom: "30px"}}>
+            Join Now
+        </Button>
     );
 }
