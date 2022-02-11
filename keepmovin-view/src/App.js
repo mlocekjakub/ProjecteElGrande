@@ -10,6 +10,7 @@ import EventForm from "./components/Event/EventForm";
 import LoginForm from "./components/Login/LoginForm";
 
 
+
 function App() {
   return (
       <Routes>
@@ -20,7 +21,9 @@ function App() {
               <Route path="register" element={<RegisterForm />} />
               <Route path="login" element={<LoginForm />}/>
             <Route path="event/create" element={<EventForm />} />
-            <Route path="list-of-events" element={<ListOfEvents/>}/>
+              <Route path="list-of-events" element={<ListOfEvents />} />
+
+
         </Route>
       </Routes>
   );
