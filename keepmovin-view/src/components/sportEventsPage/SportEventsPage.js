@@ -1,13 +1,13 @@
 ﻿import React, {useState, useEffect} from 'react';
-import EventCard from "./eventCard/EventCard";
-import "./ListOfEvents.css"
-import Filter from "./filters/Filter";
-import SearchBar from "./filters/SearchBar";
-import ButtonCard from "./eventCard/ButtonCard";
+import EventCard from "./sportEventsComponents/EventCard";
+import Filter from "./sportEventsComponents/Filter";
+import SearchBar from "./sportEventsComponents/SearchBar";
+import ButtonCard from "./sportEventsComponents/ButtonCard";
 import {Pagination} from "@mui/material";
+import "./sportEventsPage.css";
 
 
-function ListOfEvents() {
+function SportEventsPage() {
     return (
         <div className="wrapper">
             <header className="header">
@@ -41,4 +41,4 @@ function ListOfEvents() {
     )
 }
 
-export default ListOfEvents;
+export default SportEventsPage;

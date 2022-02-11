@@ -1,28 +1,8 @@
 ﻿import React, {useState, useEffect} from 'react';
-import {Button} from "@mui/material";
-import {createTheme} from "@mui/material/styles";
-import {ThemeProvider} from "@emotion/react";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ButtonCard from "./ButtonCard";
 
 
 function EventCard() {
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#0971f1',
-                darker: '#053e85',
-            },
-            join: {
-                main: '#27AB69',
-                contrastText: '#ffffff',
-            },
-            details: {
-                main: '#242626',
-                contrastText: '#ffffff',
-            }
-        },
-    });
     return (
         <div className="event-1">
             <div className="item image">

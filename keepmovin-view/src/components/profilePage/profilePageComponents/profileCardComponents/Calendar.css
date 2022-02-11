@@ -7,7 +7,7 @@
     color: white;
 }
 .flex-row-calendar-container > .flex-row-calendar-item {
-    flex: 1 1 30%; /*grow | shrink | basis */
+    flex: 1 1 30%;
     height: 250px;
     border: solid 2px black;
     justify-content: center;
@@ -19,8 +19,6 @@
 }
 
 body {
-    /*min-height: 250px;*/
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
     background: #051320;
