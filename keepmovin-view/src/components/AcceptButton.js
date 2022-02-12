@@ -3,6 +3,7 @@ import './Register/registrationComponents/RegisterCSS.css';
 import { Button } from "@mui/material";
 import { SendRegisterForm } from "./API/Api";
 import { SendLoginForm } from "./API/Api";
+import { generalValidation } from "./Register/registrationComponents/ValidateInputs"
 
 
 export default function AcceptButton(props) {
@@ -21,12 +22,9 @@ export default function AcceptButton(props) {
         let email = document.getElementById('outlined-required-mail').value;
         let password = document.getElementById('outlined-required-password').value;
         let passwordConfirmation = document.getElementById('outlined-required-password1').value;
-        if (password === passwordConfirmation) {
-
+        if (generalValidation(email,password,passwordConfirmation))
             SendRegisterForm(email, password);
-
-        }
-            
+                   
     }
 
     const CollectAndPassLoginInfo = () => {

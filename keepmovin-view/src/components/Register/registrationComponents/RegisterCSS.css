@@ -20,7 +20,7 @@ html {
 }
 
 .img {
-    background-image: url('2.jpg');
+    background-image: url('../../RandomImages/2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

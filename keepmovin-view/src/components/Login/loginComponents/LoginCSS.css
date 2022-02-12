@@ -6,7 +6,7 @@ html {
 }
 
 .img {
-    background-image: url('2.jpg');
+    background-image: url('../../RandomImages/2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -24,14 +24,6 @@ html {
     grid-template-columns: 50% 50%;
 
 }
-
-/*.grid >div{
-    background:#eee;
-    padding:1em;
-}
-.grid >div:nth-child(odd){
-    background:#ddd;
-}*/
 
 
 .Centered {
