@@ -27,7 +27,19 @@ export function validateLength(z) {
         return true;
 }
 
-export function generalValidation(x, y, z) {
+export function loginAndPasswordValidation(x, y) {
+    if ((x.length > 5 && x.length < 61 && x.includes("@")) &&
+        (y.length > 5 && y.length <= 30))
+        return true;
+    else
+        return false;
+
+
+}
+   
+
+
+export function registerValidation(x, y, z) {
     if ((x.length > 5 && x.length < 61 && x.includes("@") &&
         (y.length > 5 && y.length <= 30) &&
         (z === y) && z.length > 5))

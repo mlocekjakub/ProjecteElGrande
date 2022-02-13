@@ -3,7 +3,7 @@ import './Register/registrationComponents/RegisterCSS.css';
 import { Button } from "@mui/material";
 import { SendRegisterForm } from "./API/Api";
 import { SendLoginForm } from "./API/Api";
-import { generalValidation } from "./Register/registrationComponents/ValidateInputs"
+import { registerValidation, loginAndPasswordValidation} from "./Register/registrationComponents/ValidateInputs"
 
 
 export default function AcceptButton(props) {
@@ -22,15 +22,23 @@ export default function AcceptButton(props) {
         let email = document.getElementById('outlined-required-mail').value;
         let password = document.getElementById('outlined-required-password').value;
         let passwordConfirmation = document.getElementById('outlined-required-password1').value;
-        if (generalValidation(email,password,passwordConfirmation))
+        if (registerValidation(email, password, passwordConfirmation)) {
             SendRegisterForm(email, password);
+            console.log('dupa');
+        }
+        
                    
     }
 
     const CollectAndPassLoginInfo = () => {
         let email = document.getElementById('outlined-required-login').value;
         let password = document.getElementById('outlined-required-password').value;
-        SendLoginForm(email, password);
+        if (loginAndPasswordValidation(email, password)) {
+            SendLoginForm(email, password);
+            console.log('upa');
+        }
+                  
+        
     }
 
 
