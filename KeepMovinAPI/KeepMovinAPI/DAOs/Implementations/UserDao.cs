@@ -18,16 +18,24 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context = context;
         }
 
+
         public void Add(User user)
         {
-            throw new NotImplementedException();
+            using (_context)
+            {
+                _context.User.Add(user);             
+                _context.SaveChanges();
+            }
         }
 
         public User Get(int id)
         {
-            throw new NotImplementedException();
+            using (_context)
+            {
+                var query = _context.User.Find(id);
+                return query;
+            }
         }
-
         public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
@@ -36,6 +44,15 @@ namespace KeepMovinAPI.DAOs.Implementations
         public void Remove(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            using (_context)
+            {
+                var query = _context.User.Find(email);
+                return query;
+            }
         }
     }
 }

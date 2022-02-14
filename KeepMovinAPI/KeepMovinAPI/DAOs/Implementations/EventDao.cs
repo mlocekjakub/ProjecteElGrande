@@ -18,6 +18,8 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context = context;
         }
 
+
+
         public void Add(Event eventModel)
         {
             using (_context)
@@ -44,6 +46,7 @@ namespace KeepMovinAPI.DAOs.Implementations
                 return query;
             }
         }
+
 
         public IEnumerable<Event> GetAll()
         {

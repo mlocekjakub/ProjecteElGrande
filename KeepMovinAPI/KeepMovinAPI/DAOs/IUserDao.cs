@@ -4,6 +4,6 @@ namespace KeepMovinAPI.DAOs
 {
     public interface IUserDao : IDao<User>
     {
-
+        
     }
 }
