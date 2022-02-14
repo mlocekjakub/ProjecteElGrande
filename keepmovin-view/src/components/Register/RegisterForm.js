@@ -1,9 +1,9 @@
 import * as React from "react";
-import TextBoxes from "./registerForm/TextBoxes"
-import SignUpButton from "./registerForm/SignUpButton"
-import './registerForm/RegisterCSS.css';
-import RegistrationHyperLink from "../Login/loginForm/RegistrationHyperLink"
-import LoginHyperLink from "../Login/loginForm/LoginHyperLink"
+import TextBoxes from "./registrationComponents/TextBoxes";
+import AcceptButton from "../AcceptButton";
+import './registrationComponents/RegisterCSS.css';
+import RegistrationHyperLink from "../Login/loginComponents/RegistrationHyperLink";
+import LoginHyperLink from "../Login/loginComponents/LoginHyperLink";
 
 
 
@@ -11,16 +11,17 @@ import LoginHyperLink from "../Login/loginForm/LoginHyperLink"
 
 
 export default function RegisterForm() {
-
-    return (
-
-        <div className="Centered">
-            <div className="FormContainerCSS">
-                <RegistrationHyperLink />
-                <LoginHyperLink />
-                <TextBoxes />
-                <SignUpButton />
+    return (     
+        <div className="grid">
+            <div className="img">
             </div>
+            <div className="Centered">
+                <LoginHyperLink variant ="outlined" />
+                <RegistrationHyperLink variant="contained" color ="white" />
+                <TextBoxes />
+                <AcceptButton title="Sign Up"/>
+            </div>
+
         </div>
 
     )

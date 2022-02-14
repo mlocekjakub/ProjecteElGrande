@@ -18,14 +18,11 @@ export default function Navbar() {
                 </div>
                 <div className="nav-item nav-link active">
                     <Link to="/login">Login</Link>
-                </div>
-                <div className="nav-item nav-link active">
-                    <Link to="/event/create">Create Event</Link>
-                </div>
+                </div>      
                 <div className="nav-item nav-link active">
                     <Link to="/list-of-events">List Of Events</Link>
                 </div>
             </div>
         </nav>
     );
-};
+}

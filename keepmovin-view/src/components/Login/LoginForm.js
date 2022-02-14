@@ -1,22 +1,30 @@
 import * as React from "react";
-import TextBoxes from "./loginForm/TextBoxes";
-import SignInButton from "./loginForm/SignInButton";
-import RegistrationHyperLink from "./loginForm/RegistrationHyperLink";
-import LoginHyperLink from "./loginForm/LoginHyperLink";
-import './loginForm/LoginCSS.css';
+import TextBoxes from "./loginComponents/TextBoxes";
+import AcceptButton from "../AcceptButton";
+import RegistrationHyperLink from "./loginComponents/RegistrationHyperLink";
+import LoginHyperLink from "./loginComponents/LoginHyperLink";
+import './loginComponents/LoginCSS.css';
+
+
+
+
 
 
 export default function LoginForm() {
 
     return (
-        <div className="Centered">
-            <div className="FormContainerCSS">
-                <RegistrationHyperLink />
-                <LoginHyperLink />  
-                <TextBoxes />
-                <SignInButton />
+        <div className="grid">
+            <div className="img">
             </div>
+            <div className="Centered">
+                <LoginHyperLink variant="contained" color="white"/>
+                  <RegistrationHyperLink variant ="outlined" />
+                  <TextBoxes />
+                <AcceptButton title='Sign In'/>
+            </div>
+                
         </div>
+        
     )
 }
 

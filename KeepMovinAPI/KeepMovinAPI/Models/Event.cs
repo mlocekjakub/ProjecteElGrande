@@ -20,7 +20,7 @@ namespace KeepMovinAPI.Models
         [Column("organizer_user_id")] 
         public int OrganizerUserId { get; set; }
         
-        [Column("sport_id")] 
+        [Column("sport_id")]
         public int SportId { get; set; }
         
         [Column("experience_level")] 
@@ -43,6 +43,9 @@ namespace KeepMovinAPI.Models
         
         [Column("price_id")] 
         public int PriceId { get; set; }
+        
+        // [ForeignKey("price_id")] 
+        // public Price PriceId { get; set; }
         
         [Column("profile_picture")] 
         public Byte[] ProfilePicture { get; set; }
