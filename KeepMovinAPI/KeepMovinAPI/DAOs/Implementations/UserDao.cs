@@ -11,7 +11,14 @@ namespace KeepMovinAPI.DAOs.Implementations
 {
     public class UserDao : IUserDao
     {
-        public void Add(User item)
+        private readonly KeepMovinDbContext _context;
+
+        public UserDao(KeepMovinDbContext context)
+        {
+            _context = context;
+        }
+
+        public void Add(User user)
         {
             throw new NotImplementedException();
         }
