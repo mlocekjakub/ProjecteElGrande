@@ -351,6 +351,8 @@ MigrationBackup/
 
 *.idea
 
-../KeepMovinAPI/KeepMovinAPI/appsettings.json
-../KeepMovinAPI/KeepMovinAPI/appsettings.Development.json
+appsettings.json
+appsettings.Development.json
+
+
 
