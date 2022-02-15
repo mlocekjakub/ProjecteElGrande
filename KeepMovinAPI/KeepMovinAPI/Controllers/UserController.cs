@@ -29,17 +29,30 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
+            if (_dao.CheckIfUserExists(user))
+            {
+                return StatusCode(666);            
+            }
             _dao.Add(user);
             return StatusCode(200);
+
         }
 
         [HttpPost]
         [Route("/user/login")]
         public StatusCodeResult Login(User user)
-        {
-            var user2 = _dao.GetUserByEmail(user);
-            _logger.LogInformation(user2.Password);
+        {           
+            var dataBaseUser = _dao.GetUserByEmail(user);
+            if(!_dao.CheckIfUserExists(user))
+            {
+                return StatusCode(666);
+            }
+            if (!_dao.CompareUsers(dataBaseUser,user))
+            {
+                return StatusCode(666);
+            }
             return StatusCode(200);
+                
         }
 
     

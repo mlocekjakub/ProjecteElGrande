@@ -19,6 +19,21 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context = context;
         }
 
+        public bool CheckIfUserExists(User user)
+        {
+            if (GetUserByEmail(user) == null)
+                return false;
+            return true;
+        }
+
+        public bool CompareUsers(User dataBaseUser ,User loginUser)
+        {
+            if (dataBaseUser.Email != loginUser.Email)
+                return false;
+            if (!BCrypt.Net.BCrypt.Verify(loginUser.Password, dataBaseUser.Password))
+                return false;
+            return true;
+        }
 
         public void Add(User user)
         {
