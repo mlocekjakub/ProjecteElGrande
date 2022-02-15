@@ -1,8 +1,7 @@
 import * as React from "react";
 import './Register/registrationComponents/RegisterCSS.css';
 import { Button } from "@mui/material";
-import { SendRegisterForm } from "./API/Api";
-import { SendLoginForm } from "./API/Api";
+import { SendDataFromForm } from "./API/Api";
 import { registerValidation, loginAndPasswordValidation} from "./Register/registrationComponents/ValidateInputs"
 
 
@@ -23,25 +22,17 @@ export default function AcceptButton(props) {
         let password = document.getElementById('outlined-required-password').value;
         let passwordConfirmation = document.getElementById('outlined-required-password1').value;
         if (registerValidation(email, password, passwordConfirmation)) {
-            SendRegisterForm(email, password);
-            console.log('dupa');
-        }
-        
-                   
+            SendDataFromForm(email, password,"/user/register");
+        }                 
     }
 
     const CollectAndPassLoginInfo = () => {
         let email = document.getElementById('outlined-required-login').value;
         let password = document.getElementById('outlined-required-password').value;
         if (loginAndPasswordValidation(email, password)) {
-            SendLoginForm(email, password);
-            console.log('upa');
-        }
-                  
-        
+            SendDataFromForm(email, password,"/user/login");
+        }       
     }
-
-
 
     return (
         

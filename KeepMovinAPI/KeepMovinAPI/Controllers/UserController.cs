@@ -15,32 +15,32 @@ namespace KeepMovinAPI.Controllers
 	{
 
         private readonly ILogger<UserController> _logger;
-        private IDao<User> _dao;
-        public UserController(ILogger<UserController> logger, IDao<User> dao)
+        private UserDao _dao;
+        public UserController(ILogger<UserController> logger, UserDao dao)
 		{
 			_logger = logger;
             _dao = dao;
-        
+                  
 		}
 
 		[HttpPost]
         [Route("/user/register")]
         public void Register(User user)
         {
-           _logger.LogInformation(user.Password);
-            _logger.LogInformation(user.Email);
-
+            _dao.Add(user);
         }
 
         [HttpPost]
         [Route("/user/login")]
-        public void Login(User user)
+        public User Login(string Email)
         {
-           _logger.LogInformation(user.Password);
-            _logger.LogInformation(user.Email);
-
+            _logger.LogInformation(Email);
+            User user = _dao.GetUserByEmail(Email);
+            _logger.LogInformation(user.Password);
+            return user;
         }
-	
+
+    
     }
 
 
