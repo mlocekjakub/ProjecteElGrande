@@ -2,17 +2,34 @@
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.1fr 1fr 0.1fr;
     height: 100%;
-    margin: 90px 240px;
+    margin: 3rem 5rem;
     background: #FFFFFF;
     padding: 40px;
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+}
+
+#save-button {
+    grid-column:2;
+    position: inherit;
+}
+
+.grid-container-name {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    height: 100%;
+    background: #FFFFFF;
+    padding: 40px;
+    grid-column: span 2;
 }
 
 .grid-container-image {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(1, 1fr);
+    grid-row:2;
     height: 100%;
     padding: 40px;
 }
@@ -21,6 +38,7 @@
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(1, 1fr);
+    grid-row:2;
     height: 100%;
     padding: 40px;
 }
@@ -33,6 +51,6 @@
 }
 
 .info-about-event{
-    width:100%
-    
+    width:100%;
+    resize:none;
 }
