@@ -7,10 +7,8 @@ using KeepMovinAPI.Models;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
-    
     public class EventDao : IEventDao
     {
-
         private readonly KeepMovinDbContext _context;
 
         public EventDao(KeepMovinDbContext context)
@@ -18,15 +16,10 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context = context;
         }
 
-
-
         public void Add(Event eventModel)
         {
-            using (_context)
-            {
-                _context.Event.Add(eventModel);
-                _context.SaveChanges();
-            }
+            _context.Event.Add(eventModel);
+            _context.SaveChanges();
         }
 
         public void Remove(int id)
@@ -36,8 +29,6 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Event Get(int id)
         {
-            Console.WriteLine("->"+_context);
-
             using (_context)
             {
                 var query = _context.Event.Find(id);

@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import {Button} from "@mui/material";
+import {createEvent} from "../../API/Api"; 
 
 
 export default function FormPropsTextFields() {
@@ -62,7 +63,7 @@ export default function FormPropsTextFields() {
             </div>
             <div class="grid-container-infos">
                 <TextField
-                    id="datetime-local"
+                    id="datetime-local-start"
                     label="Start Event"
                     type="datetime-local"
                     name="StartEvent"
@@ -72,7 +73,7 @@ export default function FormPropsTextFields() {
                     }}
                 />
                 <TextField
-                    id="datetime-local"
+                    id="datetime-local-end"
                     label="End Event"
                     type="datetime-local"
                     name="EndEvent"
@@ -85,14 +86,14 @@ export default function FormPropsTextFields() {
                     <InputLabel id="demo-controlled-open-select-label">Sport</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        id="sport-select"
                         value={sportId}
                         name="SportId"
                         label="Sport"
                         onChange={handleSportIdChange}
 
                     >
-                        <MenuItem value={0}>Baseball</MenuItem>
+                        <MenuItem value={1}>Baseball</MenuItem>
                     </Select>
                 </FormControl>
                 <TextField
@@ -105,7 +106,7 @@ export default function FormPropsTextFields() {
                     <InputLabel id="demo-controlled-open-select-label">Experience Level</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        id="exp-lvl"
                         value={experienceLevel}
                         name="ExperienceLevel"
                         label="Experience Level"
@@ -128,7 +129,7 @@ export default function FormPropsTextFields() {
                         <InputLabel id="demo-controlled-open-select-label">Currency</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            id="currency"
                             name="Currency"
                             value={currency}
                             label="Currency"
@@ -144,13 +145,14 @@ export default function FormPropsTextFields() {
             <div class="grid-container-infos">
                 <TextareaAutosize
                     className="info-about-event"
+                    id="info-about-event"
                     aria-label="empty textarea"
                     name="EventInfo"
                     placeholder="Info about Event"
                     minRows={18}
                 />
             </div>
-            <Button id="save-button" variant="contained" disableElevation sx={{
+            <Button id="save-button" variant="contained" onClick={createEvent} disableElevation sx={{
                     top: '30ch', width: '80ch', position:'none'
                 }}>
                     Save
