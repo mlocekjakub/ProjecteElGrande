@@ -3,6 +3,7 @@ export function SendDataFromForm(email, password, uri) {
         "Email": email,
         "Password": password
     }
+    console.log(email);
     fetch(uri, {
         method: 'POST',
         headers: {
@@ -10,6 +11,8 @@ export function SendDataFromForm(email, password, uri) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data_package_form)
+        
     })
+        .then(console.log(JSON.stringify(data_package_form)))
 
 }
