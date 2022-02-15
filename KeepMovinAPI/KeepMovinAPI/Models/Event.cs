@@ -7,7 +7,7 @@ namespace KeepMovinAPI.Models
 {
     public class Event
     {
-        [Key] 
+        [Key]
         [Column("event_id")] 
         public int EventId { get; set; }
         
