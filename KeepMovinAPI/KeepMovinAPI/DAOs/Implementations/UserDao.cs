@@ -30,7 +30,7 @@ namespace KeepMovinAPI.DAOs.Implementations
         {
             if (dataBaseUser.Email != loginUser.Email)
                 return false;
-            if (!BCrypt.Net.BCrypt.Verify(loginUser.Password, dataBaseUser.Password))
+            if (!BCryptNet.Verify(loginUser.Password, dataBaseUser.Password))
                 return false;
             return true;
         }

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { useState } from 'react';
 
 
 export default function FormPropsTextFields() {
-
+             
     return (
         <Box
             component="form"
@@ -20,8 +21,9 @@ export default function FormPropsTextFields() {
                 <TextField className="login"
                     required
                     id="outlined-required-login"
-                    label="Login"
-                    helperText="* Required"
+                    label="Email"
+                    helperText="* Field required"
+                    
 
                 />
             </div>
@@ -30,7 +32,8 @@ export default function FormPropsTextFields() {
                     required
                     id="outlined-required-password"
                     label="Password"
-                    helperText="* Required"
+                    helperText="* Field required"
+                    type="password"
                 />
             </div>
         </Box>
