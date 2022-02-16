@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import './WelcomePageStyles.css';
 import WelcomePageTitle from "./WelcomePageComponents/WelcomePageTitle";
 import EventsCarousel from "./WelcomePageComponents/EventsCarousel";
@@ -11,6 +11,7 @@ export default function WelcomePage() {
             <WelcomePageTitle/>
             <JoinButton/>
             <EventsCarousel/>
+            test
         </div>
     )
 }

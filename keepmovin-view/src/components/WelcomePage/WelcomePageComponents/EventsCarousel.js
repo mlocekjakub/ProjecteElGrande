@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import './EventCarouselStyles.css';
 import {ArrowBack, ArrowForward} from "@material-ui/icons";
 import EventImage from '../../../Images/News-Trailer-Web-4Sep20.png';
@@ -9,7 +9,7 @@ export default function EventsCarousel() {
             <button className="prev" id="nav-button" onClick={() => {console.log("prev")}}><ArrowBack/></button>
             <div className="track">
                 <div className="card">
-                    <img src={EventImage} alt="event image" style={{ width: "100%" }}/>
+                    <img src={EventImage} alt='' style={{ width: "100%" }}/>
                     <div>16-02-2022</div>
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus id augue lobortis
                         accumsan. Proin iaculis lacinia nibh in aliquet. Integer vestibulum aliquet lacinia.
@@ -17,7 +17,7 @@ export default function EventsCarousel() {
                     <button style={{ border: "0"}}>Go for more!</button>
                 </div>
                 <div className="card">
-                    <img src={EventImage} alt="event image" style={{ width: "100%" }}/>
+                    <img src={EventImage} alt='' style={{ width: "100%" }}/>
                     <div>16-02-2022</div>
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus id augue lobortis
                         accumsan. Proin iaculis lacinia nibh in aliquet. Integer vestibulum aliquet lacinia.
@@ -25,7 +25,7 @@ export default function EventsCarousel() {
                     <button style={{ border: "0"}}>Go for more!</button>
                 </div>
                 <div className="card">
-                    <img src={EventImage} alt="event image" style={{ width: "100%" }}/>
+                    <img src={EventImage} alt='' style={{ width: "100%" }}/>
                     <div>16-02-2022</div>
                     <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus id augue lobortis
                         accumsan. Proin iaculis lacinia nibh in aliquet. Integer vestibulum aliquet lacinia.
