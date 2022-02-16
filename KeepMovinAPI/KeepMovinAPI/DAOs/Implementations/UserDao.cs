@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using KeepMovinAPI.Models;
 using KeepMovinAPI.DAOs;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 
 namespace KeepMovinAPI.DAOs.Implementations
@@ -18,23 +19,36 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context = context;
         }
 
+        public bool CheckIfUserExists(User user)
+        {
+            if (GetUserByEmail(user) == null)
+                return false;
+            return true;
+        }
+
+        public bool CompareUsers(User dataBaseUser ,User loginUser)
+        {
+            if (dataBaseUser.Email != loginUser.Email)
+                return false;
+            if (!BCryptNet.Verify(loginUser.Password, dataBaseUser.Password))
+                return false;
+            return true;
+        }
 
         public void Add(User user)
         {
-            using (_context)
-            {
-                _context.User.Add(user);             
-                _context.SaveChanges();
-            }
+            user.Password = BCryptNet.HashPassword(user.Password);
+            _context.User.Add(user);
+            _context.SaveChanges();
+
         }
 
         public User Get(int id)
         {
-            using (_context)
-            {
-                var query = _context.User.Find(id);
-                return query;
-            }
+
+            var query = _context.User.Find(id);
+            return query;
+
         }
         public IEnumerable<User> GetAll()
         {
@@ -46,13 +60,12 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new NotImplementedException();
         }
 
-        public User GetUserByEmail(string email)
+        public User GetUserByEmail(User user)
         {
-            using (_context)
-            {
-                var query = _context.User.Find(email);
-                return query;
-            }
+            var query = _context.User.Where(u => u.Email == user.Email);
+            User user2 = query.FirstOrDefault();
+            return user2;
+
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿import * as React from "react";
+import * as React from "react";
 import './WelcomePageStyles.css';
-import WelcomePageTitle from "./components/WelcomePageTitle";
-import RegisterButton from "./components/RegisterButton";
-import EventsCarousel from "./components/EventsCarousel"
+import WelcomePageTitle from "./WelcomePageComponents/WelcomePageTitle";
+import EventsCarousel from "./WelcomePageComponents/EventsCarousel";
+import JoinButton from "./WelcomePageComponents/JoinButton";
+
 
 export default function WelcomePage() {
     return (
         <div className="welcome-page">
-            <WelcomePageTitle />
-            <RegisterButton />
-            <EventsCarousel />
-            <div id="background" />
+            <WelcomePageTitle/>
+            <JoinButton/>
+            <EventsCarousel/>
+            test
         </div>
     )
 }

@@ -5,7 +5,9 @@ using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -25,19 +27,32 @@ namespace KeepMovinAPI.Controllers
 
 		[HttpPost]
         [Route("/user/register")]
-        public void Register(User user)
+        public StatusCodeResult Register(User user)
         {
+            if (_dao.CheckIfUserExists(user))
+            {
+                return StatusCode(666);            
+            }
             _dao.Add(user);
+            return StatusCode(200);
+
         }
 
         [HttpPost]
         [Route("/user/login")]
-        public User Login(string Email)
-        {
-            _logger.LogInformation(Email);
-            User user = _dao.GetUserByEmail(Email);
-            _logger.LogInformation(user.Password);
-            return user;
+        public StatusCodeResult Login(User user)
+        {           
+            var dataBaseUser = _dao.GetUserByEmail(user);
+            if(!_dao.CheckIfUserExists(user))
+            {
+                return StatusCode(666);
+            }
+            if (!_dao.CompareUsers(dataBaseUser,user))
+            {
+                return StatusCode(666);
+            }
+            return StatusCode(200);
+                
         }
 
     

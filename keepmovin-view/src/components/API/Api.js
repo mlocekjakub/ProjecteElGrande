@@ -10,8 +10,10 @@ export function SendDataFromForm(email, password, uri) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data_package_form)
-    })
 
+    }).then(response => response.status)
+        .then(data => console.log(data));
+        
 }
 
 export function createEvent() {
@@ -43,7 +45,6 @@ export function createEvent() {
             "Currency": currency
         }
     }
-    console.log(event_model_json);
     fetch("/api/event", {
         method: 'POST',
         headers: {
