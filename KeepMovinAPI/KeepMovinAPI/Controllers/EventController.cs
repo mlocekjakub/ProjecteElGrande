@@ -13,7 +13,6 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<EventController> _logger;
         private IDao<Event> _daoEvent;
-        private PriceDao _daoPrice;
 
         public EventController(ILogger<EventController> logger, IDao<Event> daoEvent)
         {
@@ -29,7 +28,7 @@ namespace KeepMovinAPI.Controllers
         
        
         [HttpGet]
-        [Route("event/{id}")]
+        [Route("api/event/{id}")]
         public Event Get(int id)
         {
             Event eventModel = _daoEvent.Get(id);
@@ -37,7 +36,7 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("events")]
+        [Route("api/events")]
         public IEnumerable<Event> GetAll()
         {
             var listOfEvents = _daoEvent.GetAll();

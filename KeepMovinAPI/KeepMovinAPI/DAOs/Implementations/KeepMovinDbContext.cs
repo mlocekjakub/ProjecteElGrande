@@ -22,6 +22,7 @@ namespace KeepMovinAPI
         public DbSet<Event> Event { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Price> Price { get; set; }
+        public DbSet<Sport> Sport { get; set; }
 
 
     }

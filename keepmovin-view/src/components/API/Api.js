@@ -15,6 +15,7 @@ export function SendDataFromForm(email, password, uri) {
 }
 
 export function createEvent() {
+    console.log("yooooo")
     let status = "upcoming";
     let owner = 1;
     let name = document.querySelector("#name").value;

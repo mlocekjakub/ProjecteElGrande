@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using KeepMovinAPI.Models;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
-    public class PriceDao : IPriceDao
+    public class SportDao : ISportDao
     {
         private readonly KeepMovinDbContext _context;
 
-        public PriceDao(KeepMovinDbContext context)
+        public SportDao(KeepMovinDbContext context)
         {
             _context = context;
         }
-        public void Add(Price item)
+        public void Add(Sport item)
         {
             throw new System.NotImplementedException();
         }
@@ -21,22 +22,15 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Price Get(int id)
+        public Sport Get(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Price> GetAll()
+        public IEnumerable<Sport> GetAll()
         {
-            throw new System.NotImplementedException();
-        }
-        
-        public int AddPrice(Price item)
-        {
-            int id = _context.Price.Add(item).Entity.PriceId;
-            _context.SaveChanges();
-            return id;
-
+            var query = _context.Sport.ToList();
+            return query;
         }
     }
 }
