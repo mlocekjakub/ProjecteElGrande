@@ -17,11 +17,11 @@ namespace KeepMovinAPI.Controllers
 	{
 
         private readonly ILogger<UserController> _logger;
-        private UserDao _dao;
-        public UserController(ILogger<UserController> logger, UserDao dao)
+        private IUserDao _userDao;
+        public UserController(ILogger<UserController> logger, UserDao userDao)
 		{
 			_logger = logger;
-            _dao = dao;
+            _userDao = userDao;
                   
 		}
 
@@ -29,11 +29,11 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
-            if (_dao.CheckIfUserExists(user))
+            if (_userDao.CheckIfUserExists(user))
             {
                 return StatusCode(666);            
             }
-            _dao.Add(user);
+            _userDao.Add(user);
             return StatusCode(200);
 
         }
@@ -42,12 +42,12 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/login")]
         public StatusCodeResult Login(User user)
         {           
-            var dataBaseUser = _dao.GetUserByEmail(user);
-            if(!_dao.CheckIfUserExists(user))
+            var dataBaseUser = _userDao.GetUserByEmail(user);
+            if(!_userDao.CheckIfUserExists(user))
             {
                 return StatusCode(666);
             }
-            if (!_dao.CompareUsers(dataBaseUser,user))
+            if (!_userDao.CompareUsers(dataBaseUser,user))
             {
                 return StatusCode(666);
             }
