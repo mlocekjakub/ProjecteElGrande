@@ -10,6 +10,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+
 
 namespace KeepMovinAPI.Controllers
 {
@@ -52,7 +54,13 @@ namespace KeepMovinAPI.Controllers
             var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_dao);
             if (token == null)
                 return Unauthorized();
-            return Ok(token);
+
+            Response.Cookies.Append("token",value:token,new CookieOptions
+            {
+                HttpOnly = true,
+            });
+
+            return Ok();
         }
     
     }
