@@ -1,5 +1,4 @@
-﻿import React, {useState, useEffect} from 'react';
-import EventCard from "./sportEventsComponents/EventCard";
+﻿import EventCard from "./sportEventsComponents/EventCard";
 import Filter from "./sportEventsComponents/Filter";
 import SearchBar from "./sportEventsComponents/SearchBar";
 import ButtonCard from "./sportEventsComponents/ButtonCard";

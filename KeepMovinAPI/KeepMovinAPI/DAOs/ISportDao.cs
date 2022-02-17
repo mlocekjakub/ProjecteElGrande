@@ -2,7 +2,7 @@ using KeepMovinAPI.Models;
 
 namespace KeepMovinAPI.DAOs
 {
-    public interface IPriceDao : IDao<Price>
+    public interface ISportDao : IDao<Sport>
     {
         
     }

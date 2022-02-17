@@ -62,6 +62,7 @@ namespace KeepMovinAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IDao<Event>, EventDao>();
             services.AddTransient<IDao<User>, UserDao>();
+            services.AddTransient<IDao<Sport>, SportDao>();
             services.AddTransient<UserController>();
             services.AddTransient<UserDao>();
 
