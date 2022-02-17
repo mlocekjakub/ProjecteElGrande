@@ -5,28 +5,14 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Button} from "@mui/material";
 
 export default function CalendarUpcoming() {
-    const style = {
-        fontColor: "white"
-    }
     return (
-        <div className="flex-row-calendar-container">
+        <div className="upcoming-calendar-container">
             <Button><ArrowBackIosIcon/></Button>
-            <div className="flex-row-item">
-                <CalendarCard monthName="March" dayName="Friday"
-                              dateName="23" eventName="Running Event"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="March" dayName="Saturday"
-                              dateName="24" eventName="Basketball"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="March" dayName="Sunday" 
-                              dateName="25" eventName="Swimming Event"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="March" dayName="Monday" 
-                              dateName="26" eventName="Running Event"/>
-            </div>
+            <CalendarCard month="March" day="Monday" dayNumber="27" category="Swimming"/>
+            <CalendarCard month="March" day="Monday" dayNumber="27" category="Swimming"/>
+            <CalendarCard month="March" day="Monday" dayNumber="27" category="Swimming"/>
+            <CalendarCard month="March" day="Monday" dayNumber="27" category="Swimming"/>
+            <CalendarCard month="March" day="Monday" dayNumber="27" category="Swimming"/>
             <Button><ArrowForwardIosIcon/></Button>
         </div>
     );

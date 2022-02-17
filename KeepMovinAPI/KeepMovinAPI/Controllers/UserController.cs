@@ -8,51 +8,50 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using KeepMovinAPI.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KeepMovinAPI.Controllers
 {
-
+    [Authorize]
 	[ApiController]
     public class UserController :  ControllerBase
 	{
 
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
-        public UserController(ILogger<UserController> logger, UserDao userDao)
+        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        public UserController(ILogger<UserController> logger, UserDao userDao, IJwtAuthenticationManager jwt)
 		{
 			_logger = logger;
             _userDao = userDao;
+            _jwtAuthenticationManager = jwt;
                   
 		}
 
-		[HttpPost]
+        [AllowAnonymous]
+        [HttpPost]
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
             if (_userDao.CheckIfUserExists(user))
             {
-                return StatusCode(666);            
+                return StatusCode(303);            
             }
             _userDao.Add(user);
             return StatusCode(200);
-
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("/user/login")]
-        public StatusCodeResult Login(User user)
+        public IActionResult Login(User user)
         {           
             var dataBaseUser = _userDao.GetUserByEmail(user);
-            if(!_userDao.CheckIfUserExists(user))
-            {
-                return StatusCode(666);
-            }
-            if (!_userDao.CompareUsers(dataBaseUser,user))
-            {
-                return StatusCode(666);
-            }
-            return StatusCode(200);
-                
+            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_userDao);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
         }
 
     
