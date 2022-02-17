@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mime;
+using System.Text.Json.Serialization;
 
 namespace KeepMovinAPI.Models
 {
@@ -17,6 +18,7 @@ namespace KeepMovinAPI.Models
         [Column("email")]
 		public string Email { get;set; }
 
+        [JsonIgnore]
         [Required(ErrorMessage = "Password is required")]
         [StringLength(200,ErrorMessage = "Password length must be between 6 and 30 signs", MinimumLength = 6)]
         [Column("password")]

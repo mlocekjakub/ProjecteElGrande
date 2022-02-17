@@ -1,25 +1,31 @@
 ﻿.carousel-container {
-    width: 70%;
-    height: 90%;
+    width: 71rem;
+    height: 25rem;
     margin-left: auto;
     margin-right: auto;
     display: grid;
     grid-template-columns: 0.1fr 1fr 0.1fr;
 }
 
-.track {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 1rem;
-    padding: 5px;
+.carousel-inner {
+    overflow: hidden;
 }
 
-.card {;
+.track {
+    display: flex;
+    transition: transform 1s;
+}
+
+.card {
     display: grid !important;
-    text-align: center;
+    grid-template-rows: 1fr 0.1fr 1fr 0.1fr !important;
+    height: 25rem;
+    width: 20rem;
+    padding-right: 1rem;
     border: 0 !important;
     border-radius: 0 !important;
-    background: rgba(0,0,0,0.34);
+    background: transparent !important;
+    text-align: center;
 }
 
 #nav-button {
