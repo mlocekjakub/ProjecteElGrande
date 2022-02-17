@@ -1,23 +1,31 @@
-﻿.flex-row-container {
-    background: #aaa;
+﻿@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap');
+
+
+:root {
+    --box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+    --clr-content-background: #FFFFFF;
+    --clr-page-background-1: #FAFAFA;
+    --clr-page-background-2: #F3F3F3;
+    --border-profile-page: 1px solid rgba(5, 5, 5, 0.13);
+}
+body {
+    background: black;
+}
+.profile-page-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+    margin: 90px 240px;
+    padding: 1rem;
+    font-family: "Manrope", "sans-serif";
+    gap: 1.2rem;
 }
-.flex-row-container > .flex-row-item {
-    flex: 1 1 30%; /*grow | shrink | basis */
-    height: 265px;
-    border: solid 2px black;
-    justify-content: center;
+.profile-content {
+    background: #FAFAFA;
+    box-shadow: var(--box-shadow);
+    border: var(--border-profile-page)
+    
 }
 
-.flex-row-item {
-    background-color: #1C1F23;
-    border: 1px solid rgba(247, 103, 7, 0);
-}
 
-.profile-page {
-    background: rgba(128, 120, 120, 0.63);
-    height: 100%
-}

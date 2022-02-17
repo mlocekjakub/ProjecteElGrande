@@ -1,0 +1,38 @@
+.grid-container-3 {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+    margin: 90px 240px;
+    background: #FFFFFF;
+    padding: 40px;
+    box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+}
+
+.grid-container-image {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    height: 100%;
+    padding: 40px;
+}
+
+.grid-container-infos {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    height: 100%;
+    padding: 40px;
+}
+
+.grid-container-price {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+}
+
+.info-about-event{
+    width:100%
+    
+}

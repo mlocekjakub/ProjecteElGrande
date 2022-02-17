@@ -1,13 +1,18 @@
 ﻿import React, {useState, useEffect} from 'react';
 import EventCard from "./sportEventsComponents/EventCard";
-import Filter from "./sportEventsComponents/Filter";
 import SearchBar from "./sportEventsComponents/SearchBar";
 import ButtonCard from "./sportEventsComponents/ButtonCard";
 import {Pagination} from "@mui/material";
 import "./sportEventsPage.css";
+import SportFilter from "./sportEventsComponents/SportFilter";
+import ExperienceFilter from "./sportEventsComponents/ExperienceFilter";
+import PriceFilter from "./sportEventsComponents/PriceFilter";
+import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFilter";
+import TypeFilter from "./sportEventsComponents/TypeFilter";
 
 
 function SportEventsPage() {
+    
     return (
         <div className="wrapper">
             <header className="header">
@@ -20,13 +25,11 @@ function SportEventsPage() {
                 <ButtonCard name="create" />
             </div>
             <div className="filter-container">
-                <Filter />
-                <Filter />
-                <Filter />
-                <Filter />
-                <Filter />
-                <Filter />
-                <Filter />
+                <SportFilter />
+                <ExperienceFilter />
+                <PriceFilter />
+                <ParticipantsCountFilter />
+                <TypeFilter />
             </div>
             <div className="events-container">
                 <EventCard />
@@ -35,6 +38,7 @@ function SportEventsPage() {
                 <EventCard />
                 <EventCard />
                 <EventCard />
+                
                 <Pagination className="pagination" count={10} color="primary" />
             </div>
         </div>

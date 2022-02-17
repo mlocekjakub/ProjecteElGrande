@@ -1,0 +1,30 @@
+﻿.filter-type-expanded-container {
+    min-height: 3rem;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0.7rem 1rem 1rem 1rem;
+}
+.filter-type-expanded-container > div {
+    padding: 0.6rem 0 0.3rem 0
+}
+
+.choose-all-type {
+    font-weight: 700;
+    color: rgb(66, 133, 244);
+}
+.type-item {
+    transition: 0.15s;
+    /*border-bottom: 1px solid rgba(5, 5, 5, 0.20);*/
+
+}
+.type-item:hover {
+    cursor: pointer;
+    background: #F3F3F3;
+}
+
+.active-filter {
+    max-height: 30rem;
+}
+.inactive-filter {
+    max-height: 2.7rem;
+}

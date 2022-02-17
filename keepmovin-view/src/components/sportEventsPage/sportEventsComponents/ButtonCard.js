@@ -29,7 +29,7 @@ function ButtonCard(props) {
         case "join":
             return (
                 <ThemeProvider theme={theme}>
-                    <Button className="join" color="join" variant="contained" style={{borderRadius: 0, borderTopRightRadius: "0.75em"}}>
+                    <Button className="join" color="join" variant="contained" style={{borderRadius: 0, borderTopRightRadius: "0.3em"}}>
                         Join Now
                     </Button>
                 </ThemeProvider>
@@ -38,7 +38,7 @@ function ButtonCard(props) {
             return(
                 <ThemeProvider theme={theme}>
                     <Button className="join" color="join" variant="contained"
-                            style={{borderRadius: "0.75em"}}>
+                            style={{borderRadius: "0.3em"}}>
                         Create Event
                     </Button>
                 </ThemeProvider>
