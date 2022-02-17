@@ -11,33 +11,25 @@ import Sport from "./Sport";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {BrowserRouter} from "react-router-dom";
 import App from "../../../App";
+import MenuItem from "@mui/material/MenuItem";
 
 
+const items = []
+fetch('/api/sports')
+    .then(response => response.json())
+    .then(data => {
+        for (const [index, value] of data.entries()) {
+            items.push(value)
+        }
+    });
 
+console.log(items);
 function SportFilter() {
 
-    const [sports, setSports] = useState([
-        {
-            id: 1,
-            type: 'Swimming',
-        },
-        {
-            id: 2,
-            type: 'Basketball',
-        },
-        {
-            id: 3,
-            type: 'Football',
-        },
-        {
-            id: 4,
-            type: 'Hockey',
-        },
-        {
-            id: 5,
-            type: 'Volleyball',
-        }
-    ])
+    
+    const [sports, setSports] = useState({items})
+    
+    console.log(sports);
     
     const [sportsSelected, setSportsSelected] = useState([
         {
@@ -85,8 +77,8 @@ function SportFilter() {
                     <div onClick={CheckAllSports} className="check-hide-all-sports sport-item">Choose All</div>
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>
                 </div>
-                {sports.map((sport) =>
-                (<Sport key={sport.id} id={sport.id} type={sport.type} markSport={MarkAsCheckedSport} />))}
+                {sports.items.map((sport) =>
+                (<Sport key={sport.sportId} id={sport.sportId} type={sport.name} markSport={MarkAsCheckedSport} />))}
             </div>
         </div>
     )

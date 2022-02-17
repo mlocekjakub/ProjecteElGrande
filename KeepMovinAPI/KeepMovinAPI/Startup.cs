@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using KeepMovinAPI.Controllers;
 
 namespace KeepMovinAPI
 {
@@ -33,6 +34,10 @@ namespace KeepMovinAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IDao<Event>, EventDao>();
             services.AddTransient<IDao<User>, UserDao>();
+            services.AddTransient<IDao<Sport>, SportDao>();
+            services.AddTransient<IPriceDao, PriceDao>();
+            services.AddTransient<UserController>();
+            services.AddTransient<UserDao>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

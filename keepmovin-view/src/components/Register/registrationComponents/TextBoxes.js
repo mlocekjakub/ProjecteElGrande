@@ -94,6 +94,7 @@ export default function FormPropsTextFields() {
                     id="outlined-required-password"
                     label="New password"
                     helperText={input2}
+                    type="password"
                 />
             </div>
             <div>
@@ -105,6 +106,7 @@ export default function FormPropsTextFields() {
                     id="outlined-required-password1"
                     label="Confirm password"
                     helperText={input3}
+                    type="password"
                 />
             </div>
             <div>

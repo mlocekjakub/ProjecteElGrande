@@ -2,7 +2,7 @@
 
 namespace KeepMovinAPI.DAOs
 {
-    public interface IUserDao : IDao<User>
+    public interface IPriceDao : IDao<Price>
     {
         
     }

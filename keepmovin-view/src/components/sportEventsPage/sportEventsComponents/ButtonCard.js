@@ -3,6 +3,7 @@ import {ThemeProvider} from "@emotion/react";
 import {Button} from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import React from "react";
+import {Link} from "react-router-dom";
 
 function ButtonCard(props) {
     const theme = createTheme({
@@ -37,8 +38,8 @@ function ButtonCard(props) {
         case "create":
             return(
                 <ThemeProvider theme={theme}>
-                    <Button className="join" color="join" variant="contained"
-                            style={{borderRadius: "0.3em"}}>
+                    <Button component={Link} to="/event/create"  className="join" color="join" variant="contained"
+                            style={{borderRadius: "0.3em"}} >
                         Create Event
                     </Button>
                 </ThemeProvider>
