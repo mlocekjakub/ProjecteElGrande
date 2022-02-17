@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     public class EventController : ControllerBase
     {
         private readonly ILogger<EventController> _logger;
         private IDao<Event> _daoEvent;
+
 
         public EventController(ILogger<EventController> logger, IDao<Event> daoEvent)
         {

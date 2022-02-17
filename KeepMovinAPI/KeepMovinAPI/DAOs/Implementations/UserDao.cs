@@ -26,8 +26,10 @@ namespace KeepMovinAPI.DAOs.Implementations
             return true;
         }
 
-        public bool CompareUsers(User dataBaseUser ,User loginUser)
+        public bool CompareUsers(User dataBaseUser ,User loginUser) 
         {
+            if (dataBaseUser == null)
+                return false;
             if (dataBaseUser.Email != loginUser.Email)
                 return false;
             if (!BCryptNet.Verify(loginUser.Password, dataBaseUser.Password))
