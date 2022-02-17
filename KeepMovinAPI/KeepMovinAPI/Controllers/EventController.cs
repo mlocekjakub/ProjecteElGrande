@@ -38,6 +38,7 @@ namespace KeepMovinAPI.Controllers
             return eventModel;
         }
         
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/events")]
         public IEnumerable<Event> GetAll()
@@ -46,7 +47,7 @@ namespace KeepMovinAPI.Controllers
             return listOfEvents;
         }
         
-        
+        [AllowAnonymous]
         [HttpPost]
         [Route("api/event")]
         public void Add(Event eventModel)

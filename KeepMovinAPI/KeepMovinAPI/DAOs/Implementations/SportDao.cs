@@ -24,7 +24,11 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Sport Get(int id)
         {
-            throw new System.NotImplementedException();
+            using (_context)
+            {
+                var query = _context.Sport.Find(id);
+                return query;
+            }
         }
 
         public IEnumerable<Sport> GetAll()
