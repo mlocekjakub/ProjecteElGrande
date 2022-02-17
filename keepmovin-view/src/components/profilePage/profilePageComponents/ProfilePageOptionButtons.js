@@ -1,11 +1,36 @@
 ﻿import ReactDOM from "react-dom";
-import React from "react";
+import React, {useState} from "react";
 import CalendarUpcoming from "./profileCardComponents/CalendarUpcoming";
 import CalendarPrevious from "./profileCardComponents/CalendarPrevious";
 import Diagrams from "./Diagrams";
 import './ProfilePageOptionButtons.css';
+import OptionButton from "./OptionButton";
+import Sport from "../../sportEventsPage/sportEventsComponents/Sport";
 
 export default function ProfilePageOptionButtons() {
+
+    const [buttonChosen, setButtonChosen] = useState([
+        {
+            id: 1,
+            type: 'Statistics',
+            buttonClass: 'item-1',
+            chosenFunction: RenderStatistics
+        },
+        {
+            id: 2,
+            type: 'UpcomingEvents',
+            buttonClass: 'item-2',
+            chosenFunction: RenderUpcoming
+        },
+        {
+            id: 3,
+            type: 'PreviousEvents',
+            buttonClass: 'item-3',
+            chosenFunction: RenderPrevious
+        },
+        ])
+    
+    
     function RenderStatistics() {
         ReactDOM.render(
             <Diagrams />,
@@ -27,9 +52,11 @@ export default function ProfilePageOptionButtons() {
     
     return (
         <div className="button-options-container">
-            <a onClick={RenderStatistics} className="button-item item-1">Statistics </a>
-            <a onClick={RenderUpcoming} className="button-item item-2">Upcoming Events</a>
-            <a onClick={RenderPrevious} className="button-item item-3">Previous Events</a>
+                {buttonChosen.map((button) =>
+                    (<OptionButton key={button.id} type={button.type} buttonClass={button.buttonClass} 
+                                   toggleFunction={button.chosenFunction} />)
+                )
+                }
         </div>
     );
 }

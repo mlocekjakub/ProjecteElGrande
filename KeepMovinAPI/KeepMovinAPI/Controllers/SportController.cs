@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
-    public class SportController 
+    [Authorize]
+    [ApiController]
+    public class SportController : ControllerBase
     {
         private readonly ILogger<SportController> _logger;
         private IDao<Sport> _daoSport;
@@ -17,6 +20,7 @@ namespace KeepMovinAPI.Controllers
             _daoSport = daoSport;
         }
         
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/sports")]
         public IEnumerable<Sport> GetAll()
