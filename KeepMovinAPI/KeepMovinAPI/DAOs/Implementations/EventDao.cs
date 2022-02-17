@@ -37,8 +37,7 @@ namespace KeepMovinAPI.DAOs.Implementations
                 return query;
             }
         }
-
-
+        
         public IEnumerable<Event> GetAll()
         {
             var query = _context.Event.ToList();

@@ -40,8 +40,8 @@ function ProfessionalEventsDiagram() {
                     title:{
                         display:true,
                         text:'Professional Events',
-                        fontSize:20,
-                        fontColor: "White"
+                        fontSize:18,
+                        fontColor: "#212529"
                     },
                     legend:{
                         display:true,

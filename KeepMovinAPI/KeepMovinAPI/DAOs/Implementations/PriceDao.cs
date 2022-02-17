@@ -1,4 +1,6 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using KeepMovinAPI.Models;
 
 namespace KeepMovinAPI.DAOs.Implementations
@@ -11,9 +13,11 @@ namespace KeepMovinAPI.DAOs.Implementations
         {
             _context = context;
         }
-        public void Add(Price item)
+
+        public void Add(Price priceModel)
         {
-            throw new System.NotImplementedException();
+            _context.Price.Add(priceModel);
+            _context.SaveChanges();
         }
 
         public void Remove(int id)
@@ -23,20 +27,13 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Price Get(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Price> GetAll()
         {
-            throw new System.NotImplementedException();
-        }
-        
-        public int AddPrice(Price item)
-        {
-            int id = _context.Price.Add(item).Entity.PriceId;
-            _context.SaveChanges();
-            return id;
-
+            var query = _context.Price.ToList();
+            return query;
         }
     }
 }

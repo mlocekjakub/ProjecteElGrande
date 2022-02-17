@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     public class EventController : ControllerBase
     {
         private readonly ILogger<EventController> _logger;
         private IDao<Event> _daoEvent;
-        private PriceDao _daoPrice;
+
 
         public EventController(ILogger<EventController> logger, IDao<Event> daoEvent)
         {
@@ -29,7 +31,7 @@ namespace KeepMovinAPI.Controllers
         
        
         [HttpGet]
-        [Route("event/{id}")]
+        [Route("api/event/{id}")]
         public Event Get(int id)
         {
             Event eventModel = _daoEvent.Get(id);
@@ -37,12 +39,13 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("events")]
+        [Route("api/events")]
         public IEnumerable<Event> GetAll()
         {
             var listOfEvents = _daoEvent.GetAll();
             return listOfEvents;
         }
+        
         
         [HttpPost]
         [Route("api/event")]

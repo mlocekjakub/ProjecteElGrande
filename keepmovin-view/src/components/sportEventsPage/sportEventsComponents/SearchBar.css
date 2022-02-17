@@ -1,0 +1,29 @@
+﻿:root {
+    
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+.search-txt {
+    background: #F3F3F3;
+    padding: 0.2rem 0 0.2rem 0.3rem;
+    border: 0;
+    transition: 0.2s;
+}
+.search-txt:focus {
+    outline: none !important;
+    background: #fff;
+    border: 2px solid rgba(128, 128, 128, 0.17);
+    
+}
+
+.search-button {
+    border: 0;
+    background: 0;
+}
+
+

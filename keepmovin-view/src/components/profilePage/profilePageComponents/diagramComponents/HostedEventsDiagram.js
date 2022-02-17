@@ -35,8 +35,8 @@ function HostedEventsDiagram() {
                     title:{
                         display:true,
                         text: 'Hosted Events',
-                        fontSize:20,
-                        fontColor: "White"
+                        fontSize: 18,
+                        fontColor: "#212529"
 
                     },
                     legend:{

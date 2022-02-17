@@ -2,30 +2,17 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {Button} from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import "./Calendar.css";
 
 export default function CalendarPrevious() {
-    const style = {
-        fontColor: "white"
-    }
     return (
-        <div className="flex-row-calendar-container">
+        <div className="previous-calendar-container">
             <Button><ArrowBackIosIcon/></Button>
-            <div className="flex-row-item">
-                <CalendarCard monthName="June" dayName="Friday"
-                              dateName="19" eventName="Running Event"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="June" dayName="Saturday"
-                              dateName="20" eventName="Basketball"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="June" dayName="Sunday"
-                              dateName="21" eventName="Swimming Event"/>
-            </div>
-            <div className="flex-row-item">
-                <CalendarCard monthName="June" dayName="Monday"
-                              dateName="22" eventName="Running Event"/>
-            </div>
+            <CalendarCard month="February" day="Saturday" dayNumber="15" category="Basketball"/>
+            <CalendarCard month="February" day="Saturday" dayNumber="15" category="Basketball"/>
+            <CalendarCard month="February" day="Saturday" dayNumber="15" category="Basketball"/>
+            <CalendarCard month="February" day="Saturday" dayNumber="15" category="Basketball"/>
+            <CalendarCard month="February" day="Saturday" dayNumber="15" category="Basketball"/>
             <Button><ArrowForwardIosIcon/></Button>
         </div>
     );

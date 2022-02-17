@@ -8,53 +8,52 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using KeepMovinAPI.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KeepMovinAPI.Controllers
 {
-
+    [Authorize]
 	[ApiController]
     public class UserController :  ControllerBase
 	{
 
         private readonly ILogger<UserController> _logger;
         private UserDao _dao;
-        public UserController(ILogger<UserController> logger, UserDao dao)
+        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        public UserController(ILogger<UserController> logger, UserDao dao,IJwtAuthenticationManager jwt)
 		{
 			_logger = logger;
             _dao = dao;
+            _jwtAuthenticationManager = jwt;
                   
 		}
 
-		[HttpPost]
+        [AllowAnonymous]
+        [HttpPost]
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
             if (_dao.CheckIfUserExists(user))
             {
-                return StatusCode(666);            
+                return StatusCode(303);            
             }
             _dao.Add(user);
             return StatusCode(200);
 
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("/user/login")]
-        public StatusCodeResult Login(User user)
+        public IActionResult Login(User user)
         {           
             var dataBaseUser = _dao.GetUserByEmail(user);
-            if(!_dao.CheckIfUserExists(user))
-            {
-                return StatusCode(666);
-            }
-            if (!_dao.CompareUsers(dataBaseUser,user))
-            {
-                return StatusCode(666);
-            }
-            return StatusCode(200);
-                
+            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_dao);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
         }
-
     
     }
 
