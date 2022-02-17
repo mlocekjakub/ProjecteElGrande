@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
-    height: 90vh;
+    height: 92vh;
     grid-template-rows: 0.6fr 0.4fr 1fr;
 }
 

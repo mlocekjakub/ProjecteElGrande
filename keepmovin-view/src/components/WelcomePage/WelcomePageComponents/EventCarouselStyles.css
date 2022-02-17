@@ -1,30 +1,31 @@
 ﻿.carousel-container {
-    width: 70%;
-    height: 90%;
+    width: 71rem;
+    height: 25rem;
     margin-left: auto;
     margin-right: auto;
     display: grid;
     grid-template-columns: 0.1fr 1fr 0.1fr;
 }
 
-.track {
-    display: grid;
-    height: 24rem;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    grid-template-rows: auto;
-    grid-auto-rows: 0;
+.carousel-inner {
     overflow: hidden;
-    column-gap: 1rem;
-    padding: 5px;
+}
+
+.track {
+    display: flex;
+    transition: transform 1s;
 }
 
 .card {
-    /*display: grid !important;*/
-    display: flex;
-    /*grid-template-rows: auto;*/
-    text-align: center;
+    display: grid !important;
+    grid-template-rows: 1fr 0.1fr 1fr 0.1fr !important;
+    height: 25rem;
+    width: 20rem;
+    padding-right: 1rem;
     border: 0 !important;
     border-radius: 0 !important;
+    background: transparent !important;
+    text-align: center;
 }
 
 #nav-button {
