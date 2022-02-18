@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
@@ -21,7 +17,7 @@ namespace KeepMovinAPI.Controllers
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        public UserController(ILogger<UserController> logger, UserDao userDao, IJwtAuthenticationManager jwt)
+        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt)
 		{
 			_logger = logger;
             _userDao = userDao;

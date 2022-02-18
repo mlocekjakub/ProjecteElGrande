@@ -12,9 +12,9 @@ namespace KeepMovinAPI.Controllers
     public class SportController : ControllerBase
     {
         private readonly ILogger<SportController> _logger;
-        private IDao<Sport> _daoSport;
+        private ISportDao _daoSport;
 
-        public SportController(ILogger<SportController> logger, IDao<Sport> daoSport)
+        public SportController(ILogger<SportController> logger, ISportDao daoSport)
         {
             _logger = logger;
             _daoSport = daoSport;

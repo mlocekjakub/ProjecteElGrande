@@ -3,15 +3,8 @@ import "./Filter.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./SportFilter.css";
 import {ExpandFilter, SportSearchBar} from "./Filter";
-import {GetCheckIcon} from "./Filter";
-import ReactDOM from "react-dom";
-import CalendarUpcoming from "../../profilePage/profilePageComponents/profileCardComponents/CalendarUpcoming";
-import CheckIcon from '@mui/icons-material/Check';
 import Sport from "./Sport";
-import {forEach} from "react-bootstrap/ElementChildren";
-import {BrowserRouter} from "react-router-dom";
-import App from "../../../App";
-import MenuItem from "@mui/material/MenuItem";
+
 
 
 const items = []
@@ -23,7 +16,6 @@ fetch('/api/sports')
         }
     });
 
-console.log(items);
 function SportFilter() {
 
     

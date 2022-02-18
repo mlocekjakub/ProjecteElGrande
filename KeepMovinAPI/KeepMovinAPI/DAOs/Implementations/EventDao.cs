@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Serialization;
 using KeepMovinAPI.Models;
 
 namespace KeepMovinAPI.DAOs.Implementations
@@ -32,8 +29,6 @@ namespace KeepMovinAPI.DAOs.Implementations
             using (_context)
             {
                 var query = _context.Event.Find(id);
-                // query.Include(events => events.Price);
-                // context.Event.Find(8);
                 return query;
             }
         }

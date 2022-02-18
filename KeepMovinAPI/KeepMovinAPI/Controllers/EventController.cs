@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
-using KeepMovinAPI.DAOs.Implementations;
 using KeepMovinAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,27 +9,21 @@ namespace KeepMovinAPI.Controllers
 {
     [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class EventController : ControllerBase
     {
         private readonly ILogger<EventController> _logger;
-        private IDao<Event> _daoEvent;
+        private IEventDao _daoEvent;
 
 
-        public EventController(ILogger<EventController> logger, IDao<Event> daoEvent)
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent)
         {
             _logger = logger;
             _daoEvent = daoEvent;
         }
 
-        /// <summary>
-        /// /Event/1
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        
-       
-        [HttpGet]
-        [Route("api/event/{id}")]
+        [AllowAnonymous]
+        [HttpGet("{id:int}")]
         public Event Get(int id)
         {
             Event eventModel = _daoEvent.Get(id);
@@ -39,21 +31,16 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("api/events")]
         public IEnumerable<Event> GetAll()
         {
             var listOfEvents = _daoEvent.GetAll();
             return listOfEvents;
         }
         
-        
         [HttpPost]
-        [Route("api/event")]
         public void Add(Event eventModel)
         {
             _daoEvent.Add(eventModel);
         }
-        
-        
     }
 }

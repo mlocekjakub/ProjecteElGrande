@@ -1,7 +1,3 @@
-using System;
-using KeepMovinAPI.DAOs;
-using KeepMovinAPI.DAOs.Implementations;
-using KeepMovinAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,11 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using KeepMovinAPI.Controllers;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using KeepMovinAPI.DAOs;
+using KeepMovinAPI.DAOs.Implementations;
 
 namespace KeepMovinAPI
 {
@@ -60,10 +57,10 @@ namespace KeepMovinAPI
 
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<EventDao>();
-            services.AddTransient<PriceDao>();
-            services.AddTransient<UserDao>();
-            services.AddTransient<SportDao>();
+            services.AddTransient<IEventDao, EventDao>();
+            services.AddTransient<IPriceDao, PriceDao>();
+            services.AddTransient<IUserDao, UserDao>();
+            services.AddTransient<ISportDao, SportDao>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
