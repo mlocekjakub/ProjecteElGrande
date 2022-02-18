@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+
 
 namespace KeepMovinAPI.Controllers
 {
@@ -47,7 +49,13 @@ namespace KeepMovinAPI.Controllers
             var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_userDao);
             if (token == null)
                 return Unauthorized();
-            return Ok(token);
+
+            Response.Cookies.Append("token",value:token,new CookieOptions
+            {
+                HttpOnly = true,
+            });
+
+            return Ok();
         }
 
     

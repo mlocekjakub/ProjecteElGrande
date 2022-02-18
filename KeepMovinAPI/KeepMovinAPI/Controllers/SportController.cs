@@ -28,5 +28,16 @@ namespace KeepMovinAPI.Controllers
             var listOfSports = _daoSport.GetAll();
             return listOfSports;
         }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/sport/{id}")]
+        public Sport Get(int id)
+        {
+            var sport = _daoSport.Get(id);
+            return sport;
+        }
+
+
     }
 }

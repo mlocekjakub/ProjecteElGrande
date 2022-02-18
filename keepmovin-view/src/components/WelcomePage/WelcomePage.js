@@ -11,7 +11,6 @@ export default function WelcomePage() {
             <WelcomePageTitle/>
             <JoinButton/>
             <EventsCarousel/>
-            test
         </div>
     )
 }
