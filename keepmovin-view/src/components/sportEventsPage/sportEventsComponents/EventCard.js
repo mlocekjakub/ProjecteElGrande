@@ -20,7 +20,7 @@ function EventCard(props) {
             </div>
             <div className="item description d-flex flex-column">
                 <div className="title p-2">
-                    <h4>Name: {props.eventName}</h4>
+                    <h4>{props.eventName}</h4>
                 </div>
                 <div className="location p-2">
                     Location: Lacko

@@ -18,7 +18,7 @@ fetch('/api/events')
             events.push(value)
         }
     });
-console.log(events);
+
 
 function SportEventsPage() {
 
