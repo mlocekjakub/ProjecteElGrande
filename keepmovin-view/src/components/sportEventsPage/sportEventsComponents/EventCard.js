@@ -4,8 +4,6 @@ import ButtonCard from "./ButtonCard";
 
 
 function EventCard(props) {
-    const price = [29, 45, 100, 150, 220];
-
     const [sportCategory, setSportCategory] = useState("")
     
     fetch(`/api/sport/${props.sportId}`)
@@ -36,7 +34,7 @@ function EventCard(props) {
                 <ButtonCard name="join" />
                 <ButtonCard name="details" />
                 <section className="price">
-                    <h5>{price[Math.floor(Math.random()*price.length)]} PLN</h5>
+                    <h5>100 PLN</h5>
                 </section>
             </article>
         </div>

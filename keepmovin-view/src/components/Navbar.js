@@ -1,29 +1,20 @@
 ﻿import * as React from 'react';
 import { Link } from 'react-router-dom';
+import "./Navbar.css";
 
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand">Keep Movin</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="nav-item nav-link">
-                    <Link to="/home">Home</Link>
-                </div>
-                <div className="nav-item nav-link active">
-                    <Link to="/profile">Profile</Link>
-                </div>
-                <div className="nav-item nav-link active">
-                    <Link to="/login">Login</Link>
-                </div>      
-                <div className="nav-item nav-link active">
-                    <Link to="/list-of-events">List Of Events</Link>
-                </div>
-            </div>
-        </nav>
+        <header>
+            <div className="logo">Keep Movin'</div>
+            <nav>
+                <ul className="nav__links">
+                    <li><Link className="Link" to="/home">Home</Link></li>
+                    <li><Link className="Link" to="/list-of-events">Events</Link></li>
+                    <li><Link className="Link" to="/profile">Profile</Link></li>
+                    <li><Link className="Link" to="/login">Login</Link></li>
+                </ul>
+            </nav>
+        </header>
     );
 }
 
