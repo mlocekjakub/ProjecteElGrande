@@ -58,7 +58,8 @@ namespace KeepMovinAPI.Controllers
             return Ok();
         }
 
-        [HttpPost("/user/logout")]
+        [AllowAnonymous] //Tag tylko i wyłącznie dla testów ,skasować po pełnej implementacji !!!
+        [HttpPost("/user/logOut")]
         public IActionResult Logout()
         {
             Response.Cookies.Delete("token");
