@@ -16,20 +16,20 @@ using Microsoft.AspNetCore.Http;
 namespace KeepMovinAPI.Controllers
 {
     [Authorize]
-	[ApiController]
-    public class UserController :  ControllerBase
-	{
+    [ApiController]
+    public class UserController : ControllerBase
+    {
 
         private readonly ILogger<UserController> _logger;
         private UserDao _dao;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        public UserController(ILogger<UserController> logger, UserDao dao,IJwtAuthenticationManager jwt)
-		{
-			_logger = logger;
+        public UserController(ILogger<UserController> logger, UserDao dao, IJwtAuthenticationManager jwt)
+        {
+            _logger = logger;
             _dao = dao;
             _jwtAuthenticationManager = jwt;
-                  
-		}
+
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -38,7 +38,7 @@ namespace KeepMovinAPI.Controllers
         {
             if (_dao.CheckIfUserExists(user))
             {
-                return StatusCode(303);            
+                return StatusCode(303);
             }
             _dao.Add(user);
             return StatusCode(200);
@@ -49,20 +49,28 @@ namespace KeepMovinAPI.Controllers
         [HttpPost]
         [Route("/user/login")]
         public IActionResult Login(User user)
-        {           
+        {
             var dataBaseUser = _dao.GetUserByEmail(user);
-            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_dao);
+            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _dao);
             if (token == null)
                 return Unauthorized();
 
-            Response.Cookies.Append("token",value:token,new CookieOptions
+            Response.Cookies.Append("token", value: token, new CookieOptions
             {
                 HttpOnly = true,
             });
-
+            
             return Ok();
         }
-    
+
+        [HttpPost("/user/logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("token");
+            return Ok();
+                         
+        }
+
     }
 
 

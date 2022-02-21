@@ -22,6 +22,9 @@ export default function Navbar() {
                 <div className="nav-item nav-link active">
                     <Link to="/list-of-events">List Of Events</Link>
                 </div>
+                <div className="nav-item nav-link active">
+                    <Link to="/user/logout">LogOut</Link>
+                </div>
             </div>
         </nav>
     );
