@@ -8,6 +8,7 @@ import SportEventsPage from "./components/sportEventsPage/SportEventsPage";
 import RegisterForm from "./components/Register/RegisterForm";
 import EventForm from "./components/Event/EventForm";
 import LoginForm from "./components/Login/LoginForm";
+import EventPage from "./components/Event/EventPage";
 
 
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />}/>
             <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<LoginForm />}/>
+            <Route path="event/:id" element={<EventPage />}/>
             <Route path="event/create" element={<EventForm />} />
             <Route path="list-of-events" element={<SportEventsPage/>}/>
         </Route>

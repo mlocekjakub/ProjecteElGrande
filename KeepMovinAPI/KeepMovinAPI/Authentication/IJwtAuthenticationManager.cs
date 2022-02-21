@@ -1,11 +1,10 @@
-﻿using KeepMovinAPI.DAOs.Implementations;
-using KeepMovinAPI.Models;
-using System;
+﻿using KeepMovinAPI.Models;
+using KeepMovinAPI.DAOs;
 
 namespace KeepMovinAPI.Authentication
 {
 	public interface IJwtAuthenticationManager
 	{
-		string Authenticate(User dataBaseUser,User loginUser,UserDao dao);
+		string Authenticate(User dataBaseUser,User loginUser,IUserDao dao);
 	}
 }

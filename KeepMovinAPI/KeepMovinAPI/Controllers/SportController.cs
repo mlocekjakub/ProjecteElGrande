@@ -12,9 +12,9 @@ namespace KeepMovinAPI.Controllers
     public class SportController : ControllerBase
     {
         private readonly ILogger<SportController> _logger;
-        private IDao<Sport> _daoSport;
+        private ISportDao _daoSport;
 
-        public SportController(ILogger<SportController> logger, IDao<Sport> daoSport)
+        public SportController(ILogger<SportController> logger, ISportDao daoSport)
         {
             _logger = logger;
             _daoSport = daoSport;
@@ -28,5 +28,16 @@ namespace KeepMovinAPI.Controllers
             var listOfSports = _daoSport.GetAll();
             return listOfSports;
         }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/sport/{id}")]
+        public Sport Get(int id)
+        {
+            var sport = _daoSport.Get(id);
+            return sport;
+        }
+
+
     }
 }

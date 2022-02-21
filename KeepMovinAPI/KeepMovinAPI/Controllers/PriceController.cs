@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,15 @@ namespace KeepMovinAPI.Controllers
         {
             var listOfPrices = _daoPrice.GetAll();
             return listOfPrices;
+        }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/price/{id}")]
+        public Price Get(int id)
+        {
+            var price = _daoPrice.Get(id);
+            return price;
         }
         
     }

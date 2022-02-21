@@ -18,13 +18,13 @@ export default function ProfilePageOptionButtons() {
         },
         {
             id: 2,
-            type: 'UpcomingEvents',
+            type: 'Upcoming Events',
             buttonClass: 'item-2',
             chosenFunction: RenderUpcoming
         },
         {
             id: 3,
-            type: 'PreviousEvents',
+            type: 'Previous Events',
             buttonClass: 'item-3',
             chosenFunction: RenderPrevious
         },

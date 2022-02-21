@@ -10,8 +10,20 @@ import PriceFilter from "./sportEventsComponents/PriceFilter";
 import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFilter";
 import TypeFilter from "./sportEventsComponents/TypeFilter";
 
+const events = []
+fetch('/api/events')
+    .then(response => response.json())
+    .then(data => {
+        for (const [index, value] of data.entries()) {
+            events.push(value)
+        }
+    });
+
 
 function SportEventsPage() {
+
+    const [allEvents, setAllEvents] = useState({events})
+    
     
     return (
         <div className="wrapper">
@@ -32,14 +44,16 @@ function SportEventsPage() {
                 <TypeFilter />
             </div>
             <div className="events-container">
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                
-                <Pagination className="pagination" count={10} color="primary" />
+                {allEvents.events.map((event) =>
+                    (<EventCard key={event.eventId} 
+                                eventName={event.name} 
+                                dateStart={event.startEvent} 
+                                dateEnd={event.endEvent} 
+                                organizerId={event.organizerUserId}
+                                maxParticipants={event.maxParticipants}
+                                sportId={event.sportId}
+                                experienceLevel={event.experienceLevel}/>))}
+                <Pagination className="pagination" count={5} color="primary" />
             </div>
         </div>
     )

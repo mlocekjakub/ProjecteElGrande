@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net.Mime;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace KeepMovinAPI.Models
 {
