@@ -1,3 +1,5 @@
+import {Redirect} from "react-router-dom";
+
 export function SendDataFromForm(email, password, uri) {
     let data_package_form = {
         "Email": email,
@@ -17,7 +19,6 @@ export function SendDataFromForm(email, password, uri) {
 }
 
 export function createEvent() {
-    console.log("yooooo")
     let status = "upcoming";
     let owner = 1;
     let name = document.querySelector("#name").value;
@@ -53,6 +54,8 @@ export function createEvent() {
         },
         body: JSON.stringify(event_model_json)
     })
+
+    window.location.href = '/list-of-events';
 
 }
 

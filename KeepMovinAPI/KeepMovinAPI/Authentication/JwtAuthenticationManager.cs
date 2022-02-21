@@ -1,10 +1,10 @@
-﻿using KeepMovinAPI.DAOs.Implementations;
-using KeepMovinAPI.Models;
+﻿using KeepMovinAPI.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
+using KeepMovinAPI.DAOs;
 
 namespace KeepMovinAPI.Authentication
 {
@@ -17,7 +17,7 @@ namespace KeepMovinAPI.Authentication
             this.key = key;
      
         }
-        public string Authenticate(User dataBaseUser, User loginUser,UserDao dao)
+        public string Authenticate(User dataBaseUser, User loginUser,IUserDao dao)
         {
 
             if (!dao.CompareUsers(dataBaseUser, loginUser))
