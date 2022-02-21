@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Http;
 namespace KeepMovinAPI.Controllers
 {
     [Authorize]
-	[ApiController]
-    public class UserController :  ControllerBase
-	{
+    [ApiController]
+    public class UserController : ControllerBase
+    {
 
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
@@ -24,8 +24,8 @@ namespace KeepMovinAPI.Controllers
 			_logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
-                  
-		}
+
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -34,7 +34,7 @@ namespace KeepMovinAPI.Controllers
         {
             if (_userDao.CheckIfUserExists(user))
             {
-                return StatusCode(303);            
+                return StatusCode(303);
             }
             _userDao.Add(user);
             return StatusCode(200);
@@ -50,15 +50,22 @@ namespace KeepMovinAPI.Controllers
             if (token == null)
                 return Unauthorized();
 
-            Response.Cookies.Append("token",value:token,new CookieOptions
+            Response.Cookies.Append("token", value: token, new CookieOptions
             {
                 HttpOnly = true,
             });
-
+            
             return Ok();
         }
 
-    
+        [HttpPost("/user/logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("token");
+            return Ok();
+                         
+        }
+
     }
 
 

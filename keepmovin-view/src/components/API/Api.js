@@ -18,6 +18,21 @@ export function SendDataFromForm(email, password, uri) {
         
 }
 
+export function LogOut(uri) {
+    fetch(uri, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("")
+
+    }).then(response => response.status)
+        .then(data => console.log(data));
+
+}
+
+
 export function createEvent() {
     let status = "upcoming";
     let owner = 1;
