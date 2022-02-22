@@ -21,7 +21,6 @@ function SportFilter() {
     
     const [sports, setSports] = useState({items})
     
-    console.log(sports);
     
     const [sportsSelected, setSportsSelected] = useState([
         {

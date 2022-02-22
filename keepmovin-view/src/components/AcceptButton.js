@@ -1,11 +1,14 @@
-import * as React from "react";
+import  React from "react";
 import './Register/registrationComponents/RegisterCSS.css';
 import { Button } from "@mui/material";
-import { SendDataFromForm } from "./API/Api";
-import { registerValidation, loginAndPasswordValidation} from "./Register/registrationComponents/ValidateInputs"
+import { registerValidation, loginAndPasswordValidation } from "./Register/registrationComponents/ValidateInputs";
+import { Navigate } from "react-router-dom";
+import { useState } from 'react';
 
 
 export default function AcceptButton(props) {
+    const [redirectToMainPage, setRedirect1] = useState(false);
+    const [redirectToLogin, setRedirect2] = useState(false);
 
     let Dispose = () => {
         if (props.title === 'Sign In')
@@ -22,17 +25,66 @@ export default function AcceptButton(props) {
         let password = document.getElementById('outlined-required-password').value;
         let passwordConfirmation = document.getElementById('outlined-required-password1').value;
         if (registerValidation(email, password, passwordConfirmation)) {
-            SendDataFromForm(email, password,"/user/register");
+            SendRegisterData(email, password);
         }                 
+    }
+
+    async function SendRegisterData(email, password) {
+        let data_package_form = {
+            "Email": email,
+            "Password": password
+        }
+        await fetch("/user/register", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data_package_form)
+
+        }).then(response => response.status)
+            setRedirect2(true);
+
+
+    }
+    if (redirectToLogin) {
+        return <Navigate to="/login" />
     }
 
     const CollectAndPassLoginInfo = () => {
         let email = document.getElementById('outlined-required-login').value;
         let password = document.getElementById('outlined-required-password').value;
         if (loginAndPasswordValidation(email, password)) {
-            SendDataFromForm(email, password,"/user/login");
+             SendLoginData(email, password);
         }       
     }
+
+    async function SendLoginData(email, password) {
+        let data_package_form = {
+            "Email": email,
+            "Password": password
+        }
+        await fetch("/user/login", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(data_package_form)
+
+        }).then(response => response.status)
+        setRedirect1(true);
+        
+        
+    }
+    if (redirectToMainPage) {
+        return <Navigate to="/" />
+    }
+
+    
+    
+
 
     return (
         

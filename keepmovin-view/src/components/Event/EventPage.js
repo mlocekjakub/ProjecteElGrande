@@ -3,13 +3,27 @@ import NamePlace from "./eventPage/NamePlace";
 import PicturePlace from "./eventPage/PicturePlace";
 import Info from "./eventPage/Info";
 import {useParams} from "react-router-dom";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
+import { useEffect} from "react";
 
 
 
 
 
 function EventPage() {
+    useEffect(async () => {
+        const response = await fetch("/user/validate", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        })
+        const content = await response.json()
+            .then(content => localStorage.setItem('session', content))
+
+    })
+    
 
     let {id} = useParams();
     const [eventName, setEventName] = useState("")

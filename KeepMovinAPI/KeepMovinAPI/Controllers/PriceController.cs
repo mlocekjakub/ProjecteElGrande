@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Authorize]
     public class PriceController : ControllerBase
     {
         private readonly ILogger<PriceController> _logger;
