@@ -32,7 +32,13 @@ namespace KeepMovinAPI.DAOs.Implementations
                 return query;
             }
         }
-        
+
+        public IEnumerable<Event> GetByInput(string input)
+        {
+            var query = _context.Event.Where(i => i.Name.ToLower().Contains(input.ToLower()));
+            return query.ToList();
+        }
+
         public IEnumerable<Event> GetAll()
         {
             var query = _context.Event.ToList();

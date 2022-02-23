@@ -1,29 +1,32 @@
 ﻿import * as React from 'react';
-import { Link } from 'react-router-dom';
+import "./Navbar.css";
+import Notifications from "./navbarComponents/Notifications";
+import Profile from "./navbarComponents/Profile";
+import Home from "./navbarComponents/Home";
+import Searchbar from "./navbarComponents/Searchbar";
+import Logo from "./navbarComponents/Logo";
+import Calendar from "./navbarComponents/Calendar";
+
+import { LogOut } from "./API/Api";
 
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand">Keep Movin</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="nav-item nav-link">
-                    <Link to="/home">Home</Link>
-                </div>
-                <div className="nav-item nav-link active">
-                    <Link to="/profile">Profile</Link>
-                </div>
-                <div className="nav-item nav-link active">
-                    <Link to="/login">Login</Link>
-                </div>      
-                <div className="nav-item nav-link active">
-                    <Link to="/list-of-events">List Of Events</Link>
-                </div>
+        <header>
+            <div className="logo-search">
+                <Logo />
+                <Searchbar />
             </div>
-        </nav>
+            <nav>
+                <div className="nav__links">
+                    <Home />
+                    <Calendar />
+                    <Notifications />
+                    <Profile />
+                </div>
+            </nav>
+        </header>
     );
 }
+
+{/*<li><Link className="Link" to="/login">Login</Link></li>*/}
 

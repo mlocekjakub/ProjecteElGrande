@@ -7,14 +7,18 @@ using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-
+using System;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 
 namespace KeepMovinAPI.Controllers
 {
     [Authorize]
-	[ApiController]
-    public class UserController :  ControllerBase
-	{
+    [ApiController]
+    public class UserController : ControllerBase
+    {
 
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
@@ -24,8 +28,8 @@ namespace KeepMovinAPI.Controllers
 			_logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
-                  
-		}
+
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -34,7 +38,7 @@ namespace KeepMovinAPI.Controllers
         {
             if (_userDao.CheckIfUserExists(user))
             {
-                return StatusCode(303);            
+                return StatusCode(303);
             }
             _userDao.Add(user);
             return StatusCode(200);
@@ -50,15 +54,42 @@ namespace KeepMovinAPI.Controllers
             if (token == null)
                 return Unauthorized();
 
-            Response.Cookies.Append("token",value:token,new CookieOptions
+            Response.Cookies.Append("token", value: token, new CookieOptions
             {
                 HttpOnly = true,
             });
-
+            
             return Ok();
         }
 
-    
+        [AllowAnonymous] //Tag tylko i wyłącznie dla testów ,skasować po pełnej implementacji !!!
+        [HttpPost("/user/logOut")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("token");
+            return Ok();
+                         
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/user/validate")]
+        public IActionResult Validate()
+        {
+            try
+            {
+                var jwt = Request.Cookies["token"];
+                var token = _jwtAuthenticationManager.Verify(jwt);
+                var tokenClaims = token.Claims.ToList();
+                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
+                return Ok(Convert.ToString(user.userid));
+            }
+            catch(Exception)
+            {
+                return Unauthorized();
+            }
+        
+        }
+
     }
 
 

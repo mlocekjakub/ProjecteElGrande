@@ -1,0 +1,229 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+header {
+   font-family: "Montserrat", "sans-serif";
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 15%;
+   background: #242626;
+   position: fixed;
+   top: 0; left: 0; right: 0;
+   z-index: 1000;
+}
+.nav__links {
+   display: flex;
+   gap: 2rem;
+}
+
+.nav-item {
+   cursor: pointer;
+   text-decoration: none;
+   font-size: 1.3rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.nav-item__icon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #FFFFFF;
+   transition: 0.2s;
+}
+.nav-item__icon:hover {
+   color: #4285F4;
+}
+.nav-item > img {
+   max-width: 2rem;
+   aspect-ratio: 1;
+   border-radius: 50%;
+   border: 1px solid rgba(255, 255, 255, 0.65);
+   transition: 0.2s;
+}
+
+.nav-item > img:hover {
+   border: 1px solid #4285F4;
+}
+
+
+
+/*logo and search bar*/
+
+
+.logo-search {
+   color: #FFFFFF;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 5rem;
+}
+.search-bar-header {
+   display: flex;
+   justify-content: center
+}
+.search-txt-header {
+   background: #F3F3F3;
+   padding: 0.3rem 1rem 0.3rem 0.5rem;
+   border: 0;
+   transition: 0.2s;
+   border-radius: 5px 0 0 5px ;
+
+}
+.search-txt-header:focus {
+   outline: none !important;
+   background: #fff;
+}
+.glass-container {
+   display: flex;
+   justify-content: center;
+   background: #F3F3F3;
+   border-radius: 0 5px 5px 0;
+   border-left: 1px solid #242626;
+   padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+   color: #242626;
+   transition: 0.2s;
+}
+.glass-container:hover {
+   cursor: pointer;
+   background: #4285F4;
+   color: #F3F3F3;
+}
+.header-search-icon {
+   min-height: 100%;
+}
+
+/*-------*/
+
+
+
+
+/*profile menu */
+
+.profile-page-expanded-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   background: #F3F3F3;
+   border-radius: 0.3rem;
+   font-size: 1rem;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.go__log-out {
+   text-decoration: none;
+   color: #242626;
+   padding: 0.3rem 6rem 0.3rem 0.3rem;
+   border-top: 1px solid rgba(5, 5, 5, 0.20);
+}
+.go__profile, .go__settings {
+   color: #242626;
+   text-decoration: none;
+   padding: 0.3rem 6rem 0.3rem 0.3rem;
+   display: flex;
+   gap: 1rem;
+}
+
+.go__profile:hover, .go__settings:hover, .go__log-out:hover {
+   color: #242626;
+   cursor: pointer;
+   background: rgba(36, 38, 38, 0.13);
+}
+
+.triangle__profile-menu {
+   position: absolute;
+   right: 17%;
+   bottom: 70%;
+   width: 2rem;
+   aspect-ratio: 1;
+   transform: rotate(45deg);
+   background: #F3F3F3;
+   z-index: -1;
+}
+
+
+
+/*-------*/
+
+/*expand actions*/
+
+.expanded__profile-menu {
+   position: absolute;
+   right: 13%;
+   top: 90%;
+   visibility: hidden;
+   transition: 0.2s;
+   opacity: 0
+}
+
+.expanded__notification-menu {
+   position: absolute;
+   right: 17%;
+   top: 94%;
+   visibility: hidden;
+   transition: 0.2s;
+   opacity: 0;
+}
+
+
+.expanded__active {
+   top: 95%;
+   visibility: visible;
+   opacity: 1;
+}
+
+
+/*-------*/
+
+
+/*notification menu*/
+
+.notification-expanded-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   background: #F3F3F3;
+   border-radius: 0.3rem;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+   color: #242626;
+   font-size: 0.8rem;
+}
+
+.notification-header {
+   padding: 0.3rem 0 0.3rem 0;
+   text-decoration: none;
+   text-align: center;
+   font-size: 1rem;
+   border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+   font-weight: bold;
+}
+.notification-container {
+   display: flex;
+   flex-direction: column;
+   min-height: 10rem;
+}
+.notification {
+   cursor: pointer;
+   padding: 0.8rem 5rem 0.8rem 0.5rem;
+   transition: 0.2s;
+}
+.notification:hover {
+   background: rgba(36, 38, 38, 0.13);
+}
+
+.triangle__notification-menu {
+   position: absolute;
+   right: 10%;
+   bottom: 84%;
+   width: 2rem;
+   aspect-ratio: 1;
+   transform: rotate(45deg);
+   background: #F3F3F3;
+   z-index: -1;
+}
+
+
+/*-------*/
+
+

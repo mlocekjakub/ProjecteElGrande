@@ -70,5 +70,13 @@ namespace KeepMovinAPI.DAOs.Implementations
             return user2;
 
         }
+
+        public User GetUserByEmail(string email)
+        {
+            var query = _context.User.Where(u => u.Email == email);
+            User user2 = query.FirstOrDefault();
+            return user2;
+
+        }
     }
 }

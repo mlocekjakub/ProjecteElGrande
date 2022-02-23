@@ -1,18 +1,18 @@
 ﻿import React, {useState, useEffect} from 'react';
 import ButtonCard from "./ButtonCard";
+import axios from "axios";
 
 
 
 function EventCard(props) {
-    const price = [29, 45, 100, 150, 220];
-
-    const [sportCategory, setSportCategory] = useState("")
-    
-    fetch(`/api/sport/${props.sportId}`)
-            .then(response => response.json())
-            .then(data => {
-                setSportCategory(data.name);
+    const [sportCategory, setSportCategory] = useState([])
+    useEffect(() => {
+        axios
+            .get(`/api/sport/${props.sportId}`)
+            .then(response => {
+                setSportCategory(response.data);
             });
+    }, [])
     
     return (
         <div className="event-1">
@@ -29,14 +29,14 @@ function EventCard(props) {
                     Date: {(props.dateStart).slice(0,10)} - {(props.dateEnd).slice(0,10)}
                 </div>
                 <div className="category p-2">
-                    Category: {sportCategory}
+                    Category: {sportCategory.name}
                 </div>
             </div>
             <article className="item go-to">
                 <ButtonCard name="join" />
                 <ButtonCard name="details" />
                 <section className="price">
-                    <h5>{price[Math.floor(Math.random()*price.length)]} PLN</h5>
+                    <h5>100 PLN</h5>
                 </section>
             </article>
         </div>

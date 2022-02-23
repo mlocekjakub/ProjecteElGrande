@@ -4,6 +4,7 @@ import AcceptButton from "../AcceptButton";
 import RegistrationHyperLink from "./loginComponents/RegistrationHyperLink";
 import LoginHyperLink from "./loginComponents/LoginHyperLink";
 import './loginComponents/LoginCSS.css';
+import { useEffect, useState } from "react";
 
 
 
@@ -11,7 +12,19 @@ import './loginComponents/LoginCSS.css';
 
 
 export default function LoginForm() {
-    
+    useEffect(async () => {
+        const response = await fetch("/user/validate", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        })
+        const content = await response.json()
+            .then(content => localStorage.setItem('session', content))
+
+    })
+
     return (
         <div className="grid">
             <div className="img">
