@@ -7,6 +7,7 @@ import Searchbar from "./navbarComponents/Searchbar";
 import Logo from "./navbarComponents/Logo";
 import Calendar from "./navbarComponents/Calendar";
 
+import { LogOut } from "./API/Api";
 
 export default function Navbar() {
     return (

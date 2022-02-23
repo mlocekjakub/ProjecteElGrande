@@ -46,7 +46,7 @@ function Searchbar(props) {
             onChange = {(e) => {
                 setTypedInput(e.target.value)
                 axios
-                    .get(`/api/event/${typedInput}`)
+                    .get(`/api/event/${typedInput.toString()}`)
                     .then(response => {
                         setEventsFound(response.data)
 

@@ -7,7 +7,11 @@ using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-
+using System;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -58,12 +62,32 @@ namespace KeepMovinAPI.Controllers
             return Ok();
         }
 
-        [HttpPost("/user/logout")]
+        [AllowAnonymous] //Tag tylko i wyłącznie dla testów ,skasować po pełnej implementacji !!!
+        [HttpPost("/user/logOut")]
         public IActionResult Logout()
         {
             Response.Cookies.Delete("token");
             return Ok();
                          
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/user/validate")]
+        public IActionResult Validate()
+        {
+            try
+            {
+                var jwt = Request.Cookies["token"];
+                var token = _jwtAuthenticationManager.Verify(jwt);
+                var tokenClaims = token.Claims.ToList();
+                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
+                return Ok(Convert.ToString(user.userid));
+            }
+            catch(Exception)
+            {
+                return Unauthorized();
+            }
+        
         }
 
     }
