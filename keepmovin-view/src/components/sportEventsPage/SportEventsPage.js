@@ -9,27 +9,29 @@ import ExperienceFilter from "./sportEventsComponents/ExperienceFilter";
 import PriceFilter from "./sportEventsComponents/PriceFilter";
 import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFilter";
 import TypeFilter from "./sportEventsComponents/TypeFilter";
+import axios from "axios";
 
-const events = []
-fetch('/api/events')
-    .then(response => response.json())
-    .then(data => {
-        for (const [index, value] of data.entries()) {
-            events.push(value)
-        }
-    });
 
 
 function SportEventsPage() {
 
-    const [allEvents, setAllEvents] = useState({events})
+    const [allEvents, setAllEvents] = useState([])
+
+    useEffect(() => {
+        axios
+            .get ('/api/event')
+            .then(response => {
+                setAllEvents(response.data)
+            });  
+    }, [])
+    
     
     
     return (
         <div className="wrapper">
-            <header className="header">
+            <div className="header">
                 <h1>Events</h1>
-            </header>
+            </div>
             <div className="searchbar-container">
                 <SearchBar />
             </div>
@@ -44,7 +46,7 @@ function SportEventsPage() {
                 <TypeFilter />
             </div>
             <div className="events-container">
-                {allEvents.events.map((event) =>
+                {allEvents.map((event) =>
                     (<EventCard key={event.eventId} 
                                 eventName={event.name} 
                                 dateStart={event.startEvent} 

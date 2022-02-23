@@ -1,21 +1,31 @@
 ﻿import * as React from 'react';
-import { Link } from 'react-router-dom';
 import "./Navbar.css";
+import Notifications from "./navbarComponents/Notifications";
+import Profile from "./navbarComponents/Profile";
+import Home from "./navbarComponents/Home";
+import Searchbar from "./navbarComponents/Searchbar";
+import Logo from "./navbarComponents/Logo";
+import Calendar from "./navbarComponents/Calendar";
+
 
 export default function Navbar() {
     return (
         <header>
-            <div className="logo">Keep Movin'</div>
+            <div className="logo-search">
+                <Logo />
+                <Searchbar />
+            </div>
             <nav>
-                <ul className="nav__links">
-                    <li><Link className="Link" to="/home">Home</Link></li>
-                    <li><Link className="Link" to="/list-of-events">Events</Link></li>
-                    <li><Link className="Link" to="/profile">Profile</Link></li>
-                    <li><Link className="Link" to="/login">Login</Link></li>
-                    <li><Link className="Link" to="/user/logout">LogOut</Link></li>
-                </ul>
+                <div className="nav__links">
+                    <Home />
+                    <Calendar />
+                    <Notifications />
+                    <Profile />
+                </div>
             </nav>
         </header>
     );
 }
+
+{/*<li><Link className="Link" to="/login">Login</Link></li>*/}
 
