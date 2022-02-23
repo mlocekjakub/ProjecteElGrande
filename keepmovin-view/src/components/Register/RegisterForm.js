@@ -5,6 +5,7 @@ import './registrationComponents/RegisterCSS.css';
 import RegistrationHyperLink from "../Login/loginComponents/RegistrationHyperLink";
 import LoginHyperLink from "../Login/loginComponents/LoginHyperLink";
 import { useEffect, useState } from "react";
+import ForgottenPassword from "../ForgottenPassword";
 
 
 
@@ -31,7 +32,7 @@ export default function RegisterForm() {
             </div>
             <div className="Centered">
                 <LoginHyperLink variant ="outlined" />
-                <RegistrationHyperLink variant="contained" color ="white" />
+                <RegistrationHyperLink variant="contained" color="white" />
                 <TextBoxes />
                 <AcceptButton title="Sign Up"/>
             </div>

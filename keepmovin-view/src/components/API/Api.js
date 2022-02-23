@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 export function LogOut(uri) {
     fetch(uri, {
         method: 'POST',
