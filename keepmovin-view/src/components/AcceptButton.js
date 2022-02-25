@@ -93,6 +93,7 @@ export default function AcceptButton(props) {
         }}>
             {props.title}
         </Button>
+        
 
     )
 }

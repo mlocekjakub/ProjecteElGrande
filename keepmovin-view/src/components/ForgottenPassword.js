@@ -1,20 +1,71 @@
 import * as React from "react";
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
-import { NavLink } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import './Register/registrationComponents/RegisterCSS.css';
+import { styled, Box } from '@mui/system';
+import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Button } from "@mui/material";
+
 
 export default function ForgottenPassword() {
 
-    return (
-        <div>
-            <Fab variant="extended" size="small" color="primary" aria-label="add">
-                <NavigationIcon sx={{ mr: 7 }} />
-                Extended
-            </Fab>
-        </div>
+    const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
+    const Backdrop = styled('div')`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+ -webkit-tap-highlight-color: transparent;
+  
+`;
 
-    )
+    const style = {
+        width: 400,
+        bgcolor: 'white',
+        border: '2px solid #000',
+        p: 2,
+        px: 4,
+        pb: 3,
+    };
+
+   
+   const [open, setOpen] = React.useState(false);
+   const handleOpen = () => setOpen(true);
+   const handleClose = () => setOpen(false);
+    
+        return (
+            <div className="ForgotPassword" > <Button onClick={handleOpen}>Forgot password? </Button>
+                <StyledModal
+                    aria-labelledby="unstyled-modal-title"
+                    aria-describedby="unstyled-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    BackdropComponent={Backdrop}
+                >
+                    <Box sx={style} >
+                        <div >
+                        <h2 id="unstyled-modal-title">Password Reminder:</h2>
+                            <input className="InputReminder" type="text" id="lname" placeholder="Your Registrated email"></input>
+                            <div>&nbsp;</div>
+                            <p> After verifying Your email we will send You a form which will allow You to change Your current password </p>
+                            <Button className="ReminderButton" type="click" variant="contained" color="success">Send </Button>                           
+                        </div>
+                    </Box>
+                </StyledModal>
+            </div>
+        )
+    
 }

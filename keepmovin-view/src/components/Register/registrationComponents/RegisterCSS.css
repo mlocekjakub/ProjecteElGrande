@@ -12,14 +12,11 @@
 }
 
 
-
-
-
 html {
     min-height: 100%;
 }
 
-.img {
+.img2 {
     background-image: url('../../RandomImages/2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,3 +34,32 @@ html {
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
+.gridModal {
+    width: 60%;
+    height: 20vh;
+    display: grid;
+    text-align: center;
+    align-content: center;
+}
+
+.ForgotPassword {
+    position:relative;
+    top: 80%;
+
+}
+
+.InputReminder {
+    width: 100%;
+    border: 1px solid #000;
+    padding: 0.5rem
+}
+
+.ReminderButton {
+    position:absolute;
+    top:-125%;
+    left:40%;
+}
+
+
+
