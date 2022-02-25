@@ -38,10 +38,6 @@ export default function EventsCarousel() {
             />
         </div>)
 
-    // console.log(events);
-    // events.map((event) => {
-    //     console.log(typeof(event.name))})
-
     const nextCard = () => {
         if (multiplier < events.length - 3) {
             setMultiplier(multiplier + 1);
