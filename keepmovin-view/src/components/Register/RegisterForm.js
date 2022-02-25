@@ -28,15 +28,15 @@ export default function RegisterForm() {
     
     return (     
         <div className="grid">
-            <div className="img">
+            <div className="img2">
             </div>
             <div className="Centered">
-                <LoginHyperLink variant ="outlined" />
-                <RegistrationHyperLink variant="contained" color="white" />
+                <ForgottenPassword/>
+                <LoginHyperLink variant="outlined" />             
+                <RegistrationHyperLink variant="contained" color="white" />              
                 <TextBoxes />
-                <AcceptButton title="Sign Up"/>
+                <AcceptButton title="Sign Up" />
             </div>
-
         </div>
 
     )
