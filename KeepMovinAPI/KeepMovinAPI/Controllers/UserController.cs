@@ -33,6 +33,18 @@ namespace KeepMovinAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [Route("/user/reminder")]
+        public StatusCodeResult Reminder(User user)
+        {
+            if (_userDao.CheckIfUserExists(user))
+            {
+                return StatusCode(303);
+            }
+            return StatusCode(200);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
