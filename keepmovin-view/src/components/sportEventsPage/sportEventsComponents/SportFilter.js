@@ -4,22 +4,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./SportFilter.css";
 import {ExpandFilter, SportSearchBar} from "./Filter";
 import Sport from "./Sport";
+import axios from "axios";
 
 
 
-const items = []
-fetch('/api/sports')
-    .then(response => response.json())
-    .then(data => {
-        for (const [index, value] of data.entries()) {
-            items.push(value)
-        }
-    });
 
 function SportFilter() {
 
-    
-    const [sports, setSports] = useState({items})
+    const [sports, setSports] = useState([])
+    useEffect(() => {
+        axios 
+            .get('/api/sports')
+            .then(response => {
+                setSports(response.data)
+            })
+    })
     
     
     const [sportsSelected, setSportsSelected] = useState([
@@ -68,7 +67,7 @@ function SportFilter() {
                     <div onClick={CheckAllSports} className="check-hide-all-sports sport-item">Choose All</div>
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>
                 </div>
-                {sports.items.map((sport) =>
+                {sports.map((sport) =>
                 (<Sport key={sport.sportId} id={sport.sportId} type={sport.name} markSport={MarkAsCheckedSport} />))}
             </div>
         </div>

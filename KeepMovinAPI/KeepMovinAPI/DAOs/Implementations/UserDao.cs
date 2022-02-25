@@ -65,6 +65,7 @@ namespace KeepMovinAPI.DAOs.Implementations
         public User GetUserByEmail(User user)
         {
             var query = _context.User.Where(u => u.Email == user.Email);
+            
             User user2 = query.FirstOrDefault();
             return user2;
 

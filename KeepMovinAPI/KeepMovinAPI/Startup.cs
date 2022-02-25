@@ -58,7 +58,6 @@ namespace KeepMovinAPI
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IEventDao, EventDao>();
-            services.AddTransient<IPriceDao, PriceDao>();
             services.AddTransient<IUserDao, UserDao>();
             services.AddTransient<ISportDao, SportDao>();
         }

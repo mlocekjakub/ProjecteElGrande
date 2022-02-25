@@ -31,6 +31,16 @@ namespace KeepMovinAPI.Controllers
         }
         
         [AllowAnonymous]
+        [HttpGet("{input}")]
+        public IEnumerable<Event> GetByInput(string input)
+        {
+            var listOfEvents = _daoEvent.GetByInput(input);
+            return listOfEvents;
+        }
+        
+        
+        
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Event> GetAll()
         {

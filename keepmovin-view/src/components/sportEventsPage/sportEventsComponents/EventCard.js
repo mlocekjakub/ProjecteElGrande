@@ -1,16 +1,18 @@
 ﻿import React, {useState, useEffect} from 'react';
 import ButtonCard from "./ButtonCard";
+import axios from "axios";
 
 
 
 function EventCard(props) {
-    const [sportCategory, setSportCategory] = useState("")
-    
-    fetch(`/api/sport/${props.sportId}`)
-            .then(response => response.json())
-            .then(data => {
-                setSportCategory(data.name);
+    const [sportCategory, setSportCategory] = useState([])
+    useEffect(() => {
+        axios
+            .get(`/api/sport/${props.sportId}`)
+            .then(response => {
+                setSportCategory(response.data);
             });
+    }, [])
     
     return (
         <div className="event-1">
@@ -27,7 +29,7 @@ function EventCard(props) {
                     Date: {(props.dateStart).slice(0,10)} - {(props.dateEnd).slice(0,10)}
                 </div>
                 <div className="category p-2">
-                    Category: {sportCategory}
+                    Category: {sportCategory.name}
                 </div>
             </div>
             <article className="item go-to">
