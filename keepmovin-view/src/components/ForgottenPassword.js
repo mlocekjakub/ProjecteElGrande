@@ -97,7 +97,7 @@ export default function ForgottenPassword() {
     const handleClose = () => setOpen(false);
 
     return (
-        <div className="ForgotPassword" > <Button onClick={handleOpen}>Forgot password? </Button>
+        <div className="forgot-password" > <Button onClick={handleOpen}>Forgot password? </Button>
             <StyledModal
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"
@@ -108,10 +108,10 @@ export default function ForgottenPassword() {
                 <Box sx={style} >
                     <div >
                         <h2 id="unstyled-modal-title">Password Reminder:</h2>
-                        <TextField onKeyUp={ValidateInput} className="InputReminder" id="email" placeholder="Your Registrated email" />
+                        <TextField onKeyUp={ValidateInput} className="input-reminder" id="email" placeholder="Your Registrated email" />
                         <div>&nbsp;</div>
                         <p> After verifying Your email we will send You a form which will allow You to change Your current password </p>
-                        <Button className="ReminderButton" type="click" onClick={SendForm} variant="contained" color="success">Send </Button>
+                        <Button className="reminder-button" type="click" onClick={SendForm} variant="contained" color="success">Send </Button>
                     </div>
                 </Box>
             </StyledModal>

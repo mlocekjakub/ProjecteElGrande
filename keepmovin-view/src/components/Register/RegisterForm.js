@@ -30,7 +30,7 @@ export default function RegisterForm() {
         <div className="grid">
             <div className="img2">
             </div>
-            <div className="Centered">
+            <div className="centered">
                 <ForgottenPassword/>
                 <LoginHyperLink variant="outlined" />             
                 <RegistrationHyperLink variant="contained" color="white" />              

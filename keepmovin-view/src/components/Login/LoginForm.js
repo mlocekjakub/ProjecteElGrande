@@ -30,7 +30,7 @@ export default function LoginForm() {
         <div className="grid">
             <div className="img1">
             </div>
-            <div className="Centered">
+            <div className="centered">
                 <ForgottenPassword />
                 <LoginHyperLink variant="contained" color="white"/>
                   <RegistrationHyperLink variant ="outlined" />
