@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using KeepMovinAPI.Models.Dtos;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -34,13 +35,23 @@ namespace KeepMovinAPI.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("/user/reminder")]
-        public StatusCodeResult Reminder(User user)
+        public StatusCodeResult Reminder(UserEmail userEmail)
         {
-            if (_userDao.CheckIfUserExists(user))
+            try
+            {
+                User user = _userDao.GetUserByEmail(userEmail.Email);
+                if (_userDao.CheckIfUserExists(user))
+                {
+                    // Some Actions Made
+                    return StatusCode(200);
+                }
+                return StatusCode(303);
+            }
+            catch(Exception)
             {
                 return StatusCode(303);
             }
-            return StatusCode(200);
+            
         }
 
         [AllowAnonymous]
