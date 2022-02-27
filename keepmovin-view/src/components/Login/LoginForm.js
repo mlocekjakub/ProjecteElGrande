@@ -13,6 +13,7 @@ import ForgottenPassword from "../ForgottenPassword";
 
 
 export default function LoginForm() {
+
     useEffect(async () => {
         const response = await fetch("/user/validate", {
             headers: {
