@@ -30,9 +30,3 @@ export function ExpandFilter(e) {
     CollapseOtherFilters(e)
 
 }
-
-export function SportSearchBar(props) {
-    return (<div className="search-bar-sport-filter">
-        <input type="text" className="search-txt-sport-filter" placeholder="Search.." />
-    </div>);
-}

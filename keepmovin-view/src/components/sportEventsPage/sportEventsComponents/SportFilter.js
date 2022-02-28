@@ -1,40 +1,31 @@
-﻿import React, {useState, useEffect} from 'react';
+﻿import React, {useState, useEffect, useRef} from 'react';
 import "./Filter.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./SportFilter.css";
-import {ExpandFilter, SportSearchBar} from "./Filter";
+import {ExpandFilter} from "./Filter";
 import Sport from "./Sport";
 import axios from "axios";
-
-
+import {useDispatch, useSelector} from "react-redux";
+import {clearSport, updateSport} from "../../../features/Sport";
 
 
 function SportFilter() {
 
+    const dispatch = useDispatch();
+    
     const [sports, setSports] = useState([])
+    
+    const [sportSearch, setSportSearch] = useState("")
+    
     useEffect(() => {
-        axios 
-            .get('/api/sports')
+        axios
+            .get(`/api/sports/${sportSearch}`)
             .then(response => {
                 setSports(response.data)
             })
-    })
+    }, [sportSearch])
     
     
-    const [sportsSelected, setSportsSelected] = useState([
-        {
-            id: 1,
-            type: 'Swimming',
-        }
-    ])
-    
-    
-    function MarkAsCheckedSport(e) {
-        let sport = e.currentTarget;
-        let sports = document.querySelectorAll(".sport")
-        sport.children[0].classList.toggle("check-icon__toggle")
-        
-    }
     
     function CheckAllSports() {
         let allSports = document.querySelectorAll(".sport");
@@ -43,7 +34,9 @@ function SportFilter() {
                     sport.children[0].classList.toggle("check-icon__toggle")
                 }
             })
+        dispatch(updateSport(sports))
     }
+    
     function UncheckAllSports() {
         let allSports = document.querySelectorAll(".sport");
         allSports.forEach(sport => {
@@ -51,8 +44,8 @@ function SportFilter() {
                 sport.children[0].classList.toggle("check-icon__toggle")
             }
         })
+        dispatch(clearSport())
     }
-
     
     return (
         <div className="filter-parent">
@@ -61,14 +54,22 @@ function SportFilter() {
                 <ExpandMoreIcon className="expand-icon"/>
             </div>
             <div className="filter-sport-expanded-container filter-box">
-                <SportSearchBar />
+                <div className="search-bar-sport-filter">
+                    <input type="text" className="search-txt-sport-filter" placeholder="Search.."
+                           required value={sportSearch}
+                           onChange={(e) => {
+                               setSportSearch(e.target.value)
+                           }}
+                           
+                    />
+                </div>
                 <div className="expanded-header">Sports:</div>
                 <div className="check-hide-container">
                     <div onClick={CheckAllSports} className="check-hide-all-sports sport-item">Choose All</div>
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>
                 </div>
                 {sports.map((sport) =>
-                (<Sport key={sport.sportId} id={sport.sportId} type={sport.name} markSport={MarkAsCheckedSport} />))}
+                (<Sport key={sport.sportId} sportSelected={sport} id={sport.sportId} type={sport.name}/>))}
             </div>
         </div>
     )

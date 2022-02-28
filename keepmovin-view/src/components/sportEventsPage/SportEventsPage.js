@@ -10,23 +10,28 @@ import PriceFilter from "./sportEventsComponents/PriceFilter";
 import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFilter";
 import TypeFilter from "./sportEventsComponents/TypeFilter";
 import axios from "axios";
+import SearchIcon from "@mui/icons-material/Search";
 
 
 
 function SportEventsPage() {
 
     const [allEvents, setAllEvents] = useState([])
+    
+    const [foundEvents, setFoundEvents] = useState([])
+    
+    const [searchedEventInput, setSearchedEventInput] = useState('')
 
     useEffect(() => {
         axios
-            .get ('/api/event')
+            .get(`/api/event/${searchedEventInput}`)
             .then(response => {
-                setAllEvents(response.data)
+                setFoundEvents(response.data)
             });
-    }, [])
+    }, [searchedEventInput])
     
 
-    useEffect(async () => {
+   /* useEffect(async () => {
         const response = await fetch("/user/validate", {
             headers: {
                 'Accept': 'application/json',
@@ -36,16 +41,37 @@ function SportEventsPage() {
         })
         const content = await response.json()
             .then(content => localStorage.setItem('session', content))
-    })
+    })*/
     
+    function Events(props) {
+        return props.display.map((event) =>
+            (<EventCard key={event.eventId}
+                        eventName={event.name}
+                        dateStart={event.startEvent}
+                        dateEnd={event.endEvent}
+                        organizerId={event.organizerUserId}
+                        maxParticipants={event.maxParticipants}
+                        sportId={event.sportId}
+                        experienceLevel={event.experienceLevel}/>))
+        }
     
+        
     return (
         <div className="wrapper">
             <div className="header">
                 <h1>Events</h1>
             </div>
             <div className="searchbar-container">
-                <SearchBar />
+                <div className="search-bar">
+                    <button type="submit" className="search-button">
+                        <SearchIcon />
+                    </button>
+                    <input type="text" className="search-txt" placeholder="Search.." 
+                           required
+                           onChange={(e) => {
+                               setSearchedEventInput(e.target.value) }}
+                    />
+                </div>
             </div>
             <div className="create-event-button">
                 <ButtonCard name="create" />
@@ -58,16 +84,9 @@ function SportEventsPage() {
                 <TypeFilter />
             </div>
             <div className="events-container">
-                {allEvents.map((event) =>
-                    (<EventCard key={event.eventId} 
-                                eventName={event.name} 
-                                dateStart={event.startEvent} 
-                                dateEnd={event.endEvent} 
-                                organizerId={event.organizerUserId}
-                                maxParticipants={event.maxParticipants}
-                                sportId={event.sportId}
-                                experienceLevel={event.experienceLevel}/>))}
-                <Pagination className="pagination" count={5} color="primary" />
+               {/* {searchedEventInput !== '' ? <Events display={foundEvents} /> : <Events display={allEvents}/>}*/}
+                <Events display={foundEvents} /> 
+                
             </div>
         </div>
     )

@@ -35,7 +35,7 @@
     gap: 2rem;
     flex-direction: column;
     grid-column: 2/ span 4;
-    grid-row: 5 / span 20;
+    grid-row: 5 / span 13;
 }
 .event-1 {
     display: grid;

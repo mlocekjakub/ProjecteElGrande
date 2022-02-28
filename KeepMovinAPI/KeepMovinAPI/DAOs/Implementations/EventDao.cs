@@ -35,7 +35,7 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public IEnumerable<Event> GetByInput(string input)
         {
-            var query = _context.Event.Where(i => i.Name.ToLower().Contains(input.ToLower()));
+            var query = _context.Event.Where(i => i.Name.ToLower().StartsWith(input.ToLower()));
             return query.ToList();
         }
 
