@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using KeepMovinAPI.Models;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {

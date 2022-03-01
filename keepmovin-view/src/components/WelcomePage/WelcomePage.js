@@ -3,24 +3,24 @@ import './WelcomePageStyles.css';
 import WelcomePageTitle from "./WelcomePageComponents/WelcomePageTitle";
 import EventsCarousel from "./WelcomePageComponents/EventsCarousel";
 import JoinButton from "./WelcomePageComponents/JoinButton";
-// import {useEffect} from "react";
+import {useEffect} from "react";
 
 export default function WelcomePage() {
     
     //doesn't work with carousel, uncomment when validation will be fully implemented
     
-    // useEffect(async () => {
-    //     const response = await fetch("/user/validate", {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         credentials: 'include',
-    //     })
-    //     const content = await response.json()
-    //         .then(content => localStorage.setItem('session', content))
-    //
-    // })
+    useEffect(async () => {
+        const response = await fetch("/user/validate", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        })
+        const content = await response.json()
+            .then(content => localStorage.setItem('session', content))
+
+    })
     
     return (
         <div className="welcome-page">

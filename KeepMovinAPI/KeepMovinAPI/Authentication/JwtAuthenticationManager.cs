@@ -1,4 +1,4 @@
-﻿using KeepMovinAPI.Models;
+﻿using KeepMovinAPI.Domain;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;

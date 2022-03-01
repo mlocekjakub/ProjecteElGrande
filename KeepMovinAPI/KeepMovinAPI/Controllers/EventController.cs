@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
-using KeepMovinAPI.Models;
+using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
