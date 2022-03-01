@@ -108,7 +108,7 @@ export default function ForgottenPassword() {
                 <Box sx={style} >
                     <div >
                         <h2 id="unstyled-modal-title">Password Reminder:</h2>
-                        <TextField onKeyUp={ValidateInput} className="input-reminder" id="email" placeholder="Your Registrated email" />
+                        <TextField  onKeyUp={ValidateInput} className="input-reminder" id="email" placeholder="Your Registrated email" />
                         <div>&nbsp;</div>
                         <p> After verifying Your email we will send You a form which will allow You to change Your current password </p>
                         <Button className="reminder-button" type="click" onClick={SendForm} variant="contained" color="success">Send </Button>
