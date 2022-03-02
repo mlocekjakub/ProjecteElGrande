@@ -6,10 +6,9 @@ namespace KeepMovinAPI.Domain
 {
     public class Sport
     {
-        [Key] [Column("sport_id")] public Guid SportId { get; set; }
-        
-        [Column("name")] public string Name { get; set; }
-        
+        [Key] 
+        public Guid SportId { get; set; } = Guid.NewGuid();
 
+        public string Name { get; set; }
     }
 }

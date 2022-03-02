@@ -9,7 +9,9 @@ export function LogOut(uri) {
         body: JSON.stringify("")
 
     }).then(response => response.status)
-        .then(data => console.log(data));
+        .then(data => console.log(data))
+        .then(localStorage.clear('session'));
+
 
 }
 

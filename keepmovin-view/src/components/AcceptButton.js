@@ -20,7 +20,7 @@ export default function AcceptButton(props) {
 
     }
 
-    const CollectAndPassRegisterInfo = () => {
+    const CollectAndPassRegisterInfo = () => {    /// Refactor needed to Ref() !!!
         let email = document.getElementById('outlined-required-mail').value;
         let password = document.getElementById('outlined-required-password').value;
         let passwordConfirmation = document.getElementById('outlined-required-password1').value;

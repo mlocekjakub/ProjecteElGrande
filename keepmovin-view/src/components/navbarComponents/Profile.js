@@ -34,7 +34,7 @@ function Profile(props) {
                         <AccountBoxIcon />
                         <span>Profile</span>
                     </Link>
-                    <Link className="go__settings profile-link" to="#">
+                    <Link className="go__settings profile-link" to="user">
                         <SettingsIcon />
                         <span>Settings</span>
                     </Link>

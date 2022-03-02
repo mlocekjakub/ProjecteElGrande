@@ -12,10 +12,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using KeepMovinAPI.Domain.Dtos;
 
 namespace KeepMovinAPI.Controllers
 {
-    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -31,19 +31,27 @@ namespace KeepMovinAPI.Controllers
 
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("/user/reminder")]
-        public StatusCodeResult Reminder(User user)
+        public StatusCodeResult Reminder(UserEmail userEmail)
         {
-            if (_userDao.CheckIfUserExists(user))
+            try
+            {
+                User user = _userDao.GetUserByEmail(userEmail.Email);
+                if (_userDao.CheckIfUserExists(user))
+                {
+                    // Some Actions Made
+                    return StatusCode(200);
+                }
+                return StatusCode(303);
+            }
+            catch(Exception)
             {
                 return StatusCode(303);
             }
-            return StatusCode(200);
+            
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
@@ -56,7 +64,6 @@ namespace KeepMovinAPI.Controllers
             return StatusCode(200);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("/user/login")]
         public IActionResult Login(User user)
@@ -74,7 +81,6 @@ namespace KeepMovinAPI.Controllers
             return Ok();
         }
 
-        [AllowAnonymous] //Tag tylko i wyłącznie dla testów ,skasować po pełnej implementacji !!!
         [HttpPost("/user/logOut")]
         public IActionResult Logout()
         {
@@ -83,7 +89,7 @@ namespace KeepMovinAPI.Controllers
                          
         }
 
-        [AllowAnonymous]
+
         [HttpGet("/user/validate")]
         public IActionResult Validate()
         {
@@ -93,7 +99,7 @@ namespace KeepMovinAPI.Controllers
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
                 var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
-                return Ok(Convert.ToString(user.userid));
+                return Ok(Convert.ToString(user.Userid));
             }
             catch(Exception)
             {
