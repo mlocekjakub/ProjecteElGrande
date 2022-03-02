@@ -7,7 +7,7 @@ import JoinButton from "./WelcomePageComponents/JoinButton";
 
 export default function WelcomePage() {
     
-  
+    //doesn't work with carousel, uncomment when validation will be fully implemented
     
      useEffect(async () => {
          const response = await fetch("/user/validate", {

@@ -1,4 +1,4 @@
-using KeepMovinAPI.Models;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs
 {

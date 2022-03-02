@@ -1,5 +1,5 @@
-﻿using KeepMovinAPI.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -10,17 +10,17 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new System.NotImplementedException();
         }
 
+        public void Remove(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Setting Get(int id)
         {
             throw new System.NotImplementedException();
         }
 
         public IEnumerable<Setting> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Remove(int id)
         {
             throw new System.NotImplementedException();
         }
