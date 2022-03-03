@@ -14,9 +14,10 @@ namespace KeepMovinAPI.Controllers
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private ISettingDao _settingDao;
 
-        public SettingController(ILogger<SettingController> logger)
+        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao)
         {
             _logger = logger;
+            _settingDao = settingDao;
 
 
 

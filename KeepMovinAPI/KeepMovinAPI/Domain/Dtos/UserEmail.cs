@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KeepMovinAPI.Models.Dtos
+namespace KeepMovinAPI.Domain.Dtos
 {
     public class UserEmail
     {

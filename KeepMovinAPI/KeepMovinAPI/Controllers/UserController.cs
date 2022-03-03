@@ -1,7 +1,7 @@
 ﻿
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.DAOs.Implementations;
-using KeepMovinAPI.Models;
+using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using KeepMovinAPI.Models.Dtos;
+using KeepMovinAPI.Domain.Dtos;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -99,7 +99,7 @@ namespace KeepMovinAPI.Controllers
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
                 var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
-                return Ok(Convert.ToString(user.userid));
+                return Ok(Convert.ToString(user.Userid));
             }
             catch(Exception)
             {

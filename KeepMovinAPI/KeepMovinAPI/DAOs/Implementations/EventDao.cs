@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using KeepMovinAPI.Models;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -28,11 +28,8 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Event Get(int id)
         {
-            using (_context)
-            {
-                var query = _context.Event.Find(id);
-                return query;
-            }
+            var query = _context.Event.Find(id);
+            return query;
         }
 
         public IEnumerable<Event> GetByInput(string input)
