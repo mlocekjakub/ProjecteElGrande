@@ -10,7 +10,7 @@ function MultiButton(props) {
     };
     return (
         <a onClick={props.toggleFunction}
-            className="buttons" sx={{ style }} >{props.type}</a>
+            className="buttons" sx={ style } >{props.type}</a>
     );
 }
 

@@ -17,23 +17,27 @@ export default function Menu() {
         {
             id: 1,
             chosenFunction: RenderChangePassword,
-            type: 'Change password'
+            type: 'Change password',
+            buttonClass: 'buttons'
             
         },
         {
             id: 2,
             chosenFunction: RenderEditProfile,
-            type: 'Edit profile'
+            type: 'Edit profile',
+            buttonClass : 'buttons'
         },
         {
             id: 3,
             chosenFunction: RenderHelp,
-            type: 'Help'
+            type: 'Help',
+            buttonClass : 'buttons'
         },
         {
             id: 3,
             chosenFunction: RenderPrivacySettings,
-            type: 'Privacy Settings'
+            type: 'Privacy Settings',
+            buttonClass : 'buttons'
         },
     ])
 
@@ -63,15 +67,11 @@ export default function Menu() {
         );
     }
 
-    const style = {
-        border: '2px solid ',
-        color: '#242626',
-        border: '1px solid rgba(5, 5, 5, 0.13)'
-    };
+   
     return (
         <div className="menu" >
             {buttonChosen.map((button) =>
-            (<MultiButton key={button.id} sx={style} type={button.type}
+            (<MultiButton key={button.id} type={button.type} buttonClass={button.buttonClass}
                 toggleFunction={button.chosenFunction} />)
             )
             }
