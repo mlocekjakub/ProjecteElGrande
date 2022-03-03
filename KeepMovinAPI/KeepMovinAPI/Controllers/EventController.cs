@@ -30,7 +30,7 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public Event Get(int id)
+        public Event Get(Guid id)
         {
             Event eventModel = _daoEvent.Get(id);
             return eventModel;
@@ -77,7 +77,7 @@ namespace KeepMovinAPI.Controllers
             {
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
-                var user = _userDao.Get(Convert.ToInt32(tokenClaims[0].Value));
+                var user = _userDao.Get(Guid.Parse(tokenClaims[0].Value));
                 if (userId == user.Userid)
                     return true;
                 else
