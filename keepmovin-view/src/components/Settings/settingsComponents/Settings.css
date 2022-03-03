@@ -1,6 +1,5 @@
 ﻿html {
     min-height: 100%;
-    background-color: red;
 }
 
 
@@ -15,7 +14,7 @@
 }
 
 .menu {
-    border: 1px solid rgba(5, 5, 5, 0.13);
+    /*border: 1px solid rgba(5, 5, 5, 0.13);*/
     background-color: #F3F3F3;
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
     display:flex;
@@ -31,6 +30,10 @@
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
 }
 
-.buttons{
-    border:none;
+.buttons {
+    font-family: "Manrope", "sans-serif";
+    text-decoration:none;
+    border: 2px solid;
+    color:  #242626;
+    border: 1px solid rgba(5, 5, 5, 0.13);
 }

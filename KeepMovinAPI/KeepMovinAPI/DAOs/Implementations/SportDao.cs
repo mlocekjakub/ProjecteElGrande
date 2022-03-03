@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
@@ -18,12 +19,12 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new System.NotImplementedException();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Sport Get(int id)
+        public Sport Get(Guid id)
         {
             var query = _context.Sport.Find(id);
             return query;
