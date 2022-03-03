@@ -9,6 +9,7 @@ import RegisterForm from "./components/Register/RegisterForm";
 import EventForm from "./components/Event/EventForm";
 import LoginForm from "./components/Login/LoginForm";
 import EventPage from "./components/Event/EventPage";
+import CalendarPage from "./components/CalendarPage/CalendarPage";
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
             <Route index element={< WelcomePage />}/>
             <Route path="home" element={<WelcomePage />}/>
+            <Route path="calendar" element={<CalendarPage />}/>
             <Route path="profile" element={<ProfilePage />}/>
             <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<LoginForm />}/>

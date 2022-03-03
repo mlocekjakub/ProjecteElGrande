@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using KeepMovinAPI.Models;
@@ -42,6 +44,13 @@ namespace KeepMovinAPI.DAOs.Implementations
         public IEnumerable<Event> GetAll()
         {
             var query = _context.Event.ToList();
+            return query;
+        }
+
+        public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate)
+        {
+            var query = _context.Event
+                .Where(i => i.StartEvent.Month == givenDate.Month && i.StartEvent.Year == givenDate.Year).ToList();
             return query;
         }
     }
