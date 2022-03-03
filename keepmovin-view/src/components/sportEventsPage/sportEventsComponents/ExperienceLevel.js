@@ -12,7 +12,7 @@ const ExperienceLevel = (props) => {
 
     const dispatch = useDispatch();
 
-    function MarkAsCheckedLevel() {
+    function MarkAsChecked() {
         let experienceLevel = ref.current
         
         experienceLevel.classList.toggle("check-icon__toggle")
@@ -28,8 +28,8 @@ const ExperienceLevel = (props) => {
     }
     
     return (
-        <div onClick={MarkAsCheckedLevel} className="experience-item level">
-            {props.level}<CheckIcon ref={ref} className="check-icon"/>
+        <div onClick={MarkAsChecked} className="experience-item level">
+            {props.level}<CheckIcon ref={ref} className="check-icon check-icon__toggle"/>
         </div>
     )
 }

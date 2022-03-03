@@ -10,6 +10,10 @@ import SearchPhraseNavReducer from "./features/SearchPhraseNav";
 import SportReducer from "./features/Sport"
 import ExperienceReducer from "./features/Experience"
 import TypeReducer from "./features/Type"
+import MinParticipantsReducer from "./features/MinParticipants"
+import MaxParticipantsReducer from "./features/MaxParticipants"
+import minPriceReducer from "./features/MinPrice"
+import maxPriceReducer from "./features/MaxPrice"
 import {Provider} from "react-redux";
 
 const store = configureStore({
@@ -18,7 +22,10 @@ const store = configureStore({
         sports: SportReducer,
         experience: ExperienceReducer,
         type: TypeReducer,
-        
+        minParticipants: MinParticipantsReducer,
+        maxParticipants: MaxParticipantsReducer,
+        minPrice: minPriceReducer,
+        maxPrice: maxPriceReducer
     },
 })
 

@@ -5,6 +5,7 @@ import RegistrationHyperLink from "./loginComponents/RegistrationHyperLink";
 import LoginHyperLink from "./loginComponents/LoginHyperLink";
 import './loginComponents/LoginCSS.css';
 import { useEffect, useState } from "react";
+import ForgottenPassword from "../ForgottenPassword";
 
 
 
@@ -12,6 +13,7 @@ import { useEffect, useState } from "react";
 
 
 export default function LoginForm() {
+
     useEffect(async () => {
         const response = await fetch("/user/validate", {
             headers: {
@@ -27,9 +29,10 @@ export default function LoginForm() {
 
     return (
         <div className="grid">
-            <div className="img">
+            <div className="img1">
             </div>
-            <div className="Centered">
+            <div className="centered">
+                <ForgottenPassword />
                 <LoginHyperLink variant="contained" color="white"/>
                   <RegistrationHyperLink variant ="outlined" />
                   <TextBoxes />

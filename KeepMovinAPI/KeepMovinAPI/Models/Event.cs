@@ -7,9 +7,9 @@ namespace KeepMovinAPI.Models
     public class Event
     {
         [Key] [Column("event_id")] public int EventId { get; set; }
-        
+
         [Column("name")] public string Name { get; set; }
-        
+
         [Column("start_event")] public DateTime StartEvent { get; set; }
 
         [Column("end_event")] public DateTime EndEvent { get; set; }
@@ -30,8 +30,10 @@ namespace KeepMovinAPI.Models
 
         [Column("status")] public string Status { get; set; }
 
-        [ForeignKey("price_id")] public Price Price { get; set; }
+        [Column("price")] public decimal Price { get; set; }
 
         [Column("profile_picture")] public Byte[] ProfilePicture { get; set; }
+        
+        [Column("currency")] public string Currency { get; set; }
     }
 }

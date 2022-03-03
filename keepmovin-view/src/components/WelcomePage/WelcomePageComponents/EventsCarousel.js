@@ -4,28 +4,49 @@ import CarouselEventCard from "./CarouselEventCard";
 import {useEffect, useState} from "react";
 
 export default function EventsCarousel() {
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     const baseTransform = 20;
-    
     const [multiplier, setMultiplier] = useState(0);
     const [transformValue, setTransformValue] = useState(baseTransform * multiplier)
 
-    let listOfCards = cards.map((card) =>
-        <div className='card-container' key={card}><CarouselEventCard date={card} key={card}/></div>)
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/event/all')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw response;
+            })
+            .then(data => {
+                setEvents(data);
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+            })
+    }, [])
+
+    let listOfCards = events.map((event) =>
+        <div className='card-container' key={event.eventId}>
+            <CarouselEventCard
+                key={event.eventId}
+                eventId={event.eventId}
+                eventTitle={event.name}
+                startDate={event.startEvent}
+                eventInfo={event.eventInfo}
+                eventPicture={event.profilePicture}
+            />
+        </div>)
 
     const nextCard = () => {
-        console.log("next");
-        if (multiplier < cards.length - 3) {
+        if (multiplier < events.length - 3) {
             setMultiplier(multiplier + 1);
-            console.log(multiplier);
         }
     }
 
     const previousCard = () => {
-        console.log("prev");
         if (multiplier >= 1) {
             setMultiplier(multiplier - 1);
-            console.log(multiplier);
         }
     }
 

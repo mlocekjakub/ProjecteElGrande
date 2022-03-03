@@ -33,6 +33,7 @@ function Searchbar(props) {
             .get(`/api/event/${typedInput}`)
             .then(response => {
                 setEventsFound(response.data)
+                console.log(eventsFound)
 
             })
     }, [typedInput])

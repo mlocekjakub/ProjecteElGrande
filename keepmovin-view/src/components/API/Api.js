@@ -9,7 +9,9 @@ export function LogOut(uri) {
         body: JSON.stringify("")
 
     }).then(response => response.status)
-        .then(data => console.log(data));
+        .then(data => console.log(data))
+        .then(localStorage.clear('session'));
+
 
 }
 
@@ -37,10 +39,8 @@ export function createEvent() {
         "EventInfo": info,
         "MaxParticipants": max_participants,
         "Status": status,
-        "Price": {
-            "Value": price,
-            "Currency": currency
-        }
+        "Price": price,
+        "Currency": currency
     }
     fetch("/api/event", {
         method: 'POST',

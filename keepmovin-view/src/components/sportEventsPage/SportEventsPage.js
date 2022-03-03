@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import EventCard from "./sportEventsComponents/EventCard";
-import SearchBar from "./sportEventsComponents/SearchBar";
 import ButtonCard from "./sportEventsComponents/ButtonCard";
-import {Pagination} from "@mui/material";
 import "./sportEventsPage.css";
 import SportFilter from "./sportEventsComponents/SportFilter";
 import ExperienceFilter from "./sportEventsComponents/ExperienceFilter";
@@ -11,7 +9,9 @@ import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFi
 import TypeFilter from "./sportEventsComponents/TypeFilter";
 import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
-
+import {useSelector} from "react-redux";
+import {Stack, TextField} from "@mui/material";
+import DatePicker from "./sportEventsComponents/DatePicker";
 
 
 function SportEventsPage() {
@@ -21,14 +21,49 @@ function SportEventsPage() {
     const [foundEvents, setFoundEvents] = useState([])
     
     const [searchedEventInput, setSearchedEventInput] = useState('')
+    
+    const sportsFilter = useSelector((state) => state.sports.value)
+    
+    const experienceFilter = useSelector((state) => state.experience.value)
+    
+    const typeFilter = useSelector((state) => state.type.value)
+    
+    const minParticipantsFilter = useSelector((state) => state.minParticipants.value)
+    
+    const maxParticipantsFilter = useSelector((state) => state.maxParticipants.value)
 
+    const minPriceFilter = useSelector((state) => state.minPrice.value)
+
+    const maxPriceFilter = useSelector((state) => state.maxPrice.value)
+    
+    function getUrl() {
+        const urlStart = `/api/event?`;
+        let sports = ``;
+        sportsFilter.map((sport) => {
+            sports += `Sports=${sport.sportId}&`
+        })
+        let minParticipants = `&MinParticipants=${minParticipantsFilter}`;
+        let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
+        let minPrice = `&MinPrice=${minPriceFilter}`;
+        let maxPrice = `&MaxPrice=${maxPriceFilter}`;
+        
+        return urlStart + sports + minParticipants + maxParticipants + minPrice + maxPrice;
+    }
+    
     useEffect(() => {
-        axios
-            .get(`/api/event/${searchedEventInput}`)
-            .then(response => {
-                setFoundEvents(response.data)
-            });
-    }, [searchedEventInput])
+        setTimeout(() => {
+            let correctFetchUrl = getUrl();
+            console.log(correctFetchUrl)
+            axios
+                .get(correctFetchUrl)
+                .then(response => {
+                    setFoundEvents(response.data)
+                });
+        }, 1000)
+    }, [sportsFilter,
+        experienceFilter, typeFilter,
+        minParticipantsFilter, maxParticipantsFilter, 
+        minPriceFilter, maxPriceFilter])
     
 
    /* useEffect(async () => {
@@ -52,41 +87,33 @@ function SportEventsPage() {
                         organizerId={event.organizerUserId}
                         maxParticipants={event.maxParticipants}
                         sportId={event.sportId}
-                        experienceLevel={event.experienceLevel}/>))
+                        experienceLevel={event.experienceLevel}
+                        price={event.price}
+                        currency={event.currency}/>))
         }
     
         
+        
     return (
-        <div className="wrapper">
+        <div className="events-page-wrapper">
             <div className="header">
                 <h1>Events</h1>
             </div>
-            <div className="searchbar-container">
-                <div className="search-bar">
-                    <button type="submit" className="search-button">
-                        <SearchIcon />
-                    </button>
-                    <input type="text" className="search-txt" placeholder="Search.." 
-                           required
-                           onChange={(e) => {
-                               setSearchedEventInput(e.target.value) }}
-                    />
+            <div className="events-filters__container">
+                <div className="filter-container">
+                    <ButtonCard name="create" />
+                    <SportFilter />
+                    <ExperienceFilter />
+                    <PriceFilter />
+                    <ParticipantsCountFilter />
+                    <TypeFilter />
                 </div>
-            </div>
-            <div className="create-event-button">
-                <ButtonCard name="create" />
-            </div>
-            <div className="filter-container">
-                <SportFilter />
-                <ExperienceFilter />
-                <PriceFilter />
-                <ParticipantsCountFilter />
-                <TypeFilter />
-            </div>
-            <div className="events-container">
-               {/* {searchedEventInput !== '' ? <Events display={foundEvents} /> : <Events display={allEvents}/>}*/}
-                <Events display={foundEvents} /> 
-                
+                <div className="events-container">
+                    <div className="event-sorting">
+                        <DatePicker />
+                    </div>
+                    <Events display={foundEvents} />
+                </div>
             </div>
         </div>
     )

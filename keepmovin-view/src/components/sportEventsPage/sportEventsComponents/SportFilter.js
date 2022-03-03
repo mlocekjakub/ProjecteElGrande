@@ -17,13 +17,27 @@ function SportFilter() {
     
     const [sportSearch, setSportSearch] = useState("")
     
-    useEffect(() => {
+    const markedSports = useSelector((state) => state.sports.value)
+    
+    function getSports() {
         axios
             .get(`/api/sports/${sportSearch}`)
             .then(response => {
                 setSports(response.data)
             })
+    }
+    useEffect(() => {
+        getSports()
     }, [sportSearch])
+    
+    useEffect(() => {
+        axios
+            .get(`/api/sports`)
+            .then(response => {
+                dispatch(updateSport(response.data))
+            })
+        
+    }, [])
     
     
     
@@ -36,7 +50,6 @@ function SportFilter() {
             })
         dispatch(updateSport(sports))
     }
-    
     function UncheckAllSports() {
         let allSports = document.querySelectorAll(".sport");
         allSports.forEach(sport => {
@@ -69,7 +82,8 @@ function SportFilter() {
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>
                 </div>
                 {sports.map((sport) =>
-                (<Sport key={sport.sportId} sportSelected={sport} id={sport.sportId} type={sport.name}/>))}
+                    
+                (<Sport key={sport.sportId} sportSelected={sport} id={sport.sportId} type={sport.name}/>) )}
             </div>
         </div>
     )

@@ -9,7 +9,6 @@ export const ExperienceSlice = createSlice({
     reducers: {
         changeExperience: (state, action) => {
             state.value = action.payload
-            console.log(state.value);
         },
         clearExperience: (state, action) => {
             state.value = initialStateValue

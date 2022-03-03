@@ -9,7 +9,6 @@ export const SportSlice = createSlice({
     reducers: {
         updateSport: (state, action) => {
             state.value = action.payload
-            console.log(state.value)
         },
         clearSport: (state, action) => {
             state.value = initialStateValue

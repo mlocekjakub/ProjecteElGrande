@@ -1,14 +1,17 @@
-﻿import React, {useState} from 'react';
+﻿import React, {useEffect, useRef, useState} from 'react';
 import "./Filter.css";
 import "./TypeFilter.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {ExpandFilter} from "./Filter";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Sport from "./Sport";
+import {changeExperience, clearExperience} from "../../../features/Experience";
+import {updateSport} from "../../../features/Sport";
+import Type from "./Type";
+import {updateType} from "../../../features/Type";
 
 
 function TypeFilter() {
-    const dispatch = useDispatch();
 
     const [types, setType] = useState([
         {
@@ -21,15 +24,21 @@ function TypeFilter() {
         },
     ])
     
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(updateType(types))
+    }, [])
+    
     return (
         <div className="filter-parent">
             <div onClick={ExpandFilter} className="filter">
                 <div className="filter-type">Type</div>
-                <ExpandMoreIcon />
+                <ExpandMoreIcon className="expand-icon"/>
             </div>
             <div className="filter-type-expanded-container filter-box">
                 {types.map((type) =>
-                    (<div key={type.id} className="type-item">{type.type}</div>))}
+                    (<Type key={type.id} typeSelected={type} typeName={type.type} />))}
             </div>
         </div>
     )

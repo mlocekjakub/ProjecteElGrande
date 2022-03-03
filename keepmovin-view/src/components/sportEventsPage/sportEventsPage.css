@@ -13,117 +13,191 @@
     --light-grayish-blue: hsl(210, 46%, 95%);
 }
 
-.wrapper {
-    display: grid;
-    grid-gap: 2.5rem;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(15, 1fr);
+.events-page-wrapper {
     min-height: 100%;
-    margin: 90px 240px;
-    /*background: #FFFFFF;*/
+    margin: 5rem 20rem;
     padding: 1rem;
-    /*box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);*/
     font-family: "Manrope", "sans-serif";
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
-.searchbar-container {
-    display: grid;
-    grid-row: 4;
 
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 15rem;
+    user-select: none;
+    overflow: hidden;
+    padding: 1rem;
 }
+
 .events-container {
     display: flex;
-    gap: 2rem;
     flex-direction: column;
-    grid-column: 2/ span 4;
-    grid-row: 5 / span 13;
+    padding: 1rem 2rem 1rem 2rem;
+    min-height: 100vh;
 }
+
+.events-filters__container {
+    display: flex;
+    gap: 2rem;
+}
+.events-filters__container > div {
+    background: #FFFFFF;
+    width: 100%;
+}
+
+
+/*event container*/
+
 .event-1 {
-    display: grid;
-    grid-gap: 20px;
-    background: #F3F3F3;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    -webkit-transition: 0.3s;
+    display: flex;
+    gap: 1rem;
     transition: 0.3s;
-    border-radius: 0.3rem;
     border: 2px solid rgba(255, 255, 255, 0.18);
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+    
+}
+.event-1 > div{
+    width: 100%;
 }
 .event-1:hover {
-    box-shadow: 0 8px 12px 0 rgba(255, 255, 255, 0.2)
+    cursor: pointer;
+    background: #EDEFF1;
 }
 
-.item {
+.event-1 > img{
+    object-fit: scale-down;
+    max-width: 14rem;
+    height: 100%;
+    
 }
-.image {
-    grid-column: span 2;
-    background: url(../../Images/News-Trailer-Web-4Sep20.png);
-    border-bottom-left-radius: 0.3em;
-    border-top-left-radius: 0.3em;
+
+/*___________________*/
+
+/*go to */
+
+.go-to {
+    display: flex;
+    flex-direction: column;
 }
+
+.go-to__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem
+}
+.go-to__join {
+    background: #4285F4;
+    color: #FFFFFF;
+    transition: 0.3s;
+}
+.go-to__join:hover {
+    background: rgba(66, 133, 244, 0.56);
+}
+.go-to__details {
+    background: var(--buttonColor);
+    color: white;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.go-to__details:hover {
+    background: rgba(36, 38, 38, 0.68);
+}
+.go-to__price {
+    background: var(--buttonColor);
+    color: white;
+    text-align: center;
+}
+
+/*___________________*/
+
+
+
+/*event info */
 
 .description {
-    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    justify-content: space-between;
 }
+
 .title {
     font-weight: bold;
+    font-size: 2.3rem;
     color: rgba(0, 0, 0, 0.92)
-}
-.location {
-    font-weight: 500;
-    color: var(--color-very-dark-grayish-blue)
 }
 .date {
     font-weight: 500;
+    font-size: 0.85rem;
     color: var(--color-very-dark-grayish-blue)
 }
 .category {
     font-weight: 500;
-    color: var(--color-very-dark-grayish-blue)
+    font-size: 0.85rem;
+    color: var(--color-very-dark-grayish-blue);
 }
 
-.go-to {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-}
-.details {
-    text-align: center;
+.events-statistics {
+    font-size: 0.8rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 1rem;
 }
-.join {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+.location-icon, .level-icon, .participants-icon {
+    max-width: 1rem;
 }
-.price {
-    display: flex;
-    background: var(--buttonColor);
-    color: white;
-    justify-content: center;
-    align-items: center;
-    border-bottom-right-radius: 0.3em;
-}
+
+/*___________________*/
+
+
+
+
+
+/*create event button */
+
+
 .create-event-button {
-    display: grid;
     border: 2px solid rgba(255, 255, 255, 0.18);
     border-radius: 0.2em;
-    grid-row: 4/5;
-    grid-column: 1;
     margin: 10px;
 }
+
+
+/*___________________*/
+
+
+
+
+
 .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
 }
+
+/*
+.event-sort {
+    display: flex;
+}
+*/
+
+
+
+/*page header */
+
 .header {
-    grid-row: span 3;
-    grid-column: span 5;
     background: url(../../Images/a9f990e6b096f439d7c2b89bd1ee174c_XL.jpg);
     background-size: cover;
     background-position: center;
-    min-height: 300px;
+    min-height: 12rem;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -135,6 +209,11 @@
     margin-bottom: 0;
     color: #fff;
 }
+
+
+/*___________________*/
+
+
 @media (max-width: 1000px) {
     .event-1 {
         grid-template-columns: repeat(1, 1fr);

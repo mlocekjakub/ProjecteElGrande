@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using KeepMovinAPI.Models;
+using KeepMovinAPI.Models.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -41,8 +44,18 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public IEnumerable<Event> GetAll()
         {
-            var query = _context.Event.ToList();
-            return query;
+            return _context.Event.ToList();
+        }
+
+        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
+        {
+            var query = _context.Event.Where(i => 
+                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
+                && (i.Price >= filter.MinPrice && i.Price <= filter.MaxPrice)
+                && (i.MaxParticipants >= filter.MinParticipants && i.MaxParticipants <= filter.MaxParticipants)
+                && filter.Sports.Contains(i.SportId));
+            
+            return query.ToList();
         }
     }
 }

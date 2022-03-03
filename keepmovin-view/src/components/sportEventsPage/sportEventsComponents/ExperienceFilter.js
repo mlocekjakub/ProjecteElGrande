@@ -25,7 +25,10 @@ function ExperienceFilter() {
             experienceLevel: 'Experienced'
         }
     ])
-    
+
+    useEffect(() => {
+        dispatch(changeExperience(level))
+    }, [])
 
     function CheckAllLevels() {
         let allExperienceLevels = document.querySelectorAll(".level");

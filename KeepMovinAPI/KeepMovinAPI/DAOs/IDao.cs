@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KeepMovinAPI.Models.Dtos;
 
 namespace KeepMovinAPI.DAOs
 {
