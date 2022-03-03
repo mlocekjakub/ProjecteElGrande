@@ -9,26 +9,26 @@ import {changeExperience, clearExperience} from "../../../features/Experience";
 import {updateSport} from "../../../features/Sport";
 import Type from "./Type";
 import {updateType} from "../../../features/Type";
+import axios from "axios";
 
 
 function TypeFilter() {
 
-    const [types, setType] = useState([
-        {
-            id: 1,
-            type: 'Professional'
-        },
-        {
-            id: 2,
-            type: 'Recreational',
-        },
-    ])
+    const [types, setType] = useState([]);
     
-    const dispatch = useDispatch();
+    const typesSelected = useSelector((state) => state.type.value)
+    
     
     useEffect(() => {
-        dispatch(updateType(types))
+        axios
+            .get(`/api/types`)
+            .then(response => {
+                setType(response.data)
+                dispatch(updateType(types))
+            })
     }, [])
+    
+    const dispatch = useDispatch();
     
     return (
         <div className="filter-parent">

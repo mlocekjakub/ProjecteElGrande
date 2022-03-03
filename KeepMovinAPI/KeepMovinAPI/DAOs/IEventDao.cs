@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using KeepMovinAPI.Models;
 using KeepMovinAPI.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs
 {

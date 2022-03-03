@@ -4,6 +4,7 @@ using System.Linq;
 using KeepMovinAPI.Models;
 using KeepMovinAPI.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -29,11 +30,8 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public Event Get(int id)
         {
-            using (_context)
-            {
-                var query = _context.Event.Find(id);
-                return query;
-            }
+            var query = _context.Event.Find(id);
+            return query;
         }
 
         public IEnumerable<Event> GetByInput(string input)
@@ -53,7 +51,7 @@ namespace KeepMovinAPI.DAOs.Implementations
                 i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
                 && (i.Price >= filter.MinPrice && i.Price <= filter.MaxPrice)
                 && (i.MaxParticipants >= filter.MinParticipants && i.MaxParticipants <= filter.MaxParticipants)
-                && filter.Sports.Contains(i.SportId));
+                && filter.Sports.Contains(i.Sports.SportId));
             
             return query.ToList();
         }

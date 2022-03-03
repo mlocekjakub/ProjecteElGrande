@@ -6,6 +6,7 @@ using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Models;
 using KeepMovinAPI.Models.Dtos;
+using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -65,7 +66,7 @@ namespace KeepMovinAPI.Controllers
         public IActionResult Add(Event eventModel)
         {
             string jwt = Request.Cookies["token"];
-            if (Validate(eventModel.OrganizerUserId,jwt))
+            if (Validate(eventModel.User.User.Userid,jwt))
             {
                 _daoEvent.Add(eventModel);
                 return Ok(); 
@@ -77,14 +78,14 @@ namespace KeepMovinAPI.Controllers
 
 
         [NonAction]
-        public bool Validate(int userId, string jwt)
+        public bool Validate(Guid userId, string jwt)
         {
             try
             {
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
                 var user = _userDao.Get(Convert.ToInt32(tokenClaims[0].Value));
-                if (userId == user.userid)
+                if (userId == user.Userid)
                     return true;
                 else
                     return false;

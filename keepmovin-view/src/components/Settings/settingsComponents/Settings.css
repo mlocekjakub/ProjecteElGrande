@@ -1,0 +1,33 @@
+﻿html {
+    min-height: 100%;
+}
+
+.wr {
+    display: flex;
+    gap:1rem;
+    min-height: 100%;
+    margin: 90px 240px;
+    padding: 1rem;
+    font-family: "Manrope", "sans-serif";
+}
+
+.menu {
+    border: 1px solid rgba(5, 5, 5, 0.13);
+    background-color: #F3F3F3;
+    box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+
+.userChoices {
+    width :75rem;
+    border: 1px solid rgba(5, 5, 5, 0.13) ;
+    background-color: #F3F3F3;
+    box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
+}
+
+.buttons{
+    border:none;
+}

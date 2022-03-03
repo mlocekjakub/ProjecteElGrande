@@ -8,7 +8,7 @@ namespace KeepMovinAPI.Models.Dtos
     public class Filter
     {
         
-        public List<int>? Sports { get; set; } = new List<int>();
+        public List<Guid>? Sports { get; set; } = new List<Guid>();
         
         /*public List<Experience> Experience { get; set; }*/
 

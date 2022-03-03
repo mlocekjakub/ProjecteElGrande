@@ -6,28 +6,24 @@ import ExperienceLevel from "./ExperienceLevel";
 import {ExpandFilter} from "./Filter";
 import {useDispatch} from "react-redux";
 import {changeExperience, clearExperience} from "../../../features/Experience";
+import axios from "axios";
+import {updateType} from "../../../features/Type";
 
 
 function ExperienceFilter() {
     const dispatch = useDispatch();
     
-    const [level, setLevel] = useState([
-        {
-            id: 1,
-            experienceLevel: 'Beginner'
-        },
-        {
-            id: 2,
-            experienceLevel: 'Intermediate',
-        },
-        {
-            id: 3,
-            experienceLevel: 'Experienced'
-        }
-    ])
+    const [level, setLevel] = useState([])
+    
+    
 
     useEffect(() => {
-        dispatch(changeExperience(level))
+        axios
+            .get(`/api/experience`)
+            .then(response => {
+                setLevel(response.data)
+                dispatch(updateType(level))
+            })
     }, [])
 
     function CheckAllLevels() {
