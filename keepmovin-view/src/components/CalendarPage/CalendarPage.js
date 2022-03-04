@@ -9,8 +9,20 @@ export default function CalendarPage() {
     const [inputDate, setInputDate] = useState(new Date());
     const [url, setUrl] = useState(`api/Calendar?inputDate=${inputDate.toJSON().slice(0, 10)}`);
     const [events, setEvents] = useState([]);
+    const [listOfEvents, setListOfEvents] = useState([
+        {
+            'title': "test",
+            'start': new Date(),
+            'end': new Date(),
+            'allDay': true,
+        }
+    ]);
 
     // localStorage.getItem('session');
+    
+    useEffect(() => {
+        console.log(listOfEvents);
+    })
 
     useEffect(() => {
         console.log(`fetch: ${url}`);
@@ -22,7 +34,18 @@ export default function CalendarPage() {
                 throw response;
             })
             .then(data => {
+                let tempList = [];
                 setEvents(data);
+                data.forEach(element => {
+                    tempList.push(
+                        {
+                            'title': element.name,
+                            'start': new Date(element.startEvent),
+                            'end': new Date(element.endEvent),
+                            'allDay': true
+                        }
+                    )})
+                setListOfEvents(tempList);
             })
             .catch(error => {
                 console.error("Error fetching data: ", error);
@@ -31,34 +54,18 @@ export default function CalendarPage() {
 
     const localizer = momentLocalizer(moment);
 
-    const listOfEvents = events.map((event) => 
-        [
-            {
-                'title': event.name, 
-                'start': event.startDate,
-                'end': event.endDate
-            }
-        ]
-    )
-
-    const MyCalendar = () => (
-        <div>
+    return (
+        <div className="calendar-page" style={{marginTop: "6rem", marginRight: "2rem", marginLeft: "2rem"}}>
             <Calendar
                 localizer={localizer}
                 events={listOfEvents}
                 startAccessor="start"
                 endAccessor="end"
-                style={{height: 500}}
+                style={{height: "88vh"}}
             />
         </div>
     )
-
-    return (
-        <div className="calendar-page" style={{marginTop: "6rem", marginRight: "2rem", marginLeft: "2rem"}}>
-            <MyCalendar/>
-        </div>
-    )
-    //
+    
     // const changeDate = (count) => {
     //     inputDate.setMonth(inputDate.getMonth() + count)
     //     setUrl(`api/Calendar?inputDate=${inputDate.toJSON().slice(0,10)}`);

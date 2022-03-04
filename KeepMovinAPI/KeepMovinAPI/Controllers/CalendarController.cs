@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
-using KeepMovinAPI.Models;
-using KeepMovinAPI.Authentication;
-using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -32,5 +29,7 @@ namespace KeepMovinAPI.Controllers
             var listOfEvents = _daoEvent.GetAllByMonthAndYear(inputDate);
             return listOfEvents;
         }
+        
+        // add get for user events
     }
 }
