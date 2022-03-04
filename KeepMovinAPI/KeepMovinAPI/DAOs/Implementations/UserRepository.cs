@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Serialization;
 using KeepMovinAPI.Domain;
-using KeepMovinAPI.DAOs;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 

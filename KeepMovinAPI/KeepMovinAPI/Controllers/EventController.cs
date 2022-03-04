@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Domain;
-using Microsoft.AspNetCore.Authorization;
+using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public class EventController : ControllerBase
@@ -35,7 +33,7 @@ namespace KeepMovinAPI.Controllers
             Event eventModel = _daoEvent.Get(id);
             return eventModel;
         }
-        
+
 
         [HttpGet("{input}")]
         public IEnumerable<Event> GetByInput(string input)
@@ -43,26 +41,32 @@ namespace KeepMovinAPI.Controllers
             var listOfEvents = _daoEvent.GetByInput(input);
             return listOfEvents;
         }
-        
+
 
         [HttpGet]
+        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
+        {
+            var listOfEvents = _daoEvent.GetFiltered(filter);
+            return listOfEvents;
+        }
+
+        [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
             var listOfEvents = _daoEvent.GetAll();
             return listOfEvents;
         }
-        
 
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {
             string jwt = Request.Cookies["token"];
-            if (Validate(eventModel.User.Organiser.Userid,jwt))
+            if (Validate(eventModel.User.Organiser.Userid, jwt))
             {
                 _daoEvent.Add(eventModel);
-                return Ok(); 
-               
+                return Ok();
             }
+
             return Unauthorized();
         }
 
@@ -77,14 +81,12 @@ namespace KeepMovinAPI.Controllers
                 var user = _userDao.Get(Guid.Parse(tokenClaims[0].Value));
                 if (userId == user.Userid)
                     return true;
-                else
-                    return false;
+                return false;
             }
             catch (Exception)
             {
-                return false; 
+                return false;
             }
-
         }
     }
 }

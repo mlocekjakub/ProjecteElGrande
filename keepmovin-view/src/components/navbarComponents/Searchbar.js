@@ -4,9 +4,14 @@ import axios from "axios";
 import EventsSearchedCard from "./EventsSearchedCard";
 import "./EventsSearchedContainer.css";
 import {useDetectClickOutside} from "react-detect-click-outside";
+import {useDispatch, useSelector} from "react-redux";
+import {changeSearchPhrase} from "../../features/SearchPhraseNav";
 
 function Searchbar(props) {
-    const [typedInput, setTypedInput] = useState('');
+    
+    const typedInput = useSelector((state) => state.searchNav.value)
+    
+    const dispatch = useDispatch();
     
     const [eventsFound, setEventsFound] = useState([]);
     
@@ -22,9 +27,18 @@ function Searchbar(props) {
     function closeSearchMenu() {
         refFoundEvents.current.classList.remove("events-found__active")
     }
+
+    useEffect(() => {
+        axios
+            .get(`/api/event/${typedInput}`)
+            .then(response => {
+                setEventsFound(response.data)
+
+            })
+    }, [typedInput])
     
     function EventsMenu() {
-       if (typedInput === '') {
+       if (typedInput === "") {
            return <div className="emptySearchMenu"> Type event you search for </div>;
        } 
        else {
@@ -43,14 +57,7 @@ function Searchbar(props) {
             <input type="text" className="search-txt-header" placeholder="Search for event.."
             required
             value = {typedInput}
-            onChange = {(e) => {
-                setTypedInput(e.target.value)
-                axios
-                    .get(`/api/event/${typedInput.toString()}`)
-                    .then(response => {
-                        setEventsFound(response.data)
-
-                    })}
+            onChange = {(e) => { dispatch(changeSearchPhrase(e.target.value)) }
             }
             onClick={expandFoundEventsContainer}
             />

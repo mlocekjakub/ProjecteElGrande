@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class SportController : ControllerBase
     {
@@ -21,7 +22,6 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("api/sports")]
         public IEnumerable<Sport> GetAll()
         {
             var listOfSports = _daoSport.GetAll();
@@ -30,7 +30,16 @@ namespace KeepMovinAPI.Controllers
         
 
         [HttpGet]
-        [Route("api/sport/{id}")]
+        [Route("input/{input}")]
+        public IEnumerable<Sport> GetByInput(string input)
+        {
+            var listOfEvents = _daoSport.GetByInput(input);
+            return listOfEvents;
+        }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{id}")]
         public Sport Get(Guid id)
         {
             var sport = _daoSport.Get(id);

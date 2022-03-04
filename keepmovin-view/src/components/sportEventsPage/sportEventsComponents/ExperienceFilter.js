@@ -4,30 +4,27 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./ExperienceFilter.css";
 import ExperienceLevel from "./ExperienceLevel";
 import {ExpandFilter} from "./Filter";
+import {useDispatch} from "react-redux";
+import {changeExperience, clearExperience} from "../../../features/Experience";
+import axios from "axios";
+import {updateType} from "../../../features/Type";
 
 
 function ExperienceFilter() {
-    const [levelSelected, setLevelSelected] = useState([
-        {
-            id: 1,
-            experienceLevel: 'Beginner'
-        },
-        {
-            id: 2,
-            experienceLevel: 'Intermediate',
-        },
-        {
-            id: 3,
-            experienceLevel: 'Experienced'
-        }
-    ])
+    const dispatch = useDispatch();
+    
+    const [level, setLevel] = useState([])
+    
+    
 
-
-    function MarkAsCheckedLevel(e) {
-        let level = e.currentTarget;
-        level.children[0].classList.toggle("check-icon__toggle")
-
-    }
+    useEffect(() => {
+        axios
+            .get(`/api/experience`)
+            .then(response => {
+                setLevel(response.data)
+                dispatch(changeExperience(response.data))
+            })
+    }, [])
 
     function CheckAllLevels() {
         let allExperienceLevels = document.querySelectorAll(".level");
@@ -36,6 +33,8 @@ function ExperienceFilter() {
                 level.children[0].classList.toggle("check-icon__toggle")
             }
         })
+        dispatch(changeExperience(level));
+        
     }
     
     function UncheckAllLevels() {
@@ -45,6 +44,7 @@ function ExperienceFilter() {
                 level.children[0].classList.toggle("check-icon__toggle")
             }
         })
+        dispatch(clearExperience());
     }
     
     return (
@@ -58,8 +58,8 @@ function ExperienceFilter() {
                     <div onClick={CheckAllLevels} className="check-hide-all-levels experience-item">Choose All</div>
                     <div onClick={UncheckAllLevels} className="check-hide-all-levels experience-item hide-btn-levels">Hide All</div>
                 </div>
-                {levelSelected.map((level) =>
-                    (<ExperienceLevel key={level.id} id={level.id} level={level.experienceLevel} markLevel={MarkAsCheckedLevel} />))}
+                {level.map((level) =>
+                    (<ExperienceLevel key={level.experienceLevelId} id={level.experienceLevelId} levelSelected={level} level={level.name} />))}
             </div>
         </div>
     )

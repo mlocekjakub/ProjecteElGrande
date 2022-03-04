@@ -34,7 +34,7 @@ function Profile(props) {
                         <AccountBoxIcon />
                         <span>Profile</span>
                     </Link>
-                    <Link className="go__settings profile-link" to="user">
+                    <Link className="go__settings profile-link" to="/Settings">
                         <SettingsIcon />
                         <span>Settings</span>
                     </Link>
@@ -42,7 +42,7 @@ function Profile(props) {
                         Log out
                     </Link>
                 </div>
-                <div className="triangle__profile-menu"></div>
+                {/*<div className="triangle__profile-menu"></div>*/}
             </div>
         </div>
     );

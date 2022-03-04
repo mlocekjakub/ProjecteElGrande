@@ -1,17 +1,11 @@
-﻿
-using KeepMovinAPI.DAOs;
-using KeepMovinAPI.DAOs.Implementations;
+﻿using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 using KeepMovinAPI.Domain.Dtos;
 
 namespace KeepMovinAPI.Controllers
@@ -19,16 +13,15 @@ namespace KeepMovinAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+
         public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt)
-		{
-			_logger = logger;
+        {
+            _logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
-
         }
 
         [HttpPost]
@@ -43,13 +36,13 @@ namespace KeepMovinAPI.Controllers
                     // Some Actions Made
                     return StatusCode(200);
                 }
+
                 return StatusCode(303);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return StatusCode(303);
             }
-            
         }
 
         [HttpPost]
@@ -60,6 +53,7 @@ namespace KeepMovinAPI.Controllers
             {
                 return StatusCode(303);
             }
+
             _userDao.Add(user);
             return StatusCode(200);
         }
@@ -67,9 +61,9 @@ namespace KeepMovinAPI.Controllers
         [HttpPost]
         [Route("/user/login")]
         public IActionResult Login(User user)
-        {           
+        {
             var dataBaseUser = _userDao.GetUserByEmail(user);
-            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user,_userDao);
+            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
             if (token == null)
                 return Unauthorized();
 
@@ -77,7 +71,7 @@ namespace KeepMovinAPI.Controllers
             {
                 HttpOnly = true,
             });
-            
+
             return Ok();
         }
 
@@ -86,7 +80,6 @@ namespace KeepMovinAPI.Controllers
         {
             Response.Cookies.Delete("token");
             return Ok();
-                         
         }
 
 
@@ -101,22 +94,10 @@ namespace KeepMovinAPI.Controllers
                 var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
                 return Ok(Convert.ToString(user.Userid));
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return Unauthorized();
             }
-        
         }
-
     }
-
-
-
-
-
-
-
-
-
 }
-

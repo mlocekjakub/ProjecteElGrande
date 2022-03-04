@@ -7,7 +7,11 @@ namespace KeepMovinAPI.Domain
     {
         [Key]
         public Guid OrganisationId { get; set; } = Guid.NewGuid();
+        
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
-        public Boolean IsVerify { get; set; }
+
+        public Boolean IsVerify { get; set; } = false;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KeepMovinAPI.Domain
 {
@@ -9,6 +8,7 @@ namespace KeepMovinAPI.Domain
         [Key] 
         public Guid SportId { get; set; } = Guid.NewGuid();
 
+        [MaxLength(25)]
         public string Name { get; set; }
     }
 }

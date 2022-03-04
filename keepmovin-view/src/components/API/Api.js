@@ -14,7 +14,6 @@ export function LogOut(uri) {
 
 }
 
-
 export function createEvent() {
     let status = "upcoming";
     let owner = 1;
@@ -36,9 +35,10 @@ export function createEvent() {
         "EventInfo": info,
         "MaxParticipants": max_participants,
         "Status": status,
-        "Value": price,
         "Currency": currency,
         "Link":""
+        "Price": price,
+        "Currency": currency
     }
     fetch("/api/event", {
         method: 'POST',

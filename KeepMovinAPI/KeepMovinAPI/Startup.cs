@@ -57,10 +57,13 @@ namespace KeepMovinAPI
 
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IEventDao, EventDao>();
-            services.AddTransient<IUserDao, UserDao>();
-            services.AddTransient<ISportDao, SportDao>();
-            services.AddTransient<ISettingDao, SettingDao>();
+            services.AddScoped<IEventDao, EventDao>();
+            services.AddScoped<IUserDao, UserDao>();
+            services.AddScoped<ISportDao, SportDao>();
+            services.AddScoped<ISettingDao, SettingDao>();
+            services.AddScoped<ITypeDao, TypeDao>();
+            services.AddScoped<IExperienceDao, ExperienceDao>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

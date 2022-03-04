@@ -6,29 +6,29 @@ import PersonIcon from '@mui/icons-material/Person';
 
 function EventsSearchedCard(props) {
 
-    const [sportCategory, setSportCategory] = useState([])
+    const [sportCategory, setSportCategory] = useState("Basketball")
     
-    const [sportLevel, setSportLevel] = useState(props.experienceLevel)
+    const [sportLevel, setSportLevel] = useState("Beginner")
     
     function LevelComponent() {
         if (sportLevel === "Beginner") {
-            return <span className="beginner"> {props.experienceLevel}</span>;
+            return <span className="beginner"> Beginner</span>;
         }
         else if(sportLevel === "Intermediate") {
-            return <span className="intermediate"> {props.experienceLevel}</span>;
+            return <span className="intermediate"> Intermedaite</span>;
         }
         else {
-            return <span className="experienced"> {props.experienceLevel}</span>;
+            return <span className="experienced"> Experienced</span>;
         }
     }
     
-    useEffect(() => {
+    /*useEffect(() => {
         axios
             .get(`/api/sport/${props.sportId}`)
             .then(response => {
                 setSportCategory(response.data);
             });
-    }, [])
+    }, [])*/
     
     return (
         <div className="event-searched-card">
@@ -38,7 +38,7 @@ function EventsSearchedCard(props) {
             </div>
             <div className="event-info__found">
                 <div className="event-info-category__found">
-                    {sportCategory.name}
+                    {sportCategory}
                 </div>
                 <div className="event-info-header__found">
                     {props.eventName}
