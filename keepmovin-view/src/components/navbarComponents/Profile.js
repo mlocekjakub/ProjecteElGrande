@@ -42,7 +42,7 @@ function Profile(props) {
                         Log out
                     </Link>
                 </div>
-                <div className="triangle__profile-menu"></div>
+                {/*<div className="triangle__profile-menu"></div>*/}
             </div>
         </div>
     );

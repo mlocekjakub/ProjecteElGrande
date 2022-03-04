@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Domain;
@@ -29,6 +30,15 @@ namespace KeepMovinAPI.Controllers
         }
         
 
+        [HttpGet]
+        [Route("api/sports/{input}")]
+        public IEnumerable<Sport> GetByInput(string input)
+        {
+            var listOfEvents = _daoSport.GetByInput(input);
+            return listOfEvents;
+        }
+        
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/sport/{id}")]
         public Sport Get(Guid id)

@@ -11,19 +11,15 @@
     cursor: pointer;
 }
 
-.filter-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    grid-column: 1;
-    grid-row: 5/9;
-    position: absolute;
-    top: 38.5rem;
-    width: 15rem;
-    user-select: none;
-    overflow: hidden;
+.spinner {
+    padding-top: 5rem;
 }
 
+.date-picker {
+    margin: 0 1rem 0 1rem;
+    display: flex;
+    justify-content: end;
+}
 .filter-parent {
     display: flex;
     flex-direction: column;

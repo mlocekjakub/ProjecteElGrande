@@ -18,9 +18,6 @@ namespace KeepMovinAPI.Controllers
         {
             _logger = logger;
             _settingDao = settingDao;
-
-
-
         }
     }
 }

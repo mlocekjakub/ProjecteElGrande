@@ -1,5 +1,6 @@
 using System;
 using KeepMovinAPI.Domain;
+using KeepMovinAPI.Domain.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeepMovinAPI
@@ -15,6 +16,7 @@ namespace KeepMovinAPI
         public DbSet<Sport> Sport { get; set; }
         public DbSet<Setting> Setting { get; set; }
         public DbSet<ExperienceLevel> ExperienceLevel { get; set; }
+        public DbSet<EventType> EventType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +45,58 @@ namespace KeepMovinAPI
             );
 
             #endregion
+            
+            #region SportSeed
+
+            modelBuilder.Entity<Sport>().HasData(
+            new Sport { Name = "Baseball" },
+            new Sport { Name = "Football" },
+            new Sport { Name = "Cycling" },
+            new Sport { Name = "HandBall" },
+            new Sport { Name = "Climbing" },
+            new Sport { Name = "Fishing" },
+            new Sport { Name = "Running" },
+            new Sport { Name = "Volleyball" },
+            new Sport { Name = "Basketball" },
+            new Sport { Name = "Nordic Walking" }
+            );
+
+            #endregion
+            
+            #region LocationSeed
+            
+            modelBuilder.Entity<Location>().HasData(
+            new Location { City = "Krakow" , Country = "Poland", ZipCode = "30-389"},
+            new Location { City = "Warszawa" , Country = "Poland", ZipCode = "30-389"},
+            new Location { City = "Gdansk" , Country = "Poland", ZipCode = "30-389"},
+            new Location { City = "Opole" , Country = "Poland", ZipCode = "30-389"}
+            );
+
+            #endregion
+            
+            
+            
+
+            /*#region EventSeed
+            
+            modelBuilder.Entity<Event>().HasData(
+                new Event
+                {
+                    Name = "Runmageddon",
+                    StartEvent = DateTime.Now,
+                    EndEvent = DateTime.Now,
+                    User = null,
+                    Sports = 
+
+
+                }
+                )
+            #endregion*/
+
+
+
+
+
         }
     }
 }

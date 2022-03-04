@@ -150,8 +150,8 @@ header {
 
 .expanded__profile-menu {
    position: absolute;
-   right: 13%;
-   top: 90%;
+   /*right: 13%;*/
+   top: 85%;
    visibility: hidden;
    transition: 0.2s;
    opacity: 0
@@ -159,7 +159,7 @@ header {
 
 .expanded__notification-menu {
    position: absolute;
-   right: 17%;
+   /*right: 17%;*/
    top: 94%;
    visibility: hidden;
    transition: 0.2s;
