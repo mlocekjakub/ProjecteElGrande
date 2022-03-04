@@ -29,8 +29,8 @@ namespace KeepMovinAPI.Controllers
             _jwtAuthenticationManager = jwt;
         }
 
-        [HttpGet("{id:int}")]
-        public Event Get(int id)
+        [HttpGet("{id}")]
+        public Event Get(Guid id)
         {
             Event eventModel = _daoEvent.Get(id);
             return eventModel;
@@ -43,8 +43,6 @@ namespace KeepMovinAPI.Controllers
             var listOfEvents = _daoEvent.GetByInput(input);
             return listOfEvents;
         }
-        
-        
         
 
         [HttpGet]
@@ -59,14 +57,13 @@ namespace KeepMovinAPI.Controllers
         public IActionResult Add(Event eventModel)
         {
             string jwt = Request.Cookies["token"];
-            if (Validate(eventModel.User.User.Userid,jwt))
+            if (Validate(eventModel.User.Organiser.Userid,jwt))
             {
                 _daoEvent.Add(eventModel);
                 return Ok(); 
                
             }
             return Unauthorized();
-
         }
 
 
@@ -77,7 +74,7 @@ namespace KeepMovinAPI.Controllers
             {
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
-                var user = _userDao.Get(Convert.ToInt32(tokenClaims[0].Value));
+                var user = _userDao.Get(Guid.Parse(tokenClaims[0].Value));
                 if (userId == user.Userid)
                     return true;
                 else

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs.Implementations
@@ -10,12 +11,12 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new System.NotImplementedException();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Setting Get(int id)
+        public Setting Get(Guid id)
         {
             throw new System.NotImplementedException();
         }

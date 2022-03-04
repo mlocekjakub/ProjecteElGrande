@@ -7,7 +7,7 @@ namespace KeepMovinAPI.Domain
     {
         [Key]
         public Guid UserProfileId { get; set; } = Guid.NewGuid();
-        public User User { get; set; }
+        public User Organiser { get; set; }
         public Picture Picture { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

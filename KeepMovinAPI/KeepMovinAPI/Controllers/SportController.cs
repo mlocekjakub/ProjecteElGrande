@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Domain;
@@ -30,7 +31,7 @@ namespace KeepMovinAPI.Controllers
 
         [HttpGet]
         [Route("api/sport/{id}")]
-        public Sport Get(int id)
+        public Sport Get(Guid id)
         {
             var sport = _daoSport.Get(id);
             return sport;

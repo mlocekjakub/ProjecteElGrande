@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using KeepMovinAPI.Domain;
@@ -19,12 +20,12 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context.SaveChanges();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Event Get(int id)
+        public Event Get(Guid id)
         {
             var query = _context.Event.Find(id);
             return query;

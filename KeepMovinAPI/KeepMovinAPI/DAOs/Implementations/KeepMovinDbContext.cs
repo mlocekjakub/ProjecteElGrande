@@ -1,4 +1,3 @@
-using System;
 using KeepMovinAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +27,9 @@ namespace KeepMovinAPI
             #region ExperienceLevelSeed
 
             modelBuilder.Entity<ExperienceLevel>().HasData(
-                new ExperienceLevel {ExperienceLevelId = Guid.NewGuid(), Name = "Beginner"},
-                new ExperienceLevel {ExperienceLevelId = Guid.NewGuid(), Name = "Intermediate"},
-                new ExperienceLevel {ExperienceLevelId = Guid.NewGuid(), Name = "Expert"}
+                new ExperienceLevel {Name = "Beginner"},
+                new ExperienceLevel {Name = "Intermediate"},
+                new ExperienceLevel {Name = "Expert"}
             );
 
             #endregion

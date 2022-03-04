@@ -1,4 +1,3 @@
-
 export function LogOut(uri) {
     fetch(uri, {
         method: 'POST',
@@ -33,16 +32,13 @@ export function createEvent() {
         "Name": name,
         "StartEvent": start_event,
         "EndEvent": end_event,
-        "OrganizerUserId": owner,
-        "SportId": sport_id,
         "ExperienceLevel": experience_level,
         "EventInfo": info,
         "MaxParticipants": max_participants,
         "Status": status,
-        "Price": {
-            "Value": price,
-            "Currency": currency
-        }
+        "Value": price,
+        "Currency": currency,
+        "Link":""
     }
     fetch("/api/event", {
         method: 'POST',
