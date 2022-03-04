@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Models;
+using KeepMovinAPI.Models.Dtos;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,17 +46,21 @@ namespace KeepMovinAPI.Controllers
             return listOfEvents;
         }
         
-        
-        
-
         [HttpGet]
+        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
+        {
+            var listOfEvents = _daoEvent.GetFiltered(filter);
+            _logger.LogInformation(filter.Experience[0].ToString());
+            return listOfEvents;
+        }
+        
+        [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
             var listOfEvents = _daoEvent.GetAll();
             return listOfEvents;
         }
         
-
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {

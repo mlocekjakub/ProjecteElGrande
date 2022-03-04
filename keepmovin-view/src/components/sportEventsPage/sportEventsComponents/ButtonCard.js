@@ -19,27 +19,10 @@ function ButtonCard(props) {
         },
     });
     switch(props.name) {
-        case "details":
-            return (
-                <ThemeProvider theme={theme}>
-                    <Button className="details" color="details" variant="contained" style={{borderRadius: 0}}>
-                        Details <ArrowRightIcon/>
-                    </Button>
-                </ThemeProvider>
-            );
-        case "join":
-            return (
-                <ThemeProvider theme={theme}>
-                    <Button className="join" color="join" variant="contained" style={{borderRadius: 0, borderTopRightRadius: "0.3em"}}>
-                        Join Now
-                    </Button>
-                </ThemeProvider>
-            );
         case "create":
             return(
                 <ThemeProvider theme={theme}>
-                    <Button component={Link} to="/event/create"  className="join" color="join" variant="contained"
-                            style={{borderRadius: "0.3em"}} >
+                    <Button component={Link} to="/event/create"  className="join" color="join" variant="contained">
                         Create Event
                     </Button>
                 </ThemeProvider>

@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using KeepMovinAPI.Models;
+using KeepMovinAPI.Models.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
-using System;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -35,14 +37,28 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public IEnumerable<Event> GetByInput(string input)
         {
-            var query = _context.Event.Where(i => i.Name.ToLower().Contains(input.ToLower()));
+            var query = _context.Event.Where(i => i.Name.ToLower().StartsWith(input.ToLower()));
             return query.ToList();
         }
 
         public IEnumerable<Event> GetAll()
         {
-            var query = _context.Event.ToList();
-            return query;
+            return _context.Event.ToList();
+        }
+
+        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
+        {
+            var query = _context.Event.Where(i => 
+                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
+                && (i.Price >= filter.MinPrice 
+                && i.Price <= filter.MaxPrice)
+                && (i.MaxParticipants >= filter.MinParticipants 
+                && i.MaxParticipants <= filter.MaxParticipants)
+                && filter.Sports.Contains(i.Sports.SportId)
+                && filter.Type.Contains(i.Type.TypeId)
+                && filter.Experience.Contains(i.ExperienceLevel.ExperienceLevelId));
+            
+            return query.ToList();
         }
 
         public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate)

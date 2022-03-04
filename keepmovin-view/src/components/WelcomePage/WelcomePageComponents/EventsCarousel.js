@@ -11,7 +11,7 @@ export default function EventsCarousel() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        fetch('/api/event')
+        fetch('/api/event/all')
             .then(response => {
                 if (response.ok) {
                     return response.json();
