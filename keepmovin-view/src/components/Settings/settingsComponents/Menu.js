@@ -1,27 +1,80 @@
 import Button from '@mui/material/Button';
+import ReactDOM from "react-dom";
 import * as React from "react";
+import ChangePassword from './ChangePassword';
+import EditProfile from './EditProfile';
+import Help from './Help';
+import PrivacySettings from './PrivacySettings';
 import "./Settings.css";
+import { useState } from 'react';
+import MultiButton from './MultiButton'
 
 
 
 export default function Menu() {
 
-    const choiceId = (e) => {
-        let targetId = e.target.id;
-        localStorage.setItem('choice', targetId);
+    const [buttonChosen, setButtonChosen] = useState([
+        {
+            id: 1,
+            chosenFunction: RenderChangePassword,
+            type: 'Change password',
+            buttonClass: 'buttons'
+            
+        },
+        {
+            id: 2,
+            chosenFunction: RenderEditProfile,
+            type: 'Edit profile',
+            buttonClass : 'buttons'
+        },
+        {
+            id: 3,
+            chosenFunction: RenderHelp,
+            type: 'Help',
+            buttonClass : 'buttons'
+        },
+        {
+            id: 3,
+            chosenFunction: RenderPrivacySettings,
+            type: 'Privacy Settings',
+            buttonClass : 'buttons'
+        },
+    ])
+
+    function RenderChangePassword() {
+        ReactDOM.render(
+            <ChangePassword />,
+            document.getElementById('menuContent')
+        );
+    }
+    function RenderEditProfile() {
+        ReactDOM.render(
+            <EditProfile />,
+            document.getElementById('menuContent')
+        );
+    }
+    function RenderHelp() {
+        ReactDOM.render(
+            <Help />,
+            document.getElementById('menuContent')
+        );
     }
 
-    const style = {
-        border: '2px solid ',
-        color: '#242626',
-        border: '1px solid rgba(5, 5, 5, 0.13)'
-    };
+    function RenderPrivacySettings() {
+        ReactDOM.render(
+            <PrivacySettings />,
+            document.getElementById('menuContent')
+        );
+    }
+
+   
     return (
         <div className="menu" >
-            <Button id='1' onClick={choiceId} sx={style}>Edit Profile</Button>
-            <Button id='2' onClick={choiceId} sx={style}>Privacy settings</Button>
-            <Button id='3' onClick={choiceId} sx={style}>Change Password</Button>
-            <Button id='4' onClick={choiceId} sx={style} >Help</Button>
+            {buttonChosen.map((button) =>
+            (<MultiButton key={button.id} type={button.type} buttonClass={button.buttonClass}
+                toggleFunction={button.chosenFunction} />)
+            )
+            }
         </div>
     )
 }
