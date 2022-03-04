@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using KeepMovinAPI.Models.Dtos;
+using System;
 
 namespace KeepMovinAPI.DAOs
 {
     public interface IDao<T>
     {
         void Add(T item);
-        void Remove(int id);
-        T Get(int id);
+        void Remove(Guid id);
+        T Get(Guid id);
         IEnumerable<T> GetAll();
     }
 }

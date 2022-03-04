@@ -45,7 +45,7 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         }
 
-        public User Get(int id)
+        public User Get(Guid id)
         {
 
             var query = _context.User.Find(id);
@@ -57,7 +57,7 @@ namespace KeepMovinAPI.DAOs.Implementations
             throw new NotImplementedException();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new NotImplementedException();
         }

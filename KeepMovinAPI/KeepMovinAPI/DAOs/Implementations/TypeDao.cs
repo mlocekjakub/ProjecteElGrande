@@ -9,18 +9,22 @@ namespace KeepMovinAPI.DAOs.Implementations
     public class TypeDao : ITypeDao
     {
         private readonly KeepMovinDbContext _context;
+        public TypeDao(KeepMovinDbContext context)
+        {
+            _context = context;
+        }
         
         public void Add(EventType item)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public EventType Get(int id)
+        public EventType Get(Guid id)
         {
             throw new NotImplementedException();
         }

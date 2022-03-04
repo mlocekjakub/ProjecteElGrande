@@ -22,7 +22,7 @@ const Type = (props) => {
         }
         else {
             dispatch(updateType(markedTypes.filter((markType) =>
-                markType.id !== props.typeSelected.id)))
+                markType.typeId !== props.typeSelected.typeId)))
         }
 
     }

@@ -1,7 +1,6 @@
 ﻿import React, {useRef, useState} from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import {useDispatch, useSelector} from "react-redux";
-import {updateSport} from "../../../features/Sport";
 import {changeExperience} from "../../../features/Experience";
 
 const ExperienceLevel = (props) => {
@@ -13,6 +12,7 @@ const ExperienceLevel = (props) => {
     const dispatch = useDispatch();
 
     function MarkAsChecked() {
+        
         let experienceLevel = ref.current
         
         experienceLevel.classList.toggle("check-icon__toggle")
@@ -20,11 +20,11 @@ const ExperienceLevel = (props) => {
         if (experienceLevel.classList.contains("check-icon__toggle")) {
                 dispatch(changeExperience([...markedLevels, props.levelSelected]))
         }
+        
         else {
             dispatch(changeExperience(markedLevels.filter((markLevel) =>
-                markLevel.id !== props.levelSelected.id)))
+                markLevel.experienceLevelId !== props.levelSelected.experienceLevelId)))
         }
-
     }
     
     return (

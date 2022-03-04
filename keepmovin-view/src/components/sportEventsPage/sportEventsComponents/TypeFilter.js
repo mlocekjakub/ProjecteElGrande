@@ -17,6 +17,8 @@ function TypeFilter() {
     const [types, setType] = useState([]);
     
     const typesSelected = useSelector((state) => state.type.value)
+
+    const dispatch = useDispatch();
     
     
     useEffect(() => {
@@ -24,11 +26,11 @@ function TypeFilter() {
             .get(`/api/types`)
             .then(response => {
                 setType(response.data)
-                dispatch(updateType(types))
+                dispatch(updateType(response.data))
             })
-    }, [])
+    },[])
     
-    const dispatch = useDispatch();
+    
     
     return (
         <div className="filter-parent">
@@ -38,7 +40,7 @@ function TypeFilter() {
             </div>
             <div className="filter-type-expanded-container filter-box">
                 {types.map((type) =>
-                    (<Type key={type.id} typeSelected={type} typeName={type.type} />))}
+                    (<Type key={type.typeId} typeSelected={type} typeName={type.name} />))}
             </div>
         </div>
     )

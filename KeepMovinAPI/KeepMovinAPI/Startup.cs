@@ -61,6 +61,9 @@ namespace KeepMovinAPI
             services.AddTransient<IUserDao, UserDao>();
             services.AddTransient<ISportDao, SportDao>();
             services.AddTransient<ISettingDao, SettingDao>();
+            services.AddTransient<ITypeDao, TypeDao>();
+            services.AddTransient<IExperienceDao, ExperienceDao>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

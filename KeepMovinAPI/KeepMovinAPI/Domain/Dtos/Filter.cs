@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KeepMovinAPI.Controllers;
+using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeepMovinAPI.Models.Dtos
@@ -8,13 +9,13 @@ namespace KeepMovinAPI.Models.Dtos
     public class Filter
     {
         
-        public List<Guid>? Sports { get; set; } = new List<Guid>();
+        public List<Guid> Sports { get; set; } = new List<Guid>();
         
-        /*public List<Experience> Experience { get; set; }*/
+        public List<Guid> Experience { get; set; } = new List<Guid>();
 
         public string? SearchPhrase { get; set; } = "";
-        
-        /*public List<Type> Type { get; set; }*/
+
+        public List<Guid> Type { get; set; } = new List<Guid>();
 
         public int? MinPrice { get; set; } = 0;
 

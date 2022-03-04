@@ -1,5 +1,6 @@
 using System;
 using KeepMovinAPI.Domain;
+using KeepMovinAPI.Domain.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeepMovinAPI

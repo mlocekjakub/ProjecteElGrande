@@ -11,8 +11,8 @@ export default function Settings() {
 
     return (
         <div className="wr">  
-            <Menu/>
-            <UserChoices/>
+            <Menu />
+            <UserChoices />
         </div>
 
     )

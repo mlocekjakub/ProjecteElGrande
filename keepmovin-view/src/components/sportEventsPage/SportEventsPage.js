@@ -8,10 +8,9 @@ import PriceFilter from "./sportEventsComponents/PriceFilter";
 import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFilter";
 import TypeFilter from "./sportEventsComponents/TypeFilter";
 import axios from "axios";
-import SearchIcon from "@mui/icons-material/Search";
 import {useSelector} from "react-redux";
-import {Stack, TextField} from "@mui/material";
 import DatePicker from "./sportEventsComponents/DatePicker";
+import LoadingSpinner from "./sportEventsComponents/LoadingSpinner";
 
 
 function SportEventsPage() {
@@ -42,18 +41,28 @@ function SportEventsPage() {
         sportsFilter.map((sport) => {
             sports += `Sports=${sport.sportId}&`
         })
-        let minParticipants = `&MinParticipants=${minParticipantsFilter}`;
+        
+        let experiences = ``;
+        experienceFilter.map((experience) => {
+            experiences += `Experience=${experience.experienceLevelId}&`
+        })
+        
+        let types = ``;
+        typeFilter.map((eventType) => {
+            types += `Type=${eventType.typeId}&`
+        })
+        
+        let minParticipants = `MinParticipants=${minParticipantsFilter}`;
         let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
         let minPrice = `&MinPrice=${minPriceFilter}`;
         let maxPrice = `&MaxPrice=${maxPriceFilter}`;
-        
-        return urlStart + sports + minParticipants + maxParticipants + minPrice + maxPrice;
+        return urlStart + sports + experiences + types + minParticipants + maxParticipants + minPrice + maxPrice;
     }
+    
     
     useEffect(() => {
         setTimeout(() => {
             let correctFetchUrl = getUrl();
-            console.log(correctFetchUrl)
             axios
                 .get(correctFetchUrl)
                 .then(response => {
@@ -84,15 +93,12 @@ function SportEventsPage() {
                         eventName={event.name}
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}
-                        organizerId={event.organizerUserId}
                         maxParticipants={event.maxParticipants}
-                        sportId={event.sportId}
+                        sport={event.sports}
                         experienceLevel={event.experienceLevel}
                         price={event.price}
                         currency={event.currency}/>))
         }
-    
-        
         
     return (
         <div className="events-page-wrapper">
@@ -109,10 +115,10 @@ function SportEventsPage() {
                     <TypeFilter />
                 </div>
                 <div className="events-container">
-                    <div className="event-sorting">
-                        <DatePicker />
-                    </div>
-                    <Events display={foundEvents} />
+                    <DatePicker />
+                    {foundEvents.length > 0 
+                        ? <Events display={foundEvents} /> 
+                        : <LoadingSpinner />}
                 </div>
             </div>
         </div>

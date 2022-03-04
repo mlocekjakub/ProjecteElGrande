@@ -11,7 +11,15 @@
     cursor: pointer;
 }
 
+.spinner {
+    padding-top: 5rem;
+}
 
+.date-picker {
+    margin: 0 1rem 0 1rem;
+    display: flex;
+    justify-content: end;
+}
 .filter-parent {
     display: flex;
     flex-direction: column;

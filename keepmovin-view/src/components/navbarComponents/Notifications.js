@@ -32,7 +32,7 @@ function Notifications(props) {
                         </div>
                     </div>
                 </div>
-                <div className="triangle__notification-menu"></div>
+                {/*<div className="triangle__notification-menu"></div>*/}
             </div>
         </div>
     );

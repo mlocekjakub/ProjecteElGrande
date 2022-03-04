@@ -1,4 +1,3 @@
-
 export function LogOut(uri) {
     fetch(uri, {
         method: 'POST',
@@ -14,7 +13,6 @@ export function LogOut(uri) {
 
 
 }
-
 
 export function createEvent() {
     let status = "upcoming";

@@ -81,9 +81,11 @@ function SportFilter() {
                     <div onClick={CheckAllSports} className="check-hide-all-sports sport-item">Choose All</div>
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>
                 </div>
-                {sports.map((sport) =>
-                    
-                (<Sport key={sport.sportId} sportSelected={sport} id={sport.sportId} type={sport.name}/>) )}
+                <div className="scroll-container">
+                    {sports.map((sport) =>
+                        
+                    (<Sport key={sport.sportId} sportSelected={sport} id={sport.sportId} type={sport.name}/>) )}
+                </div>
             </div>
         </div>
     )

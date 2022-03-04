@@ -22,7 +22,7 @@ function ExperienceFilter() {
             .get(`/api/experience`)
             .then(response => {
                 setLevel(response.data)
-                dispatch(updateType(level))
+                dispatch(changeExperience(response.data))
             })
     }, [])
 
@@ -59,7 +59,7 @@ function ExperienceFilter() {
                     <div onClick={UncheckAllLevels} className="check-hide-all-levels experience-item hide-btn-levels">Hide All</div>
                 </div>
                 {level.map((level) =>
-                    (<ExperienceLevel key={level.id} id={level.id} levelSelected={level} level={level.experienceLevel} />))}
+                    (<ExperienceLevel key={level.experienceLevelId} id={level.experienceLevelId} levelSelected={level} level={level.name} />))}
             </div>
         </div>
     )

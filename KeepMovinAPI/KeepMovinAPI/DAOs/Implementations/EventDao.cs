@@ -5,6 +5,7 @@ using KeepMovinAPI.Models;
 using KeepMovinAPI.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
+using System;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -23,12 +24,12 @@ namespace KeepMovinAPI.DAOs.Implementations
             _context.SaveChanges();
         }
 
-        public void Remove(int id)
+        public void Remove(Guid id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Event Get(int id)
+        public Event Get(Guid id)
         {
             var query = _context.Event.Find(id);
             return query;
@@ -49,9 +50,13 @@ namespace KeepMovinAPI.DAOs.Implementations
         {
             var query = _context.Event.Where(i => 
                 i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
-                && (i.Price >= filter.MinPrice && i.Price <= filter.MaxPrice)
-                && (i.MaxParticipants >= filter.MinParticipants && i.MaxParticipants <= filter.MaxParticipants)
-                && filter.Sports.Contains(i.Sports.SportId));
+                && (i.Price >= filter.MinPrice 
+                && i.Price <= filter.MaxPrice)
+                && (i.MaxParticipants >= filter.MinParticipants 
+                && i.MaxParticipants <= filter.MaxParticipants)
+                && filter.Sports.Contains(i.Sports.SportId)
+                && filter.Type.Contains(i.Type.TypeId)
+                && filter.Experience.Contains(i.ExperienceLevel.ExperienceLevelId));
             
             return query.ToList();
         }
