@@ -31,14 +31,14 @@ export function createEvent() {
         "Name": name,
         "StartEvent": start_event,
         "EndEvent": end_event,
-        "OrganizerUserId": owner,
-        "SportId": sport_id,
         "ExperienceLevel": experience_level,
         "EventInfo": info,
         "MaxParticipants": max_participants,
         "Status": status,
+        "Currency": currency,
+        "Link":"",
         "Price": price,
-        "Currency": currency
+        /*"Currency": currency*/
     }
     fetch("/api/event", {
         method: 'POST',

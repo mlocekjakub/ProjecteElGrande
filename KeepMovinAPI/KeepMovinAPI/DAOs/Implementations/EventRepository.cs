@@ -1,11 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using KeepMovinAPI.Models;
-using KeepMovinAPI.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
-using System;
+using KeepMovinAPI.Domain.Dtos;
 
 namespace KeepMovinAPI.DAOs.Implementations
 {
@@ -59,6 +58,13 @@ namespace KeepMovinAPI.DAOs.Implementations
                 && filter.Experience.Contains(i.ExperienceLevel.ExperienceLevelId));
             
             return query.ToList();
+        }
+
+        public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate)
+        {
+            var query = _context.Event
+                .Where(i => i.StartEvent.Month == givenDate.Month && i.StartEvent.Year == givenDate.Year).ToList();
+            return query;
         }
     }
 }

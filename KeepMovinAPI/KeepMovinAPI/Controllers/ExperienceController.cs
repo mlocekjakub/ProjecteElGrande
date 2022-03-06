@@ -17,7 +17,7 @@ namespace KeepMovinAPI.Controllers
             _logger = logger;
             _daoExperience = daoExperience;
         }
-        
+
         [HttpGet]
         [Route("api/experience")]
         public IEnumerable<ExperienceLevel> GetAll()
@@ -25,7 +25,5 @@ namespace KeepMovinAPI.Controllers
             var listOfExperiences = _daoExperience.GetAll();
             return listOfExperiences;
         }
-        
-        
     }
 }

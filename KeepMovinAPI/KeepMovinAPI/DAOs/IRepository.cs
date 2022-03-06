@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using KeepMovinAPI.Models.Dtos;
 using System;
+using System.Collections.Generic;
 
 namespace KeepMovinAPI.DAOs
 {

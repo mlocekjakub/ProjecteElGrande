@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class TypeController : ControllerBase
     {
@@ -21,7 +22,6 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("api/types")]
         public IEnumerable<EventType> GetAll()
         {
             var listOfTypes = _daoType.GetAll();

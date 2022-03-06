@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using KeepMovinAPI.Models;
 using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs

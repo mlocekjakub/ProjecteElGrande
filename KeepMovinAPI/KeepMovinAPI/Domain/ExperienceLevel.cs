@@ -7,6 +7,8 @@ namespace KeepMovinAPI.Domain
     {
         [Key]
         public Guid ExperienceLevelId { get; set; } = Guid.NewGuid();
+        
+        [MaxLength(15)]
         public string Name { get; set; }
     }
 }

@@ -19,21 +19,20 @@ function SportFilter() {
     
     const markedSports = useSelector((state) => state.sports.value)
     
-    function getSports() {
+    
+    useEffect(() => {
         axios
-            .get(`/api/sports/${sportSearch}`)
+            .get(`/api/sport/${sportSearch}`)
             .then(response => {
                 setSports(response.data)
             })
-    }
-    useEffect(() => {
-        getSports()
     }, [sportSearch])
     
     useEffect(() => {
         axios
-            .get(`/api/sports`)
+            .get(`/api/sport`)
             .then(response => {
+                setSports(response.data)
                 dispatch(updateSport(response.data))
             })
         

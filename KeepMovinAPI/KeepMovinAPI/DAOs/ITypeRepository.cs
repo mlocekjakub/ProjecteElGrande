@@ -1,5 +1,4 @@
-﻿using System;
-using KeepMovinAPI.Domain;
+﻿using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.DAOs
 {
