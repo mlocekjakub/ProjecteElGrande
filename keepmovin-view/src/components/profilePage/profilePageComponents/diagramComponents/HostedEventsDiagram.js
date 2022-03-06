@@ -1,6 +1,6 @@
 ﻿import React, {useState, useEffect} from 'react';
 import { Pie, Doughnut} from 'react-chartjs-2';
-import './HostedEventsDiagram.css'
+import './Diagram.css'
 
 function HostedEventsDiagram() {
 
@@ -28,7 +28,7 @@ function HostedEventsDiagram() {
     }, [])
 
     return (
-        <div className="hosted-events-container">
+        <div className="diagram">
             <Doughnut
                 data={data}
                 options={{
@@ -36,7 +36,7 @@ function HostedEventsDiagram() {
                         display:true,
                         text: 'Hosted Events',
                         fontSize: 18,
-                        fontColor: "#212529"
+                        fontColor: "#FFFFFF"
 
                     },
                     legend:{

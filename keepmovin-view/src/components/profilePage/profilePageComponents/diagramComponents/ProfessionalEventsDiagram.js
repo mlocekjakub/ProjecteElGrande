@@ -1,6 +1,6 @@
 ﻿import React, {useState, useEffect} from 'react';
 import { Pie, Doughnut} from 'react-chartjs-2';
-import "./ProfessionalEventsDiagram.css"
+import "./Diagram.css"
 
 function ProfessionalEventsDiagram() {
 
@@ -33,7 +33,7 @@ function ProfessionalEventsDiagram() {
     }, [])
 
     return (
-        <div className="hosted-events-container">
+        <div className="diagram">
             <Doughnut
                 data={data}
                 options={{
@@ -41,7 +41,7 @@ function ProfessionalEventsDiagram() {
                         display:true,
                         text:'Professional Events',
                         fontSize:18,
-                        fontColor: "#212529"
+                        fontColor: "#FFFFFF"
                     },
                     legend:{
                         display:true,

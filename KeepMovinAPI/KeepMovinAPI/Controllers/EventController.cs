@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Threading.Tasks;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Models;
 using KeepMovinAPI.Models.Dtos;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -46,14 +48,30 @@ namespace KeepMovinAPI.Controllers
             return listOfEvents;
         }
         
-        [HttpGet]
+        /*[HttpGet]
         public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
         {
             var listOfEvents = _daoEvent.GetFiltered(filter);
-            _logger.LogInformation(filter.Experience[0].ToString());
+           
             return listOfEvents;
+        }*/
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult<IEnumerable<Event>>> TestGetEvents([FromQuery] Filter filter)
+        {
+            var listOfEvents = _daoEvent.GetFiltered(filter);
+            if (!listOfEvents.Any())
+            {
+                return NoContent();
+            }
+            return Ok(listOfEvents);
+
         }
-        
+
+
+
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
