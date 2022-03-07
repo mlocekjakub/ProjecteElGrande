@@ -1,5 +1,5 @@
 ﻿using KeepMovinAPI.Domain;
-using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Repository;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace KeepMovinAPI.Authentication

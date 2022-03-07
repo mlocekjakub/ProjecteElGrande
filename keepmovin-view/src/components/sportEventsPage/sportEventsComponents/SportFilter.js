@@ -21,7 +21,7 @@ function SportFilter() {
     
     function getSports() {
         axios
-            .get(`/api/sports/${sportSearch}`)
+            .get(`api/Sport/input/${sportSearch}`)
             .then(response => {
                 setSports(response.data)
             })
@@ -32,7 +32,7 @@ function SportFilter() {
     
     useEffect(() => {
         axios
-            .get(`/api/sports`)
+            .get(`api/Sport`)
             .then(response => {
                 dispatch(updateSport(response.data))
             })

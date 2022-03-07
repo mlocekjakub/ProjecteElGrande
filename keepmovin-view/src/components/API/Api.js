@@ -36,9 +36,8 @@ export function createEvent() {
         "MaxParticipants": max_participants,
         "Status": status,
         "Currency": currency,
-        "Link":""
+        "Link":"",
         "Price": price,
-        "Currency": currency
     }
     fetch("/api/event", {
         method: 'POST',

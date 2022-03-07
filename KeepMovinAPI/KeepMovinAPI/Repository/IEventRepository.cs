@@ -4,15 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 
-namespace KeepMovinAPI.DAOs
+namespace KeepMovinAPI.Repository
+
 {
     public interface IEventDao : IDao<Event>
     {
         public IEnumerable<Event> GetByInput(string input);
         public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate);
         public IEnumerable<Event> GetFiltered([FromQuery] Filter filter);
-         
-        
-
     }
 }

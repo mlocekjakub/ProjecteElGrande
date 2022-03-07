@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using KeepMovinAPI.Authentication;
-using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace KeepMovinAPI.Controllers
         private IEventDao _daoEvent;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IUserDao _userDao;
-
+        private readonly IMapper _mapper;
 
         public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt)
         {
@@ -44,10 +45,10 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
+        public IEnumerable<EventDto> GetFiltered([FromQuery] Filter filter)
         {
             var listOfEvents = _daoEvent.GetFiltered(filter);
-            return listOfEvents;
+            return _mapper.Map<IList<EventDto>>(listOfEvents);
         }
 
         [HttpGet("all")]

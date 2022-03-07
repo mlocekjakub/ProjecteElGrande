@@ -5,7 +5,8 @@ using KeepMovinAPI.Domain;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 
-namespace KeepMovinAPI.DAOs.Implementations
+namespace KeepMovinAPI.Repository.Implementations
+
 {
     public class UserDao : IUserDao
     {
@@ -23,7 +24,7 @@ namespace KeepMovinAPI.DAOs.Implementations
             return true;
         }
 
-        public bool CompareUsers(User dataBaseUser ,User loginUser) 
+        public bool CompareUsers(User dataBaseUser, User loginUser)
         {
             if (dataBaseUser == null)
                 return false;
@@ -39,16 +40,14 @@ namespace KeepMovinAPI.DAOs.Implementations
             user.Password = BCryptNet.HashPassword(user.Password);
             _context.User.Add(user);
             _context.SaveChanges();
-
         }
 
         public User Get(Guid id)
         {
-
             var query = _context.User.Find(id);
             return query;
-
         }
+
         public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
@@ -62,10 +61,9 @@ namespace KeepMovinAPI.DAOs.Implementations
         public User GetUserByEmail(User user)
         {
             var query = _context.User.Where(u => u.Email == user.Email);
-            
+
             User user2 = query.FirstOrDefault();
             return user2;
-
         }
 
         public User GetUserByEmail(string email)
@@ -73,7 +71,6 @@ namespace KeepMovinAPI.DAOs.Implementations
             var query = _context.User.Where(u => u.Email == email);
             User user2 = query.FirstOrDefault();
             return user2;
-
         }
     }
 }

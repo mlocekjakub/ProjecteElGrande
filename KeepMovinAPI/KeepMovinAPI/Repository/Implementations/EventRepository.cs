@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 
-namespace KeepMovinAPI.DAOs.Implementations
+namespace KeepMovinAPI.Repository.Implementations
 {
     public class EventDao : IEventDao
     {

@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,8 +10,8 @@ using KeepMovinAPI.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using KeepMovinAPI.DAOs;
-using KeepMovinAPI.DAOs.Implementations;
+using KeepMovinAPI.Repository;
+using KeepMovinAPI.Repository.Implementations;
 
 namespace KeepMovinAPI
 {
@@ -63,7 +64,7 @@ namespace KeepMovinAPI
             services.AddScoped<ISettingDao, SettingDao>();
             services.AddScoped<ITypeDao, TypeDao>();
             services.AddScoped<IExperienceDao, ExperienceDao>();
-            
+            services.AddAutoMapper(Assembly.GetExecutingAssembly()); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
