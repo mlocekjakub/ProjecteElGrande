@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using KeepMovinAPI.DAOs;
 using KeepMovinAPI.Domain;
-using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class SportController : ControllerBase
     {
@@ -22,7 +22,6 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet]
-        [Route("api/sports")]
         public IEnumerable<Sport> GetAll()
         {
             var listOfSports = _daoSport.GetAll();
@@ -31,7 +30,7 @@ namespace KeepMovinAPI.Controllers
         
 
         [HttpGet]
-        [Route("api/sports/{input}")]
+        [Route("{input}")]
         public IEnumerable<Sport> GetByInput(string input)
         {
             var listOfEvents = _daoSport.GetByInput(input);
@@ -40,7 +39,7 @@ namespace KeepMovinAPI.Controllers
         
         [AllowAnonymous]
         [HttpGet]
-        [Route("api/sport/{id}")]
+        [Route("id/{id}")]
         public Sport Get(Guid id)
         {
             var sport = _daoSport.Get(id);

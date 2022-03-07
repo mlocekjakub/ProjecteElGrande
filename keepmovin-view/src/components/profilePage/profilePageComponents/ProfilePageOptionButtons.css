@@ -3,30 +3,24 @@
     justify-content: center;
     align-items: center;
     gap: 0.7rem;
-    
 }
 
-.button-options-container > a {
-}
 .button-item {
-    background: #1C1F23; 
-    box-shadow: var(--box-shadow);
-    border: var(--border-profile-page);
+    background: var(--bg-btn-primary-blue);
+    border: var(--border-containers);
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem 0 1rem 0;
-    color: #fff;
+    color: var(--font-btn);
     font-weight: 500;
     text-decoration: none;
     transition: 0.1s;
 }
 
 .button-item:hover {
-    background: rgba(28, 31, 35, 0.8);
+    background: var(--bg-btn-primary-blue-hover);
     cursor: pointer;
-    color: #ffffff;
-    
-    
+    color: var(--font-btn);
 }

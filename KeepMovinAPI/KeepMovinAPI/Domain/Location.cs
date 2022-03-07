@@ -7,8 +7,15 @@ namespace KeepMovinAPI.Domain
     {
         [Key]
         public Guid LocationId { get; set; } = Guid.NewGuid();
+        
+        [MaxLength(30)]
         public string City { get; set; }
+        
+        [MaxLength(30)]
         public string Country { get; set; }
+        
+        [MaxLength(10)]
+        [Required]
         public string ZipCode { get; set; }
 
     }

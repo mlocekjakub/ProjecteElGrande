@@ -57,12 +57,12 @@ namespace KeepMovinAPI
 
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IEventDao, EventDao>();
-            services.AddTransient<IUserDao, UserDao>();
-            services.AddTransient<ISportDao, SportDao>();
-            services.AddTransient<ISettingDao, SettingDao>();
-            services.AddTransient<ITypeDao, TypeDao>();
-            services.AddTransient<IExperienceDao, ExperienceDao>();
+            services.AddScoped<IEventDao, EventDao>();
+            services.AddScoped<IUserDao, UserDao>();
+            services.AddScoped<ISportDao, SportDao>();
+            services.AddScoped<ISettingDao, SettingDao>();
+            services.AddScoped<ITypeDao, TypeDao>();
+            services.AddScoped<IExperienceDao, ExperienceDao>();
             
         }
 

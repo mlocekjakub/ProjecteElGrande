@@ -28,6 +28,19 @@
     text-align: center;
 }
 
+.event-info {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0.2rem;
+}
+
+::-webkit-scrollbar-track {
+    color: rgba(0, 0, 0, 0.6);
+}
+
 #nav-button {
     height: 3rem;
     width: 3rem;

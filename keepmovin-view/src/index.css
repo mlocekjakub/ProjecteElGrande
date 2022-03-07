@@ -1,13 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+:root {
+    --bg-btn-primary-blue: #4285F4;
+    --font-btn: #FFFFFF;
+    
+    --bg-btn-primary-blue-hover: rgba(66, 133, 244, 0.56);
+    --bg-primary-dark: #242626;
+    --bg-website: #EDEFF1;
+    --event-border: 1px solid rgba(5, 5, 5, 0.20);
+    --clr-paragraph-info: hsl(217, 19%, 35%);
+    
+    --page-margin: 5rem 20rem;
+    
+    --box-shadow-containers: 0 1px 5px rgba(50, 50, 50, 0.1);
+    --border-containers: 1px solid rgba(5, 5, 5, 0.13);
+    --bg-clr-containers: #FFFFFF;
 }

@@ -1,6 +1,5 @@
 ﻿using KeepMovinAPI.Authentication;
 using KeepMovinAPI.DAOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using KeepMovinAPI.Controllers;
-using KeepMovinAPI.Domain;
-using Microsoft.AspNetCore.Mvc;
 
-namespace KeepMovinAPI.Models.Dtos
+
+namespace KeepMovinAPI.Domain.Dtos
 {
     public class Filter
     {

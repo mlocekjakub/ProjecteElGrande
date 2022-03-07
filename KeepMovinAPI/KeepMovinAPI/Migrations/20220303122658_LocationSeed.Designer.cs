@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KeepMovinAPI.Migrations
 {
     [DbContext(typeof(KeepMovinDbContext))]
-    [Migration("20220303121532_LocationSeed")]
+    [Migration("20220303122658_LocationSeed")]
     partial class LocationSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace KeepMovinAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
+                .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EventUser", b =>
@@ -125,12 +125,12 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            TypeId = new Guid("5e2bce86-078f-4215-b7a6-787001268dbc"),
+                            TypeId = new Guid("cfe5f866-6e87-4df1-b716-daed1903a189"),
                             Name = "Professional"
                         },
                         new
                         {
-                            TypeId = new Guid("0789e786-5c4b-47a2-bbe5-7770e9068ef3"),
+                            TypeId = new Guid("0c0069f2-d539-49ed-839b-c6a57fd97763"),
                             Name = "Recreational"
                         });
                 });
@@ -151,17 +151,17 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            ExperienceLevelId = new Guid("f473177e-0d05-4f55-84f5-4ab0af107d3f"),
+                            ExperienceLevelId = new Guid("a7c2a07f-dbfa-490c-b441-633ba9139b8c"),
                             Name = "Beginner"
                         },
                         new
                         {
-                            ExperienceLevelId = new Guid("03016594-a25c-4c86-b0fe-d305ecc9d486"),
+                            ExperienceLevelId = new Guid("61ae8989-63c8-40c5-9bce-b1b47d47ea9d"),
                             Name = "Intermediate"
                         },
                         new
                         {
-                            ExperienceLevelId = new Guid("df87c66d-0939-429f-bf9a-b5d114d3e86c"),
+                            ExperienceLevelId = new Guid("481b9f4f-bd46-4abf-a3cb-5932f3e4865a"),
                             Name = "Expert"
                         });
                 });
@@ -188,28 +188,28 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            LocationId = new Guid("4967c9d6-2abe-4205-99da-72a656bb84ea"),
+                            LocationId = new Guid("0fa5ab47-7d1d-4c70-9d65-e30ab58d612a"),
                             City = "Krakow",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("8573bc8b-9a99-463d-9daf-0dfffd035a14"),
+                            LocationId = new Guid("4effc4c5-0956-4379-97de-1cb9c8e81e70"),
                             City = "Warszawa",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("79c9a1c0-d8da-4bc7-921d-abcd867586fa"),
+                            LocationId = new Guid("aba56b62-2138-47a9-9635-fc5f9474a298"),
                             City = "Gdansk",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("8f8026df-d224-4001-b6b9-d7100206c348"),
+                            LocationId = new Guid("8446e4d1-4d55-45e4-a772-6277225399d9"),
                             City = "Opole",
                             Country = "Poland",
                             ZipCode = "30-389"
@@ -303,52 +303,52 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            SportId = new Guid("c98bec46-c0e3-4a9e-a15a-b42522abe9d3"),
+                            SportId = new Guid("77d2ac77-5b06-4855-aecd-a857c8f57e03"),
                             Name = "Baseball"
                         },
                         new
                         {
-                            SportId = new Guid("98caf32c-59c7-47c7-abc3-1346b31b38c4"),
+                            SportId = new Guid("9228ccf4-1b16-44e2-8efb-481a1220650d"),
                             Name = "Football"
                         },
                         new
                         {
-                            SportId = new Guid("babc7aa8-adbe-444f-b0f0-9fc3ba100903"),
+                            SportId = new Guid("cad9df09-86b4-4be7-9086-4c2295227b6c"),
                             Name = "Cycling"
                         },
                         new
                         {
-                            SportId = new Guid("92d3318f-600f-4f01-ab7a-27f2a35c0390"),
-                            Name = "HandBall"
+                            SportId = new Guid("b750c60d-2b76-4dc4-bcf5-8f728f94d229"),
+                            Name = "Handball"
                         },
                         new
                         {
-                            SportId = new Guid("8c672207-0255-436b-8194-20d71441d338"),
+                            SportId = new Guid("c2527ea2-2a0b-4ecb-b792-945ce3365199"),
                             Name = "Climbing"
                         },
                         new
                         {
-                            SportId = new Guid("da23a2bf-13db-406f-bc3e-f8fd0f29ffaf"),
+                            SportId = new Guid("ad9c1761-68ce-4bca-a261-ecd287794daf"),
                             Name = "Fishing"
                         },
                         new
                         {
-                            SportId = new Guid("430b2f65-8307-4d87-8a75-ac596bed1b62"),
+                            SportId = new Guid("bf8a063a-5d90-4486-a23e-962374ff1c8b"),
                             Name = "Running"
                         },
                         new
                         {
-                            SportId = new Guid("677dfd3a-7c4b-42e7-b862-b28755fa4aff"),
+                            SportId = new Guid("df47dd35-44fd-40fc-93d0-056741b7e4d2"),
                             Name = "Volleyball"
                         },
                         new
                         {
-                            SportId = new Guid("6811c78b-e33a-4f22-bb96-9698bc019441"),
+                            SportId = new Guid("a26917aa-f406-42ba-9c66-93839e9c1e82"),
                             Name = "Basketball"
                         },
                         new
                         {
-                            SportId = new Guid("93a3cece-d427-4f65-ba08-f540f21d0f1b"),
+                            SportId = new Guid("4112f370-fe35-4e76-9b59-79e959f3f9ed"),
                             Name = "Nordic Walking"
                         });
                 });

@@ -5,8 +5,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using KeepMovinAPI.DAOs;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
 
 namespace KeepMovinAPI.Authentication
 {
