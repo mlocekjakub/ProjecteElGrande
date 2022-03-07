@@ -50,7 +50,6 @@ namespace KeepMovinAPI.Controllers
         public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
         {
             var listOfEvents = _daoEvent.GetFiltered(filter);
-            _logger.LogInformation(filter.Experience[0].ToString());
             return listOfEvents;
         }
         
