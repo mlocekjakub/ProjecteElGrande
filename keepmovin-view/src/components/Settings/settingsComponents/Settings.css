@@ -32,10 +32,15 @@
     font-family: "Manrope", "sans-serif";
     text-decoration:none;
     border: 2px solid;
-    color:  #242626;
+    color: #242626;
     border: 1px solid rgba(5, 5, 5, 0.13);
 }
 
+.uno{
+    height:30%;
+}
+
 .change-password {
-    
+
+
 }
