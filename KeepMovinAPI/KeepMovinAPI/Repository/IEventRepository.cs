@@ -11,6 +11,6 @@ namespace KeepMovinAPI.Repository
     {
         public IEnumerable<Event> GetByInput(string input);
         public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate);
-        public IEnumerable<Event> GetFiltered([FromQuery] Filter filter);
+        public IEnumerable<EventDto> GetFiltered([FromQuery] Filter filter);
     }
 }

@@ -7,9 +7,8 @@
     grid-gap: 1rem;
 }
 .profile-card-wrapper > div {
-    box-shadow: var(--box-shadow);
-    background: var(--clr-content-background);
-    border: var(--border-profile-page)
+    background: var(--bg-clr-containers);
+    border: var(--border-containers)
 }
 
 .personal-info-container {
@@ -45,30 +44,13 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
-.edit-profile-btn {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #fff;
-    background: #1C1F23;
-    margin: 0.9rem 0 0.9rem 0;
-    padding: 0 0.8rem 0 0.8rem;
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-}
-.edit-profile-btn:hover {
-    cursor: pointer;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.47);
-    
-}
 .profile-background {
-    background-image: url("./profileCardComponents/7362291.jpg");
+    background-image: url("../../../Images/7362291.jpg");
     background-repeat: no-repeat;
     background-position: 0 -50rem;
-    min-height: 15rem;
+    min-height: 12rem;
     margin-bottom: 1rem;
-    border: var(--border-profile-page)
+    border: var(--border-containers)
 }
 .about {
     padding: 2rem 2rem 2rem 2rem;

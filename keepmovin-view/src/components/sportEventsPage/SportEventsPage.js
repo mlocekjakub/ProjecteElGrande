@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import EventCard from "./sportEventsComponents/EventCard";
 import ButtonCard from "./sportEventsComponents/ButtonCard";
 import "./sportEventsPage.css";
+import "../../index.css"
 import SportFilter from "./sportEventsComponents/SportFilter";
 import ExperienceFilter from "./sportEventsComponents/ExperienceFilter";
 import PriceFilter from "./sportEventsComponents/PriceFilter";
@@ -35,6 +36,12 @@ function SportEventsPage() {
 
     const maxPriceFilter = useSelector((state) => state.maxPrice.value)
     
+    const [inputTimeout, setInputTimeout] = useState(null);
+    
+    const [isFetchingData, setIsFetchingData] = useState(false);
+    
+    const [eventsNotFound, setEventsNotFound] = useState(false);
+    
     function getUrl() {
         const urlStart = `/api/event?`;
         let sports = ``;
@@ -61,14 +68,28 @@ function SportEventsPage() {
     
     
     useEffect(() => {
-        setTimeout(() => {
-            let correctFetchUrl = getUrl();
-            axios
-                .get(correctFetchUrl)
-                .then(response => {
-                    setFoundEvents(response.data)
-                });
-        }, 1000)
+        setIsFetchingData(true);
+        setEventsNotFound(false);
+        setFoundEvents([])
+        if (inputTimeout) {
+            clearTimeout(inputTimeout)
+        }
+        setInputTimeout(
+            setTimeout(() => {
+                let correctFetchUrl = getUrl();
+                axios
+                    .get(correctFetchUrl)
+                    .then(response => {
+                        if (response.data === '') {
+                            setEventsNotFound(true);
+                        }
+                        else {
+                            setFoundEvents(response.data)
+                        }
+                        setIsFetchingData(false);
+                    });
+            }, 1000) 
+        )
     }, [sportsFilter,
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
@@ -94,7 +115,7 @@ function SportEventsPage() {
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}
                         maxParticipants={event.maxParticipants}
-                        sport={event.sports}
+                        sport={event.sportsSportId}
                         experienceLevel={event.experienceLevel}
                         price={event.price}
                         currency={event.currency}/>))
@@ -116,9 +137,12 @@ function SportEventsPage() {
                 </div>
                 <div className="events-container">
                     <DatePicker />
-                    {foundEvents.length > 0 
-                        ? <Events display={foundEvents} /> 
-                        : <LoadingSpinner />}
+                    
+                    {isFetchingData && <LoadingSpinner />}
+
+                    {eventsNotFound && <div className="events__not-found">Events not found</div>}
+                    
+                    <Events display={foundEvents} />
                 </div>
             </div>
         </div>

@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using System.Threading.Tasks;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,14 +24,15 @@ namespace KeepMovinAPI.Controllers
         private IUserDao _userDao;
         private readonly IMapper _mapper;
 
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt)
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt, IMapper mapper)
         {
             _logger = logger;
             _daoEvent = daoEvent;
             _jwtAuthenticationManager = jwt;
+            _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public Event Get(Guid id)
         {
             Event eventModel = _daoEvent.Get(id);
@@ -43,14 +47,21 @@ namespace KeepMovinAPI.Controllers
             return listOfEvents;
         }
 
-
         [HttpGet]
-        public IEnumerable<EventDto> GetFiltered([FromQuery] Filter filter)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult<IEnumerable<EventDto>>> GetFilteredEvents([FromQuery] Filter filter)
         {
             var listOfEvents = _daoEvent.GetFiltered(filter);
-            return _mapper.Map<IList<EventDto>>(listOfEvents);
-        }
+            if (!listOfEvents.Any())
+            {
+                return NoContent();
+            }
 
+            // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
+            return Ok(listOfEvents);
+        }
+        
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {

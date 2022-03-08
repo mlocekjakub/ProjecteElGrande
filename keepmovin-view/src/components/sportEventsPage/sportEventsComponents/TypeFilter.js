@@ -23,7 +23,7 @@ function TypeFilter() {
     
     useEffect(() => {
         axios
-            .get(`/api/Type`)
+            .get(`/api/type`)
             .then(response => {
                 setType(response.data)
                 dispatch(updateType(response.data))

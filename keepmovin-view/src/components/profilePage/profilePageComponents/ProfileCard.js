@@ -12,7 +12,7 @@ export default function ProfileCard() {
                     <div className="asd">
                         <img src={profileImage} alt="" />
                         <div className="personal-info">
-                            <div className="name">Filip Koniuszewksi</div>
+                            <div className="name">Filip Koniuszewski</div>
                             <div className="location">Poland, Kraków</div>
                         </div>
                     </div>
@@ -33,9 +33,6 @@ export default function ProfileCard() {
                                 399
                             </div>
                         </div>
-                        <a className="edit-profile-btn">
-                            Edit Profile
-                        </a>
                     </div>
                     <OrganiserInfo />
                 </div>
