@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using System.Threading.Tasks;
 using KeepMovinAPI.Authentication;
-using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,16 +22,17 @@ namespace KeepMovinAPI.Controllers
         private IEventDao _daoEvent;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IUserDao _userDao;
+        private readonly IMapper _mapper;
 
-
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt)
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt, IMapper mapper)
         {
             _logger = logger;
             _daoEvent = daoEvent;
             _jwtAuthenticationManager = jwt;
+            _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public Event Get(Guid id)
         {
             Event eventModel = _daoEvent.Get(id);
@@ -38,7 +40,7 @@ namespace KeepMovinAPI.Controllers
         }
 
 
-        [HttpGet("input/{input}")]
+        [HttpGet("{input}")]
         public IEnumerable<Event> GetByInput(string input)
         {
             var listOfEvents = _daoEvent.GetByInput(input);
@@ -48,15 +50,16 @@ namespace KeepMovinAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult<IEnumerable<Event>>> GetFilteredEvents([FromQuery] Filter filter)
+        public async Task<ActionResult<IEnumerable<EventDto>>> GetFilteredEvents([FromQuery] Filter filter)
         {
             var listOfEvents = _daoEvent.GetFiltered(filter);
             if (!listOfEvents.Any())
             {
                 return NoContent();
             }
-            return Ok(listOfEvents);
 
+            // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
+            return Ok(listOfEvents);
         }
         
         [HttpGet("all")]

@@ -38,7 +38,6 @@ export function createEvent() {
         "Currency": currency,
         "Link":"",
         "Price": price,
-        /*"Currency": currency*/
     }
     fetch("/api/event", {
         method: 'POST',

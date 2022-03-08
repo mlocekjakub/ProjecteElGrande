@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 
 const items = []
-fetch('/api/sports')
+fetch('api/Sport')
     .then(response => response.json())
     .then(data => {
         for (const [index, value] of data.entries()) {

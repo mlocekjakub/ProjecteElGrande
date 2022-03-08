@@ -1,9 +1,9 @@
 ﻿using KeepMovinAPI.Domain;
 
-namespace KeepMovinAPI.DAOs
+namespace KeepMovinAPI.Repository
+
 {
     public interface IExperienceDao : IDao<ExperienceLevel>
     {
-        
     }
 }

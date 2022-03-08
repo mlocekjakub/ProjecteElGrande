@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+using AutoMapper;
+using KeepMovinAPI.Domain;
+using KeepMovinAPI.Domain.Dtos;
 
-namespace KeepMovinAPI.Domain.Dtos
+namespace KeepMovinAPI.Configuration
 {
     public class EventProfile : Profile
     {
