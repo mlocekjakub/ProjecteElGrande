@@ -1,6 +1,7 @@
 ﻿import {useEffect, useState} from "react";
 import * as React from "react";
 import FullCalendar from '@fullcalendar/react';
+import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -9,13 +10,14 @@ export default function CalendarPage() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [url, setUrl] = useState(null);
-    // const [url, setUrl] = useState(`api/Calendar?inputDate=${inputDate.toJSON().slice(0, 10)}`);
     const [events, setEvents] = useState([]);
     const [listOfEvents, setListOfEvents] = useState([]);
 
     // localStorage.getItem('session');
 
     useEffect(() => {
+        console.log(startDate);
+        console.log(endDate);
         setUrl(`api/Calendar?startDate=${startDate.toJSON().slice(0, 10)}&endDate=${endDate.toJSON().slice(0, 10)}`);
     }, [startDate, endDate])
 
@@ -52,7 +54,7 @@ export default function CalendarPage() {
     return (
         <div className="calendar-page" style={{marginTop: "6rem", marginRight: "2rem", marginLeft: "2rem"}}>
             <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 eventTimeFormat={{
                     hour: '2-digit',
                     minute: '2-digit',
@@ -61,6 +63,16 @@ export default function CalendarPage() {
                 }}
                 firstDay={1} // 1 = Monday
                 initialView="dayGridMonth"
+                headerToolbar={{
+                    left: "title",
+                    center: "prev next",
+                    right: "dayGridMonth list"
+                }}
+                views={{
+                    list: {
+                        duration: { months: 1 },
+                    }
+                }}
                 events={listOfEvents}
                 eventClick={(e) => {
                     console.log(e.event.id);
