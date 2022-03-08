@@ -1,0 +1,17 @@
+﻿.calendar-page {
+    background-color: var(--bg-website);
+}
+
+.calendar-container {
+    margin: var(--page-margin);
+    background-color: var(--bg-clr-containers);
+    padding: 1rem;
+}
+
+.fc-event-title {
+    white-space: initial;
+}
+
+a {
+    text-decoration: none !important;
+}
