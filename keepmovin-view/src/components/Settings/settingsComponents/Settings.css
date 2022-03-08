@@ -12,11 +12,9 @@
 }
 
 .menu {
-    /*border: 1px solid rgba(5, 5, 5, 0.13);*/
     background-color: #F3F3F3;
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
     display:flex;
-    justify-content:center;
     flex-direction:column;
 }
 
@@ -30,6 +28,7 @@
 
 .buttons {
     font-family: "Manrope", "sans-serif";
+    font-size :x-large;
     text-decoration:none;
     border: 2px solid;
     color: #242626;

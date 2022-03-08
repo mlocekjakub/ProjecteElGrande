@@ -8,7 +8,7 @@ import PrivacySettings from './PrivacySettings';
 import "./Settings.css";
 import { useState } from 'react';
 import MultiButton from './MultiButton';
-import AcceptChangesButton from "./AcceptChangesButton";
+
 
 
 

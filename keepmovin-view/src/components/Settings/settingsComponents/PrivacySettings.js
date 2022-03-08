@@ -67,6 +67,7 @@ export default function PrivacySettings() {
                 inputProps={{ 'aria-label': 'controlled' }}
             />
             <p><h5>"Hide Information 'about me'"</h5></p>
+            <p>The description box on your profile will be blurred</p>
             <Switch
                 checked={aboutMe}
                 onChange={handleAboutMe}
