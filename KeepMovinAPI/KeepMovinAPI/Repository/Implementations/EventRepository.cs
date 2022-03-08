@@ -89,10 +89,10 @@ namespace KeepMovinAPI.Repository.Implementations
             return query.ToList();
         }
 
-        public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate)
+        public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate)
         {
             var query = _context.Event
-                .Where(i => i.StartEvent.Month == givenDate.Month && i.StartEvent.Year == givenDate.Year).ToList();
+                .Where(i => i.StartEvent >= startDate && i.StartEvent <= endDate).ToList();
             return query;
         }
     }

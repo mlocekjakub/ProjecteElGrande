@@ -11,12 +11,12 @@
     font-family: "Manrope", "sans-serif";
 }
 
+
+
 .menu {
-    /*border: 1px solid rgba(5, 5, 5, 0.13);*/
     background-color: #F3F3F3;
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
     display:flex;
-    justify-content:center;
     flex-direction:column;
 }
 
@@ -30,12 +30,43 @@
 
 .buttons {
     font-family: "Manrope", "sans-serif";
+    font-size :x-large;
     text-decoration:none;
     border: 2px solid;
-    color:  #242626;
+    color: #242626;
     border: 1px solid rgba(5, 5, 5, 0.13);
 }
 
-.change-password {
-    
+.uno{
+    height:30%;
 }
+
+.change-password {
+
+
+}
+
+
+.main-header {
+    padding: 15px 50px 15px 100px;
+}
+
+.secondary-header {
+    padding: 15px 50px 5px 100px;
+}
+
+.main-content {
+    padding: 1px 60px 40px 60px;
+}
+
+
+.content {
+    padding: 15px 100px 55px 200px;
+}
+
+
+
+
+
+
+
