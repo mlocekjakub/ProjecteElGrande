@@ -12,8 +12,9 @@ export default function ChangePassword() {
 
 
     return (
-        <div className="centered">
-            <Box
+        
+        <div className="centered" >
+            <Box className="centered"
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -21,6 +22,7 @@ export default function ChangePassword() {
                 noValidate
                 autoComplete="off"
             >
+                
                 <div>
                     <TextField
                         label="Old password"

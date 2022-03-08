@@ -10,7 +10,6 @@ export default function Help() {
 
     return (
         <div className="centered">
-            <p><h4>"HELP"</h4></p>
         </div>
 
     )

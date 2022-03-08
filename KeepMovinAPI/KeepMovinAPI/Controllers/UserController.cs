@@ -22,6 +22,7 @@ namespace KeepMovinAPI.Controllers
             _logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
+
         }
 
         [HttpPost]
@@ -53,7 +54,6 @@ namespace KeepMovinAPI.Controllers
             {
                 return StatusCode(303);
             }
-
             _userDao.Add(user);
             return StatusCode(200);
         }

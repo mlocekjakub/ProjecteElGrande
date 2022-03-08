@@ -17,7 +17,6 @@ export default function EditProfile() {
 
     return (
         <div className="centered">
-            <p><h4>"EDIT PROFILE"</h4></p>
             <Box
                 component="form"
                 sx={{

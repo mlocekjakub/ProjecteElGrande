@@ -1,6 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using KeepMovinAPI.Domain;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using KeepMovinAPI.Domain.Dtos;
+
 
 namespace KeepMovinAPI.Repository.Implementations
 
@@ -8,9 +12,12 @@ namespace KeepMovinAPI.Repository.Implementations
 {
     public class SettingDao : ISettingDao
     {
+        private readonly KeepMovinDbContext _context;
+
         public void Add(Setting item)
         {
-            throw new System.NotImplementedException();
+            _context.Setting.Add(item);
+            _context.SaveChanges();
         }
 
         public void Remove(Guid id)
