@@ -13,7 +13,7 @@ export default function PrivacySettings() {
     const [aboutMe, setAboutMe] = useState(false);
     const [upEvents, setUpEvents] = useState(false);
     const [prEvents, setPrEvents] = useState(false);
-
+    const [photo, setPhoto] = useState(false);
 
     const handleLocation = (event) => {
         setLocation(event.target.checked);
@@ -38,6 +38,9 @@ export default function PrivacySettings() {
     const handlePreviosEvents = (event) => {
         setPrEvents(event.target.checked);
     };
+    const handlePhoto = (event) => {
+        setPhoto(event.target.checked);
+    };
 
     return (
         <div className ="centered">
@@ -52,7 +55,6 @@ export default function PrivacySettings() {
             />          
             <p className="content">Your City and Your country will not be seen for people outside Your followers group. If You will take part in the
                 event , person who organize current event will see Your data.</p>
-           
             <p className="secondary-header"><h5>"Hide follow"</h5></p>
             <Switch
                 checked={follow}
@@ -93,9 +95,14 @@ export default function PrivacySettings() {
                 inputProps={{ 'aria-label': 'controlled' }}
             />
             <p className="content">No one other than your followers will have access to the list of events in which you have already participated</p>
-            
-            <br></br>
-            <AcceptChangesButton/>
+            <p className="secondary-header"><h5>"Photo"</h5></p>
+            <Switch className="switch"
+                checked={photo}
+                onChange={handlePhoto}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />
+            <p>Your profile photo will be blured and no one who is not Your follower will not be able to see it</p>
+            <AcceptChangesButton module ="PrivacySettings"/>
         </div>
 
     )

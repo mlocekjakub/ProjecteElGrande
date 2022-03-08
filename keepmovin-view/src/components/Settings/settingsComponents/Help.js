@@ -9,9 +9,8 @@ export default function Help() {
 
 
     return (
-        <div>
-            <p>"HELP"</p>
-            <p> For now I can give You only Kuba.M house location, he will help You for sure  !!!</p>
+        <div className="centered">
+            <p><h4>"HELP"</h4></p>
         </div>
 
     )

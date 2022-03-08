@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 
 
 
-export default function AcceptChangesSettings() {
+export default function AcceptChangesSettings(props) {
     return (
         <div className="save-button">
             
@@ -15,6 +15,5 @@ export default function AcceptChangesSettings() {
         
         </div>
         
-
     );
 }

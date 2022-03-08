@@ -7,12 +7,12 @@ namespace KeepMovinAPI.Domain
     {
         [Key] public Guid SettingsId { get; set; } = Guid.NewGuid();
 
-        public bool AboutMe { get; set; } = true;
-        public bool Location { get; set; } = true;
-        public bool Photo { get; set; } = true;
-        public bool FollowersFollowing { get; set; } = true;
-        public bool Statistics { get; set; } = true;
-        public bool UpcomingEvents { get; set; } = true;
-        public bool PreviousEvents { get; set; } = true;
+        public bool Location { get; set; } = false;      
+        public bool FollowersFollowing { get; set; } = false;
+        public bool Statistics { get; set; } = false;
+        public bool AboutMe { get; set; } = false;                        
+        public bool UpcomingEvents { get; set; } = false;
+        public bool PreviousEvents { get; set; } = false;
+        public bool Photo { get; set; } = false;  
     }
 }

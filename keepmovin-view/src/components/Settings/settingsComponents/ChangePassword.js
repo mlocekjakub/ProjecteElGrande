@@ -12,7 +12,7 @@ export default function ChangePassword() {
 
 
     return (
-        <div className="change-password">
+        <div className="centered">
             <Box
                 component="form"
                 sx={{
@@ -44,7 +44,7 @@ export default function ChangePassword() {
                   
                 </div>
             </Box>
-            <AcceptChangesButton />
+            <AcceptChangesButton module="ChangePasswor" />
         </div>
 
     )
