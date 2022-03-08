@@ -5,6 +5,8 @@ import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import '../../index.css';
+import './CalendarPageStyles.css';
 
 export default function CalendarPage() {
     const [startDate, setStartDate] = useState(new Date());
@@ -16,9 +18,9 @@ export default function CalendarPage() {
     // localStorage.getItem('session');
 
     useEffect(() => {
-        console.log(startDate);
-        console.log(endDate);
-        setUrl(`api/Calendar?startDate=${startDate.toJSON().slice(0, 10)}&endDate=${endDate.toJSON().slice(0, 10)}`);
+        if (startDate != null && endDate != null) {
+            setUrl(`api/Calendar?startDate=${startDate.toJSON().slice(0, 10)}&endDate=${endDate.toJSON().slice(0, 10)}`);
+        }
     }, [startDate, endDate])
 
     useEffect(() => {
@@ -52,39 +54,40 @@ export default function CalendarPage() {
     }, [url])
 
     return (
-        <div className="calendar-page" style={{marginTop: "6rem", marginRight: "2rem", marginLeft: "2rem"}}>
-            <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                eventTimeFormat={{
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    meridiem: false,
-                    hour12: false
-                }}
-                firstDay={1} // 1 = Monday
-                initialView="dayGridMonth"
-                headerToolbar={{
-                    left: "title",
-                    center: "prev next",
-                    right: "dayGridMonth list"
-                }}
-                views={{
-                    list: {
-                        duration: { months: 1 },
-                    }
-                }}
-                events={listOfEvents}
-                eventClick={(e) => {
-                    console.log(e.event.id);
-                }}
-                dateClick={(e) => console.log(e.dateStr)}
-                datesSet={(dateInfo) => {
-                    setStartDate(dateInfo.start); // start of the range the calendar date
-                    setEndDate(dateInfo.end); // end of the range the calendar date
-                    console.log(dateInfo);
-                }}
-                contentHeight={"80vh"}
-            />
+        <div className="calendar-page">
+            <div className="calendar-container" style={{textDecoration: "none"}}>
+                <FullCalendar
+                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+                    eventTimeFormat={{
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        meridiem: false,
+                        hour12: false
+                    }}
+                    firstDay={1} // 1 = Monday
+                    initialView="dayGridMonth"
+                    headerToolbar={{
+                        left: "title",
+                        center: "prev next",
+                        right: "dayGridMonth list"
+                    }}
+                    views={{
+                        list: {
+                            duration: {months: 1} // full month in list
+                        }
+                    }}
+                    events={listOfEvents}
+                    eventClick={(e) => {
+                        console.log(e.event.id);
+                    }}
+                    dateClick={(e) => console.log(e.dateStr)}
+                    datesSet={(dateInfo) => {
+                        setStartDate(dateInfo.start); // start of the range the calendar date
+                        setEndDate(dateInfo.end); // end of the range the calendar date
+                    }}
+                    contentHeight={"80vh"}
+                />
+            </div>
         </div>
     )
 }
