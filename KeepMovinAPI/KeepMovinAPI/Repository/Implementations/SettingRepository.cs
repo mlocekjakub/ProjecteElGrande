@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using KeepMovinAPI.Domain;
 
-namespace KeepMovinAPI.DAOs.Implementations
+namespace KeepMovinAPI.Repository.Implementations
+
+
 {
     public class SettingDao : ISettingDao
     {

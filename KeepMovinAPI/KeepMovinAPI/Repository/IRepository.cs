@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KeepMovinAPI.DAOs
+namespace KeepMovinAPI.Repository
 {
     public interface IDao<T>
     {

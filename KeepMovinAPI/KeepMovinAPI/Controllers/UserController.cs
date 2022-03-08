@@ -1,4 +1,4 @@
-﻿using KeepMovinAPI.DAOs;
+﻿using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

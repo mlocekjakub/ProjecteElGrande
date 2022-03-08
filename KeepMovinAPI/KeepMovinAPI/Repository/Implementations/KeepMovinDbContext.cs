@@ -15,6 +15,7 @@ namespace KeepMovinAPI
         public DbSet<Setting> Setting { get; set; }
         public DbSet<ExperienceLevel> ExperienceLevel { get; set; }
         public DbSet<EventType> EventType { get; set; }
+        public DbSet<Location> Location { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

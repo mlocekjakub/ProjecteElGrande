@@ -14,7 +14,7 @@ function EventCard(props) {
     const [sportCategory, setSportCategory] = useState([])
     useEffect(() => {
         axios
-            .get(`/api/sport/${props.sport}`)
+            .get(`/api/sport/id/${props.sport}`)
             .then(response => {
                 setSportCategory(response.data);
             });

@@ -115,7 +115,7 @@ function SportEventsPage() {
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}
                         maxParticipants={event.maxParticipants}
-                        sport={event.sports}
+                        sport={event.sportsSportId}
                         experienceLevel={event.experienceLevel}
                         price={event.price}
                         currency={event.currency}/>))

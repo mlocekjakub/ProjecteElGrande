@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using KeepMovinAPI.Domain;
 
-namespace KeepMovinAPI.DAOs
+namespace KeepMovinAPI.Repository
 {
     public interface ISportDao : IDao<Sport>
     {
