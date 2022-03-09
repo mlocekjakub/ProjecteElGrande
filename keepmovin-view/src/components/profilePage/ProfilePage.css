@@ -1,17 +1,316 @@
-﻿.profile-page-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 100%;
-    margin: var(--page-margin);
-    padding: 1rem;
-    font-family: "Manrope", "sans-serif";
-    gap: 1.2rem;
+﻿:root {
+    --clr-header: #1D1E35;
+    
+    --clr-paragraph: hsl(237, 12%, 33%);
+    
+    
 }
 
-.profile-content {
-    background: var(--bg-clr-containers);
-    border: var(--border-containers)
+/*_________________________________________*/
+/*profile*/
+.profile-page-wrapper {
+    margin: var(--page-margin-profile-page);
+    display: flex;
+    flex-direction: column;
+    font-family: "Manrope", "sans-serif";
+    background: #FFFFFF;
+    min-height: 100%;
+    
 }
+
+.profile-background {
+    background-image: url(../../Images/10701048.jpg);
+    background-position: right;
+    min-height: 12rem;
+}
+
+.profile {
+    display: flex;
+    gap: 3rem;
+}
+
+.profile-image {
+    max-width: 10rem;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    border: 3px solid white;
+    justify-content: center;
+    object-fit: scale-down;
+    background: #FFFFFF;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 24rem;
+    gap: 3rem;
+    min-height: 36rem;
+    position: relative;
+    bottom: 6.5rem;
+    padding-left: 1.5rem;
+}
+.profile__socials-info {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    border-bottom: var(--border-containers);
+    border-top: var(--border-containers);
+    padding: 1.5rem 0 1.5rem 0;
+}
+
+.profile__following, .profile__followed, .profile__rating {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__following, .profile__followed, .profile__rating > div {
+    text-align: center;
+}
+.profile__name {
+    font-weight: 700;
+}
+.profile__location {
+    color: var(--clr-paragraph);
+}
+.personal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    color: var(--clr-paragraph);
+    
+}
+.heading {
+    color: var(--clr-paragraph);
+    font-weight: 500;
+}
+.about-header {
+    font-weight: 700;
+    color: var(--bg-btn-primary-blue);
+}
+.number {
+    font-weight: 700;
+}
+
+
+/*_________________________________________*/
+/*info container*/
+
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info-buttons {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.info__nav {
+    display: flex;
+    gap: 15rem;
+    width: 100%;
+}
+.nav__menu {
+    display: flex;
+    gap: 4rem;
+}
+
+
+.nav__menu > div {
+    transition: 0.2s;
+    color: var(--clr-header);
+    font-weight: 700;
+    padding: 1rem 0 0 0;
+    min-height: 3rem;
+}
+
+.nav__menu > div:hover {
+    cursor: pointer;
+    color: var(--bg-btn-primary-blue);
+    border-bottom: 1px solid var(--bg-btn-primary-blue)
+}
+
+.button-active {
+    color: var(--bg-btn-primary-blue) !important;
+    border-bottom: 1px solid var(--bg-btn-primary-blue)
+}
+
+.profile__paginate {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--clr-header);
+    font-weight: 700;
+    padding: 1rem 0 0 0;
+    min-height: 3rem;
+}
+.arrow-paginate {
+    max-width: 0.8rem;
+    transition: 0.2s;
+}
+.arrow-paginate:hover {
+    cursor: pointer;
+    color: var(--bg-btn-primary-blue)
+}
+
+
+/*_________________________________________*/
+/*event cards*/
+
+.events-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+    grid-gap: 1.5rem;
+    padding: 2.5rem 2rem 2.1rem 0;
+}
+
+.event-card {
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.event-card:hover {
+    cursor: pointer;
+}
+
+.empty-card {
+    background: #F3F3F3;
+    border-radius: 0.15rem;
+}
+
+.profile-event-card__image {
+    min-height: 9rem;
+    transition: 0.4s;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: start;
+    padding-right: 0.4rem;
+    gap: 0.2rem;
+}
+
+.profile-event-card__image::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: url(../../Images/News-Trailer-Web-4Sep20.png);
+    background-size: cover;
+    opacity: 0.7;
+    content: "";
+    z-index: -1;
+    border-radius: 0 0 0.3rem 0.3rem;
+}
+
+.info-content {
+    height: 100%;
+}
+
+.info-paragraph {
+    font-weight: 500;
+    color: var(--clr-paragraph);
+}
+.info-header__title {
+    padding-top: 0.5rem;
+    font-weight: 700;
+    color: var(--clr-header);
+}
+.info-header-category {
+    display: flex;
+    font-weight: 500;
+    color: var(--clr-paragraph);
+    justify-content: space-between;
+}
+.info-header-button {
+    background: var(--bg-primary-dark);
+    border-radius: 50%;
+    color: #FFFFFF;
+    padding: 0.2rem;
+    position: relative;
+    bottom: 1rem;
+    transition: 0.2s;
+    z-index: 10;
+}
+.info-header-button:hover {
+    cursor: pointer;
+    background: var(--bg-btn-primary-blue);
+}
+
+.profile-event-card__info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.6rem 0 0.6rem;
+}
+.info-header {
+    display: flex;
+}
+.info-category {
+    line-height: 0.4rem;
+    font-size: 0.8rem;
+}
+
+
+
+/*_________________________________________*/
+/*calendar card, people counter*/
+
+
+.event-people__count {
+}
+
+
+.info__go-to {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-people__count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FFFFFF;
+    background: var(--bg-primary-dark);
+    padding: 0.3rem;
+    z-index: 10;
+    border-radius: 0 0 0.4rem 0.4rem;
+}
+
+.people-icon__profile {
+    max-width: 1.2rem;
+}
+
+.counter__profile {
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.event-date-card {
+    background: var(--bg-btn-primary-blue);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 0.4rem 0.4rem;
+    padding: 0.4rem;
+}
+
+.event-date-card__day {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
 
 

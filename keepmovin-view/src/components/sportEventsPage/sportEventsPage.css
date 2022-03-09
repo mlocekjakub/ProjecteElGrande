@@ -1,14 +1,12 @@
 ﻿.events-page-wrapper {
     min-height: 100%;
-    margin: var(--page-margin);
+    margin: var(--page-margin-events-page);
     padding: 1rem;
     font-family: "Manrope", "sans-serif";
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
-
 
 .filter-container {
     display: flex;
@@ -25,6 +23,7 @@
     flex-direction: column;
     padding: 1rem 2rem 1rem 2rem;
     min-height: 100vh;
+    gap: 1rem;
 }
 
 .events-filters__container {
@@ -48,6 +47,7 @@
     border: 2px solid rgba(255, 255, 255, 0.18);
     padding: 1.5rem 1rem 1.5rem 1rem;
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+    color: var(--clr-paragraph);
     
 }
 .event-1 > div{
@@ -62,6 +62,7 @@
     object-fit: scale-down;
     max-width: 14rem;
     height: 100%;
+    border-radius: 0.3rem;
     
 }
 
@@ -78,41 +79,63 @@
 
 /*go to */
 
-.go-to {
+.events__card-nav {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    border-radius: 0.3rem;
+    min-width: 15ch;
 }
-
-.go-to__item {
+.card-nav__details-join {
     display: flex;
-    justify-content: center;
+    gap: 0.4rem;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem
 }
-.go-to__join {
-    background: var(--bg-btn-primary-blue);
-    color: var(--font-btn);
-    transition: 0.3s;
-}
-.go-to__join:hover {
-    background: var(--bg-btn-primary-blue-hover);
-}
-.go-to__details {
+.events__card-nav-price {
     background: var(--bg-primary-dark);
-    color: var(--font-btn);
+    border-radius: 0 0 0.3rem 0.3rem;
+    padding: 0.5rem;
+    color: #FFFFFF;
+}
+.events__card-nav-details {
+    transition: 0.2s;
+    color: #FFFFFF;
+    background: var(--bg-btn-primary-blue);
+    padding: 0.3rem;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+.events__card-nav-join {
     transition: 0.3s;
-    text-align: center;
+    color: #FFFFFF;
+    background: var(--bg-btn-primary-blue);
+    padding: 0.3rem;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+.events__card-nav-details:hover {
+    cursor: pointer;
+    background: var(--bg-primary-dark);
+    
+}
+.events__card-nav-join:hover {
+    cursor: pointer;
+    background: var(--bg-primary-dark);
 }
 
-.go-to__details:hover {
-    background: rgba(36, 38, 38, 0.68);
-}
-.go-to__price {
-    background: var(--bg-primary-dark);
-    color: var(--font-btn);
+
+.create-button-link {
+    text-decoration: none;
+    color: #FFFFFF;
     text-align: center;
+    letter-spacing: 0.03rem;
+    background: var(--bg-btn-primary-blue);
+    padding: 0.5rem 0 0.5rem 0;
+    transition: 0.2s;
+    border-radius: 0.3rem;
+}
+.create-button-link:hover {
+    background: var(--bg-primary-dark);
+    color: #FFFFFF;
 }
 
 /*___________________*/
@@ -128,19 +151,26 @@
     justify-content: space-between;
 }
 
+.info__to {
+    color: var(--bg-btn-primary-blue)
+}
+
 .title {
     font-weight: bold;
+    color: var(--clr-header);
     font-size: 2.3rem;
 }
 .date {
     font-weight: 500;
     font-size: 0.85rem;
-    color: var(--clr-paragraph-info)
+}
+.info__to {
+    color: var(--bg-primary-dark);
+    font-weight: 700;
 }
 .category {
     font-weight: 500;
     font-size: 0.85rem;
-    color: var(--clr-paragraph-info);
 }
 
 .events-statistics {
@@ -152,6 +182,7 @@
 
 .location-icon, .level-icon, .participants-icon {
     max-width: 1rem;
+    color: var(--clr-header);
 }
 
 /*___________________*/
@@ -193,4 +224,36 @@
 
 /*___________________*/
 
-
+.events-page__paginate-button {
+    color: var(--bg-primary-dark);
+    /*padding: 0.2rem;*/
+    transition: 0.2s;
+}
+.events-page__paginate-button-disabled {
+    color: rgba(36, 38, 38, 0.4);
+}
+.events-page__paginate-button:hover {
+    cursor: pointer;
+    color: var(--bg-btn-primary-blue);
+}
+.events-page__pagination {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-website);
+    padding: 0.8rem;
+    border-radius: 0.4rem 0 0 0.4rem;
+}
+.events-page__locating {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    padding-right: 1rem;
+}
+.pagination__number {
+    color: var(--clr-header);
+    font-weight: 700;
+    display: flex;
+    gap: 0.5rem;
+}

@@ -1,7 +1,7 @@
 ﻿import ProfessionalEventsDiagram from "./diagramComponents/ProfessionalEventsDiagram";
 import RecreationalEventsDiagram from "./diagramComponents/RecreationalEventsDiagram";
 import HostedEventsDiagram from "./diagramComponents/HostedEventsDiagram";
-import './Diagrams.css'
+import '../profilePageComponents/diagramComponents/Diagram.css'
 
 export default function Diagrams() {
     return (

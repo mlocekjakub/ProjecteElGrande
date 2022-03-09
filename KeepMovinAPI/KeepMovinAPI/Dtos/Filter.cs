@@ -27,8 +27,7 @@ namespace KeepMovinAPI.Domain.Dtos
 
         public int? MaxParticipants { get; set; } = 9999;
 
-        public int? PageNumber { get; set; } = 1;
-
+        public int CurrentPageNumber { get; set; } = 1;
 
 
 

@@ -11,9 +11,14 @@
     --event-border: 1px solid rgba(5, 5, 5, 0.20);
     --clr-paragraph-info: hsl(217, 19%, 35%);
     
-    --page-margin: 5rem 20rem;
+    --page-margin-events-page: 7rem 20rem;
+    --page-margin-profile-page: 8rem 21rem 2rem 21rem;
     
     --box-shadow-containers: 0 1px 5px rgba(50, 50, 50, 0.1);
     --border-containers: 1px solid rgba(5, 5, 5, 0.13);
     --bg-clr-containers: #FFFFFF;
+
+    --clr-header: #1D1E35;
+
+    --clr-paragraph: hsl(237, 12%, 33%);
 }

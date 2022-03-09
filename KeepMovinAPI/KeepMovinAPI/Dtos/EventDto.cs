@@ -31,6 +31,8 @@ namespace KeepMovinAPI.Domain.Dtos
         public Guid TypeId { get; set; }
         
         public Guid LocationId { get; set; }
+        
+        public decimal NumberOfPages { get; set; }
 
     }
 }

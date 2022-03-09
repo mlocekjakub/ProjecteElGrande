@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import EventCard from "./sportEventsComponents/EventCard";
-import ButtonCard from "./sportEventsComponents/ButtonCard";
 import "./sportEventsPage.css";
 import "../../index.css"
 import SportFilter from "./sportEventsComponents/SportFilter";
@@ -12,6 +11,9 @@ import axios from "axios";
 import {useSelector} from "react-redux";
 import DatePicker from "./sportEventsComponents/DatePicker";
 import LoadingSpinner from "./sportEventsComponents/LoadingSpinner";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import {Link} from "react-router-dom";
 
 
 function SportEventsPage() {
@@ -36,11 +38,20 @@ function SportEventsPage() {
 
     const maxPriceFilter = useSelector((state) => state.maxPrice.value)
     
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    const [numberOfPages, setNumberOfPages] = useState(2);
+    
     const [inputTimeout, setInputTimeout] = useState(null);
     
     const [isFetchingData, setIsFetchingData] = useState(false);
     
     const [eventsNotFound, setEventsNotFound] = useState(false);
+    
+    const [isLimitNext, setIsLimitNext] = useState(false);
+
+    const [isLimitPrevious, setIsLimitPrevious] = useState(true);
+    
     
     function getUrl() {
         const urlStart = `/api/event?`;
@@ -63,7 +74,8 @@ function SportEventsPage() {
         let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
         let minPrice = `&MinPrice=${minPriceFilter}`;
         let maxPrice = `&MaxPrice=${maxPriceFilter}`;
-        return urlStart + sports + experiences + types + minParticipants + maxParticipants + minPrice + maxPrice;
+        let pageNumber = `&CurrentPageNumber=${currentPage}`
+        return urlStart + sports + experiences + types + minParticipants + maxParticipants + minPrice + maxPrice + pageNumber;
     }
     
     
@@ -90,12 +102,30 @@ function SportEventsPage() {
                     });
             }, 1000) 
         )
+        if (numberOfPages === 1) {
+            setIsLimitNext(true)
+        }
     }, [sportsFilter,
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
-        minPriceFilter, maxPriceFilter])
+        minPriceFilter, maxPriceFilter, currentPage])
     
 
+    const NextPage = () => {
+        if(currentPage + 1 === numberOfPages) {
+            setIsLimitNext(true);
+        }
+        setCurrentPage(currentPage + 1)
+        setIsLimitPrevious(false)
+    }
+    
+    const PreviousPage = () => {
+        if (currentPage - 1 === 1) {
+            setIsLimitPrevious(true);
+        }
+        setCurrentPage(currentPage - 1)
+        setIsLimitNext(false)
+    }
    /* useEffect(async () => {
         const response = await fetch("/user/validate", {
             headers: {
@@ -128,7 +158,7 @@ function SportEventsPage() {
             </div>
             <div className="events-filters__container">
                 <div className="filter-container">
-                    <ButtonCard name="create" />
+                    <Link className="create-button-link" to="/event/create">Create Event</Link>
                     <SportFilter />
                     <ExperienceFilter />
                     <PriceFilter />
@@ -136,13 +166,36 @@ function SportEventsPage() {
                     <TypeFilter />
                 </div>
                 <div className="events-container">
-                    <DatePicker />
-                    
-                    {isFetchingData && <LoadingSpinner />}
-
-                    {eventsNotFound && <div className="events__not-found">Events not found</div>}
-                    
-                    <Events display={foundEvents} />
+                    <div className="events-page__locating">
+                        <DatePicker />
+                        <div  className="events-page__pagination">
+                            {isLimitPrevious
+                                ?
+                                <div className="events-page__paginate-button-disabled">
+                                    <ArrowBackIosIcon className="events__back-icon"/>
+                                </div>
+                                :
+                                <div className="events-page__paginate-button">
+                                    <ArrowBackIosIcon onClick={PreviousPage}/>
+                                </div>}
+                            <div className="pagination__number"> <span>{currentPage}</span> of <span>{numberOfPages}</span></div>
+                            {isLimitNext 
+                                ? 
+                                <div className="events-page__paginate-button-disabled">
+                                    <ArrowForwardIosIcon className="events__forward-icon"/>
+                                </div> 
+                                : 
+                                <div className="events-page__paginate-button">
+                                    <ArrowForwardIosIcon onClick={NextPage} className="events__forward-icon"/>
+                                </div>}
+                            
+                        </div>
+                    </div>
+                    <div>
+                        {isFetchingData && <LoadingSpinner />}
+                        {eventsNotFound && <div className="events__not-found">Events not found</div>}
+                        <Events display={foundEvents} />
+                    </div>
                 </div>
             </div>
         </div>

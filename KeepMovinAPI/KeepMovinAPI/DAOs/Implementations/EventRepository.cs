@@ -47,7 +47,9 @@ namespace KeepMovinAPI.DAOs.Implementations
 
         public IEnumerable<Event> GetFiltered([FromQuery] Filter filter)
         {
-            var query = _context.Event.Where(i => 
+            var numberOfEventsPerPage = 5;
+            
+            var filteredEvents = _context.Event.Where(i => 
                 i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
                 && (i.Price >= filter.MinPrice 
                 && i.Price <= filter.MaxPrice)
@@ -55,9 +57,16 @@ namespace KeepMovinAPI.DAOs.Implementations
                 && i.MaxParticipants <= filter.MaxParticipants)
                 && filter.Sports.Contains(i.Sports.SportId)
                 && filter.Type.Contains(i.Type.TypeId)
-                && filter.Experience.Contains(i.ExperienceLevel.ExperienceLevelId));
-            
-            return query.ToList();
+                && filter.Experience.Contains(i.ExperienceLevel.ExperienceLevelId)).ToList();
+
+            var numberOfPages = Math.Ceiling((decimal) filteredEvents.ToList().Count / numberOfEventsPerPage);
+                
+            filteredEvents = filteredEvents
+                .Skip((filter.CurrentPageNumber - 1) * numberOfEventsPerPage)
+                .Take(numberOfEventsPerPage)
+                .ToList();
+
+            return filteredEvents;
         }
 
         public IEnumerable<Event> GetAllByMonthAndYear(DateTime givenDate)

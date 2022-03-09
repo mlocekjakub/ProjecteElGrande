@@ -1,8 +1,6 @@
 ﻿import React, {useState, useEffect} from 'react';
-import ButtonCard from "./ButtonCard";
 import axios from "axios";
 import eventImage from "../../../Images/News-Trailer-Web-4Sep20.png";
-import eventImage2 from "../../../Images/tempevent.jpg";
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -25,7 +23,7 @@ function EventCard(props) {
             <div className="description">
                 <div className="info">
                     <div className="date">
-                        Date: {(props.dateStart).slice(0,10)} - {(props.dateEnd).slice(0,10)}
+                        {(props.dateStart).slice(0,10)} <span className="info__to">to</span> {(props.dateEnd).slice(0,10)}
                     </div>
                     <div className="title">
                         <h4>{props.eventName}</h4>
@@ -49,10 +47,12 @@ function EventCard(props) {
                     </div>
                 </div>
             </div>
-            <article className="go-to">
-                <div className="go-to__join go-to__item">Join</div>
-                <div className="go-to__details go-to__item">Details <ArrowRightIcon/></div>
-                <div className="go-to__price go-to__item">{props.price} {props.currency}</div>
+            <article className="events__card-nav">
+                <div className="events__card-nav-price">{props.price} {props.currency}</div>
+                <div className="card-nav__details-join">
+                    <div className="events__card-nav-details">Details</div>
+                    <div className="events__card-nav-join">Join</div>
+                </div>
             </article>
         </div>
     )
