@@ -64,7 +64,9 @@ namespace KeepMovinAPI
             services.AddScoped<ISettingDao, SettingDao>();
             services.AddScoped<ITypeDao, TypeDao>();
             services.AddScoped<IExperienceDao, ExperienceDao>();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly()); 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddScoped<IExperienceDao, ExperienceDao>();
+ 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

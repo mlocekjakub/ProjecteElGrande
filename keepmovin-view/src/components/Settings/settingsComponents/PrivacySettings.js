@@ -15,6 +15,27 @@ export default function PrivacySettings() {
     const [prEvents, setPrEvents] = useState(false);
     const [photo, setPhoto] = useState(false);
 
+
+    let privacy = {};
+
+    useEffect(() => {
+        privacy = {
+            'location': location,
+            'follow': follow,
+            'stats': stats,
+            'aboutMe': aboutMe,
+            'upEvents': upEvents,
+            'prEvents': prEvents,
+            'photo': photo
+        }
+        localStorage.setItem("privacy", JSON.stringify(privacy));
+    });
+    
+
+    
+    
+        
+
     const handleLocation = (event) => {
         setLocation(event.target.checked);
     };
@@ -48,7 +69,7 @@ export default function PrivacySettings() {
             <p className="main-content"> These options will allow You to set up Your privacy policy to users which are not in Your followers
                 every person which is not added to that group will be limited to these settings</p>
             <p className="secondary-header"><h5>"Hide location"</h5></p>
-            <Switch
+            <Switch id='1'
                 checked={location}
                 onChange={handleLocation}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -56,7 +77,7 @@ export default function PrivacySettings() {
             <p className="content">Your City and Your country will not be seen for people outside Your followers group. If You will take part in the
                 event , person who organize current event will see Your data.</p>
             <p className="secondary-header"><h5>"Hide follow"</h5></p>
-            <Switch
+            <Switch id='2'
                 checked={follow}
                 onChange={handleFollow}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -64,7 +85,7 @@ export default function PrivacySettings() {
             <p className="content">Anyone who does not follow You will not have access to the accounts You are following or following You.</p>
             
             <p className="secondary-header"><h5>"Hide Stats"</h5></p>
-            <Switch
+            <Switch id='3'
                 checked={stats}
                 onChange={handleStats}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -72,7 +93,7 @@ export default function PrivacySettings() {
             <p className="content">Your statistics, including the number of events in which You participated or were the organizer, will be blurred together with the charts and the percentage results</p>
            
             <p className="secondary-header"><h5>"Hide Information 'about me'"</h5></p>
-            <Switch
+            <Switch id='4'
                 checked={aboutMe}
                 onChange={handleAboutMe}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -81,7 +102,7 @@ export default function PrivacySettings() {
             
             
             <p className="secondary-header"><h5>"Hide UpComming'"</h5></p>
-            <Switch
+            <Switch id='5'
                 checked={upEvents}
                 onChange={handleUpcomingEvents}
                 inputProps={{ 'aria-label': 'controlled' }}
@@ -89,14 +110,14 @@ export default function PrivacySettings() {
             <p className="content">No one other than your followers will have access to the list of events in which you will participate in the future.</p>
             
             <p className="secondary-header"><h5>"Hide PreviousEvents'"</h5></p>
-            <Switch className="switch"
+            <Switch className="switch" id='6'
                 checked={prEvents}
                 onChange={handlePreviosEvents}
                 inputProps={{ 'aria-label': 'controlled' }}
             />
             <p className="content">No one other than your followers will have access to the list of events in which you have already participated</p>
             <p className="secondary-header"><h5>"Photo"</h5></p>
-            <Switch className="switch"
+            <Switch className="switch" id='7'
                 checked={photo}
                 onChange={handlePhoto}
                 inputProps={{ 'aria-label': 'controlled' }}

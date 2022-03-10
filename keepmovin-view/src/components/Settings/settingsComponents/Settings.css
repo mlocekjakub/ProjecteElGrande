@@ -66,6 +66,21 @@
     padding: 15px 100px 55px 130px;
 }
 
+.organization-content-info {
+    padding: 15px 100px 55px 130px;
+}
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+
+
 
 
 

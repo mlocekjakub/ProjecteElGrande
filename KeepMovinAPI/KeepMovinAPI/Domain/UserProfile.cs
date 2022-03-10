@@ -12,15 +12,15 @@ namespace KeepMovinAPI.Domain
         
         public Picture Picture { get; set; }
         
-        [Required]
+
         [MaxLength(20)]
         public string Name { get; set; }
         
-        [Required]
+
         [MaxLength(20)]
         public string Surname { get; set; }
         
-        public int Age { get; set; }
+        public DateTime BirthDate { get; set; }
         
         public string PersonalInfo { get; set; }
         
