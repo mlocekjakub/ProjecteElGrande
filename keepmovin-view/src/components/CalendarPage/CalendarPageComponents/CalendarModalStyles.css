@@ -1,0 +1,40 @@
+﻿.event-calendar-modal {
+    position: absolute;
+    z-index: 1055;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-modal-content {
+    background-color: #ff0000;
+    width: 20rem;
+}
+
+.event-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.1rem;
+}
+
+.event-modal-header {
+    padding-bottom: 1rem;
+}
+
+.event-modal-footer {
+    padding: 1rem;
+}
+
+.event-modal-title {
+    text-align: center;
+}
+
+.event-modal-body {
+    padding: 1rem;
+    border-top: 0.1rem solid black;
+    border-bottom: 0.1rem solid black;
+}
