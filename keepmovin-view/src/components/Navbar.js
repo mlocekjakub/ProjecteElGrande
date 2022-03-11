@@ -1,12 +1,11 @@
 ﻿import * as React from 'react';
 import "./Navbar.css";
-import Notifications from "./navbarComponents/Notifications";
-import Profile from "./navbarComponents/Profile";
-import Home from "./navbarComponents/Home";
-import Searchbar from "./navbarComponents/Searchbar";
-import Logo from "./navbarComponents/Logo";
-import Calendar from "./navbarComponents/Calendar";
-import EventsList from "./navbarComponents/EventsList";
+import Notifications from "./NavbarComponents/Notifications";
+import Profile from "./NavbarComponents/Profile";
+import Home from "./NavbarComponents/Home";
+import Searchbar from "./NavbarComponents/Searchbar";
+import Logo from "./NavbarComponents/Logo";
+import Calendar from "./NavbarComponents/Calendar";
 
 
 export default function Navbar() {
@@ -19,7 +18,6 @@ export default function Navbar() {
             <nav>
                 <div className="nav__links">
                     <Home />
-                    {/*<EventsList />*/}
                     <Calendar />
                     <Notifications />
                     <Profile />

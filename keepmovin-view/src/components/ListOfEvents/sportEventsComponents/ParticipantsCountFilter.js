@@ -1,6 +1,5 @@
-﻿import React, {useState, useEffect} from 'react';
+﻿import React, {useEffect} from 'react';
 import "./Filter.css";
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {ExpandFilter} from "./Filter";
 import "./ParticipantsCountFilter.css";

@@ -1,31 +1,26 @@
 ﻿import React, {useState, useEffect} from 'react';
-import { Pie, Doughnut} from 'react-chartjs-2';
-import "./Diagram.css"
+import {Doughnut} from 'react-chartjs-2';
+import './Diagram.css'
 
-function ProfessionalEventsDiagram() {
+function HostedEventsDiagram() {
 
     const [data, setData] = useState({});
 
     useEffect(() => {
         setData({
-            labels: ['Running', 'Swimming', 'Basketball',
-                'Hockey'],
+            labels: ['Basketball', 'Running'],
             datasets: [
                 {
-                    label: 'Professional Events',
+                    label: 'Hosted Events',
                     backgroundColor: [
                         '#B21F00',
-                        '#C9DE00',
-                        '#00A6B4',
-                        '#6800B4'
+                        '#e1ff00'
                     ],
                     hoverBackgroundColor: [
                         '#501800',
-                        '#4B5000',
-                        '#003350',
-                        '#35014F'
+                        '#4B5000'
                     ],
-                    data: [6, 6, 8, 9],
+                    data: [6, 1],
                     borderColor: "rgba(247, 103, 7, 0)"
                 }
             ]
@@ -39,15 +34,17 @@ function ProfessionalEventsDiagram() {
                 options={{
                     title:{
                         display:true,
-                        text:'Professional Events',
-                        fontSize:18,
+                        text: 'Hosted Events',
+                        fontSize: 18,
                         fontColor: "#1D1E35",
                         fontWeight: 700,
                         paddingBottom: '0.3rem'
+
                     },
                     legend:{
                         display:true,
                         position:'right',
+                        fontSize: 100,
                         fontColor: "hsl(237, 12%, 33%)"
                     }
                 }}
@@ -56,4 +53,4 @@ function ProfessionalEventsDiagram() {
     )
 }
 
-export default ProfessionalEventsDiagram;
+export default HostedEventsDiagram;

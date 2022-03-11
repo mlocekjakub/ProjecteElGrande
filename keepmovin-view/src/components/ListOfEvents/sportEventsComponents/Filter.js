@@ -1,5 +1,4 @@
 ﻿import React from "react";
-import CheckIcon from '@mui/icons-material/Check';
 
 function RotateExpandIcon(expandIcon) {
     if (expandIcon.classList.contains("active-expand-icon")) {

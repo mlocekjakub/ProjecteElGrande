@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useRef, useState} from 'react';
 import {ValidateRegister} from './ValidateInputs';
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {changeRegisterData} from "../../../features/Register";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';

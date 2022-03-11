@@ -1,11 +1,9 @@
-﻿import React, {useState, useEffect} from 'react';
+﻿import React, {useEffect} from 'react';
 import "./Filter.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {ExpandFilter} from "./Filter";
 import "./PriceFilter.css";
 import {useDispatch, useSelector} from "react-redux";
-import {changeMinParticipants} from "../../../features/MinParticipants";
-import {changeMaxParticipants} from "../../../features/MaxParticipants";
 import {changeMinPrice} from "../../../features/MinPrice";
 import {changeMaxPrice} from "../../../features/MaxPrice";
 

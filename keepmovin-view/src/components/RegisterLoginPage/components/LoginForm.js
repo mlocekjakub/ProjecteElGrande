@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useRef, useState} from "react";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {ValidateLogin} from "./ValidateInputs";
 import {changeLoginData} from "../../../features/Login";

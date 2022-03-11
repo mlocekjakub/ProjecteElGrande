@@ -2,7 +2,7 @@
 import "../../index.css"
 import profileImage from "../../Images/pexels-photo-771742.jpeg"
 import EventsMenu from "./profilePageComponents/EventsMenu";
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import Statistics from "./profilePageComponents/Statistics";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {ArrowBackIos} from "@material-ui/icons";

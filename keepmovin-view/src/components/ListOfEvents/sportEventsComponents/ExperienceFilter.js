@@ -7,8 +7,6 @@ import {ExpandFilter} from "./Filter";
 import {useDispatch} from "react-redux";
 import {changeExperience, clearExperience} from "../../../features/Experience";
 import axios from "axios";
-import {updateType} from "../../../features/Type";
-
 
 function ExperienceFilter() {
     const dispatch = useDispatch();
@@ -34,7 +32,6 @@ function ExperienceFilter() {
             }
         })
         dispatch(changeExperience(level));
-        
     }
     
     function UncheckAllLevels() {

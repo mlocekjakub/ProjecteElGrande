@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import EventCard from "./sportEventsComponents/EventCard";
-import "./sportEventsPage.css";
+import "./ListOfEvents.css";
 import "../../index.css"
 import SportFilter from "./sportEventsComponents/SportFilter";
 import ExperienceFilter from "./sportEventsComponents/ExperienceFilter";

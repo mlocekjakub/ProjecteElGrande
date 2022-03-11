@@ -1,4 +1,4 @@
-﻿import React, {useState, useEffect, useRef} from 'react';
+﻿import React, {useState, useEffect} from 'react';
 import "./Filter.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./SportFilter.css";
@@ -37,7 +37,6 @@ function SportFilter() {
             })
         
     }, [])
-    
     
     
     function CheckAllSports() {

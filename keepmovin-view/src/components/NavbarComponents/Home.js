@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import HomeIcon from "@mui/icons-material/Home";
 import {Link} from "react-router-dom";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 function Home(props) {
     return (

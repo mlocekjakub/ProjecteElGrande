@@ -1,4 +1,4 @@
-﻿import React, {useState, useEffect} from 'react';
+﻿import React from 'react';
 import "./SearchBar.css";
 import SearchIcon from '@mui/icons-material/Search';
 

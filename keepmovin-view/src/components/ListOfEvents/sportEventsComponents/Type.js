@@ -1,7 +1,6 @@
-﻿import React, {useRef, useState} from 'react';
+﻿import React, {useRef} from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import {useDispatch, useSelector} from "react-redux";
-import {updateSport} from "../../../features/Sport";
 import {updateType} from "../../../features/Type";
 
 const Type = (props) => {

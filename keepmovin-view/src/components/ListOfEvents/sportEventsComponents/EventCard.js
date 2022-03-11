@@ -1,9 +1,7 @@
-﻿import React, {useState, useEffect} from 'react';
-import axios from "axios";
+﻿import React from 'react';
 import eventImage from "../../../Images/News-Trailer-Web-4Sep20.png";
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
 
 

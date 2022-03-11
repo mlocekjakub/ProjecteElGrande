@@ -1,7 +1,4 @@
 ﻿import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import eventImage from "../../Images/News-Trailer-Web-4Sep20.png"
-import Sport from "../sportEventsPage/sportEventsComponents/Sport";
 import PersonIcon from '@mui/icons-material/Person';
 
 function EventsSearchedCard(props) {
