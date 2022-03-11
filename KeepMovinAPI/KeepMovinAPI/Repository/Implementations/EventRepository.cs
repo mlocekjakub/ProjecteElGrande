@@ -55,7 +55,8 @@ namespace KeepMovinAPI.Repository.Implementations
             var joinedTables =
                 from eventModel in events
                 join sport in sports on eventModel.Sports.SportId equals sport.SportId
-                join experience in experiences on eventModel.ExperienceLevel.ExperienceLevelId equals experience.ExperienceLevelId
+                join experience in experiences on eventModel.ExperienceLevel.ExperienceLevelId equals experience
+                    .ExperienceLevelId
                 join type in types on eventModel.Type.TypeId equals type.TypeId
                 join location in locations on eventModel.Location.LocationId equals location.LocationId
                 select new EventDto()
@@ -75,24 +76,28 @@ namespace KeepMovinAPI.Repository.Implementations
                     TypeId = eventModel.Type.TypeId,
                     LocationId = eventModel.Location.LocationId,
                 };
-            
-            var query = joinedTables.Where(i => 
-                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
-                && (i.Price >= filter.MinPrice 
-                && i.Price <= filter.MaxPrice)
-                && (i.MaxParticipants >= filter.MinParticipants 
-                && i.MaxParticipants <= filter.MaxParticipants)
+
+            var query = joinedTables.Where(i =>
+                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower())
+                && (i.Price >= filter.MinPrice
+                    && i.Price <= filter.MaxPrice)
+                && (i.MaxParticipants >= filter.MinParticipants
+                    && i.MaxParticipants <= filter.MaxParticipants)
                 && filter.Sports.Contains(i.SportsSportId)
                 && filter.Type.Contains(i.TypeId)
                 && filter.Experience.Contains(i.ExperienceLevelId));
-            
+
             return query.ToList();
         }
 
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate)
         {
             var query = _context.Event
-                .Where(i => i.StartEvent >= startDate && i.StartEvent <= endDate).ToList();
+                .Where(i =>
+                    i.StartEvent >= startDate
+                    && i.StartEvent <= endDate
+                    || i.EndEvent >= startDate
+                ).ToList();
             return query;
         }
     }
