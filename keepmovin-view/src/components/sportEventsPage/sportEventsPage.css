@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 15rem;
+    max-width: 18rem;
     user-select: none;
     overflow: hidden;
     padding: 1rem;
@@ -82,45 +82,36 @@
 .events__card-nav {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
     align-items: end;
     border-radius: 0.3rem;
     min-width: 15ch;
 }
-.card-nav__details-join {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
+
+.sign-up-event {
+    background: var(--bg-btn-primary-blue);
+    color: #FFFFFF;
+    transition: 0.2s;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    border-radius: 0.3rem;
 }
+.sign-up-event:hover {
+    cursor: pointer;
+    background: var(--bg-primary-dark);
+}
+
 .events__card-nav-price {
     background: var(--bg-primary-dark);
-    border-radius: 0 0 0.3rem 0.3rem;
-    padding: 0.5rem;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
     color: #FFFFFF;
+    max-width: 4.5rem;
+    text-align: center;
+    font-size: 0.8rem;
 }
-.events__card-nav-details {
-    transition: 0.2s;
-    color: #FFFFFF;
-    background: var(--bg-btn-primary-blue);
-    padding: 0.3rem;
-    border-radius: 0.3rem 0.3rem 0 0;
-}
-.events__card-nav-join {
-    transition: 0.3s;
-    color: #FFFFFF;
-    background: var(--bg-btn-primary-blue);
-    padding: 0.3rem;
-    border-radius: 0.3rem 0.3rem 0 0;
-}
-.events__card-nav-details:hover {
-    cursor: pointer;
-    background: var(--bg-primary-dark);
-    
-}
-.events__card-nav-join:hover {
-    cursor: pointer;
-    background: var(--bg-primary-dark);
-}
+
+
+
 
 
 .create-button-link {
@@ -155,14 +146,16 @@
     color: var(--bg-btn-primary-blue)
 }
 
-.title {
+.event__title {
     font-weight: bold;
     color: var(--clr-header);
     font-size: 2.3rem;
+    letter-spacing: .00001em;
 }
 .date {
     font-weight: 500;
     font-size: 0.85rem;
+    padding-bottom: 0.3rem;
 }
 .info__to {
     color: var(--bg-primary-dark);
@@ -177,6 +170,9 @@
     font-size: 0.8rem;
     display: flex;
     gap: 1rem;
+}
+
+.events-statistics > div {
 }
 
 

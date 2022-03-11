@@ -19,7 +19,7 @@ function ExperienceFilter() {
 
     useEffect(() => {
         axios
-            .get(`/api/experience`)
+            .get(`/api/Experience`)
             .then(response => {
                 setLevel(response.data)
                 dispatch(changeExperience(response.data))

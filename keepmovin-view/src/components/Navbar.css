@@ -74,6 +74,7 @@ header {
 .search-txt-header:focus {
    outline: none !important;
    background: #fff;
+   border: 0;
 }
 .glass-container {
    display: flex;

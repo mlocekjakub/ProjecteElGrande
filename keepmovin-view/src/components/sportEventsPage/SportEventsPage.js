@@ -40,7 +40,7 @@ function SportEventsPage() {
     
     const [currentPage, setCurrentPage] = useState(1);
     
-    const [numberOfPages, setNumberOfPages] = useState(2);
+    const [numberOfPages, setNumberOfPages] = useState();
     
     const [inputTimeout, setInputTimeout] = useState(null);
     
@@ -57,17 +57,17 @@ function SportEventsPage() {
         const urlStart = `/api/event?`;
         let sports = ``;
         sportsFilter.map((sport) => {
-            sports += `Sports=${sport.sportId}&`
+            sports += `Sports=${sport.name}&`
         })
         
         let experiences = ``;
         experienceFilter.map((experience) => {
-            experiences += `Experience=${experience.experienceLevelId}&`
+            experiences += `Experience=${experience.name}&`
         })
         
         let types = ``;
         typeFilter.map((eventType) => {
-            types += `Type=${eventType.typeId}&`
+            types += `Type=${eventType.name}&`
         })
         
         let minParticipants = `MinParticipants=${minParticipantsFilter}`;
@@ -96,15 +96,13 @@ function SportEventsPage() {
                             setEventsNotFound(true);
                         }
                         else {
-                            setFoundEvents(response.data)
+                            setFoundEvents(response.data.eventsFound)
+                            setNumberOfPages(response.data.numberOfPages)
                         }
                         setIsFetchingData(false);
                     });
             }, 1000) 
         )
-        if (numberOfPages === 1) {
-            setIsLimitNext(true)
-        }
     }, [sportsFilter,
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
@@ -145,10 +143,11 @@ function SportEventsPage() {
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}
                         maxParticipants={event.maxParticipants}
-                        sport={event.sports}
+                        sport={event.sport}
                         experienceLevel={event.experienceLevel}
                         price={event.price}
-                        currency={event.currency}/>))
+                        currency={event.currency}
+                        location={event.location}/>))
         }
         
     return (
@@ -168,28 +167,30 @@ function SportEventsPage() {
                 <div className="events-container">
                     <div className="events-page__locating">
                         <DatePicker />
-                        <div  className="events-page__pagination">
-                            {isLimitPrevious
-                                ?
-                                <div className="events-page__paginate-button-disabled">
-                                    <ArrowBackIosIcon className="events__back-icon"/>
-                                </div>
-                                :
-                                <div className="events-page__paginate-button">
-                                    <ArrowBackIosIcon onClick={PreviousPage}/>
-                                </div>}
-                            <div className="pagination__number"> <span>{currentPage}</span> of <span>{numberOfPages}</span></div>
-                            {isLimitNext 
-                                ? 
-                                <div className="events-page__paginate-button-disabled">
-                                    <ArrowForwardIosIcon className="events__forward-icon"/>
-                                </div> 
-                                : 
-                                <div className="events-page__paginate-button">
-                                    <ArrowForwardIosIcon onClick={NextPage} className="events__forward-icon"/>
-                                </div>}
-                            
-                        </div>
+                        {!eventsNotFound &&
+                            <div className="events-page__pagination">
+                                {isLimitPrevious
+                                    ?
+                                    <div className="events-page__paginate-button-disabled">
+                                        <ArrowBackIosIcon className="events__back-icon"/>
+                                    </div>
+                                    :
+                                    <div className="events-page__paginate-button">
+                                        <ArrowBackIosIcon onClick={PreviousPage}/>
+                                    </div>}
+                                <div className="pagination__number">
+                                    <span>{currentPage}</span> of <span>{numberOfPages}</span></div>
+                                {isLimitNext
+                                    ?
+                                    <div className="events-page__paginate-button-disabled">
+                                        <ArrowForwardIosIcon className="events__forward-icon"/>
+                                    </div>
+                                    :
+                                    <div className="events-page__paginate-button">
+                                        <ArrowForwardIosIcon onClick={NextPage} className="events__forward-icon"/>
+                                    </div>}
+                            </div>
+                        }
                     </div>
                     <div>
                         {isFetchingData && <LoadingSpinner />}

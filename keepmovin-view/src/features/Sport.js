@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const initialStateValue = [];
 export const SportSlice = createSlice({
     name: "sports",

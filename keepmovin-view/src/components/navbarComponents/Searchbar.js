@@ -30,7 +30,7 @@ function Searchbar(props) {
 
     useEffect(() => {
         axios
-            .get(`/api/event/input/${typedInput}`)
+            .get(`/api/Event/input/${typedInput}`)
             .then(response => {
                 setEventsFound(response.data)
 

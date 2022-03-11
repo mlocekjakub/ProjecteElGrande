@@ -1,15 +1,13 @@
 ﻿import React from 'react';
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import {Link} from "react-router-dom";
 
-function Calendar(props) {
+export default function CalendarPageNav(props) {
     return (
-        <Link className="nav-item" to="#">
+        <Link className="nav-item" to="calendar">
             <div className="nav-item__icon">
-                <CalendarTodayIcon />
+                <DateRangeIcon />
             </div>
         </Link>
     );
 }
-
-export default Calendar;

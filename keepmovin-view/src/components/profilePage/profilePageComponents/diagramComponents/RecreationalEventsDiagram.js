@@ -38,11 +38,14 @@ function RecreationalEventsDiagram() {
                         display:true,
                         text:'Recreational Events',
                         fontSize:18,
-                        fontColor: "#FFFFFF"
+                        fontColor: "#1D1E35",
+                        fontWeight: 700,
+                        paddingBottom: '0.3rem'
                     },
                     legend:{
                         display:true,
-                        position:'right'
+                        position:'right',
+                        fontColor: "hsl(237, 12%, 33%)"
                     }
                 }}
             />

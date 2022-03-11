@@ -36,14 +36,16 @@ function HostedEventsDiagram() {
                         display:true,
                         text: 'Hosted Events',
                         fontSize: 18,
-                        fontColor: "#FFFFFF"
+                        fontColor: "#1D1E35",
+                        fontWeight: 700,
+                        paddingBottom: '0.3rem'
 
                     },
                     legend:{
                         display:true,
                         position:'right',
                         fontSize: 100,
-                        fontColor: "White"
+                        fontColor: "hsl(237, 12%, 33%)"
                     }
                 }}
             />

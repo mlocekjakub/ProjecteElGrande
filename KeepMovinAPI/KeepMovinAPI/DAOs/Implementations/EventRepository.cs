@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 
-namespace KeepMovinAPI.DAOs.Implementations
+namespace KeepMovinAPI.Repository.Implementations
 {
     public class EventDao : IEventDao
     {
@@ -76,4 +76,4 @@ namespace KeepMovinAPI.DAOs.Implementations
             return query;
         }
     }
-}
+}*/

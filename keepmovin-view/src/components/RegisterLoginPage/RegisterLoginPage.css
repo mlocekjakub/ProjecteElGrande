@@ -1,0 +1,109 @@
+﻿.register-login__page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.register-login__container {
+    display: flex;
+    box-shadow: var(--box-shadow-containers);
+    min-height: 32rem;
+    background: #FFFFFF;
+    border-radius: 0.7rem;
+}
+
+.register-login__bg-container {
+    /*background: url("../RandomImages/2.jpg");*/
+    /*background-size: cover;*/
+    background: rgba(66, 133, 244, 0.8);
+    min-width: 20rem;
+    border-radius: 0.7rem 0 0 0.7rem
+}
+.register-login__forms {
+    display: flex;
+    min-width: 25rem;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+}
+
+.register__header {
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 2rem;
+    letter-spacing: .0001em;
+    padding-bottom: 1rem;
+}
+.register__paragraph {
+    padding-top: 1rem;
+    border-top: 1px solid rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 11rem;
+}
+.header-info {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.login-register__buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.go-to__login, .go-to__register {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.go-to__login:hover, .go-to__register:hover {
+    cursor: pointer;
+}
+
+.register-login__register, .register-login__login {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 2rem;
+}
+
+input[type=password], input[type=email] {
+    outline: none !important;
+    min-width: 15rem;
+    border: 0;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    border-bottom: 1px solid rgba(36, 38, 38, 0.2);
+    transition: 0.5s;
+}
+input[type=submit] {
+    background: var(--bg-primary-dark);
+    color: #FFFFFF;
+    border: 0;
+    border-radius: 1.3rem;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    transition: 0.3s;
+}
+
+.submit-container {
+    align-self: end;
+}
+input:focus {
+    border-bottom: 1px solid var(--bg-btn-primary-blue);
+}
+
+.email-container, .password-container, .confirm-password-container {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+.register-icon-container {
+    opacity: 0.2;
+    transition: 0.3s;
+}
+.input-active {
+    color: var(--bg-btn-primary-blue);
+    opacity: 0.7;
+}

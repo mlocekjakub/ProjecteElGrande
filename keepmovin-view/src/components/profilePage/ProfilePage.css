@@ -149,9 +149,12 @@
     display: flex;
     gap: 0.5rem;
     color: var(--clr-header);
+    align-items: center;
     font-weight: 700;
-    padding: 1rem 0 0 0;
-    min-height: 3rem;
+    padding: 0 0.5rem 0 0.5rem;
+    /*min-height: 3rem;*/
+    background: var(--bg-website);
+    border-radius: 0.4rem;
 }
 .arrow-paginate {
     max-width: 0.8rem;
@@ -159,7 +162,7 @@
 }
 .arrow-paginate:hover {
     cursor: pointer;
-    color: var(--bg-btn-primary-blue)
+    color: var(--bg-btn-primary-blue);
 }
 
 

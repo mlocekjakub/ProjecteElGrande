@@ -6,6 +6,7 @@ import Home from "./navbarComponents/Home";
 import Searchbar from "./navbarComponents/Searchbar";
 import Logo from "./navbarComponents/Logo";
 import Calendar from "./navbarComponents/Calendar";
+import EventsList from "./navbarComponents/EventsList";
 
 
 export default function Navbar() {
@@ -18,6 +19,7 @@ export default function Navbar() {
             <nav>
                 <div className="nav__links">
                     <Home />
+                    {/*<EventsList />*/}
                     <Calendar />
                     <Notifications />
                     <Profile />

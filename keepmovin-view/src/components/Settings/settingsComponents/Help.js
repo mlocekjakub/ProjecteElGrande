@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Settings.css";
-
+import AcceptChangesButton from "./AcceptChangesButton";
 
 
 
@@ -9,8 +9,7 @@ export default function Help() {
 
 
     return (
-        <div>
-            <p>"HELP"</p>
+        <div className="centered">
         </div>
 
     )

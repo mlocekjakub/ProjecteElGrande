@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-/*import eventImage from "../../Images/News-Trailer-Web-4Sep20.png"*/
 import EastIcon from '@mui/icons-material/East';
 import PersonIcon from "@mui/icons-material/Person";
 

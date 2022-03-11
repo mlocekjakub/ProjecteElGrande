@@ -4,7 +4,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
-using KeepMovinAPI.DAOs;
+using KeepMovinAPI.Repository;
 
 namespace KeepMovinAPI.Authentication
 {

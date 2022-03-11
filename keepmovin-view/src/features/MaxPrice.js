@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const initialStateValue = 9999;
 export const maxPriceSlice = createSlice({
     name: "maxPrice",

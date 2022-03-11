@@ -37,7 +37,7 @@
 }
 .search-txt-sport-filter {
     background: #F3F3F3;
-    padding: 0.2rem 1rem 0.2rem 0.3rem;
+    padding: 0.3rem 1rem 0.3rem 0.3rem;
     border: 0;
     transition: 0.2s;
 
@@ -45,7 +45,7 @@
 .search-txt-sport-filter:focus {
     outline: none !important;
     background: #fff;
-    border: 2px solid rgba(128, 128, 128, 0.17);
+    border: 0;
 }
 
 .search-button-sport-filter {

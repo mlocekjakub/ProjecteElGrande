@@ -1,4 +1,4 @@
-﻿using KeepMovinAPI.DAOs;
+﻿using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,6 +22,7 @@ namespace KeepMovinAPI.Controllers
             _logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
+
         }
 
         [HttpPost]
@@ -53,7 +54,6 @@ namespace KeepMovinAPI.Controllers
             {
                 return StatusCode(303);
             }
-
             _userDao.Add(user);
             return StatusCode(200);
         }

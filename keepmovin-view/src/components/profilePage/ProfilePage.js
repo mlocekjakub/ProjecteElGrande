@@ -5,6 +5,7 @@ import EventsMenu from "./profilePageComponents/EventsMenu";
 import React, {useRef, useState} from "react";
 import Statistics from "./profilePageComponents/Statistics";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import {ArrowBackIos} from "@material-ui/icons";
 
 export default function ProfilePage() {
     
@@ -76,7 +77,8 @@ export default function ProfilePage() {
                             </div>
                             {activeEvent === "upcoming" || activeEvent === "previous" ?
                             <div className="profile__paginate">
-                                1/1
+                                <ArrowBackIos className="arrow-paginate"/>
+                                1 of 1
                                 <ArrowForwardIosIcon className="arrow-paginate"/>
                             </div> : ""
                             }

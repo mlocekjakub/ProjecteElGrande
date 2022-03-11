@@ -7,7 +7,8 @@ import Help from './Help';
 import PrivacySettings from './PrivacySettings';
 import "./Settings.css";
 import { useState } from 'react';
-import MultiButton from './MultiButton'
+import MultiButton from './MultiButton';
+
 
 
 
@@ -18,7 +19,7 @@ export default function Menu() {
             id: 1,
             chosenFunction: RenderChangePassword,
             type: 'Change password',
-            buttonClass: 'buttons'
+            buttonClass: 'buttons',
             
         },
         {
