@@ -26,6 +26,7 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public bool CompareUsers(User dataBaseUser, User loginUser)
         {
+           
             if (dataBaseUser == null)
                 return false;
             if (dataBaseUser.Email != loginUser.Email)

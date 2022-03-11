@@ -69,6 +69,7 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/login")]
         public IActionResult Login(User user)
         {
+            
             var dataBaseUser = _userDao.GetUserByEmail(user);
             var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
             if (token == null)
