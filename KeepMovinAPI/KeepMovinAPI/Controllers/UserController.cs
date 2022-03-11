@@ -15,13 +15,18 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
+        private ISettingDao  _settingDao;
+        private IUserProfileRepository _profileRepository;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
 
-        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt)
+        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt,ISettingDao setting,
+           IUserProfileRepository profileRepository )
         {
+            _settingDao = setting;
             _logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
+            _profileRepository = profileRepository;
 
         }
 
@@ -50,13 +55,15 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
+
             if (_userDao.CheckIfUserExists(user))
             {
                 return StatusCode(303);
             }
-            _userDao.Add(user);
+            CreateAUserInfrastructure(user);
             return StatusCode(200);
         }
+
 
         [HttpPost]
         [Route("/user/login")]
@@ -98,6 +105,18 @@ namespace KeepMovinAPI.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [NonAction]
+        private void CreateAUserInfrastructure(User user)
+        {
+            _userDao.Add(user);
+            Setting settings = new Setting();
+            _settingDao.Add(settings);
+            UserProfile profile = new UserProfile();
+            profile.AddUser(user);
+            profile.AddSettings(settings);
+            _profileRepository.Add(profile);
         }
     }
 }

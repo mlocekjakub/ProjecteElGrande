@@ -11,25 +11,6 @@ export default function AcceptChangesSettings(props) {
         var privacyData = JSON.parse(localStorage.getItem("privacy"));
         EditUserSettings();
 
-        //let dataValues = {
-        //    'Location': location,
-        //    'FollowersFollowing': followersFollowing,
-        //    'Statistics': stats,
-        //    'AboutMe': aboutMe,
-        //    'UpcomingEvents': upcomingEvents,
-        //    'PreviousEvents': previousEvents,
-        //    'Photo' : photo
-        //}
-        //console.log(dataValues);
-
-        //function ConvertInput(input) {
-        //    if (input === 'on')
-        //        return true;
-        //    if(input === )
-
-
-
-        //}
 
         function EditUserSettings() {
             fetch('api/Setting/edit', {

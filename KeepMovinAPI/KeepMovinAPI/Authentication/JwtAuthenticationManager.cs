@@ -13,15 +13,16 @@ namespace KeepMovinAPI.Authentication
         private readonly string Pkey;
 
 
+
         public JwtAuthenticationManager(string secretKey)
         {
             Pkey = secretKey;
 
         }
-        public string Authenticate(User dataBaseUser, User loginUser,IUserDao dao)
+        public string Authenticate(User dataBaseUser, User loginUser, IUserDao userDao)
         {
 
-            if (!dao.CompareUsers(dataBaseUser, loginUser))
+            if (userDao.CompareUsers(dataBaseUser, loginUser))
             {
                 return null;
             }
@@ -43,6 +44,8 @@ namespace KeepMovinAPI.Authentication
             return tokenHandler.WriteToken(token);
             
         }
+
+
 
         public JwtSecurityToken Verify(string jwt)
         {
