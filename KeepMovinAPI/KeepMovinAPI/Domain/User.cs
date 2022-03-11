@@ -10,11 +10,11 @@ namespace KeepMovinAPI.Domain
         public Guid Userid { get; set; } = Guid.NewGuid();
         
         [Required] 
-        [MaxLength(20)] 
+        [MaxLength(60)] 
         public string Email { get; set; }
         
         [Required] 
-        [MaxLength(20)] 
+        [MaxLength(200)] 
         public string Password { get; set; }
         
         public List<User> Followers { get; set; }

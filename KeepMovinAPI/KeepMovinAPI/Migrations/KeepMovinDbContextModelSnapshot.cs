@@ -65,8 +65,8 @@ namespace KeepMovinAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(6, 2)
@@ -129,12 +129,12 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            TypeId = new Guid("9f69722c-cf90-4d11-aceb-1e227307cce1"),
+                            TypeId = new Guid("e4ecbd0d-7982-4fb3-b881-46d23d7eeb8a"),
                             Name = "Professional"
                         },
                         new
                         {
-                            TypeId = new Guid("4c1208c4-b613-4d7c-b459-c9eb4b3be39a"),
+                            TypeId = new Guid("fc71e529-dabc-4697-9f98-ac4dbcc925a7"),
                             Name = "Recreational"
                         });
                 });
@@ -156,17 +156,17 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            ExperienceLevelId = new Guid("9610dc2b-ce90-4461-98e7-6cb32c5713b6"),
+                            ExperienceLevelId = new Guid("a6e0b2fa-18db-4931-b87a-e3b6cf48f0c2"),
                             Name = "Beginner"
                         },
                         new
                         {
-                            ExperienceLevelId = new Guid("fe6d00ce-7e1c-4937-a641-745fe4d4656c"),
+                            ExperienceLevelId = new Guid("634c2032-198f-469d-b6c0-e3d09c2ecf06"),
                             Name = "Intermediate"
                         },
                         new
                         {
-                            ExperienceLevelId = new Guid("af8a5e0c-16c9-4c93-80bc-d68a465a0b37"),
+                            ExperienceLevelId = new Guid("cca30aaf-0f7f-4976-a62b-ca5a22b24a7c"),
                             Name = "Expert"
                         });
                 });
@@ -197,28 +197,28 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            LocationId = new Guid("90f12136-e814-45cb-947a-64a6911825fd"),
+                            LocationId = new Guid("aa1580bc-aba6-4b6d-8f0b-46d8de8afe26"),
                             City = "Krakow",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("13084689-5f83-428e-a713-78fd8795e628"),
+                            LocationId = new Guid("afae0a11-cb54-4e88-bb57-68db9636e0bc"),
                             City = "Warszawa",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("f6aa71e4-b87b-4545-8173-0d7f25ea65b8"),
+                            LocationId = new Guid("4114c874-e72e-4854-815a-fd120eaa236a"),
                             City = "Gdansk",
                             Country = "Poland",
                             ZipCode = "30-389"
                         },
                         new
                         {
-                            LocationId = new Guid("b682d3d8-9828-4532-8972-97a5cd4c03c2"),
+                            LocationId = new Guid("5748862f-c8ab-4af2-a775-84633607285d"),
                             City = "Opole",
                             Country = "Poland",
                             ZipCode = "30-389"
@@ -231,8 +231,8 @@ namespace KeepMovinAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsVerify")
-                        .HasColumnType("bit");
+                    b.Property<string>("IsVerify")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -316,52 +316,52 @@ namespace KeepMovinAPI.Migrations
                     b.HasData(
                         new
                         {
-                            SportId = new Guid("52007a33-3fc8-491f-9dc2-7e9262fe7f56"),
+                            SportId = new Guid("4ebb308a-c6cd-4a98-9ffc-8246fd4f9b0b"),
                             Name = "Baseball"
                         },
                         new
                         {
-                            SportId = new Guid("f30582c6-764b-4d2b-bf58-a73c0533dcba"),
+                            SportId = new Guid("2717e83d-ce6d-4758-94ee-bfe46af35004"),
                             Name = "Football"
                         },
                         new
                         {
-                            SportId = new Guid("0dba86d3-b00e-49b7-b84b-d5891da26d9d"),
+                            SportId = new Guid("88edef09-d57a-4583-8ecb-0dae73670554"),
                             Name = "Cycling"
                         },
                         new
                         {
-                            SportId = new Guid("4b84a62e-3c00-4aa6-bd62-df938404cd81"),
+                            SportId = new Guid("9464076c-adbe-4d64-9e52-54e8e4098700"),
                             Name = "HandBall"
                         },
                         new
                         {
-                            SportId = new Guid("417e1819-fc18-4bf5-b4ff-b5175ecb39f1"),
+                            SportId = new Guid("e9065179-d343-432a-8df1-a099d1e4996d"),
                             Name = "Climbing"
                         },
                         new
                         {
-                            SportId = new Guid("0ef9bf1c-c8ae-4dfd-a2d7-a099cfc64c90"),
+                            SportId = new Guid("c0e3e634-898c-4585-8526-f544d130beb7"),
                             Name = "Fishing"
                         },
                         new
                         {
-                            SportId = new Guid("084ee798-aa7d-4173-841e-b00ea6ef48a1"),
+                            SportId = new Guid("cd8c6936-92dd-4fdb-accd-01c294fb56c6"),
                             Name = "Running"
                         },
                         new
                         {
-                            SportId = new Guid("71771681-3296-465a-a109-0b79060ae6e6"),
+                            SportId = new Guid("080bb22c-65a5-4073-8095-2c3902531df6"),
                             Name = "Volleyball"
                         },
                         new
                         {
-                            SportId = new Guid("469109e4-0b75-4da5-9dc8-9617d4fd5266"),
+                            SportId = new Guid("968c2efb-1831-4d54-ba5a-e52c6aac4c96"),
                             Name = "Basketball"
                         },
                         new
                         {
-                            SportId = new Guid("4fc7ba2a-6dc6-4f1c-a253-7f5761c4ee12"),
+                            SportId = new Guid("a925e599-b322-43b5-8bab-366d7a7826d2"),
                             Name = "Nordic Walking"
                         });
                 });
@@ -374,13 +374,13 @@ namespace KeepMovinAPI.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Userid");
 
@@ -393,14 +393,13 @@ namespace KeepMovinAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -424,7 +423,6 @@ namespace KeepMovinAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 

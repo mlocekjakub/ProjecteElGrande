@@ -12,6 +12,6 @@ namespace KeepMovinAPI.Domain
         [MaxLength(30)]
         public string Name { get; set; }
 
-        public Boolean IsVerify { get; set; } = false;
+        public string IsVerify { get; set; }
     }
 }

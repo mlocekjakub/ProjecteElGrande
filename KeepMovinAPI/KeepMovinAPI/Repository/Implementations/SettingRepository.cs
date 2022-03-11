@@ -3,7 +3,6 @@ using KeepMovinAPI.Domain;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using KeepMovinAPI.Domain.Dtos;
 
 
 namespace KeepMovinAPI.Repository.Implementations
@@ -13,6 +12,11 @@ namespace KeepMovinAPI.Repository.Implementations
     public class SettingDao : ISettingDao
     {
         private readonly KeepMovinDbContext _context;
+
+        public SettingDao(KeepMovinDbContext context)
+        {
+            _context = context;
+        }
 
         public void Add(Setting item)
         {

@@ -103,7 +103,11 @@ namespace KeepMovinAPI.Repository.Implementations
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate)
         {
             var query = _context.Event
-                .Where(i => i.StartEvent >= startDate && i.StartEvent <= endDate).ToList();
+                .Where(i =>
+                    i.StartEvent >= startDate
+                    && i.StartEvent <= endDate
+                    || i.EndEvent >= startDate
+                ).ToList();
             return query;
         }
     }
