@@ -11,3 +11,12 @@
 a {
     text-decoration: none !important;
 }
+
+.fc-daygrid-day-top :hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fc-daygrid-event :hover {
+    cursor: pointer;
+}

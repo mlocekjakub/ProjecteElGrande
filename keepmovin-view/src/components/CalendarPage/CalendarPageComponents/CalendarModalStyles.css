@@ -23,10 +23,16 @@
 
 .event-modal-header {
     padding-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .event-modal-footer {
+    display: flex;
+    justify-content: space-between;
     padding: 1rem;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    font-weight: bold;
 }
 
 .event-modal-title {

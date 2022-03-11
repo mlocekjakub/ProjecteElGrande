@@ -21,7 +21,7 @@ export default function EventModal({show, eventId, onClose}) {
                     console.error("Error fetching data: ", error);
                 })
         }
-    }, [eventId])
+    }, [eventId, show])
 
     if (!show) {
         return null;
@@ -44,7 +44,12 @@ export default function EventModal({show, eventId, onClose}) {
                     {eventData.eventInfo}
                 </div>
                 <div className="event-modal-footer">
-                    Modal Footer
+                    <div className="event-details-button" role="button">
+                        Details
+                    </div>
+                    <div className="event-join-button" role="button">
+                        Join
+                    </div>
                 </div>
             </div>
         </div>
