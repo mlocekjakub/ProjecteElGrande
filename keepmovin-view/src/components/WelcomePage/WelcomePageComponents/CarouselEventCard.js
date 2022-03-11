@@ -1,9 +1,9 @@
 import React from 'react';
-import EventImage from "../../../Images/News-Trailer-Web-4Sep20.png"; //default image  
+import EventImage from "../../../Images/News-Trailer-Web-4Sep20.png";  
 
 export default function CarouselEventCard({eventId, eventTitle, startDate, eventInfo, eventPicture}) { //eventId, eventTitle for future implementation
     if (eventPicture == null) {
-        eventPicture = EventImage; //remove when events will have image   
+        eventPicture = EventImage;  
     }
 
     return (
