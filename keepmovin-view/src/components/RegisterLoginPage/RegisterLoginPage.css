@@ -52,12 +52,13 @@
 .register__header {
     /*color: #FFFFFF;*/
     color: var(--bg-primary-dark);
-    font-size: 2rem;
+    font-size: 1.6rem;
     letter-spacing: .0001em;
     font-weight: 500;
     padding-bottom: 0.2rem;
 }
 .register__paragraph {
+    font-size: 1rem;
     padding-top: 0.5rem;
     color: rgba(74, 75, 94, 0.5);
     font-weight: 500;
@@ -79,7 +80,7 @@
 .go-to__login, .go-to__register {
     cursor: pointer;
     color: #FFFFFF;
-    background: rgba(36, 38, 38, 0.5);
+    background: rgba(36, 38, 38, 0.7);
     border-radius: 1.3rem;
     padding: 0.6rem 1.5rem 0.6rem 1.5rem;
     box-shadow: var(--box-shadow-containers);
