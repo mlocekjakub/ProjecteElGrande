@@ -6,9 +6,19 @@ namespace KeepMovinAPI.Repository.Implementations
 {
     public class UserProfileRepository : IUserProfileRepository
     {
+        private readonly KeepMovinDbContext _context;
+
+
+        public UserProfileRepository(KeepMovinDbContext context)
+        {
+            _context = context;
+        }
+
+
         public void Add(UserProfile item)
         {
-            throw new NotImplementedException();
+            _context.UserProfile.Add(item);
+            _context.SaveChanges();
         }
 
         public UserProfile Get(Guid id)

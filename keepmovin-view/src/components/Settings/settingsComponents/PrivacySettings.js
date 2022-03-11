@@ -26,7 +26,8 @@ export default function PrivacySettings() {
             'aboutMe': aboutMe,
             'upEvents': upEvents,
             'prEvents': prEvents,
-            'photo': photo
+            'photo': photo,
+            'userId': localStorage.getItem('session')
         }
         localStorage.setItem("privacy", JSON.stringify(privacy));
     });

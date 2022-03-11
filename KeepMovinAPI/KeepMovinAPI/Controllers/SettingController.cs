@@ -1,11 +1,13 @@
 ﻿using KeepMovinAPI.Authentication;
 using KeepMovinAPI.Domain;
+using KeepMovinAPI.Dtos;
+using KeepMovinAPI.Domain.Dtos;
 using KeepMovinAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-
+using static KeepMovinAPI.Dtos.SettingsDto;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -28,16 +30,14 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpPost("edit")]  
-        public IActionResult Edit(Setting item,Guid userid) // model i zmienna czy DTo z user id ??? ma;powanie modeli zapytaj Kuba
-        {
-
-            Guid userId = new Guid("8238632f-9f9a-41e5-bd0a-e9f570af2a14"); // Guid nie moze być nullem , Guid.Empty alternatywa do walidacji
+        public IActionResult Edit(SettingsDto settings) 
+        {          
             string jwt = Request.Cookies["token"];
-            if (Validate(userId, jwt))
+            if (Validate(settings.UserId, jwt))
             {
+                ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
                 return Ok();
             }
-
             return Unauthorized();
 
         }
@@ -57,10 +57,10 @@ namespace KeepMovinAPI.Controllers
 
 
         [NonAction]
-        public bool Validate(Guid userId, string jwt)
+        private bool Validate(Guid userId, string jwt)
         {
             try
-            {              
+            {                 
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
                 var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
