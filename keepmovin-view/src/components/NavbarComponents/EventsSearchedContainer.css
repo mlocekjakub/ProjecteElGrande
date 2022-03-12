@@ -69,13 +69,13 @@
     align-items: center;
     padding-top: 0.5rem;
 }
-.beginner {
+.Beginner {
     color: #008450;
 }
-.intermediate {
+.Intermediate {
     color: #C49102;
 }
-.experienced {
+.Expert {
     color: #B81D13;
 }
 

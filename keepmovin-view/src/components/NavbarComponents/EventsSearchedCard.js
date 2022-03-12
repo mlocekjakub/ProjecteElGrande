@@ -1,48 +1,24 @@
-﻿import React, {useEffect, useState} from 'react';
+﻿import React from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 
 function EventsSearchedCard(props) {
-
-    const [sportCategory, setSportCategory] = useState("Basketball")
-    
-    const [sportLevel, setSportLevel] = useState("Beginner")
-    
-    function LevelComponent() {
-        if (sportLevel === "Beginner") {
-            return <span className="beginner"> Beginner</span>;
-        }
-        else if(sportLevel === "Intermediate") {
-            return <span className="intermediate"> Intermedaite</span>;
-        }
-        else {
-            return <span className="experienced"> Experienced</span>;
-        }
-    }
-    
-    /*useEffect(() => {
-        axios
-            .get(`/api/sport/${props.sportId}`)
-            .then(response => {
-                setSportCategory(response.data);
-            });
-    }, [])*/
     
     return (
         <div className="event-searched-card">
             <div className="event-searched-date">
-                <div className="event-searched-day">{props.dateStart.slice(8, 10)}</div>
-                <div className="event-searched-month">{props.dateStart.slice(5, 7)}</div>
+                <div className="event-searched-day">{props.eventDateStart.slice(8, 10)}</div>
+                <div className="event-searched-month">{props.eventDateStart.slice(5, 7)}</div>
             </div>
             <div className="event-info__found">
                 <div className="event-info-category__found">
-                    {sportCategory}
+                    {props.sportName}
                 </div>
                 <div className="event-info-header__found">
                     {props.eventName}
                 </div>
                 <div className="event-info-paragraph__found">
                     <div className="event-info-paragraph-level__found">
-                        level: <LevelComponent />
+                        level: <span className={props.experienceLevel}>{props.experienceLevel}</span>
                     </div>
                     <div className="event-info-paragraph-people__found">
                         <span>{props.maxParticipants}</span> 

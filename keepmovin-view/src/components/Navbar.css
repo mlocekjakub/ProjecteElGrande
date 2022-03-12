@@ -1,5 +1,4 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
 header {
    font-family: "Montserrat", "sans-serif";
    display: flex;
@@ -33,7 +32,7 @@ header {
    transition: 0.2s;
 }
 .nav-item__icon:hover {
-   color: #4285F4;
+   color: var(--bg-btn-primary-blue);
 }
 .nav-item > img {
    max-width: 2rem;
@@ -44,7 +43,7 @@ header {
 }
 
 .nav-item > img:hover {
-   border: 1px solid #4285F4;
+   border: 1px solid var(--bg-btn-primary-blue);
 }
 
 

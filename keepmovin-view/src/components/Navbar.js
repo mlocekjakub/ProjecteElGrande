@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import "./Navbar.css";
+import "../index.css"
 import Notifications from "./NavbarComponents/Notifications";
 import Profile from "./NavbarComponents/Profile";
 import Home from "./NavbarComponents/Home";
