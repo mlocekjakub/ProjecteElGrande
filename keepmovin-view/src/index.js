@@ -13,8 +13,7 @@ import MinParticipantsReducer from "./features/MinParticipants"
 import MaxParticipantsReducer from "./features/MaxParticipants"
 import minPriceReducer from "./features/MinPrice"
 import maxPriceReducer from "./features/MaxPrice"
-import maxDateReducer from "./features/MaxDate"
-import minDateReducer from "./features/MinDate"
+import rangeDateReducer from "./features/RangeDate"
 import loginReducer from "./features/Login"
 import registerReducer from "./features/Register"
 import {Provider} from "react-redux";
@@ -29,8 +28,7 @@ const store = configureStore({
         maxParticipants: MaxParticipantsReducer,
         minPrice: minPriceReducer,
         maxPrice: maxPriceReducer,
-        minDate: minDateReducer,
-        maxDate: maxDateReducer,
+        rangeDate: rangeDateReducer,
         login: loginReducer,
         register: registerReducer,
     },

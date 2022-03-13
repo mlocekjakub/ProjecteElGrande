@@ -17,6 +17,7 @@ function CollapseOtherFilters(e) {
     filterBoxes.forEach(filterBox => {
         if (currentFilterBox !== filterBox && filterBox.parentElement.classList.contains("active-filter")) {
             filterBox.parentElement.classList.toggle("active-filter")
+            filterBox.previousElementSibling.children[1].classList.toggle("active-expand-icon")
         }
     })
 }

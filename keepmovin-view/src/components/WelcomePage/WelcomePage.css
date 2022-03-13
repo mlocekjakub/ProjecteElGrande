@@ -42,10 +42,10 @@
     color: #FFFFFF;
 }
 
-.welcome__hr {
+.welcome__separator {
     border-top: 2px solid #FFFFFF;
     max-width: 10rem;
-    margin: 1.2rem 0 1.2rem 0;
+    margin: 1.3rem 0 1.3rem 0;
 }
 
 .welcome__nav {
@@ -59,16 +59,17 @@
     transition: 0.3s;
     border-radius: 1.3rem;
     padding: 0.4rem 1rem 0.4rem 1rem;
-    font-size: 2.5vh;
+    font-size: 2.1vh;
 }
 
 
 .web-description {
-    max-width: 90%;
-    font-size: 1.3rem;
+    max-width: 55ch;
+    font-size: 1.2rem;
     text-transform: none;
     line-height: 2rem;
     font-weight: 500;
+    color: #FFFFFF;
 }
 
 .welcome-page-content {

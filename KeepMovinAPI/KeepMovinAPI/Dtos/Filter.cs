@@ -19,9 +19,9 @@ namespace KeepMovinAPI.Domain.Dtos
 
         public int MaxPrice { get; set; } = 9999;
         
-        /*public DateTime MinDate { get; set; }
+        public string MinDate { get; set; }
         
-        public DateTime MaxDate { get; set; }*/
+        public string MaxDate { get; set; }
 
         public int MinParticipants { get; set; } = 0;
 

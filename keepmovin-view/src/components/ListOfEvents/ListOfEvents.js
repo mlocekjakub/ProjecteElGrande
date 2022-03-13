@@ -9,7 +9,7 @@ import ParticipantsCountFilter from "./sportEventsComponents/ParticipantsCountFi
 import TypeFilter from "./sportEventsComponents/TypeFilter";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import DatePicker from "./sportEventsComponents/DatePicker";
+import DateFilter from "./sportEventsComponents/DateFilter";
 import LoadingSpinner from "./sportEventsComponents/LoadingSpinner";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -37,6 +37,8 @@ function SportEventsPage() {
     const minPriceFilter = useSelector((state) => state.minPrice.value)
 
     const maxPriceFilter = useSelector((state) => state.maxPrice.value)
+    
+    const datesFilter = useSelector((state) => state.rangeDate.value)
     
     const [currentPage, setCurrentPage] = useState(1);
     
@@ -74,14 +76,17 @@ function SportEventsPage() {
         let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
         let minPrice = `&MinPrice=${minPriceFilter}`;
         let maxPrice = `&MaxPrice=${maxPriceFilter}`;
+        let minDate = `&MinDate=${datesFilter[0]}`
+        let maxDate = `&MaxDate=${datesFilter[1]}`
         let pageNumber = `&CurrentPageNumber=${currentPage}`
-        return urlStart + sports + experiences + types + minParticipants + maxParticipants + minPrice + maxPrice + pageNumber;
+        return urlStart + sports + experiences + types + minParticipants + maxParticipants + minDate + maxDate + minPrice + maxPrice + pageNumber;
     }
     
     
     useEffect(() => {
         setIsFetchingData(true);
         setEventsNotFound(false);
+        console.log(datesFilter)
         setFoundEvents([])
         if (inputTimeout) {
             clearTimeout(inputTimeout)
@@ -106,7 +111,7 @@ function SportEventsPage() {
     }, [sportsFilter,
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
-        minPriceFilter, maxPriceFilter, currentPage])
+        minPriceFilter, maxPriceFilter,datesFilter, currentPage])
     
 
     const NextPage = () => {
@@ -166,7 +171,7 @@ function SportEventsPage() {
                 </div>
                 <div className="events-container">
                     <div className="events-page__locating">
-                        <DatePicker />
+                        <DateFilter />
                         {!eventsNotFound &&
                             <div className="events-page__pagination">
                                 {isLimitPrevious

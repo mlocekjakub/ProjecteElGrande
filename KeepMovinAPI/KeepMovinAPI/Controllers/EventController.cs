@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("input/{input}")]
-        public IEnumerable<Event> GetByInput(string input)
+        public IEnumerable<EventCardDto> GetByInput(string input)
         {
             var listOfEvents = _daoEvent.GetByInput(input);
             return listOfEvents;
