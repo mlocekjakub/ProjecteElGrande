@@ -75,7 +75,7 @@ export default function LoginForm() {
     
     return (
         <form className="register-login__login" onSubmit={submitHandler}>
-            <div className="email-container">
+            <div className="email-container__login">
                 <div className="register-icon-container" ref={emailRef}>
                     <MailOutlineIcon />
                 </div>
@@ -86,8 +86,8 @@ export default function LoginForm() {
                        placeholder="Email"
                        onChange={e => setDetails({...details, email: e.target.value})} />
             </div>
-            <div className="password-login-container">
-                <div className="password-input-container">
+            <div className="password-container__login">
+                <div className="password-input-container__login">
                     <div className="register-icon-container" ref={passwordRef}>
                         <LockOpenIcon />
                     </div>
