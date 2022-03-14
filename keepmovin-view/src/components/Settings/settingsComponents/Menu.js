@@ -35,7 +35,7 @@ export default function Menu() {
             buttonClass : 'buttons'
         },
         {
-            id: 3,
+            id: 4,
             chosenFunction: RenderPrivacySettings,
             type: 'Privacy Settings',
             buttonClass : 'buttons'
@@ -72,7 +72,7 @@ export default function Menu() {
     return (
         <div className="menu" >
             {buttonChosen.map((button) =>
-            (<MultiButton key={button.id} type={button.type} buttonClass={button.buttonClass}
+            (<MultiButton id={button.id} type={button.type} buttonClass={button.buttonClass}
                 toggleFunction={button.chosenFunction} />)
             )
             }

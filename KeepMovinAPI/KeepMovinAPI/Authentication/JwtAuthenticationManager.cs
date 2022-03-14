@@ -22,11 +22,10 @@ namespace KeepMovinAPI.Authentication
         public string Authenticate(User dataBaseUser, User loginUser, IUserDao userDao)
         {
 
-            if (userDao.CompareUsers(dataBaseUser, loginUser))
+            if (!userDao.CompareUsers(dataBaseUser, loginUser))
             {
                 return null;
             }
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(Pkey);
             var tokenDescriptor = new SecurityTokenDescriptor

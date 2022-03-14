@@ -86,7 +86,6 @@ function SportEventsPage() {
     useEffect(() => {
         setIsFetchingData(true);
         setEventsNotFound(false);
-        console.log(datesFilter)
         setFoundEvents([])
         if (inputTimeout) {
             clearTimeout(inputTimeout)
@@ -129,17 +128,6 @@ function SportEventsPage() {
         setCurrentPage(currentPage - 1)
         setIsLimitNext(false)
     }
-   /* useEffect(async () => {
-        const response = await fetch("/user/validate", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        })
-        const content = await response.json()
-            .then(content => localStorage.setItem('session', content))
-    })*/
     
     function Events(props) {
         return props.display.map((event) =>

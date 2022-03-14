@@ -17,7 +17,7 @@ export default function WelcomePage() {
          })
          const content = await response.json()
              .then(content => localStorage.setItem('session', content))
-    
+
      })
     
     return (
