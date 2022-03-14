@@ -6,6 +6,7 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -15,13 +16,14 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<CalendarController> _logger;
         private IEventDao _daoEvent;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        private IValidation _validation;
 
-        public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt)
+        public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
+            IUserDao userDao, IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
-            _jwtAuthenticationManager = jwt;
+            _validation = validation;
         }
 
         [HttpGet]
@@ -34,5 +36,8 @@ namespace KeepMovinAPI.Controllers
         }
 
         // add get for user events
+
+
+     
     }
 }

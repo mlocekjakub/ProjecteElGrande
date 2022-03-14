@@ -14,6 +14,44 @@ export function LogOut(uri) {
 
 }
 
+export function SendChangePasswordForm(collectUserInputs) {
+    fetch('/user/changePassword', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(collectUserInputs)
+
+    }).then(response => response.status)
+        .then(data => DisplayActionResult(data))
+
+    function DisplayActionResult(data) {
+        if (data === "200")
+            alert('jUHUHUHUHUHU')
+        else
+            alert("dupa");
+
+    }
+}
+
+
+export function EditUserSettings() {
+    var privacyData = JSON.parse(localStorage.getItem("privacy"));
+    fetch('api/Setting/edit', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(privacyData)
+
+    }).then(response => response.status)
+        .then(data => console.log(data))
+        .then(localStorage.removeItem('privacy'))
+
+}
+
 export function createEvent() {
     let status = "upcoming";
     let owner = 1;
@@ -36,7 +74,7 @@ export function createEvent() {
         "MaxParticipants": max_participants,
         "Status": status,
         "Currency": currency,
-        "Link":"",
+        "Link": "",
         "Price": price,
     }
     fetch("/api/event", {

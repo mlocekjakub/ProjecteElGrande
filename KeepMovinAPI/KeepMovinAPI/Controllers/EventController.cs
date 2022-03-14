@@ -20,16 +20,16 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<EventController> _logger;
         private IEventDao _daoEvent;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        private IUserDao _userDao;
         private readonly IMapper _mapper;
+        private IValidation _validation;
 
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt, IMapper mapper)
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
+            IMapper mapper,IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
-            _jwtAuthenticationManager = jwt;
             _mapper = mapper;
+            _validation = validation;
         }
 
         [HttpGet("id/{id}")]
@@ -73,7 +73,7 @@ namespace KeepMovinAPI.Controllers
         public IActionResult Add(Event eventModel)
         {
             string jwt = Request.Cookies["token"];
-            if (Validate(eventModel.User.Organiser.Userid, jwt))
+            if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
             {
                 _daoEvent.Add(eventModel);
                 return Ok();
@@ -83,22 +83,6 @@ namespace KeepMovinAPI.Controllers
         }
 
 
-        [NonAction]
-        public bool Validate(Guid userId, string jwt)
-        {
-            try
-            {
-                var token = _jwtAuthenticationManager.Verify(jwt);
-                var tokenClaims = token.Claims.ToList();
-                var user = _userDao.Get(Guid.Parse(tokenClaims[0].Value));
-                if (userId == user.Userid)
-                    return true;
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+
     }
 }

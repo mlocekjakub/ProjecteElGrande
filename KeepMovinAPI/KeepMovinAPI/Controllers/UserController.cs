@@ -30,6 +30,18 @@ namespace KeepMovinAPI.Controllers
 
         }
 
+        //[HttpPost]
+        //[Route("/user/changePassword")]
+        //public void ChangePassword(ChangePasswordDto changePasswordItems)
+        //{
+
+
+
+
+        //}
+        
+
+
         [HttpPost]
         [Route("/user/reminder")]
         public StatusCodeResult Reminder(UserEmail userEmail)
@@ -69,7 +81,7 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/login")]
         public IActionResult Login(User user)
         {
-            
+
             var dataBaseUser = _userDao.GetUserByEmail(user);
             var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
             if (token == null)
@@ -94,12 +106,13 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("/user/validate")]
         public IActionResult Validate()
         {
+            
             try
             {
                 var jwt = Request.Cookies["token"];
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
-                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
+                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);   
                 return Ok(Convert.ToString(user.Userid));
             }
             catch (Exception)
