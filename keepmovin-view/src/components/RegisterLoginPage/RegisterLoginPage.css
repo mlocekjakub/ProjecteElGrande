@@ -100,7 +100,7 @@
     padding-bottom: 4.5rem;
 }
 .register-login__login {
-    padding-bottom: 9.2rem;
+    padding-bottom: 6.47rem;
 }
 
 input[type=password], input[type=email] {
@@ -127,6 +127,7 @@ input[type=submit]:hover {
 .submit-container {
     align-self: end;
 }
+
 input:focus {
     border-bottom: 1px solid var(--bg-btn-primary-blue);
 }
@@ -135,6 +136,19 @@ input:focus {
     display: flex;
     gap: 0.4rem;
     align-items: center;
+}
+.password-login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+}
+.password-input-container {
+    display: flex;
+    gap: 0.4rem;
+}
+.forgot-password {
+    align-self: end;
 }
 .register-icon-container {
     opacity: 0.2;

@@ -12,6 +12,7 @@ import moment from "moment";
 export default function DateFilter() {
     const dispatch = useDispatch();
     const [displayDates, setDisplayDates] = useState(false)
+    const [open, setOpen] = useState(false)
     const [dates, setDates] = useState([
         {
             startDate: new Date(new Date().getFullYear(), 0, 1),
@@ -28,24 +29,22 @@ export default function DateFilter() {
         let endDate = dates[0].endDate.toISOString();
         dispatch(changeRangeDate([startDate, endDate]))
     }, [dates])
-    
-   const [open, SetOpen] = useState(false)
 
     const refFoundEventsClickOutside = useDetectClickOutside(
         { onTriggered: CloseMenu });
    
    function CloseMenu() {
-       SetOpen(false)
+       setOpen(false)
    }
     
     return (
         <div className="date-selector-container" ref={refFoundEventsClickOutside}>
             <div className="date-picker__selected-dates-container">
                 <div className="date-picker__selected-dates">
-                    <div className="date-picker__first-date" onClick={(e)=> SetOpen(!open)}>{
+                    <div className="date-picker__first-date" onClick={(e)=> setOpen(!open)}>{
                         compareDates ? dates[0].startDate.toLocaleDateString() : <span>select date</span>}</div>
                     <div className="date-separator"> To </div>
-                    <div className="date-picker__second-date" onClick={(e)=> SetOpen(!open)}>{
+                    <div className="date-picker__second-date" onClick={(e)=> setOpen(!open)}>{
                         compareDates ? dates[0].endDate.toLocaleDateString() : <span> select date</span>}</div>
                 </div>
                 <div className="dates-clear-button" onClick={() => {
@@ -55,7 +54,8 @@ export default function DateFilter() {
                             endDate: new Date(new Date().getFullYear(), 12, 31),
                             key: 'selection'
                         }
-                    ])
+                    ]) 
+                    setOpen(false)
                 }}>
                     <CrossIcon />
                 </div>

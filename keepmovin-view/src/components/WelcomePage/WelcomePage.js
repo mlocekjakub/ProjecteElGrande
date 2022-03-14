@@ -4,7 +4,6 @@ import '../../index.css'
 import EventsCarousel from "./WelcomePageComponents/EventsCarousel";
  import {useEffect} from "react";
 import {Link} from "react-router-dom";
-import welcomeImage2 from "./ImagesTesting/pngfind.com-running-silhouette-png-2263367.png";
 
 export default function WelcomePage() {
     
@@ -41,8 +40,7 @@ export default function WelcomePage() {
                         </Link>
                     </div>
                 </div>
-                <img src={welcomeImage2}  alt="" />
-            {/*<EventsCarousel/>*/}
+            {/*   <EventsCarousel />*/}
             </div>
             
         </div>

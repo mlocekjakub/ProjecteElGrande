@@ -50,13 +50,11 @@ export default function RegisterLoginPage(props) {
                         ?
                         <div className="header-info">
                             <div className="register__header">Welcome Friend!</div>
-                            {/*<hr className="header__separator"/>*/}
                             <div className="register__paragraph">Enter your personal details and start journey with us</div>
                         </div>
                             :
                             <div className="header-info">
                                 <div className="register__header">Welcome Back!</div>
-                                {/*<hr className="header__separator"/>*/}
                                 <div className="register__paragraph">To keep connected with us please login with your personal info</div>
                             </div>
                         }
@@ -68,9 +66,8 @@ export default function RegisterLoginPage(props) {
                         </div>
                         :
                         <div>
-                            <LoginForm /> 
+                            <LoginForm />
                         </div>}
-                    {/*<ForgottenPassword />*/}
                 </div>
             </div>
         </div>

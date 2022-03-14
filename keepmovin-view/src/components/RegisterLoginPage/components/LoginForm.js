@@ -6,6 +6,7 @@ import {ValidateLogin} from "./ValidateInputs";
 import {changeLoginData} from "../../../features/Login";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import ForgottenPassword from "./ForgottenPassword";
 
 
 export default function LoginForm() {
@@ -85,16 +86,21 @@ export default function LoginForm() {
                        placeholder="Email"
                        onChange={e => setDetails({...details, email: e.target.value})} />
             </div>
-            <div className="password-container">
-                <div className="register-icon-container" ref={passwordRef}>
-                    <LockOpenIcon />
+            <div className="password-login-container">
+                <div className="password-input-container">
+                    <div className="register-icon-container" ref={passwordRef}>
+                        <LockOpenIcon />
+                    </div>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           autoComplete="off"
+                           placeholder="Password"
+                           onChange={e => setDetails({...details, password: e.target.value})}/>
                 </div>
-                <input type="password"
-                       name="password"
-                       id="password"
-                       autoComplete="off"
-                       placeholder="Password"
-                       onChange={e => setDetails({...details, password: e.target.value})}/>
+                <div className="forgot-password">
+                    <ForgottenPassword />
+                </div>
             </div>
             <div className="submit-container">
                 <input type="submit" value="login"/>

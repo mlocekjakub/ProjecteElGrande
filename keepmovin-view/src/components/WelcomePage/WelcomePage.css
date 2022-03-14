@@ -1,6 +1,11 @@
 ﻿.welcome-page {
     background: #242626;
     height: 100vh;
+    background-image: url(./ImagesTesting/typo1.png);
+    background-repeat: no-repeat;
+    background-position: 75% 35%;
+    background-size: 28%;
+    object-fit: scale-down;
 }
 
 .welcome-page-title{
@@ -11,11 +16,11 @@
     font-size: 4rem;
 }
 
+
 /*____*/
 
 
 .join-button {
-    width: 10rem;
     background: rgba(66, 133, 244, 0.5);
     color: #FFFFFF;
     border: 0;
@@ -45,7 +50,7 @@
 .welcome__separator {
     border-top: 2px solid #FFFFFF;
     max-width: 10rem;
-    margin: 1.3rem 0 1.3rem 0;
+    margin: 1.6rem 0 1.6rem 0;
 }
 
 .welcome__nav {
@@ -58,24 +63,26 @@
     text-align: center;
     transition: 0.3s;
     border-radius: 1.3rem;
-    padding: 0.4rem 1rem 0.4rem 1rem;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     font-size: 2.1vh;
 }
 
 
 .web-description {
-    max-width: 55ch;
+    max-width: 45ch;
     font-size: 1.2rem;
     text-transform: none;
-    line-height: 2rem;
+    line-height: 1.7rem;
     font-weight: 500;
     color: #FFFFFF;
 }
 
 .welcome-page-content {
-    padding: 10rem 22rem;
+    padding: 8rem 22rem 5rem 22rem;
     display: flex;
     height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .welcome-page-content > img {
@@ -85,7 +92,7 @@
 .welcome-info {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 4rem;
 }
 
 .welcome-page-title {
