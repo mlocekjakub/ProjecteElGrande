@@ -36,7 +36,6 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/changePassword")]
         public StatusCodeResult ChangePassword(ChangePasswordDto changePasswordItems)
         {
-            _logger.LogError(Convert.ToString(changePasswordItems.Userid));
             try
             {
                 if (changePasswordItems.NewPassword != changePasswordItems.ConfirmPassword)
@@ -54,8 +53,9 @@ namespace KeepMovinAPI.Controllers
                 return StatusCode(200);
 
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
             
@@ -78,8 +78,9 @@ namespace KeepMovinAPI.Controllers
 
                 return StatusCode(303);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
         }
@@ -99,8 +100,9 @@ namespace KeepMovinAPI.Controllers
 
 
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
             
@@ -127,6 +129,7 @@ namespace KeepMovinAPI.Controllers
             }
             catch(Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
             
@@ -154,8 +157,9 @@ namespace KeepMovinAPI.Controllers
                 var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
                 return Ok(Convert.ToString(user.Userid));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
         }

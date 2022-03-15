@@ -1,6 +1,7 @@
 ﻿using KeepMovinAPI.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
@@ -21,9 +22,12 @@ namespace KeepMovinAPI.Repository.Implementations
             _context.SaveChanges();
         }
 
-        public UserProfile Get(Guid id)
+        public UserProfile Get(Guid userId)
         {
-            throw new NotImplementedException();
+            var query = _context.UserProfile.Where(u => u.Organiser.Userid == userId);
+            UserProfile userProfile = query.FirstOrDefault();
+            return userProfile;
+
         }
 
         public IEnumerable<UserProfile> GetAll()
@@ -37,3 +41,4 @@ namespace KeepMovinAPI.Repository.Implementations
         }
     }
 }
+    
