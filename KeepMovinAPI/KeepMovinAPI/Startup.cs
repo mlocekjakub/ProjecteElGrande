@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using KeepMovinAPI.Repository;
 using KeepMovinAPI.Repository.Implementations;
+using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI
 {
@@ -58,7 +60,10 @@ namespace KeepMovinAPI
 
 
             services.AddDbContext<KeepMovinDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging());
             services.AddScoped<IEventDao, EventDao>();
             services.AddScoped<IUserDao, UserDao>();
             services.AddScoped<ISportDao, SportDao>();

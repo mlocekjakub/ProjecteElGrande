@@ -105,7 +105,6 @@ namespace KeepMovinAPI.Repository.Implementations
             
             var numberOfPages = Math.Ceiling((decimal) filteredEvents.ToList().Count / eventsPerPage);
             
-            
             filteredEvents = filteredEvents
                 .Skip((filter.CurrentPageNumber - 1) * eventsPerPage)
                 .Take(eventsPerPage)
