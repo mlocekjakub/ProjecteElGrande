@@ -7,18 +7,48 @@ import Switch from '@mui/material/Switch';
 
 
 export default function PrivacySettings() {
-    const [location, setLocation] = useState(true);
+
+    const [location, setLocation] = useState(false);
     const [follow, setFollow] = useState(false);
-    const [stats, setStats] = useState(true);
+    const [stats, setStats] = useState(false);
     const [aboutMe, setAboutMe] = useState(false);
     const [upEvents, setUpEvents] = useState(false);
     const [prEvents, setPrEvents] = useState(false);
     const [photo, setPhoto] = useState(false);
 
+    useEffect(async() => {
+        const response = await fetch("api/Setting/upload", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "etag" : localStorage.getItem('session')
+                
+            },
+            credentials: 'include',
+        })
+        const content = await response.json()
+            .then(content => SetSettingsStatesFromDataBase(content))
+        .then(console.log(content))
 
-    let privacy = {};
+    },[])
+
+
+
+    function SetSettingsStatesFromDataBase(data) {
+        console.log(data.Location);
+        setLocation(data.location);
+        setFollow(data.followersFollowing);
+        setStats(data.statistics);
+        setAboutMe(data.aboutMe);
+        setUpEvents(data.upcomingEvents);
+        setPrEvents(data.previousEvents);
+        setPhoto(data.photo);
+    }
+
+
 
     useEffect(() => {
+        let privacy = {};
         privacy = {
             'location': location,
             'follow': follow,
@@ -32,11 +62,7 @@ export default function PrivacySettings() {
         localStorage.setItem("privacy", JSON.stringify(privacy));
     });
     
-
     
-    
-        
-
     const handleLocation = (event) => {
         setLocation(event.target.checked);
     };
@@ -66,10 +92,10 @@ export default function PrivacySettings() {
 
     return (
         <div className ="centered">
-            <p className="main-header"><h4>"PRIVACY SETTINGS"</h4></p>
+            <h4><p className="main-header">"PRIVACY SETTINGS"</p></h4>
             <p className="main-content"> These options will allow You to set up Your privacy policy to users which are not in Your followers
                 every person which is not added to that group will be limited to these settings</p>
-            <p className="secondary-header"><h5>"Hide location"</h5></p>
+            <h5><p className="secondary-header">"Hide location"</p></h5>
             <Switch id='1'
                 checked={location}
                 onChange={handleLocation}
@@ -77,7 +103,7 @@ export default function PrivacySettings() {
             />          
             <p className="content">Your City and Your country will not be seen for people outside Your followers group. If You will take part in the
                 event , person who organize current event will see Your data.</p>
-            <p className="secondary-header"><h5>"Hide follow"</h5></p>
+            <h5><p className="secondary-header">"Hide follow"</p></h5>
             <Switch id='2'
                 checked={follow}
                 onChange={handleFollow}
@@ -85,7 +111,7 @@ export default function PrivacySettings() {
             />
             <p className="content">Anyone who does not follow You will not have access to the accounts You are following or following You.</p>
             
-            <p className="secondary-header"><h5>"Hide Stats"</h5></p>
+            <h5><p className="secondary-header">"Hide Stats"</p></h5>
             <Switch id='3'
                 checked={stats}
                 onChange={handleStats}
@@ -93,7 +119,7 @@ export default function PrivacySettings() {
             />
             <p className="content">Your statistics, including the number of events in which You participated or were the organizer, will be blurred together with the charts and the percentage results</p>
            
-            <p className="secondary-header"><h5>"Hide Information 'about me'"</h5></p>
+            <h5><p className="secondary-header">"Hide Information 'about me'"</p></h5>
             <Switch id='4'
                 checked={aboutMe}
                 onChange={handleAboutMe}
@@ -102,7 +128,7 @@ export default function PrivacySettings() {
             <p className="content">The description box on your profile will be blurred</p>
             
             
-            <p className="secondary-header"><h5>"Hide UpComming'"</h5></p>
+            <h5><p className="secondary-header">"Hide UpComming'"</p></h5>
             <Switch id='5'
                 checked={upEvents}
                 onChange={handleUpcomingEvents}
@@ -110,14 +136,14 @@ export default function PrivacySettings() {
             />
             <p className="content">No one other than your followers will have access to the list of events in which you will participate in the future.</p>
             
-            <p className="secondary-header"><h5>"Hide PreviousEvents'"</h5></p>
+            <h5><p className="secondary-header">"Hide PreviousEvents'"</p></h5>
             <Switch className="switch" id='6'
                 checked={prEvents}
                 onChange={handlePreviosEvents}
                 inputProps={{ 'aria-label': 'controlled' }}
             />
             <p className="content">No one other than your followers will have access to the list of events in which you have already participated</p>
-            <p className="secondary-header"><h5>"Photo"</h5></p>
+            <h5><p className="secondary-header">"Photo"</p></h5>
             <Switch className="switch" id='7'
                 checked={photo}
                 onChange={handlePhoto}

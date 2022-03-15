@@ -24,6 +24,12 @@ namespace KeepMovinAPI.Repository.Implementations
             return true;
         }
 
+        public bool ComparePasswords(string passwordInput, string passwordDataBase)
+        {
+
+            return BCryptNet.Verify(passwordInput, passwordDataBase);
+        }
+
         public bool CompareUsers(User dataBaseUser, User loginUser)
         {
            
@@ -73,5 +79,14 @@ namespace KeepMovinAPI.Repository.Implementations
             User user2 = query.FirstOrDefault();
             return user2;
         }
+
+        public void UpdatePassword(User user,string newPassword)
+        {
+            user.Password = BCryptNet.HashPassword(newPassword);
+            _context.User.Update(user);
+            _context.SaveChanges();
+        }
+
+        
     }
 }

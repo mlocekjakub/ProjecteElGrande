@@ -1,15 +1,25 @@
 import * as React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { Button } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from "react";
 import "./Settings.css";
-import AcceptChangesButton from "./AcceptChangesButton";
-
+import {SendChangePasswordForm} from '../../API/Api'
 
 
 
 export default function ChangePassword() {
 
+    const ChangePassword = () => {
+        var collectUserInputs = {
+            'Userid': localStorage.getItem('session'),
+            'OldPassword': document.getElementById("OldPassword").value,
+            'NewPassword': document.getElementById("NewPassword").value,
+            'ConfirmPassword': document.getElementById("ConfirmNewPassword").value
+        }
+        SendChangePasswordForm(collectUserInputs);
+    }
 
     return (
         
@@ -25,28 +35,34 @@ export default function ChangePassword() {
                 
                 <div>
                     <TextField
-                        label="Old password"
-                        id="outlined-size-small"
+                        id ="OldPassword"
+                        label="Old password"                     
                         size="small"
                     />
                 </div>
                 <div>
                     <TextField
+                        id="NewPassword"
                         label="New password"
-                        id="outlined-size-small"
                         size="small"
                     />
                 </div>
                 <div>
                     <TextField
+                        id="ConfirmNewPassword"
                         label="Confirm new password"
-                        id="outlined-size-small"
                         size="small"
                     />
                   
                 </div>
             </Box>
-            <AcceptChangesButton module="ChangePasswor" />
+            <div className="save-button">
+
+                <Button onClick={ChangePassword} variant="contained" endIcon={<SendIcon />} >
+                    Save
+                </Button>
+
+            </div>
         </div>
 
     )

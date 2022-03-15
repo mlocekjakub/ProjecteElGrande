@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using static KeepMovinAPI.Dtos.SettingsDto;
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -16,24 +17,24 @@ namespace KeepMovinAPI.Controllers
     public class SettingController : ControllerBase
     {
         private readonly ILogger<SettingController> _logger;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private ISettingDao _settingDao;
-        private IUserDao _userDao;
+        private IValidation _validation;
 
         public SettingController(ILogger<SettingController> logger, ISettingDao settingDao, IUserDao userDao,
-            IJwtAuthenticationManager jwt)
+            IJwtAuthenticationManager jwt, IValidation validation)
         {
             _logger = logger;
             _settingDao = settingDao;
-            _userDao = userDao;
-            _jwtAuthenticationManager = jwt;
+            _validation = validation;
         }
+
 
         [HttpPost("edit")]  
         public IActionResult Edit(SettingsDto settings) 
-        {          
+        {
+            _logger.LogError(Convert.ToString(settings.Photo));
             string jwt = Request.Cookies["token"];
-            if (Validate(settings.UserId, jwt))
+            if (_validation.Validate(settings.UserId, jwt))
             {
                 ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
                 return Ok();
@@ -42,37 +43,34 @@ namespace KeepMovinAPI.Controllers
 
         }
 
-        [HttpPost("upload")]  
-        public IActionResult Upload (Guid userId)
+        [HttpGet("upload")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Upload([FromHeader(Name = "etag")]string userId)
         {
+            if (!Guid.TryParse(userId, out _)) 
+                return Unauthorized();
             string jwt = Request.Cookies["token"];
-            if (Validate(userId, jwt))
+            if (!_validation.Validate(Guid.Parse(userId), jwt))
+                return Unauthorized();
+            //////// Wyciągamy obiekt z bazy///
+            Setting setting = new Setting
             {
-                return Ok();
-            }
+                Location = true,
+                FollowersFollowing = false,
+                Statistics = true,
+                AboutMe = false,
+                UpcomingEvents = true,
+                PreviousEvents = false,
+                Photo = true
 
-            return Unauthorized();
+            };
+            return Ok(setting);
+            
+
 
         }
 
-
-        [NonAction]
-        private bool Validate(Guid userId, string jwt)
-        {
-            try
-            {                 
-                var token = _jwtAuthenticationManager.Verify(jwt);
-                var tokenClaims = token.Claims.ToList();
-                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
-                if (userId == user.Userid)
-                    return true;
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
 
 
     }

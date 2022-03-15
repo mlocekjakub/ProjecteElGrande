@@ -3,7 +3,6 @@ export function validateEmail(x) {
         return true;
     else
         return false;
-
 }
 
 export function validatePassword1(y) {
@@ -11,7 +10,6 @@ export function validatePassword1(y) {
         return true;
     else
         return false
-
 }
 
 export function comparePasswords(z, y) {
@@ -19,7 +17,6 @@ export function comparePasswords(z, y) {
         return true;
     else
         return false;
-
 }
 
 export function validateLength(z) {
@@ -33,11 +30,8 @@ export function loginAndPasswordValidation(x, y) {
         return true;
     else
         return false;
-
-
 }
    
-
 
 export function registerValidation(x, y, z) {
     if ((x.length > 5 && x.length < 61 && x.includes("@") &&
@@ -45,6 +39,5 @@ export function registerValidation(x, y, z) {
         (z === y) && z.length > 5))
         return true;
     else
-        return false;
-        
+        return false;      
 }

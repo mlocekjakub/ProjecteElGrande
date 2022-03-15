@@ -50,6 +50,7 @@ namespace KeepMovinAPI
 
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "KeepMovinAPI", Version = "v1"});
@@ -67,6 +68,10 @@ namespace KeepMovinAPI
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IExperienceDao, ExperienceDao>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IValidation, Validation>();
+
+
+
 
         }
 

@@ -3,8 +3,8 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
-
-
+using System;
+using System.Linq;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -12,17 +12,21 @@ namespace KeepMovinAPI.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly ILogger<UserProfileController> _logger;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        private IUserProfileRepository _userDao;
+        private IUserProfileRepository _userProfileDao;
+        private IValidation _validation;
 
-        public UserProfileController(ILogger<UserProfileController> logger, IJwtAuthenticationManager jwt, IUserProfileRepository userDao)
+        public UserProfileController(ILogger<UserProfileController> logger,
+            IUserProfileRepository userProfileDao,IValidation validation)
         {
             _logger = logger;
-            _jwtAuthenticationManager = jwt;
-            _userDao = userDao;
+            _userProfileDao = userProfileDao;
+            _validation = validation;
 
         }
 
-       
+
+     
+
+
     }
 }
