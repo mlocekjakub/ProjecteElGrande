@@ -10,8 +10,8 @@ using Microsoft.Extensions.Logging;
 public class Validation:IValidation
 {
 
-    private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-    private readonly IUserDao _userDao;
+    private IJwtAuthenticationManager _jwtAuthenticationManager;
+    private IUserDao _userDao;
 
 
     public Validation(IJwtAuthenticationManager jwt,IUserDao userDao)

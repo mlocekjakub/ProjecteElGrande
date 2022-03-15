@@ -20,8 +20,8 @@ namespace KeepMovinAPI.Controllers
         private ISettingDao _settingDao;
         private IValidation _validation;
 
-        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao, IUserDao userDao,
-            IJwtAuthenticationManager jwt, IValidation validation)
+        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao,
+             IValidation validation)
         {
             _logger = logger;
             _settingDao = settingDao;
@@ -32,14 +32,22 @@ namespace KeepMovinAPI.Controllers
         [HttpPost("edit")]  
         public IActionResult Edit(SettingsDto settings) 
         {
-            _logger.LogError(Convert.ToString(settings.Photo));
-            string jwt = Request.Cookies["token"];
-            if (_validation.Validate(settings.UserId, jwt))
+            try
             {
-                ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
-                return Ok();
+                string jwt = Request.Cookies["token"];
+                if (_validation.Validate(settings.UserId, jwt))
+                {
+                    ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
+                    return Ok();
+                }
+                return Unauthorized();
             }
-            return Unauthorized();
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }
+            
 
         }
 
@@ -48,26 +56,33 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")]string userId)
         {
-            if (!Guid.TryParse(userId, out _)) 
-                return Unauthorized();
-            string jwt = Request.Cookies["token"];
-            if (!_validation.Validate(Guid.Parse(userId), jwt))
-                return Unauthorized();
-            //////// Wyciągamy obiekt z bazy///
-            Setting setting = new Setting
+
+            try
             {
-                Location = true,
-                FollowersFollowing = false,
-                Statistics = true,
-                AboutMe = false,
-                UpcomingEvents = true,
-                PreviousEvents = false,
-                Photo = true
+                if (!Guid.TryParse(userId, out _))
+                    return Unauthorized();
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                //////// Wyciągamy obiekt z bazy///
+                Setting setting = new Setting
+                {
+                    Location = true,
+                    FollowersFollowing = false,
+                    Statistics = true,
+                    AboutMe = false,
+                    UpcomingEvents = true,
+                    PreviousEvents = false,
+                    Photo = true
 
-            };
-            return Ok(setting);
-            
-
+                };
+                return Ok(setting);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }            
 
         }
 

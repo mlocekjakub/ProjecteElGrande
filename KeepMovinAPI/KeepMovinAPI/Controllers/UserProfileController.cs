@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -29,8 +30,27 @@ namespace KeepMovinAPI.Controllers
         
         
 
+        [HttpGet("uploadProfileInformation")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Upload([FromHeader(Name = "etag")] string userId)
+        {
+            if (!Guid.TryParse(userId, out _))
+                return Unauthorized();
+            string jwt = Request.Cookies["token"];
+            if (!_validation.Validate(Guid.Parse(userId), jwt))
+                return Unauthorized();
 
-     
+            //////// Wyciągamy obiekt z bazy///
+           
+            return Ok();
+
+
+
+        }
+
+
+
 
 
     }

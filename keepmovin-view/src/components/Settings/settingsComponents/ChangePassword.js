@@ -5,18 +5,18 @@ import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from "react";
 import "./Settings.css";
-import {SendChangePasswordForm} from "../../API/Api";
-
+import {SendChangePasswordForm} from '../../API/Api'
 
 
 
 export default function ChangePassword() {
 
-    let ChangePassword = (e) => {
-        let collectUserInputs = {
-            'OldPassword': document.getElementById().value,
-            'NewPassword': document.getElementById().value,
-            'ConfirmPassword': document.getElementById().value
+    const ChangePassword = () => {
+        var collectUserInputs = {
+            'Userid': localStorage.getItem('session'),
+            'OldPassword': document.getElementById("OldPassword").value,
+            'NewPassword': document.getElementById("NewPassword").value,
+            'ConfirmPassword': document.getElementById("ConfirmNewPassword").value
         }
         SendChangePasswordForm(collectUserInputs);
     }
@@ -36,8 +36,7 @@ export default function ChangePassword() {
                 <div>
                     <TextField
                         id ="OldPassword"
-                        label="Old password"
-                        id="outlined-size-small"
+                        label="Old password"                     
                         size="small"
                     />
                 </div>
@@ -45,7 +44,6 @@ export default function ChangePassword() {
                     <TextField
                         id="NewPassword"
                         label="New password"
-                        id="outlined-size-small"
                         size="small"
                     />
                 </div>
@@ -53,7 +51,6 @@ export default function ChangePassword() {
                     <TextField
                         id="ConfirmNewPassword"
                         label="Confirm new password"
-                        id="outlined-size-small"
                         size="small"
                     />
                   

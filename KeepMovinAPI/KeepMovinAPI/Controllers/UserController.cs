@@ -15,31 +15,52 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private IUserDao _userDao;
-        private ISettingDao  _settingDao;
+        private ISettingDao _settingDao;
         private IUserProfileRepository _profileRepository;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        private IValidation _validation;
 
-        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt,ISettingDao setting,
-           IUserProfileRepository profileRepository )
+        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt, ISettingDao setting,
+           IUserProfileRepository profileRepository, IValidation validation)
         {
             _settingDao = setting;
             _logger = logger;
             _userDao = userDao;
             _jwtAuthenticationManager = jwt;
             _profileRepository = profileRepository;
+            _validation = validation;
 
         }
 
-        //[HttpPost]
-        //[Route("/user/changePassword")]
-        //public void ChangePassword(ChangePasswordDto changePasswordItems)
-        //{
+        [HttpPost]
+        [Route("/user/changePassword")]
+        public StatusCodeResult ChangePassword(ChangePasswordDto changePasswordItems)
+        {
+            try
+            {
+                if (changePasswordItems.NewPassword != changePasswordItems.ConfirmPassword)
+                    return StatusCode(303);
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(changePasswordItems.Userid, jwt))
+                    return StatusCode(303);
 
+                User user = _userDao.Get(changePasswordItems.Userid);
 
+                if (!_userDao.ComparePasswords(changePasswordItems.OldPassword,user.Password))
+                    return StatusCode(303);
 
+                _userDao.UpdatePassword(user, changePasswordItems.NewPassword);
+                return StatusCode(200);
 
-        //}
-        
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return StatusCode(303);
+            }
+            
+        }
+
 
 
         [HttpPost]
@@ -57,8 +78,9 @@ namespace KeepMovinAPI.Controllers
 
                 return StatusCode(303);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
         }
@@ -67,13 +89,23 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/register")]
         public StatusCodeResult Register(User user)
         {
-
-            if (_userDao.CheckIfUserExists(user))
+            try
             {
+                if (_userDao.CheckIfUserExists(user))
+                {
+                    return StatusCode(303);
+                }
+                CreateAUserInfrastructure(user);
+                return StatusCode(200);
+
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
                 return StatusCode(303);
             }
-            CreateAUserInfrastructure(user);
-            return StatusCode(200);
+            
         }
 
 
@@ -81,19 +113,29 @@ namespace KeepMovinAPI.Controllers
         [Route("/user/login")]
         public IActionResult Login(User user)
         {
-
-            var dataBaseUser = _userDao.GetUserByEmail(user);
-            var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
-            if (token == null)
-                return Unauthorized();
-
-            Response.Cookies.Append("token", value: token, new CookieOptions
+            try
             {
-                HttpOnly = true,
-            });
+                var dataBaseUser = _userDao.GetUserByEmail(user);
+                var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
+                if (token == null)
+                    return Unauthorized();
 
-            return Ok();
+                Response.Cookies.Append("token", value: token, new CookieOptions
+                {
+                    HttpOnly = true,
+                });
+
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return StatusCode(303);
+            }
+            
         }
+
+
 
         [HttpPost("/user/logOut")]
         public IActionResult Logout()
@@ -106,17 +148,18 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("/user/validate")]
         public IActionResult Validate()
         {
-            
+
             try
             {
                 var jwt = Request.Cookies["token"];
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
-                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);   
+                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
                 return Ok(Convert.ToString(user.Userid));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
         }

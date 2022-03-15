@@ -25,7 +25,6 @@ namespace KeepMovinAPI.Domain
         public UserProfile User { get; set; }
 
         [Required]
-        [BindProperty(Name="SportsSportId")]
         public Sport Sports { get; set; }
 
         [Required]
