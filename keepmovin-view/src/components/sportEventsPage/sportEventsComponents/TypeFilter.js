@@ -20,7 +20,6 @@ function TypeFilter() {
 
     const dispatch = useDispatch();
     
-    
     useEffect(() => {
         axios
             .get(`/api/type`)
@@ -29,8 +28,6 @@ function TypeFilter() {
                 dispatch(updateType(response.data))
             })
     },[])
-    
-    
     
     return (
         <div className="filter-parent">

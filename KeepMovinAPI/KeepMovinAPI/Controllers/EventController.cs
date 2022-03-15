@@ -58,7 +58,6 @@ namespace KeepMovinAPI.Controllers
                 return NoContent();
             }
 
-            // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
             return Ok(listOfEvents);
         }
         
