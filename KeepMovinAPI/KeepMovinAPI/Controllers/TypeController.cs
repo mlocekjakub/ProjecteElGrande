@@ -3,6 +3,7 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -22,8 +23,17 @@ namespace KeepMovinAPI.Controllers
         [HttpGet]
         public IEnumerable<EventType> GetAll()
         {
-            var listOfTypes = _daoType.GetAll();
-            return listOfTypes;
+            try
+            {
+                var listOfTypes = _daoType.GetAll();
+                return listOfTypes;
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
         
         

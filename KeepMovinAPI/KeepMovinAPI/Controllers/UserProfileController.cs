@@ -25,22 +25,32 @@ namespace KeepMovinAPI.Controllers
 
         }
 
+
+
         [HttpGet("uploadProfileInformation")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")] string userId)
         {
-            if (!Guid.TryParse(userId, out _))
+            try
+            {
+                if (!Guid.TryParse(userId, out _))
+                    return Unauthorized();
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+
+                UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
+
+                return Ok(userProfile);
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
                 return Unauthorized();
-            string jwt = Request.Cookies["token"];
-            if (!_validation.Validate(Guid.Parse(userId), jwt))
-                return Unauthorized();
-
-            //////// Wyciągamy obiekt z bazy///
-           
-            return Ok();
-
-
+            }
+            
 
         }
 

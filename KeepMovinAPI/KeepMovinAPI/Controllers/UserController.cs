@@ -140,8 +140,17 @@ namespace KeepMovinAPI.Controllers
         [HttpPost("/user/logOut")]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete("token");
-            return Ok();
+            try
+            {
+                Response.Cookies.Delete("token");
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+           
         }
 
 
