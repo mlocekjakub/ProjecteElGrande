@@ -93,6 +93,7 @@ function SportEventsPage() {
         setInputTimeout(
             setTimeout(() => {
                 let correctFetchUrl = getUrl();
+                console.log(correctFetchUrl)
                 axios
                     .get(correctFetchUrl)
                     .then(response => {
@@ -136,11 +137,11 @@ function SportEventsPage() {
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}
                         maxParticipants={event.maxParticipants}
-                        sport={event.sport}
-                        experienceLevel={event.experienceLevel}
+                        sport={event.sports.name}
+                        experienceLevel={event.ExperienceLevel.name}
                         price={event.price}
                         currency={event.currency}
-                        location={event.location}/>))
+                        location={event.location.name}/>))
         }
         
     return (

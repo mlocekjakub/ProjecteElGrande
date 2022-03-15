@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace KeepMovinAPI.Domain
@@ -24,6 +25,7 @@ namespace KeepMovinAPI.Domain
         public UserProfile User { get; set; }
 
         [Required]
+        [BindProperty(Name="SportsSportId")]
         public Sport Sports { get; set; }
 
         [Required]

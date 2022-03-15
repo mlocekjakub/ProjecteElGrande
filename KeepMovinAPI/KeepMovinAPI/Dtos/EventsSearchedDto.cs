@@ -6,9 +6,9 @@ namespace KeepMovinAPI.Domain.Dtos
     {
         public decimal NumberOfPages { get; set; }
         
-        public IEnumerable<EventDto> EventsFound { get; set; }
+        public IEnumerable<Event> EventsFound { get; set; }
 
-        public EventsSearchedDto(decimal numberOfPages, IEnumerable<EventDto> events)
+        public EventsSearchedDto(decimal numberOfPages, IEnumerable<Event> events)
         {
             NumberOfPages = numberOfPages;
             EventsFound = events;

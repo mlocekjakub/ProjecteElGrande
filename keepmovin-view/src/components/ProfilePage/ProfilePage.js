@@ -1,11 +1,13 @@
 ﻿import "./ProfilePage.css"
 import "../../index.css"
 import profileImage from "../../Images/pexels-photo-771742.jpeg"
+import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
 import EventsMenu from "./profilePageComponents/EventsMenu";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Statistics from "./profilePageComponents/Statistics";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {ArrowBackIos} from "@material-ui/icons";
+import axios from "axios";
 
 export default function ProfilePage() {
     
@@ -18,10 +20,22 @@ export default function ProfilePage() {
     
     const [statistics, setStatistics] = useState();
     
+    const [isLogged, setIsLogged] = useState(false);
+    
+    const [profile, setProfile] = useState();
+    
     
     const setActive = (status) => {
         setActiveEvent(status)
     }
+
+/*    useEffect(() => {
+        axios
+            .get(`/api/sport/${sportSearch}`)
+            .then(response => {
+                setSports(response.data)
+            })
+    }, [sportSearch])*/
     
     return (
         <div className="profile-page-wrapper">
@@ -29,7 +43,7 @@ export default function ProfilePage() {
             <div className="profile">
                 <div className="profile-card">
                     <div className="personal-content">
-                        <img className="profile-image" src={profileImage} alt="" />
+                        <img className="profile-image" src={defaultProfileImage} alt="" />
                         <div className="profile__name">Filip Koniuszewski</div>
                         <div className="profile__location">Krakow, Poland</div>
                     </div>

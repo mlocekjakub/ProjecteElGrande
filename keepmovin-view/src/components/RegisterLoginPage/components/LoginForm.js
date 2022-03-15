@@ -3,7 +3,6 @@ import {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {ValidateLogin} from "./ValidateInputs";
-import {changeLoginData} from "../../../features/Login";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ForgottenPassword from "./ForgottenPassword";
@@ -26,32 +25,11 @@ export default function LoginForm() {
             navigate("/list-of-events")
         }
     }, [redirectToMainPage])
-
-    useEffect( () => {
-        if(details.email === "") {
-            emailRef.current.classList.remove("input-active")
-        }
-        else {
-            emailRef.current.classList.add("input-active")
-        }
-
-    }, [details.email])
-
-    useEffect( () => {
-        if(details.password === "") {
-            passwordRef.current.classList.remove("input-active")
-        }
-        else {
-            passwordRef.current.classList.add("input-active")
-        }
-
-    }, [details.password])
     
 
-    const submitHandler = () => {
+    function HandleSubmit() {
         if (ValidateLogin(details.email, details.password)) {
             FetchLoginData(details.email, details.password);
-            dispatch(changeLoginData(details))
         }
     }
 
@@ -74,9 +52,9 @@ export default function LoginForm() {
     }
     
     return (
-        <form className="register-login__login" onSubmit={submitHandler}>
+        <form className="register-login__login">
             <div className="email-container__login">
-                <div className="register-icon-container" ref={emailRef}>
+                <div className={`register-icon-container ${details.email === "" ? "" : 'input-active' }`}>
                     <MailOutlineIcon />
                 </div>
                 <input type="email"
@@ -88,7 +66,7 @@ export default function LoginForm() {
             </div>
             <div className="password-container__login">
                 <div className="password-input-container__login">
-                    <div className="register-icon-container" ref={passwordRef}>
+                    <div className={`register-icon-container ${details.password === "" ? "" : 'input-active' }`}>
                         <LockOpenIcon />
                     </div>
                     <input type="password"
@@ -103,7 +81,7 @@ export default function LoginForm() {
                 </div>
             </div>
             <div className="submit-container">
-                <input type="submit" value="login"/>
+                <input type="submit" onClick={HandleSubmit} value="login"/>
             </div>
         </form>
     );

@@ -19,9 +19,6 @@ export default function RegisterForm() {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
     const confirmPasswordRef = useRef(null)
-    const [isEmailValidated, setIsEmailValidated] = useState(false)
-    const [isPasswordValidated, setIsPasswordValidated] = useState(false)
-    const [isConfirmPasswordValidated, setIsConfirmPasswordValidated] = useState(false)
     const [redirectToLogin, setRedirectToLogin] = useState(false);
     const [isRegisterValid, setIsRegisterValid] = useState(false)
     const [details, setDetails] = useState({
@@ -33,7 +30,7 @@ export default function RegisterForm() {
     
     useEffect(() => {
         if (redirectToLogin === true) {
-            navigate("/")
+            navigate("/login")
         }
     }, [redirectToLogin])
     
@@ -47,7 +44,7 @@ export default function RegisterForm() {
         
     }, [details])
     
-    const submitHandler = () => {
+    function HandleSubmit() {
         FetchRegisterData(details.email, details.password)
     }
 
@@ -64,13 +61,13 @@ export default function RegisterForm() {
             },
             body: JSON.stringify(data_package_form)
 
-        }).then(response => response.status)
+        }).then(response => console.log(response.status))
         setRedirectToLogin(true);
     }
 
     return (
         
-        <form className="register-login__register" onSubmit={submitHandler}>
+        <form className="register-login__register">
             <div className="email-container__register">
                 <div className={`input-container__register ${ValidateEmail(details.email) 
                 && 'input-email-valid'}`}>
@@ -166,7 +163,7 @@ export default function RegisterForm() {
                 }</div>
             </div>
             <div className="submit-container">
-                <input type="submit" disabled={!isRegisterValid} value="register"/>
+                <input type="submit" onClick={HandleSubmit} disabled={!isRegisterValid} value="register"/>
             </div>
         </form>
 

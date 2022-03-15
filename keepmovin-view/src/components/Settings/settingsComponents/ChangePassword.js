@@ -13,10 +13,10 @@ import {SendChangePasswordForm} from "../../API/Api";
 export default function ChangePassword() {
 
     let ChangePassword = (e) => {
-        var collectUserInputs = {
-            'OldPassword': document.GetElementById().value,
-            'NewPassword': document.GetElementById().value,
-            'ConfirmPassword': document.GetElementById().value
+        let collectUserInputs = {
+            'OldPassword': document.getElementById().value,
+            'NewPassword': document.getElementById().value,
+            'ConfirmPassword': document.getElementById().value
         }
         SendChangePasswordForm(collectUserInputs);
     }

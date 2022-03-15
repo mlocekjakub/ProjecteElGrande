@@ -1,5 +1,6 @@
 ﻿import React, {useRef} from 'react';
 import profileImage from "../../Images/pexels-photo-771742.jpeg";
+import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
 import {Link} from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -27,7 +28,7 @@ function Profile(props) {
     
     return (
         <div className="nav-item" onClick={toggleProfileMenu} ref={refClickOutsideProf}>
-            <img src={profileImage} alt="" />
+            <img src={defaultProfileImage} alt="" />
             <div className="expanded__profile-menu" ref={refProfileMenu}>
                 <div className="profile-page-expanded-container">
                     <Link className="go__profile profile-link" to="/profile">
