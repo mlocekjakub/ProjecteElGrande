@@ -24,7 +24,7 @@ namespace KeepMovinAPI.Controllers
         private readonly IMapper _mapper;
         private IValidation _validation;
 
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent,
             IMapper mapper,IValidation validation)
         {
             _logger = logger;
@@ -36,16 +36,34 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("id/{id}")]
         public Event Get(Guid id)
         {
-            Event eventModel = _daoEvent.Get(id);
-            return eventModel;
+            try
+            {
+                Event eventModel = _daoEvent.Get(id);
+                return eventModel;
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
 
 
         [HttpGet("input/{input}")]
         public IEnumerable<EventCardDto> GetByInput(string input)
         {
-            var listOfEvents = _daoEvent.GetByInput(input);
-            return listOfEvents;
+            try
+            {
+                var listOfEvents = _daoEvent.GetByInput(input);
+                return listOfEvents;
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
 
         [HttpGet]
@@ -53,34 +71,62 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<IEnumerable<EventDto>>> GetFilteredEvents([FromQuery] Filter filter)
         {
-            var listOfEvents = _daoEvent.GetFiltered(filter);
-            if (!listOfEvents.EventsFound.Any())
+            try
             {
+                var listOfEvents = _daoEvent.GetFiltered(filter);
+                if (!listOfEvents.EventsFound.Any())
+                {
+                    return NoContent();
+                }
+
+                    // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
+                return Ok(listOfEvents);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
                 return NoContent();
             }
-
-            // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
-            return Ok(listOfEvents);
+            
         }
         
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
-            var listOfEvents = _daoEvent.GetAll();
-            return listOfEvents;
+            try
+            {
+                 var listOfEvents = _daoEvent.GetAll();
+                 return listOfEvents;    
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+
+            }
+           
         }
 
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {
-            string jwt = Request.Cookies["token"];
-            if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
-            {
-                _daoEvent.Add(eventModel);
-                return Ok();
-            }
+            try
+            {       
+                string jwt = Request.Cookies["token"];
+                if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
+                {
+                    _daoEvent.Add(eventModel);
+                    return Ok();
+                }
 
-            return Unauthorized();
+                return Unauthorized();
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }
         }
 
 

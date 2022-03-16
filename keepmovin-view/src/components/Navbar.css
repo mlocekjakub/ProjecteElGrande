@@ -73,7 +73,7 @@ header {
 .search-txt-header:focus {
    outline: none !important;
    background: #fff;
-   border: 0;
+   border: 0 !important;
 }
 .glass-container {
    display: flex;

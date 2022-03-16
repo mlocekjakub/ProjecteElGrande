@@ -6,6 +6,10 @@ import {ValidateLogin} from "./ValidateInputs";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ForgottenPassword from "./ForgottenPassword";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+
 
 
 export default function LoginForm() {
@@ -15,6 +19,7 @@ export default function LoginForm() {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
     const [redirectToMainPage, setRedirectToMainPage] = useState(false);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [details, setDetails] = useState({
         email: "",
         password: "",
@@ -32,6 +37,7 @@ export default function LoginForm() {
             FetchLoginData(details.email, details.password);
         }
     }
+    
 
     async function FetchLoginData(email, password) {
         let data_package_form = {
@@ -57,9 +63,10 @@ export default function LoginForm() {
                 <div className={`register-icon-container ${details.email === "" ? "" : 'input-active' }`}>
                     <MailOutlineIcon />
                 </div>
+                <label htmlFor="login-email"></label>
                 <input type="email"
                        name="email"
-                       id="name"
+                       id="login-email"
                        autoComplete="off"
                        placeholder="Email"
                        onChange={e => setDetails({...details, email: e.target.value})} />
@@ -69,19 +76,25 @@ export default function LoginForm() {
                     <div className={`register-icon-container ${details.password === "" ? "" : 'input-active' }`}>
                         <LockOpenIcon />
                     </div>
-                    <input type="password"
+                    <label for="login-password"></label>
+                    <input type={isPasswordVisible ? "text" : "password"}
                            name="password"
-                           id="password"
+                           id="login-password"
                            autoComplete="off"
                            placeholder="Password"
                            onChange={e => setDetails({...details, password: e.target.value})}/>
+                    
                 </div>
                 <div className="forgot-password">
+                    {isPasswordVisible ?
+                        <div className="password__visible" onClick={() => setIsPasswordVisible(false)}><VisibilityIcon /></div>
+                        : <div className="password__visible" onClick={() => setIsPasswordVisible(true)}><VisibilityOffIcon /></div>}
                     <ForgottenPassword />
                 </div>
             </div>
             <div className="submit-container">
-                <input type="submit" onClick={HandleSubmit} value="login"/>
+                <label htmlFor="login-submit"></label>
+                <input type="submit" name="submit" id="login-submit" onClick={HandleSubmit} value="login"/>
             </div>
         </form>
     );

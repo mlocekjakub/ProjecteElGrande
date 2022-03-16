@@ -12,12 +12,14 @@ public class Validation:IValidation
 
     private IJwtAuthenticationManager _jwtAuthenticationManager;
     private IUserDao _userDao;
+    private readonly ILogger<Validation> _logger;
 
 
-    public Validation(IJwtAuthenticationManager jwt,IUserDao userDao)
+    public Validation(IJwtAuthenticationManager jwt,IUserDao userDao, ILogger<Validation> logger)
 	{
         _jwtAuthenticationManager = jwt;
         _userDao = userDao;
+        _logger = logger;
 
 
 	}
@@ -33,8 +35,9 @@ public class Validation:IValidation
                 return true;
             return false;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            _logger.LogWarning(Convert.ToString(e));
             return false;
         }
     }

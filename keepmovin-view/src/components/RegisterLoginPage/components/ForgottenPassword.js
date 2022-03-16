@@ -86,7 +86,7 @@ export default function ForgottenPassword() {
     };
 
     return (
-        <div className="forgot-password" > <Button onClick={() => setOpen(true)}>Forgot password </Button>
+        <div className="forgot-password" > <div className="forgot-password-button" onClick={() => setOpen(true)}>Forgot password </div>
             <StyledModal
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"

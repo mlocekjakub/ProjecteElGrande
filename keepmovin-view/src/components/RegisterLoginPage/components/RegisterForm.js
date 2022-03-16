@@ -80,9 +80,10 @@ export default function RegisterForm() {
                                      : 'input-active'}`}>
                         <MailOutlineIcon />
                     </div>
+                    <label htmlFor="register-email"></label>
                     <input type="email" 
                            name="email" 
-                           id="name" 
+                           id="register-email" 
                            autoComplete="off"
                            placeholder="Email"
                            required
@@ -112,9 +113,10 @@ export default function RegisterForm() {
                                      : 'input-active'}`}>
                         <LockOpenIcon />
                     </div>
+                    <label htmlFor="register-password"></label>
                     <input type="password"
                            name="password"
-                           id="password"
+                           id="register-password"
                            autoComplete="off"
                            placeholder="Password"
                            required
@@ -146,9 +148,10 @@ export default function RegisterForm() {
                                      : 'input-active'}`}>
                         <LockOpenIcon />
                     </div>
+                    <label htmlFor="register-confirm-password"></label>
                     <input type="password"
-                           name="confirmPassword"
-                           id="confirmPassword"
+                           name="confirm-password"
+                           id="register-confirm-password"
                            autoComplete="off"
                            placeholder="Confirm Password"
                            required
@@ -163,7 +166,8 @@ export default function RegisterForm() {
                 }</div>
             </div>
             <div className="submit-container">
-                <input type="submit" onClick={HandleSubmit} disabled={!isRegisterValid} value="register"/>
+                <label htmlFor="register-submit"></label>
+                <input type="submit" name="submit" id="register-submit" onClick={HandleSubmit} disabled={!isRegisterValid} value="register"/>
             </div>
         </form>
 
