@@ -19,40 +19,24 @@ import {Link} from "react-router-dom";
 function SportEventsPage() {
 
     const [allEvents, setAllEvents] = useState([])
-    
     const [foundEvents, setFoundEvents] = useState([])
-    
     const [searchedEventInput, setSearchedEventInput] = useState('')
-    
     const sportsFilter = useSelector((state) => state.sports.value)
-    
     const experienceFilter = useSelector((state) => state.experience.value)
-    
     const typeFilter = useSelector((state) => state.type.value)
-    
     const minParticipantsFilter = useSelector((state) => state.minParticipants.value)
-    
     const maxParticipantsFilter = useSelector((state) => state.maxParticipants.value)
-
     const minPriceFilter = useSelector((state) => state.minPrice.value)
-
     const maxPriceFilter = useSelector((state) => state.maxPrice.value)
-    
     const datesFilter = useSelector((state) => state.rangeDate.value)
-    
     const [currentPage, setCurrentPage] = useState(1);
-    
     const [numberOfPages, setNumberOfPages] = useState();
-    
     const [inputTimeout, setInputTimeout] = useState(null);
-    
     const [isFetchingData, setIsFetchingData] = useState(false);
-    
     const [eventsNotFound, setEventsNotFound] = useState(false);
-    
     const [isLimitNext, setIsLimitNext] = useState(false);
-
     const [isLimitPrevious, setIsLimitPrevious] = useState(true);
+    const isUserLogged = useSelector((state) => state.isLogged.value)
     
     
     function getUrl() {
@@ -152,7 +136,10 @@ function SportEventsPage() {
             </div>
             <div className="events-filters__container">
                 <div className="filter-container">
-                    <Link className="create-button-link" to="/event/create">Create Event</Link>
+                    {isUserLogged ? <Link className="create-button-link" to="/event/create">Create Event</Link> 
+                        : <div className="create-button-link__disable">Sign in to create event</div> 
+                    }
+                    
                     <SportFilter />
                     <ExperienceFilter />
                     <PriceFilter />

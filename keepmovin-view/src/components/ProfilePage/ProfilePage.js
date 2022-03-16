@@ -28,14 +28,6 @@ export default function ProfilePage() {
     const setActive = (status) => {
         setActiveEvent(status)
     }
-
-/*    useEffect(() => {
-        axios
-            .get(`/api/sport/${sportSearch}`)
-            .then(response => {
-                setSports(response.data)
-            })
-    }, [sportSearch])*/
     
     return (
         <div className="profile-page-wrapper">

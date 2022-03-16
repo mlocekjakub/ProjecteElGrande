@@ -93,12 +93,21 @@
     background: var(--bg-btn-primary-blue);
     color: #FFFFFF;
     transition: 0.2s;
-    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    padding: 0.2rem 1rem;
     border-radius: 0.3rem;
 }
 .sign-up-event:hover {
     cursor: pointer;
     background: var(--bg-primary-dark);
+}
+.sign-up-event__disable {
+    background: rgba(66, 133, 244, 0.5);
+    color: #FFFFFF;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+}
+.sign-up-event__disable:hover {
+    cursor: pointer;
 }
 
 .events__card-nav-price {
@@ -129,6 +138,20 @@
 .create-button-link:hover {
     background: var(--bg-primary-dark);
     color: #FFFFFF;
+}
+
+.create-button-link__disable {
+    background: rgba(66, 133, 244, 0.5);
+    text-align: center;
+    letter-spacing: 0.03rem;
+    color: #FFFFFF;
+    padding: 0.7rem 0;
+    margin-bottom: 1.5rem;
+    border-radius: 0.3rem;
+}
+.create-button-link__disable:hover {
+    cursor: pointer;
+    
 }
 
 /*___________________*/

@@ -4,21 +4,10 @@ import '../../index.css'
 import EventsCarousel from "./WelcomePageComponents/EventsCarousel";
  import {useEffect} from "react";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 export default function WelcomePage() {
-    
-     useEffect(async () => {
-         const response = await fetch("/user/validate", {
-             headers: {
-                 'Accept': 'application/json',
-                 'Content-Type': 'application/json'
-             },
-             credentials: 'include',
-         })
-         const content = await response.json()
-             .then(content => localStorage.setItem('session', content))
-
-     })
+    const isUserLogged = useSelector((state) => state.isLogged.value)
     
     return (
         <div className="welcome-page">
@@ -32,9 +21,11 @@ export default function WelcomePage() {
                         </div>
                     </div>
                     <div className="welcome__nav">
-                        <Link className="join-button nav-welcome" to="/register">
-                            Join now
-                        </Link>
+                        {!isUserLogged &&
+                            <Link className="join-button nav-welcome" to="/register">
+                                Join now
+                            </Link>
+                        }
                         <Link className="welcome__events-details-button nav-welcome" to="/list-of-events">
                             Check Events
                         </Link>

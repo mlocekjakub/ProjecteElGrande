@@ -35,7 +35,6 @@ function Searchbar(props) {
                 setEventsFound(response.data)
 
             })
-        console.log(eventsFound)
     }, [typedInput])
     
     function EventsMenu() {

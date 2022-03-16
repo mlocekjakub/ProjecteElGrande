@@ -6,10 +6,14 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsIcon from "@mui/icons-material/Settings";
 import {useDetectClickOutside} from "react-detect-click-outside";
 import {LogOut} from "../API/Api";
+import {changeIsLogged} from "../../features/IsLogged";
+import {useDispatch} from "react-redux";
 
 function Profile(props) {
 
     const refProfileMenu = useRef(null);
+    
+    const dispatch = useDispatch();
 
     const refClickOutsideProf = useDetectClickOutside(
         { onTriggered: closeProfileMenu });
@@ -22,8 +26,16 @@ function Profile(props) {
         refProfileMenu.current.classList.toggle("expanded__active")
     }
 
-    let execute = () => {
-        LogOut('/user/logOut');
+    let logout = () => {
+        fetch('/user/logOut', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify("")})
+            .then(localStorage.removeItem("session"));
+        dispatch(changeIsLogged(false))
     }
     
     return (
@@ -39,11 +51,10 @@ function Profile(props) {
                         <SettingsIcon />
                         <span>Settings</span>
                     </Link>
-                    <Link className="go__log-out profile-link" to="/" onClick={execute}>
+                    <Link className="go__log-out profile-link" to="/" onClick={logout}>
                         Log out
                     </Link>
                 </div>
-                {/*<div className="triangle__profile-menu"></div>*/}
             </div>
         </div>
     );

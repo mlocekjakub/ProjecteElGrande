@@ -7,9 +7,16 @@ import Home from "./NavbarComponents/Home";
 import Searchbar from "./NavbarComponents/Searchbar";
 import Logo from "./NavbarComponents/Logo";
 import Calendar from "./NavbarComponents/Calendar";
+import {useEffect, useState} from "react";
+import SignIn from "./NavbarComponents/SignIn";
+import {useSelect} from "@mui/base";
+import {useSelector} from "react-redux";
 
 
 export default function Navbar() {
+    
+    const isUserLogged = useSelector((state) => state.isLogged.value)
+    
     return (
         <header>
             <div className="logo-search">
@@ -19,9 +26,9 @@ export default function Navbar() {
             <nav>
                 <div className="nav__links">
                     <Home />
-                    <Calendar />
-                    <Notifications />
-                    <Profile />
+                    {isUserLogged && <Calendar />}
+                    {isUserLogged && <Notifications />}
+                    {isUserLogged ? <Profile /> : <SignIn />}
                 </div>
             </nav>
         </header>

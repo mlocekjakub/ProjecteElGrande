@@ -14,19 +14,6 @@ export default function RegisterLoginPage(props) {
     const changeContent = (state) => {
         setActiveButton(state)
     }
-
-    useEffect(async () => {
-        const response = await fetch("/user/validate", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        })
-        const content = await response.json()
-            .then(content => localStorage.setItem('session', content))
-
-    })
     
     return (
         <div className="register-login__page">

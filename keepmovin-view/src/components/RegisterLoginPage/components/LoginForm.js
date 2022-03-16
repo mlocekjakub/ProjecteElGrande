@@ -8,6 +8,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ForgottenPassword from "./ForgottenPassword";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {changeIsLogged} from "../../../features/IsLogged";
 
 
 
@@ -32,7 +33,8 @@ export default function LoginForm() {
     }, [redirectToMainPage])
     
 
-    function HandleSubmit() {
+    const HandleSubmit = (e) => {
+        e.preventDefault()
         if (ValidateLogin(details.email, details.password)) {
             FetchLoginData(details.email, details.password);
         }
@@ -44,7 +46,7 @@ export default function LoginForm() {
             "Email": email,
             "Password": password
         }
-        await fetch("/user/login", {
+        const response = await fetch("/user/login", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -52,9 +54,15 @@ export default function LoginForm() {
             },
             credentials: 'include',
             body: JSON.stringify(data_package_form)
-
-        }).then(response => response.status)
-        setRedirectToMainPage(true);
+        })
+        if (response.ok) {
+            let content = await response.json()
+                .then(content => {
+                    localStorage.setItem('session', content)
+                    dispatch(changeIsLogged(true))
+                })
+            setRedirectToMainPage(true);
+        }
     }
     
     return (
@@ -76,7 +84,7 @@ export default function LoginForm() {
                     <div className={`register-icon-container ${details.password === "" ? "" : 'input-active' }`}>
                         <LockOpenIcon />
                     </div>
-                    <label for="login-password"></label>
+                    <label htmlFor="login-password"></label>
                     <input type={isPasswordVisible ? "text" : "password"}
                            name="password"
                            id="login-password"
@@ -94,7 +102,7 @@ export default function LoginForm() {
             </div>
             <div className="submit-container">
                 <label htmlFor="login-submit"></label>
-                <input type="submit" name="submit" id="login-submit" onClick={HandleSubmit} value="login"/>
+                <input type="submit" name="submit" id="login-submit" onClick={(e) => HandleSubmit(e)} value="login"/>
             </div>
         </form>
     );

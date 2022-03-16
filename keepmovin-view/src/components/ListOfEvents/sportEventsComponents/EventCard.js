@@ -3,10 +3,13 @@ import eventImage from "../../../Images/News-Trailer-Web-4Sep20.png";
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from "@mui/icons-material/Person";
+import {useSelector} from "react-redux";
 
 
 
 function EventCard(props) {
+    const isUserLogged = useSelector((state) => state.isLogged.value)
+    
     return (
         <div className="event-1">
             <img src={eventImage} alt="" />
@@ -39,7 +42,7 @@ function EventCard(props) {
                 </div>
             </div>
             <article className="events__card-nav">
-                <div className="sign-up-event">Sign up</div>
+                {isUserLogged ? <div className="sign-up-event">Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
             </article>
         </div>
     )

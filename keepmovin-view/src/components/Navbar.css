@@ -142,6 +142,14 @@ header {
    z-index: -1;
 }
 
+.sign-in__button {
+   color: #FFFFFF;
+   transition: 0.2s;
+}
+.sign-in__button:hover {
+   color: var(--bg-btn-primary-blue);
+}
+
 
 
 /*-------*/
