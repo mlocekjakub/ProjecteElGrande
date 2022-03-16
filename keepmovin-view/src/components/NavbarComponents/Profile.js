@@ -51,7 +51,7 @@ function Profile(props) {
                         <SettingsIcon />
                         <span>Settings</span>
                     </Link>
-                    <Link className="go__log-out profile-link" to="/" onClick={logout}>
+                    <Link className="go__log-out profile-link" to="#" onClick={logout}>
                         Log out
                     </Link>
                 </div>

@@ -60,8 +60,7 @@ export default function RegisterForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data_package_form)
-
-        }).then(response => console.log(response.status))
+        })
         setRedirectToLogin(true);
     }
 

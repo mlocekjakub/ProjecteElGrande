@@ -8,6 +8,7 @@ import Statistics from "./profilePageComponents/Statistics";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {ArrowBackIos} from "@material-ui/icons";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 export default function ProfilePage() {
     
@@ -23,6 +24,8 @@ export default function ProfilePage() {
     const [isLogged, setIsLogged] = useState(false);
     
     const [profile, setProfile] = useState();
+    
+    const isUserLogged = useSelector((state) => state.isLogged.value)
     
     
     const setActive = (status) => {

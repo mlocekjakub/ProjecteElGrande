@@ -74,10 +74,6 @@ namespace KeepMovinAPI
             services.AddScoped<IExperienceDao, ExperienceDao>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IValidation, Validation>();
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
