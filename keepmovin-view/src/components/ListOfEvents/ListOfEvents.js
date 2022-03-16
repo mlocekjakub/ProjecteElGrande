@@ -103,6 +103,7 @@ function SportEventsPage() {
                         else {
                             setFoundEvents(response.data.eventsFound)
                             setNumberOfPages(response.data.numberOfPages)
+                            console.log(foundEvents)
                         }
                         setIsFetchingData(false);
                     });
@@ -138,10 +139,10 @@ function SportEventsPage() {
                         dateEnd={event.endEvent}
                         maxParticipants={event.maxParticipants}
                         sport={event.sports.name}
-                        experienceLevel={event.ExperienceLevel.name}
+                        experienceLevels={event.experienceLevel.name}
                         price={event.price}
                         currency={event.currency}
-                        location={event.location.name}/>))
+                        location={event.location.city}/>))
         }
         
     return (

@@ -11,8 +11,6 @@ namespace KeepMovinAPI.Domain.Dtos
         
         public List<string> Experience { get; set; } = new List<string>();
 
-        public string SearchPhrase { get; set; } = "";
-
         public List<string> Type { get; set; } = new List<string>();
 
         public int MinPrice { get; set; } = 0;

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.Extensions.Logging;
 
@@ -69,11 +69,6 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public EventsSearchedDto GetFiltered([FromQuery] Filter filter)
         {
-            /*var sports = _context.Sport.ToList();
-            var events = _context.Event.ToList();
-            var experiences = _context.ExperienceLevel.ToList();
-            var types = _context.EventType.ToList();
-            var locations = _context.Location.ToList();*/
             var eventsPerPage = 4;
 
             var filteredEvents = _context.Event
@@ -81,28 +76,18 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Include(eventModel => eventModel.Sports)
                 .Include(eventModel => eventModel.Type)
                 .Include(eventModel => eventModel.ExperienceLevel)
-                .Where(i =>
-                    i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower())
-                    && (i.Price >= filter.MinPrice
-                        && i.Price <= filter.MaxPrice)
-                    && (i.MaxParticipants >= filter.MinParticipants
+                .Where(i => 
+                    (i.Price >= filter.MinPrice 
+                     && i.Price <= filter.MaxPrice)
+                    && (i.MaxParticipants >= filter.MinParticipants 
                         && i.MaxParticipants <= filter.MaxParticipants)
                     && filter.Sports.Contains(i.Sports.Name)
                     && filter.Type.Contains(i.Type.Name)
+                    && (DateTime.Compare(i.StartEvent, DateTime.Parse(filter.MinDate)) > 0)
+                    && (DateTime.Compare(i.EndEvent, DateTime.Parse(filter.MaxDate)) < 0)
                     && filter.Experience.Contains(i.ExperienceLevel.Name)).ToList();
-
-            /*/*var filteredEvents = joinedTables.Where(i => 
-                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower()) 
-                && (i.Price >= filter.MinPrice 
-                && i.Price <= filter.MaxPrice)
-                && (i.MaxParticipants >= filter.MinParticipants 
-                && i.MaxParticipants <= filter.MaxParticipants)
-                && (DateTime.Compare(i.StartEvent, DateTime.Parse(filter.MinDate)) > 0)
-                && (DateTime.Compare(i.EndEvent, DateTime.Parse(filter.MaxDate)) < 0)
-                && filter.Sports.Contains(i.Sport)
-                && filter.Type.Contains(i.Type)
-                && filter.Experience.Contains(i.ExperienceLevel));*/
             
+
             var numberOfPages = Math.Ceiling((decimal) filteredEvents.ToList().Count / eventsPerPage);
             
             filteredEvents = filteredEvents

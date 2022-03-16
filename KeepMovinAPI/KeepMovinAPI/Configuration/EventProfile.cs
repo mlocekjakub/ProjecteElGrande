@@ -9,6 +9,8 @@ namespace KeepMovinAPI.Configuration
         public EventProfile()
         {
             CreateMap<Event, EventDto>().ReverseMap();
+            
+            CreateMap<Event, EventCardDto>().ReverseMap();
         }
     }
 }

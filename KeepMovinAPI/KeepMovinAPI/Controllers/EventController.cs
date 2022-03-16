@@ -56,7 +56,7 @@ namespace KeepMovinAPI.Controllers
             try
             {
                 var listOfEvents = _daoEvent.GetByInput(input);
-                return listOfEvents;
+                return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
             }
             catch(Exception e)
             {

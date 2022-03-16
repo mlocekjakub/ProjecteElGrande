@@ -1,22 +1,11 @@
 export function ValidateEmail(email) {
-    return !!(email.length > 5 && email.length < 61 && email.includes("@"));
-}
-
-export function ValidateLogin(email, password) {
-    return !!((email.length > 5 && email.length < 61 && email.includes("@")) &&
-        (password.length > 5 && password.length <= 30));
-}
-
-export function ValidateRegister(email, password, passwordConfirmation) {
-    return !!(email.length > 5 && email.length < 61 && email.includes("@") &&
-        (password.length > 5 && password.length <= 30) &&
-        (passwordConfirmation === password) && passwordConfirmation.length > 5);
+    return (email.length > 5 && email.length < 61 && 
+    email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/));
 }
 
 export function ValidatePassword(password) {
     return (password.length > 5 && password.length <= 30);
 }
-
 
 export function ComparePasswords(password, passwordConfirmation) {
     return (password === passwordConfirmation);
@@ -39,6 +28,21 @@ export function IsPasswordTooLong(password) {
 
 export function IsPasswordTooShort(password) {
     return (password.length <= 5 && password.length > 0)
+}
+
+export function ValidateLogin(email, password) {
+    return (
+        ValidateEmail(email) && 
+        ValidatePassword(password)
+    );
+}
+
+export function ValidateRegister(email, password, passwordConfirmation) {
+    return (
+        ValidateEmail(email) &&
+        ValidatePassword(password) &&
+        ComparePasswords(password, passwordConfirmation)
+    );
 }
 
 

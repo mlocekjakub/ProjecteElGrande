@@ -30,7 +30,7 @@ function EventCard(props) {
                     </div>
                     <div className="events-level">
                         <SignalCellularAltIcon className="level-icon"/>
-                        {props.experienceLevel}
+                        {props.experienceLevels}
                     </div>
                     <div className="events-participants">
                         <PersonIcon className="participants-icon" />
