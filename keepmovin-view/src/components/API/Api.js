@@ -77,6 +77,7 @@ export function createEvent() {
         "Link": "",
         "Price": price,
     }
+    
     fetch("/api/event", {
         method: 'POST',
         headers: {

@@ -32,13 +32,19 @@ namespace KeepMovinAPI.Controllers
             _validation = validation;
         }
 
+        [HttpGet("uid/{id}")]
+        public IEnumerable<User> GetUser(Guid id)
+        {
+            List<User> eventModel = (List<User>) _daoEvent.GetUsers(id);
+            return eventModel;
+        }
+
         [HttpGet("id/{id}")]
         public Event Get(Guid id)
         {
             Event eventModel = _daoEvent.Get(id);
             return eventModel;
         }
-
 
         [HttpGet("{input}")]
         public IEnumerable<Event> GetByInput(string input)
