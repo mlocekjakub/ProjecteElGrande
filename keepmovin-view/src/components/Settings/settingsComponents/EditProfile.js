@@ -20,6 +20,22 @@ export default function EditProfile() {
         setValue(event.target.value);
     };
 
+    useEffect(async () => {
+        const response = await fetch("api/UserProfile/uploadProfileInformation", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "etag": localStorage.getItem('session')
+
+            },
+            credentials: 'include',
+        })
+        const content = await response.json()
+            .then(content => console.log(content))
+            .then(console.log(content))
+
+    }, [])
+
     const [checked, setChecked] = React.useState(true);
 
     const handleCheckBox = (event) => {

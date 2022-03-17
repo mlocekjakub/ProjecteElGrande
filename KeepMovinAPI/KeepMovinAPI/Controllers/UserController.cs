@@ -125,7 +125,7 @@ namespace KeepMovinAPI.Controllers
                     HttpOnly = true,
                 });
 
-                return Ok();
+                return Ok(dataBaseUser.Userid);
             }
             catch(Exception e)
             {
@@ -133,6 +133,7 @@ namespace KeepMovinAPI.Controllers
                 return StatusCode(303);
             }
             
+
         }
 
 

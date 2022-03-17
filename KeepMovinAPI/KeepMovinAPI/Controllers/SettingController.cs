@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using static KeepMovinAPI.Dtos.SettingsDto;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -17,15 +18,20 @@ namespace KeepMovinAPI.Controllers
     public class SettingController : ControllerBase
     {
         private readonly ILogger<SettingController> _logger;
+        private IUserProfileRepository _userProfileDao;
         private ISettingDao _settingDao;
         private IValidation _validation;
+        private readonly IMapper _mapper;
 
         public SettingController(ILogger<SettingController> logger, ISettingDao settingDao,
-             IValidation validation)
+             IValidation validation, IUserProfileRepository userProfileDao, IMapper mapper)
         {
             _logger = logger;
             _settingDao = settingDao;
             _validation = validation;
+            _userProfileDao = userProfileDao;
+            _mapper = mapper;
+
         }
 
 
@@ -37,7 +43,7 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (_validation.Validate(settings.UserId, jwt))
                 {
-                    ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
+                    SafeChanges(settings);
                     return Ok();
                 }
                 return Unauthorized();
@@ -50,6 +56,8 @@ namespace KeepMovinAPI.Controllers
             
 
         }
+
+      
 
         [HttpGet("upload")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
@@ -84,6 +92,15 @@ namespace KeepMovinAPI.Controllers
                 return Unauthorized();
             }            
 
+        }
+
+        [NonAction]
+        public void SafeChanges(SettingsDto settings)
+        {
+            var userProfile = _userProfileDao.Get(settings.UserId);
+            
+            //Setting dataBaseSettings = _settingDao.Get(settingsId);
+            //_settingDao.Update(_mapper.Map<Setting>(settings));
         }
 
 

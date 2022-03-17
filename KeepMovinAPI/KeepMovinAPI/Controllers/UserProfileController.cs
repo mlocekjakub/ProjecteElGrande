@@ -6,29 +6,34 @@ using KeepMovinAPI.Authentication;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using KeepMovinAPI.Dtos;
+using AutoMapper;
 
 namespace KeepMovinAPI.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class UserProfileController : ControllerBase
     {
         private readonly ILogger<UserProfileController> _logger;
         private IUserProfileRepository _userProfileDao;
+        private readonly IMapper _mapper;
         private IValidation _validation;
 
         public UserProfileController(ILogger<UserProfileController> logger,
-            IUserProfileRepository userProfileDao,IValidation validation)
+            IUserProfileRepository userProfileDao,IValidation validation, IMapper mapper)
         {
             _logger = logger;
             _userProfileDao = userProfileDao;
             _validation = validation;
+            _mapper = mapper; 
 
         }
 
 
 
         [HttpGet("uploadProfileInformation")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")] string userId)
         {
@@ -41,8 +46,7 @@ namespace KeepMovinAPI.Controllers
                     return Unauthorized();
 
                 UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
-
-                return Ok(userProfile);
+                return Ok(_mapper.Map<UserProfileDto>(userProfile));
 
             }
             catch(Exception e)
@@ -53,9 +57,6 @@ namespace KeepMovinAPI.Controllers
             
 
         }
-
-
-
 
 
     }

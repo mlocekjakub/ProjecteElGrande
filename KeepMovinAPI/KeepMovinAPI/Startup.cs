@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using KeepMovinAPI.Repository;
 using KeepMovinAPI.Repository.Implementations;
+using System;
 
 namespace KeepMovinAPI
 {
@@ -28,6 +29,7 @@ namespace KeepMovinAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var key = "Tu ustawiamy nasz tajny klucz jakby co";
             services.AddAuthentication(x =>
             {
