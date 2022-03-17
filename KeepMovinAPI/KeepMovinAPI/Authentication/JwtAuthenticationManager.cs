@@ -22,7 +22,7 @@ namespace KeepMovinAPI.Authentication
         public string Authenticate(User dataBaseUser, User loginUser, IUserDao userDao)
         {
 
-            if (userDao.CompareUsers(dataBaseUser, loginUser))
+            if (!userDao.CompareUsers(dataBaseUser, loginUser))
             {
                 return null;
             }
