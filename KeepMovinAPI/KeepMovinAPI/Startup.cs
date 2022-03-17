@@ -30,6 +30,7 @@ namespace KeepMovinAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var key = "Tu ustawiamy nasz tajny klucz jakby co";
             services.AddAuthentication(x =>
             {
@@ -57,7 +58,6 @@ namespace KeepMovinAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "KeepMovinAPI", Version = "v1"});
             });
-
 
             services.AddDbContext<KeepMovinDbContext>(options =>
                 

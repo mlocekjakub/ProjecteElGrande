@@ -16,13 +16,15 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<CalendarController> _logger;
         private IEventDao _daoEvent;
+        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IValidation _validation;
 
-        public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent,
+        public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
              IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
+            _jwtAuthenticationManager = jwt;
             _validation = validation;
         }
 
@@ -48,9 +50,16 @@ namespace KeepMovinAPI.Controllers
             
         }
 
-        // add get for user events
-
-
-     
+        // [HttpGet("user-events")]
+        // public IEnumerable<Event> GetUserEvents(Guid userId)
+        // {
+        //     var listOfUserEvents = _eventUserDao.GetByUserId(userId);
+        //     var listOfEvents = new List<Event>();
+        //     foreach (var userEvent in listOfUserEvents)
+        //     {
+        //         listOfEvents.Add(_daoEvent.Get(userEvent.EventsEventId));
+        //     }
+        //     return listOfEvents;
+        // }
     }
 }

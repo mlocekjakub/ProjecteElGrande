@@ -43,7 +43,6 @@ export function EditUserSettings() {
         body: JSON.stringify(privacyData)
 
     }).then(response => response.status)
-        .then(data => console.log(data))
         .then(localStorage.removeItem('privacy'))
 
 }

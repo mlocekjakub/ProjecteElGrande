@@ -15,8 +15,8 @@ export default function EventCalendar() {
 
     const [show, setShow] = useState(false);
     const [givenId, setGivenId] = useState(null);
-
-    // localStorage.getItem('session');
+    
+    // console.log(localStorage.getItem('session'));
 
     useEffect(() => {
         if (startDate != null && endDate != null) {
@@ -53,12 +53,23 @@ export default function EventCalendar() {
                 })
         }
     }, [url])
-    
+
     return (
         <div className="calendar-container">
-            <EventModal onClose={() => setShow(false)} show={show} eventId={givenId}/>
+            <EventModal onClose={() => {
+                setShow(false);
+                setGivenId(null)
+            }} show={show} eventId={givenId}/>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+                customButtons={{
+                    userEventsButton: {
+                        text: "My events",
+                        click: function() {
+                            alert("clicked");
+                        }
+                    }
+                }}
                 eventTimeFormat={{
                     hour: '2-digit',
                     minute: '2-digit',
@@ -68,14 +79,18 @@ export default function EventCalendar() {
                 firstDay={1} // 1 = Monday
                 initialView="dayGridMonth"
                 headerToolbar={{
-                    left: "title",
-                    center: "prev next",
+                    left: "userEventsButton prev next",
+                    center: "title",
                     right: "dayGridMonth list"
                 }}
                 views={{
                     list: {
                         duration: {months: 1}, // full month in list
-                        displayEventTime: true
+                        displayEventTime: true,
+                        eventClick: (e) => {
+                            setGivenId(e.event.id);
+                            setShow(true);
+                        }
                     }
                 }}
                 displayEventTime={false}
