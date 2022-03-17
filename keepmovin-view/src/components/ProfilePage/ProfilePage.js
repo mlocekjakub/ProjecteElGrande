@@ -21,16 +21,22 @@ export default function ProfilePage() {
     
     const [statistics, setStatistics] = useState();
     
-    const [isLogged, setIsLogged] = useState(false);
-    
     const isUserLogged = useSelector((state) => state.isLogged.value)
 
     const [profileItems, setProfileItems] = useState();
+    
+    
     useEffect(() => {
         if (isUserLogged) {
-            let userId = localStorage.getItem("session")
             axios
-                .get(`/api/UserProfile/${userId}`)
+                .get(`/api/UserProfile/id`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        "etag" : localStorage.getItem('session')
+
+                    }
+                })
                 .then(response => setProfileItems(response.data))
         }
         
@@ -38,10 +44,26 @@ export default function ProfilePage() {
     }, [])
     
     
+    
+    useEffect(() => {
+        if (isUserLogged) {
+            axios
+                .get(`/api/UserProfile/id`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        "etag" : localStorage.getItem('session')
+
+                    }
+                })
+                .then(response => setProfileItems(response.data))
+        }
+    }, [])
+    
     const setActive = (status) => {
         setActiveEvent(status)
-        console.log(profileItems)
     }
+    
     
     return (
         <div className="profile-page-wrapper">
@@ -50,29 +72,37 @@ export default function ProfilePage() {
                 <div className="profile-card">
                     <div className="personal-content">
                         <img className="profile-image" src={defaultProfileImage} alt="" />
-                        <div className="profile__name">Filip Koniuszewski</div>
-                        <div className="profile__location">Krakow, Poland</div>
+                        <div className="profile__name">{profileItems && profileItems.name ? 
+                            <span>{profileItems.name}</span>
+                            : <span className="profile-incomplete">fill in your name</span> }
+                            {profileItems && profileItems.surname ?
+                                <span>{profileItems.surname}</span>
+                            :<span className="profile-incomplete">fill in your surname</span>}
+                        </div>
+                            
+                        {profileItems && profileItems.locationCity && profileItems.locationCountry ?
+                            <div className="profile__location">{profileItems.locationCity} {profileItems.locationCountry}</div>
+                            : <div className="profile__location__incomplete">Fill in your location</div>}
                     </div>
                     <div className="profile__socials-info">
                         <div className="profile__following">
-                            <div className="number">399</div>
+                            <div className="number">{profileItems && `${profileItems.followers.length}`}</div>
                             <div className="heading">Following</div>
                         </div>
                         <div className="profile__followed">
-                            <div className="number">250</div>
+                            <div className="number">{profileItems && `${profileItems.followed.length}`}</div>
                             <div className="heading">Followed</div>
                         </div>
                         <div className="profile__rating">
-                            <div className="number">4.9</div>
+                            <div className="number">0</div>
                             <div className="heading">Rating</div>
                         </div>
                     </div>
                     <div className="about">
                         <div className="about-header">about</div>
-                        Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit. Mauris vel vulputate ante. 
-                        Praesent consequat, nisl at molestie iaculis, 
-                        sem lacus cursus justo,
+                        {profileItems && profileItems.personalInfo  ?
+                            <div>{profileItems.personalInfo}</div>
+                            : <div className="about-header__incomplete">Fill in your aboutme</div>}
                     </div>
                 </div>
                 <div className="info">

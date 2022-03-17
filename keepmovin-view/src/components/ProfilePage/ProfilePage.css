@@ -70,6 +70,8 @@
 }
 .profile__name {
     font-weight: 700;
+    display: flex;
+    gap: 0.3rem;
 }
 .profile__location {
     color: var(--clr-paragraph);
@@ -314,6 +316,29 @@
     font-weight: bold;
     font-size: 1.3rem;
 }
+
+
+.profile-incomplete {
+    font-size: 0.9rem;
+    background: rgba(237, 239, 241, 0.75);
+    font-weight: 700;
+    color: var(--clr-paragraph);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.3rem 0 0.3rem 0;
+}
+
+.profile__location__incomplete, .about-header__incomplete {
+    font-size: 0.9rem;
+    background: rgba(237, 239, 241, 0.75);
+    color: var(--clr-paragraph);
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.3rem;
+    font-weight: 700;
+}
+
+
+
 
 
 

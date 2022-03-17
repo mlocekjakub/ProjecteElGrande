@@ -1,15 +1,18 @@
 ﻿import React from 'react';
 import EventCard from "./EventCard";
+import EventsSearchedCard from "../../NavbarComponents/EventsSearchedCard";
 
-function UpcomingEvents(props) {
+function UpcomingEvents(trigger,setTrigger, content) {
+    
     return (
         <div className="events-menu">
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <div className="empty-card"></div>
-            <div className="empty-card"></div>
+            {content.events.map((event) =>
+            (<EventCard key={event.eventId}
+                                 eventName={event.name}
+                                 eventDateStart={event.startEvent}
+                                 sportName={event.sport}
+                                 maxParticipants={event.maxParticipants}/>))
+            }
         </div>
     );
 }

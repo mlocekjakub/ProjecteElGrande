@@ -55,7 +55,7 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("id")]
         public ProfilePersonalInfoDto GetProfileById([FromHeader(Name = "etag")] string userId)
         {
             var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
