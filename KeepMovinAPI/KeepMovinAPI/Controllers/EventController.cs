@@ -114,8 +114,10 @@ namespace KeepMovinAPI.Controllers
             try
             {       
                 string jwt = Request.Cookies["token"];
+                _logger.LogError(jwt);
                 if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
                 {
+                    _logger.LogError("Dupa");
                     _daoEvent.Add(eventModel);
                     return Ok();
                 }

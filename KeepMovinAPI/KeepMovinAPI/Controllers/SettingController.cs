@@ -10,6 +10,7 @@ using System.Linq;
 using static KeepMovinAPI.Dtos.SettingsDto;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using KeepMovinAPI.Repository.Implementations;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -72,19 +73,8 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
                     return Unauthorized();
-                //////// Wyciągamy obiekt z bazy///
-                Setting setting = new Setting
-                {
-                    Location = true,
-                    FollowersFollowing = false,
-                    Statistics = true,
-                    AboutMe = false,
-                    UpcomingEvents = true,
-                    PreviousEvents = false,
-                    Photo = true
-
-                };
-                return Ok(setting);
+                 Setting settings = _userProfileDao.GetSettingsByUserId(Guid.Parse(userId));
+                 return Ok(settings);
             }
             catch(Exception e)
             {
