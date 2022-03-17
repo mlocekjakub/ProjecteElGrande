@@ -1,18 +1,14 @@
-export function LogOut(uri) {
-    fetch(uri, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify("")
+import {useDispatch} from "react-redux";
+import {changeIsLogged} from "../../features/IsLogged";
 
-    }).then(response => response.status)
-        .then(data => console.log(data))
-        .then(localStorage.clear('session'));
+/*export function LogOut(uri) {
+    /!*const dispatch = useDispatch();*!/
+    /!*dispatch(changeIsLogged(false))*!/
+    
+    
 
 
-}
+}*/
 
 export function SendChangePasswordForm(collectUserInputs) {
     fetch('/user/changePassword', {

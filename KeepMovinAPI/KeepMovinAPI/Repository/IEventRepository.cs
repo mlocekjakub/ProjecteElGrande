@@ -10,8 +10,8 @@ namespace KeepMovinAPI.Repository
 {
     public interface IEventDao : IDao<Event>
     {
-        public IEnumerable<Event> GetByInput(string input);
+        public IEnumerable<EventCardDto> GetByInput(string input);
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate);
-        public IEnumerable<EventDto> GetFiltered([FromQuery] Filter filter);
+        public EventsSearchedDto GetFiltered([FromQuery] Filter filter);
     }
 }

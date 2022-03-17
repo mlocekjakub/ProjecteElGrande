@@ -1,39 +1,18 @@
 ﻿import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import "../index.css"
+import "./Footer.css"
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function Footer() {
     return (
-        <div>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: '100vh',
-                }}
-            >
-                <CssBaseline />
-                <Box
-                    component="footer"
-                    sx={{
-                        py: 3,
-                        px: 2,
-                        mt: 'auto',
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'light'
-                                ? theme.palette.grey[200]
-                                : theme.palette.grey[800],
-                    }}
-                >
-                    <Container maxWidth="sm">
-                        <Typography variant="body1">
-                            This is an example project for training the react routing
-                        </Typography>
-                    </Container>
-                </Box>
-            </Box>
+        <div className="page-footer">
+            <div className="footer__title">Keep Movin</div>
+            <div className="footer__page-description">Lorem ipsum dolor sit amet, consectetur 
+                adipiscing elit. Sed mi neque, viverra id 
+                lacinia a, vestibulum eget orci.
+            </div>
+            <a className="go-to__github" href="https://github.com/mlocekjakub/ProjecteElGrande" target="_blank">Github <GitHubIcon /></a>
+            {/*<div>Copyright &copy;2022 Keep Movin</div>*/}
         </div>
     );
 }

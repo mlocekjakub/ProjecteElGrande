@@ -14,9 +14,9 @@ namespace KeepMovinAPI.Domain.Dtos
         
         public UserProfile User { get; set; }
 
-        public Guid SportsSportId { get; set; }
+        public string Sport { get; set; }
 
-        public Guid ExperienceLevelId { get; set; }
+        public string ExperienceLevel { get; set; }
 
         public string EventInfo { get; set; }
 
@@ -28,9 +28,11 @@ namespace KeepMovinAPI.Domain.Dtos
 
         public string Currency { get; set; }
         
-        public Guid TypeId { get; set; }
+        public string Type { get; set; }
         
-        public Guid LocationId { get; set; }
+        public string Location { get; set; }
+        
+        public decimal NumberOfPages { get; set; }
 
     }
 }
