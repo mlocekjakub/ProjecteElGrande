@@ -8,7 +8,7 @@ export default function DateTimeInput(props) {
             label={props.label}
             type="datetime-local"
             name={props.name}
-            defaultValue="2017-05-24T10:30"
+            defaultValue={new Date()}
             InputLabelProps={{
                 shrink: true,
             }}

@@ -30,6 +30,7 @@ namespace KeepMovinAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var key = "Tu ustawiamy nasz tajny klucz jakby co";
             services.AddAuthentication(x =>
             {
@@ -60,7 +61,8 @@ namespace KeepMovinAPI
 
 
             services.AddDbContext<KeepMovinDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).LogTo(Console.WriteLine, LogLevel.Information)
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .LogTo(Console.WriteLine, LogLevel.Information)
                     .EnableSensitiveDataLogging());
             services.AddScoped<IEventDao, EventDao>();
             services.AddScoped<IUserDao, UserDao>();

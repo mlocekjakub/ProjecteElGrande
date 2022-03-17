@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const initialStateValue = 0;
 export const minPriceSlice = createSlice({
     name: "minPrice",

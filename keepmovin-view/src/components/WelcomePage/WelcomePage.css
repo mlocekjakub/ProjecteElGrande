@@ -1,0 +1,107 @@
+﻿.welcome-page {
+    background: #242626;
+    height: 100vh;
+    background-image: url(./ImagesTesting/typo1.png);
+    background-repeat: no-repeat;
+    background-position: 75% 35%;
+    background-size: 28%;
+    object-fit: scale-down;
+}
+
+.welcome-page-title{
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.0001rem;
+    font-size: 4rem;
+}
+
+
+/*____*/
+
+
+.join-button {
+    background: rgba(66, 133, 244, 0.5);
+    color: #FFFFFF;
+    border: 0;
+}
+.join-button:hover {
+    cursor: pointer;
+    background: var(--bg-btn-primary-blue);
+    transform: translateY(-3px);
+    /*border: 2px solid var(--bg-btn-primary-blue);*/
+}
+.welcome__events-details-button:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+    background: var(--bg-btn-primary-blue);
+    transform: translateY(-3px);
+}
+
+.welcome__events-details-button {
+    border: 1px solid var(--bg-btn-primary-blue);
+    color: var(--bg-btn-primary-blue);
+}
+
+.join-button:hover {
+    color: #FFFFFF;
+}
+
+.welcome__separator {
+    border-top: 2px solid #FFFFFF;
+    max-width: 10rem;
+    margin: 1.6rem 0 1.6rem 0;
+}
+
+.welcome__nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.welcome__nav > .nav-welcome {
+    text-align: center;
+    transition: 0.3s;
+    border-radius: 1.3rem;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 2.1vh;
+}
+
+
+.web-description {
+    max-width: 45ch;
+    font-size: 1.2rem;
+    text-transform: none;
+    line-height: 1.7rem;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.welcome-page-content {
+    padding: 8rem 22rem 5rem 22rem;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.welcome-page-content > img {
+    max-width: 33rem;
+}
+
+.welcome-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.welcome-page-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 3.8rem;
+}
+
+.welcome-page-title > span {
+    color: var(--bg-btn-primary-blue);
+    
+}

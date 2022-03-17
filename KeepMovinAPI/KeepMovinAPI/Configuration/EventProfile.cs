@@ -1,6 +1,7 @@
 using AutoMapper;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Configuration
 {
@@ -9,6 +10,8 @@ namespace KeepMovinAPI.Configuration
         public EventProfile()
         {
             CreateMap<Event, EventDto>().ReverseMap();
+            CreateMap<Event, CreateEventDto>().ReverseMap();
+            CreateMap<Event, EventCardDto>().ReverseMap();
         }
     }
 }

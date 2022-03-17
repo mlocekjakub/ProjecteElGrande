@@ -6,11 +6,12 @@ import MenuItem from "@mui/material/MenuItem";
 
 
 const items = []
-fetch('api/Sport')
+fetch('/api/Sport')
     .then(response => response.json())
     .then(data => {
         for (const [index, value] of data.entries()) {
-            items.push(<MenuItem value={value["sportId"]}>{value["name"]}</MenuItem>)
+            console.log(value)
+            items.push(<MenuItem value={JSON.stringify(value)}>{value["name"]}</MenuItem>)
         }
     });
 
