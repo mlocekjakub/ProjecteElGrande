@@ -31,16 +31,16 @@ export default function ProfilePage() {
             let userId = localStorage.getItem("session")
             axios
                 .get(`/api/UserProfile/${userId}`)
-                .then(response => setProfileItems(response))
-            console.log(profileItems)
+                .then(response => setProfileItems(response.data))
         }
         
         
-    }, [profileItems])
+    }, [])
     
     
     const setActive = (status) => {
         setActiveEvent(status)
+        console.log(profileItems)
     }
     
     return (

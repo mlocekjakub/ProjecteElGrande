@@ -6,6 +6,6 @@ namespace KeepMovinAPI.Repository
 {
     public interface IUserProfileRepository : IDao<UserProfile>
     {
-        public ProfilePageDto GetProfilePersonalInfoById(Guid userId);
+        public ProfilePersonalInfoDto GetProfilePersonalInfoById(Guid userId);
     }
 }

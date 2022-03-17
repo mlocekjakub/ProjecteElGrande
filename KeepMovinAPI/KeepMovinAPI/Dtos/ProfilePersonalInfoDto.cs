@@ -4,27 +4,27 @@ using System.Collections.Generic;
 
 namespace KeepMovinAPI.Domain.Dtos
 {
-    public class ProfilePageDto
+    public class ProfilePersonalInfoDto
     {
-        private Guid UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        private string? Name { get; set; }
+        public string? Name { get; set; }
 
-        private string? Surname { get; set; }
+        public string? Surname { get; set; }
 
-        private DateTime UserAge { get; set; }
+        public DateTime UserAge { get; set; }
 
-        private string? PersonalInfo { get; set; }
+        public string? PersonalInfo { get; set; }
 
-        private string? LocationCity { get; set; }
+        public string? LocationCity { get; set; }
 
-        private string? LocationCountry { get; set; }
+        public string? LocationCountry { get; set; }
 
-        private IEnumerable<User> Followers { get; set; } = new List<User>();
+        public IEnumerable<User> Followers { get; set; } = new List<User>();
 
-        private IEnumerable<User> Followed { get; set; } = new List<User>();
+        public IEnumerable<User> Followed { get; set; } = new List<User>();
 
-        public ProfilePageDto(
+        public ProfilePersonalInfoDto(
             Guid id, string name, string surname,  
             DateTime userAge, string personalInfo,
             string locationCity, string locationCountry)
