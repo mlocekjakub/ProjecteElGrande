@@ -1,4 +1,4 @@
-﻿import React, {useRef} from 'react';
+﻿import React, {useEffect, useRef, useState} from 'react';
 import profileImage from "../../Images/pexels-photo-771742.jpeg";
 import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
 import {Link} from "react-router-dom";
@@ -25,6 +25,7 @@ function Profile(props) {
     function toggleProfileMenu() {
         refProfileMenu.current.classList.toggle("expanded__active")
     }
+    
 
     let logout = () => {
         fetch('/user/logOut', {
@@ -51,7 +52,7 @@ function Profile(props) {
                         <SettingsIcon />
                         <span>Settings</span>
                     </Link>
-                    <Link className="go__log-out profile-link" to="#" onClick={logout}>
+                    <Link className="go__log-out profile-link" to="/list-of-events" onClick={logout}>
                         Log out
                     </Link>
                 </div>

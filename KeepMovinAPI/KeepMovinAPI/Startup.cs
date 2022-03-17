@@ -59,7 +59,6 @@ namespace KeepMovinAPI
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "KeepMovinAPI", Version = "v1"});
             });
 
-
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .LogTo(Console.WriteLine, LogLevel.Information)

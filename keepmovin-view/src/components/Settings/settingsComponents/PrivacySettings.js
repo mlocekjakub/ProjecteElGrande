@@ -16,29 +16,37 @@ export default function PrivacySettings() {
     const [prEvents, setPrEvents] = useState(false);
     const [photo, setPhoto] = useState(false);
 
-    useEffect(async() => {
+    useEffect(async () => {
         const response = await fetch("api/Setting/upload", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                "etag" : localStorage.getItem('session')
-                
+                "etag": localStorage.getItem('session')
+
             },
             credentials: 'include',
         })
         const content = await response.json()
-            .then(content => SetSettingsStatesFromDataBase(content))
-        .then(console.log(content))
+            .then(content => {
+
+                console.log(content.aboutMe)
+                console.log(content.location)
+                SetSettingsStatesFromDataBase(content)
+            })
+     
+            
+
+            
+      
 
     },[])
 
 
 
     function SetSettingsStatesFromDataBase(data) {
-        console.log(data.Location);
-        setLocation(data.location);
-        setFollow(data.followersFollowing);
-        setStats(data.statistics);
+        setLocation(data.aboutMe);
+        setFollow(data.aboutMe);
+        setStats(data.stat);
         setAboutMe(data.aboutMe);
         setUpEvents(data.upcomingEvents);
         setPrEvents(data.previousEvents);

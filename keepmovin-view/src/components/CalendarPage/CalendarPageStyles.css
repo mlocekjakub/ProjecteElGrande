@@ -3,11 +3,21 @@
 }
 
 .calendar-container {
-    margin: var(--page-margin);
+    margin: var(--page-margin-events-page);
     background-color: var(--bg-clr-containers);
     padding: 1rem;
+    min-height: 100vh;
 }
 
 a {
     text-decoration: none !important;
+}
+
+.fc-daygrid-day-top :hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fc-daygrid-event :hover {
+    cursor: pointer;
 }
