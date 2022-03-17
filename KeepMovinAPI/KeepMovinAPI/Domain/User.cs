@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace KeepMovinAPI.Domain
 {
@@ -19,6 +20,7 @@ namespace KeepMovinAPI.Domain
         
         public List<User> Followers { get; set; }
         public List<User> Followed { get; set; }
+        [JsonIgnore]
         public List<Event> Events { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace KeepMovinAPI.Controllers
             _validation = validation;
         }
 
-        [HttpGet("id/{id}")]
+        [HttpGet("{id}")]
         public Event Get(Guid id)
         {
             try
@@ -64,6 +64,13 @@ namespace KeepMovinAPI.Controllers
                 return null;
             }
             
+        }
+        
+        [HttpGet("user-events/{userId}")]
+        public IEnumerable<Event> GetUserEvents(Guid userId)
+        {
+            var listOfUserEvents = _daoEvent.GetUserEventsByUserId(userId);
+            return listOfUserEvents;
         }
 
         [HttpGet]
