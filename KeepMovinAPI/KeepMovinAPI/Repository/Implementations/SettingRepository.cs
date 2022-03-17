@@ -29,6 +29,8 @@ namespace KeepMovinAPI.Repository.Implementations
             throw new System.NotImplementedException();
         }
 
+  
+
         public Setting Get(Guid id)
         {
             var query = _context.Setting.Find(id);
@@ -36,7 +38,7 @@ namespace KeepMovinAPI.Repository.Implementations
         }
 
 
-        
+
 
 
 

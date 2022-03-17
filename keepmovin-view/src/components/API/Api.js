@@ -20,15 +20,9 @@ export function SendChangePasswordForm(collectUserInputs) {
         body: JSON.stringify(collectUserInputs)
 
     }).then(response => response.status)
-        .then(data => DisplayActionResult(data))
+        .then(data => console.log(data))
 
-    function DisplayActionResult(data) {
-        if (data === "200")
-            alert('jUHUHUHUHUHU')
-        else
-            alert("dupa");
 
-    }
 }
 
 

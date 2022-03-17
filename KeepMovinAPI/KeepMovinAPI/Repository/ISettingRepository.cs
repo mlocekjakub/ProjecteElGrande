@@ -1,4 +1,5 @@
 ﻿using KeepMovinAPI.Domain;
+using System;
 
 namespace KeepMovinAPI.Repository
 {
@@ -6,5 +7,7 @@ namespace KeepMovinAPI.Repository
     {
 
         public void Update(Setting setting);
+
+       
     }
 }

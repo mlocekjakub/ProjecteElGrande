@@ -60,6 +60,17 @@ namespace KeepMovinAPI.Repository.Implementations
             }
         }
 
+        public Setting GetSettingsByUserId(Guid userId)
+        {
+            var query = _context.UserProfile
+                .Include(e => e.Setting)
+                .Where(u => u.Organiser.Userid == userId);
+            UserProfile userProfile = query.FirstOrDefault();
+            Setting settings = userProfile.Setting;
+            return settings;
+
+        }
+
 
 
         public IEnumerable<UserProfile> GetAll()
@@ -71,6 +82,7 @@ namespace KeepMovinAPI.Repository.Implementations
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
-    
