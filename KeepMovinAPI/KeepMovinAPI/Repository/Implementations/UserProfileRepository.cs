@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq;
 using KeepMovinAPI.Domain.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
@@ -29,7 +30,22 @@ namespace KeepMovinAPI.Repository.Implementations
             var query = _context.UserProfile.Where(u => u.Organiser.Userid == userId);
             UserProfile userProfile = query.FirstOrDefault();
             return userProfile;
+        }
 
+
+        public ProfilePageDto GetProfilePersonalInfoById(Guid userId)
+        {
+
+            var test = _context.UserProfile.Where(u => u.Organiser.Userid == userId);
+
+            var user = test.FirstOrDefault();
+            
+            var userProfile = new ProfilePageDto(userId, user.Name, user.Surname,
+                user.BirthDate, user.PersonalInfo,
+                user.Location.City, user.Location.Country);
+
+            return userProfile;
+         
         }
 
         public IEnumerable<UserProfile> GetAll()

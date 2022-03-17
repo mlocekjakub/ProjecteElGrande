@@ -5,11 +5,13 @@ using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using System;
 using System.Linq;
+using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class UserProfileController : ControllerBase
     {
         private readonly ILogger<UserProfileController> _logger;
@@ -24,13 +26,6 @@ namespace KeepMovinAPI.Controllers
             _validation = validation;
 
         }
-        
-        
-        
-        
-        
-
-
 
         [HttpGet("uploadProfileInformation")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
@@ -55,8 +50,15 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogError(Convert.ToString(e));
                 return Unauthorized();
             }
+        }
+        
+        [HttpGet("{id}")]
+        public ProfilePageDto GetProfileById(Guid id)
+        {
+            var profilePage = _userProfileDao.GetProfilePersonalInfoById(id);
+            return profilePage;
             
-
+            
         }
 
 
