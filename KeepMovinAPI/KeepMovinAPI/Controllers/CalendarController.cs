@@ -15,12 +15,14 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<CalendarController> _logger;
         private IEventDao _daoEvent;
+        // private IEventUserDao _eventUserDao;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
 
         public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt)
         {
             _logger = logger;
             _daoEvent = daoEvent;
+            // _eventUserDao = eventUserDao;
             _jwtAuthenticationManager = jwt;
         }
 
@@ -33,6 +35,16 @@ namespace KeepMovinAPI.Controllers
             return listOfEvents;
         }
 
-        // add get for user events
+        // [HttpGet("user-events")]
+        // public IEnumerable<Event> GetUserEvents(Guid userId)
+        // {
+        //     var listOfUserEvents = _eventUserDao.GetByUserId(userId);
+        //     var listOfEvents = new List<Event>();
+        //     foreach (var userEvent in listOfUserEvents)
+        //     {
+        //         listOfEvents.Add(_daoEvent.Get(userEvent.EventsEventId));
+        //     }
+        //     return listOfEvents;
+        // }
     }
 }

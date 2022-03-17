@@ -15,8 +15,8 @@ export default function EventCalendar() {
 
     const [show, setShow] = useState(false);
     const [givenId, setGivenId] = useState(null);
-
-    // localStorage.getItem('session');
+    
+    // console.log(localStorage.getItem('session'));
 
     useEffect(() => {
         if (startDate != null && endDate != null) {

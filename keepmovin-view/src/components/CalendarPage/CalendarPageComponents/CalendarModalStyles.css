@@ -17,7 +17,7 @@
 
 .event-modal-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 0.1rem;
 }
 
@@ -28,10 +28,8 @@
 
 .event-modal-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 1rem;
-    margin-right: 3rem;
-    margin-left: 3rem;
     font-weight: bold;
 }
 
