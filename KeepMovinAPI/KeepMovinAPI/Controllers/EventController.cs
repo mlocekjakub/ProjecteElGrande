@@ -46,6 +46,13 @@ namespace KeepMovinAPI.Controllers
             var listOfEvents = _daoEvent.GetByInput(input);
             return listOfEvents;
         }
+        
+        [HttpGet("user-events/{userId}")]
+        public IEnumerable<Event> GetUserEvents(Guid userId)
+        {
+            var listOfUserEvents = _daoEvent.GetUserEventsByUserId(userId);
+            return listOfUserEvents;
+        }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

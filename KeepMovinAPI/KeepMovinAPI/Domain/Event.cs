@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 
 namespace KeepMovinAPI.Domain
@@ -58,6 +59,7 @@ namespace KeepMovinAPI.Domain
         
         public List<Picture> Pictures { get; set; }
         
+        [JsonIgnore]
         public List<User> Users { get; set; }
 
     }

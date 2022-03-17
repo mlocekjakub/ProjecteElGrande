@@ -4,6 +4,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
@@ -98,6 +100,14 @@ namespace KeepMovinAPI.Repository.Implementations
                     && i.StartEvent <= endDate
                     || i.EndEvent >= startDate
                 ).ToList();
+            return query;
+        }
+        
+        public IEnumerable<Event> GetUserEventsByUserId(Guid id)
+        {
+            var query = _context.Event
+                .Include(e => e.Users)
+                .Where(i => i.Users.Any(j => j.Userid == id));
             return query;
         }
     }

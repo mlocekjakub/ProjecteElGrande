@@ -55,7 +55,6 @@ namespace KeepMovinAPI
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "KeepMovinAPI", Version = "v1"});
             });
 
-
             services.AddDbContext<KeepMovinDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEventDao, EventDao>();
@@ -67,7 +66,6 @@ namespace KeepMovinAPI
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IExperienceDao, ExperienceDao>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
