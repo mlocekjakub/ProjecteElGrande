@@ -26,7 +26,6 @@ namespace KeepMovinAPI.Authentication
             {
                 return null;
             }
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(Pkey);
             var tokenDescriptor = new SecurityTokenDescriptor

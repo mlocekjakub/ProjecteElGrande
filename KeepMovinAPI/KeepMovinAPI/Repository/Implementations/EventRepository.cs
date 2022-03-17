@@ -6,6 +6,9 @@ using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.Extensions.Logging;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
@@ -35,10 +38,30 @@ namespace KeepMovinAPI.Repository.Implementations
             return query;
         }
 
-        public IEnumerable<Event> GetByInput(string input)
+        public IEnumerable<EventCardDto> GetByInput(string input)
         {
-            var query = _context.Event.Where(i => i.Name.ToLower().StartsWith(input.ToLower()));
-            return query.ToList();
+            var sports = _context.Sport.ToList();
+            var events = _context.Event.ToList();
+            var experiences = _context.ExperienceLevel.ToList();
+
+            var joinedTables =
+                from eventModel in events
+                join sport in sports on eventModel.Sports.SportId equals sport.SportId
+                join experience in experiences on eventModel.ExperienceLevel.ExperienceLevelId equals experience.ExperienceLevelId
+                select new EventCardDto()
+                {
+                    EventId = eventModel.EventId,
+                    Name = eventModel.Name,
+                    StartEvent = eventModel.StartEvent,
+                    Sport = eventModel.Sports.Name,
+                    ExperienceLevel = eventModel.ExperienceLevel.Name,
+                    MaxParticipants = eventModel.MaxParticipants,
+                };
+
+            var filteredEvents = joinedTables.Where(i => 
+                i.Name.ToLower().StartsWith(input.ToLower()));
+
+            return filteredEvents;
         }
 
         public IEnumerable<Event> GetAll()
@@ -46,50 +69,37 @@ namespace KeepMovinAPI.Repository.Implementations
             return _context.Event.ToList();
         }
 
-        public IEnumerable<EventDto> GetFiltered([FromQuery] Filter filter)
+        public EventsSearchedDto GetFiltered([FromQuery] Filter filter)
         {
-            var sports = _context.Sport.ToList();
-            var events = _context.Event.ToList();
-            var experiences = _context.ExperienceLevel.ToList();
-            var types = _context.EventType.ToList();
-            var locations = _context.Location.ToList();
+            var eventsPerPage = 4;
 
-            var joinedTables =
-                from eventModel in events
-                join sport in sports on eventModel.Sports.SportId equals sport.SportId
-                join experience in experiences on eventModel.ExperienceLevel.ExperienceLevelId equals experience
-                    .ExperienceLevelId
-                join type in types on eventModel.Type.TypeId equals type.TypeId
-                join location in locations on eventModel.Location.LocationId equals location.LocationId
-                select new EventDto()
-                {
-                    EventId = eventModel.EventId,
-                    Name = eventModel.Name,
-                    StartEvent = eventModel.StartEvent,
-                    EndEvent = eventModel.StartEvent,
-                    User = eventModel.User,
-                    SportsSportId = eventModel.Sports.SportId,
-                    ExperienceLevelId = eventModel.ExperienceLevel.ExperienceLevelId,
-                    EventInfo = eventModel.EventInfo,
-                    MaxParticipants = eventModel.MaxParticipants,
-                    Status = eventModel.Status,
-                    Price = eventModel.Price,
-                    Currency = eventModel.Currency,
-                    TypeId = eventModel.Type.TypeId,
-                    LocationId = eventModel.Location.LocationId,
-                };
+            var filteredEvents = _context.Event
+                .Include(eventModel => eventModel.Location)
+                .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.Type)
+                .Include(eventModel => eventModel.ExperienceLevel)
+                .Where(i => 
+                    (i.Price >= filter.MinPrice 
+                     && i.Price <= filter.MaxPrice)
+                    && (i.MaxParticipants >= filter.MinParticipants 
+                        && i.MaxParticipants <= filter.MaxParticipants)
+                    && filter.Sports.Contains(i.Sports.Name)
+                    && filter.Type.Contains(i.Type.Name)
+                    && (DateTime.Compare(i.StartEvent, DateTime.Parse(filter.MinDate)) > 0)
+                    && (DateTime.Compare(i.EndEvent, DateTime.Parse(filter.MaxDate)) < 0)
+                    && filter.Experience.Contains(i.ExperienceLevel.Name)).ToList();
+            
 
-            var query = joinedTables.Where(i =>
-                i.Name.ToLower().StartsWith(filter.SearchPhrase.ToLower())
-                && (i.Price >= filter.MinPrice
-                    && i.Price <= filter.MaxPrice)
-                && (i.MaxParticipants >= filter.MinParticipants
-                    && i.MaxParticipants <= filter.MaxParticipants)
-                && filter.Sports.Contains(i.SportsSportId)
-                && filter.Type.Contains(i.TypeId)
-                && filter.Experience.Contains(i.ExperienceLevelId));
+            var numberOfPages = Math.Ceiling((decimal) filteredEvents.ToList().Count / eventsPerPage);
+            
+            filteredEvents = filteredEvents
+                .Skip((filter.CurrentPageNumber - 1) * eventsPerPage)
+                .Take(eventsPerPage)
+                .ToList();
 
-            return query.ToList();
+            var searchedEvents = new EventsSearchedDto(numberOfPages, filteredEvents);
+            
+            return searchedEvents;
         }
 
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate)

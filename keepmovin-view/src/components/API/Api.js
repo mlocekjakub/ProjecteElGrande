@@ -1,16 +1,49 @@
-export function LogOut(uri) {
-    fetch(uri, {
+import {useDispatch} from "react-redux";
+import {changeIsLogged} from "../../features/IsLogged";
+
+/*export function LogOut(uri) {
+    /!*const dispatch = useDispatch();*!/
+    /!*dispatch(changeIsLogged(false))*!/
+    
+    
+
+
+}*/
+
+export function SendChangePasswordForm(collectUserInputs) {
+    fetch('/user/changePassword', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify("")
+        body: JSON.stringify(collectUserInputs)
 
     }).then(response => response.status)
-        .then(data => console.log(data))
-        .then(localStorage.clear('session'));
+        .then(data => DisplayActionResult(data))
 
+    function DisplayActionResult(data) {
+        if (data === "200")
+            alert('jUHUHUHUHUHU')
+        else
+            alert("dupa");
+
+    }
+}
+
+
+export function EditUserSettings() {
+    var privacyData = JSON.parse(localStorage.getItem("privacy"));
+    fetch('api/Setting/edit', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(privacyData)
+
+    }).then(response => response.status)
+        .then(localStorage.removeItem('privacy'))
 
 }
 
@@ -36,7 +69,7 @@ export function createEvent() {
         "MaxParticipants": max_participants,
         "Status": status,
         "Currency": currency,
-        "Link":"",
+        "Link": "",
         "Price": price,
     }
     fetch("/api/event", {

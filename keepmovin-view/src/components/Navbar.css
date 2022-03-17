@@ -1,11 +1,10 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
 header {
    font-family: "Montserrat", "sans-serif";
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 20px 15%;
+   padding: 20px 18%;
    background: #242626;
    position: fixed;
    top: 0; left: 0; right: 0;
@@ -33,7 +32,7 @@ header {
    transition: 0.2s;
 }
 .nav-item__icon:hover {
-   color: #4285F4;
+   color: var(--bg-btn-primary-blue);
 }
 .nav-item > img {
    max-width: 2rem;
@@ -44,7 +43,7 @@ header {
 }
 
 .nav-item > img:hover {
-   border: 1px solid #4285F4;
+   border: 1px solid var(--bg-btn-primary-blue);
 }
 
 
@@ -74,6 +73,7 @@ header {
 .search-txt-header:focus {
    outline: none !important;
    background: #fff;
+   border: 0 !important;
 }
 .glass-container {
    display: flex;
@@ -140,6 +140,14 @@ header {
    transform: rotate(45deg);
    background: #F3F3F3;
    z-index: -1;
+}
+
+.sign-in__button {
+   color: #FFFFFF;
+   transition: 0.2s;
+}
+.sign-in__button:hover {
+   color: var(--bg-btn-primary-blue);
 }
 
 

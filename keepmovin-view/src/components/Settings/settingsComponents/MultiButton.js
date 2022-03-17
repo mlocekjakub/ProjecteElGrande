@@ -4,7 +4,6 @@ import React from 'react';
 
 function MultiButton(props) {
     const style = {
-        border: '2px solid ',
         color: '#242626',
         border: '1px solid rgba(5, 5, 5, 0.13)',
     };

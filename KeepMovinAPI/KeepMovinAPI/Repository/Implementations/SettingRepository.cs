@@ -31,12 +31,25 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public Setting Get(Guid id)
         {
-            throw new System.NotImplementedException();
+            var query = _context.Setting.Find(id);
+            return query;
         }
+
+
+        
+
+
 
         public IEnumerable<Setting> GetAll()
         {
             throw new System.NotImplementedException();
         }
+
+        public void Update(Setting setting)
+        {
+            _context.Setting.Update(setting);
+        }
+
+
     }
 }

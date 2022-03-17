@@ -3,9 +3,10 @@
 }
 
 .calendar-container {
-    margin: var(--page-margin);
+    margin: var(--page-margin-events-page);
     background-color: var(--bg-clr-containers);
     padding: 1rem;
+    min-height: 100vh;
 }
 
 a {

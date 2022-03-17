@@ -2,30 +2,29 @@ import React from "react";
 import { Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
+import { EditUserSettings } from "../../API/Api"
 
 
 
 export default function AcceptChangesSettings(props) {
 
+
     const BigBangTraffic = (e) => {
-        var privacyData = JSON.parse(localStorage.getItem("privacy"));
-        EditUserSettings();
+
+        let currentButton = e.target.id;
+
+        if (currentButton == "PrivacySettings")
+            EditUserSettings();
+        else if (currentButton = ChangePassword)
+            ChangePassword();
+
+        
 
 
-        function EditUserSettings() {
-            fetch('api/Setting/edit', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(privacyData)
+     
+    }
 
-            }).then(response => response.status)
-                .then(data => console.log(data))
-                .then(localStorage.removeItem('privacy'))
-
-        }
+    let ChangePassword = (e) => {
 
     }
 
@@ -35,7 +34,7 @@ export default function AcceptChangesSettings(props) {
 
         <div className="save-button">
             
-            <Button onClick={BigBangTraffic} variant="contained" endIcon={<SendIcon />} >
+            <Button onClick={BigBangTraffic} id={props.module} variant="contained" endIcon={<SendIcon />} >
                 Save
             </Button>
         

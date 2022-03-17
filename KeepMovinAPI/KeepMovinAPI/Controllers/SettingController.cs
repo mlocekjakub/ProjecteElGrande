@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using static KeepMovinAPI.Dtos.SettingsDto;
+using Microsoft.AspNetCore.Http;
+using AutoMapper;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -16,63 +18,91 @@ namespace KeepMovinAPI.Controllers
     public class SettingController : ControllerBase
     {
         private readonly ILogger<SettingController> _logger;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        private IUserProfileRepository _userProfileDao;
         private ISettingDao _settingDao;
-        private IUserDao _userDao;
+        private IValidation _validation;
+        private readonly IMapper _mapper;
 
-        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao, IUserDao userDao,
-            IJwtAuthenticationManager jwt)
+        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao,
+             IValidation validation, IUserProfileRepository userProfileDao, IMapper mapper)
         {
             _logger = logger;
             _settingDao = settingDao;
-            _userDao = userDao;
-            _jwtAuthenticationManager = jwt;
+            _validation = validation;
+            _userProfileDao = userProfileDao;
+            _mapper = mapper;
+
         }
+
 
         [HttpPost("edit")]  
         public IActionResult Edit(SettingsDto settings) 
-        {          
-            string jwt = Request.Cookies["token"];
-            if (Validate(settings.UserId, jwt))
-            {
-                ///jeżeli tak to mapujemy na model i wysyłamy do bazy danych
-                return Ok();
-            }
-            return Unauthorized();
-
-        }
-
-        [HttpPost("upload")]  
-        public IActionResult Upload (Guid userId)
-        {
-            string jwt = Request.Cookies["token"];
-            if (Validate(userId, jwt))
-            {
-                return Ok();
-            }
-
-            return Unauthorized();
-
-        }
-
-
-        [NonAction]
-        private bool Validate(Guid userId, string jwt)
         {
             try
-            {                 
-                var token = _jwtAuthenticationManager.Verify(jwt);
-                var tokenClaims = token.Claims.ToList();
-                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
-                if (userId == user.Userid)
-                    return true;
-                return false;
-            }
-            catch (Exception)
             {
-                return false;
+                string jwt = Request.Cookies["token"];
+                if (_validation.Validate(settings.UserId, jwt))
+                {
+                    SafeChanges(settings);
+                    return Ok();
+                }
+                return Unauthorized();
             }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }
+            
+
         }
+
+      
+
+        [HttpGet("upload")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Upload([FromHeader(Name = "etag")]string userId)
+        {
+
+            try
+            {
+                if (!Guid.TryParse(userId, out _))
+                    return Unauthorized();
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                //////// Wyciągamy obiekt z bazy///
+                Setting setting = new Setting
+                {
+                    Location = true,
+                    FollowersFollowing = false,
+                    Statistics = true,
+                    AboutMe = false,
+                    UpcomingEvents = true,
+                    PreviousEvents = false,
+                    Photo = true
+
+                };
+                return Ok(setting);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }            
+
+        }
+
+        [NonAction]
+        public void SafeChanges(SettingsDto settings)
+        {
+            var userProfile = _userProfileDao.Get(settings.UserId);
+            
+            //Setting dataBaseSettings = _settingDao.Get(settingsId);
+            //_settingDao.Update(_mapper.Map<Setting>(settings));
+        }
+
 
 
     }

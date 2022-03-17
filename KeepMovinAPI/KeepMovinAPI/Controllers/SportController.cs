@@ -4,6 +4,8 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections;
+using System.Linq;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -23,8 +25,17 @@ namespace KeepMovinAPI.Controllers
         [HttpGet]
         public IEnumerable<Sport> GetAll()
         {
-            var listOfSports = _daoSport.GetAll();
-            return listOfSports;
+            try
+            {
+                var listOfSports = _daoSport.GetAll();
+                return listOfSports;
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
         
 
@@ -32,16 +43,35 @@ namespace KeepMovinAPI.Controllers
         [Route("{input}")]
         public IEnumerable<Sport> GetByInput(string input)
         {
-            var listOfEvents = _daoSport.GetByInput(input);
-            return listOfEvents;
+            try
+            {
+                var listOfEvents = _daoSport.GetByInput(input);
+                return listOfEvents;
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
         
         [HttpGet]
         [Route("id/{id}")]
         public Sport Get(Guid id)
         {
-            var sport = _daoSport.Get(id);
-            return sport;
+            try
+            {
+                var sport = _daoSport.Get(id);
+                return sport;
+            }
+            catch(Exception e)
+            {
+
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
 
 

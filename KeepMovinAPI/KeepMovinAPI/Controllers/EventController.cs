@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using System.Threading.Tasks;
@@ -20,31 +21,49 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<EventController> _logger;
         private IEventDao _daoEvent;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-        private IUserDao _userDao;
         private readonly IMapper _mapper;
+        private IValidation _validation;
 
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt, IMapper mapper)
+        public EventController(ILogger<EventController> logger, IEventDao daoEvent,
+            IMapper mapper,IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
-            _jwtAuthenticationManager = jwt;
             _mapper = mapper;
+            _validation = validation;
         }
 
         [HttpGet("id/{id}")]
         public Event Get(Guid id)
         {
-            Event eventModel = _daoEvent.Get(id);
-            return eventModel;
+            try
+            {
+                Event eventModel = _daoEvent.Get(id);
+                return eventModel;
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
 
 
-        [HttpGet("{input}")]
-        public IEnumerable<Event> GetByInput(string input)
+        [HttpGet("input/{input}")]
+        public IEnumerable<EventCardDto> GetByInput(string input)
         {
-            var listOfEvents = _daoEvent.GetByInput(input);
-            return listOfEvents;
+            try
+            {
+                var listOfEvents = _daoEvent.GetByInput(input);
+                return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+            
         }
         
         [HttpGet("user-events/{userId}")]
@@ -59,53 +78,65 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<IEnumerable<EventDto>>> GetFilteredEvents([FromQuery] Filter filter)
         {
-            var listOfEvents = _daoEvent.GetFiltered(filter);
-            if (!listOfEvents.Any())
+            try
             {
+                var listOfEvents = _daoEvent.GetFiltered(filter);
+                if (!listOfEvents.EventsFound.Any())
+                {
+                    return NoContent();
+                }
+
+                    // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
+                return Ok(listOfEvents);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
                 return NoContent();
             }
-
-            // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
-            return Ok(listOfEvents);
+            
         }
         
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
-            var listOfEvents = _daoEvent.GetAll();
-            return listOfEvents;
+            try
+            {
+                 var listOfEvents = _daoEvent.GetAll();
+                 return listOfEvents;    
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+
+            }
+           
         }
 
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {
-            string jwt = Request.Cookies["token"];
-            if (Validate(eventModel.User.Organiser.Userid, jwt))
-            {
-                _daoEvent.Add(eventModel);
-                return Ok();
-            }
-
-            return Unauthorized();
-        }
-
-
-        [NonAction]
-        public bool Validate(Guid userId, string jwt)
-        {
             try
-            {
-                var token = _jwtAuthenticationManager.Verify(jwt);
-                var tokenClaims = token.Claims.ToList();
-                var user = _userDao.Get(Guid.Parse(tokenClaims[0].Value));
-                if (userId == user.Userid)
-                    return true;
-                return false;
+            {       
+                string jwt = Request.Cookies["token"];
+                if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
+                {
+                    _daoEvent.Add(eventModel);
+                    return Ok();
+                }
+
+                return Unauthorized();
             }
-            catch (Exception)
+            catch(Exception e)
             {
-                return false;
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
             }
         }
+
+
+
     }
 }
