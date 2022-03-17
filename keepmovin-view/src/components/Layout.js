@@ -11,6 +11,7 @@ export default function Layout() {
     const dispatch = useDispatch();
     
     useEffect(() => {
+        
         if (localStorage["session"]) {
             dispatch(changeIsLogged(true))
         }
@@ -22,7 +23,7 @@ export default function Layout() {
         <div>
             <Navbar />
             <Outlet />
-            <Footer/>
+            <Footer />
         </div>
     );
 }

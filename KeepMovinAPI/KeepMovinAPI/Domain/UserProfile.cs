@@ -7,15 +7,12 @@ namespace KeepMovinAPI.Domain
     {
 
         [Key] public Guid UserProfileId { get; set; } = Guid.NewGuid();
-
         public User Organiser { get; set; }
         
         public Picture Picture { get; set; }
-        
 
         [MaxLength(20)]
         public string Name { get; set; }
-        
 
         [MaxLength(20)]
         public string Surname { get; set; }
@@ -27,18 +24,14 @@ namespace KeepMovinAPI.Domain
         public Organisation Organisation { get; set; }
         
         public Location Location { get; set; }
-        
         public Setting Setting { get; set; }
         
         [MaxLength(12)]
         public string PhoneNumber { get; set; }
-
-
         public void AddUser(User user)
         {
             Organiser = user;
         }
-
         public void AddSettings(Setting settings)
         {
             Setting = settings;

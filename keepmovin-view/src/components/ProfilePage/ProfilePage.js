@@ -23,13 +23,24 @@ export default function ProfilePage() {
     
     const [isLogged, setIsLogged] = useState(false);
     
-    const [profile, setProfile] = useState();
-    
     const isUserLogged = useSelector((state) => state.isLogged.value)
+
+    const [profileItems, setProfileItems] = useState();
+    useEffect(() => {
+        if (isUserLogged) {
+            let userId = localStorage.getItem("session")
+            axios
+                .get(`/api/UserProfile/${userId}`)
+                .then(response => setProfileItems(response.data))
+        }
+        
+        
+    }, [])
     
     
     const setActive = (status) => {
         setActiveEvent(status)
+        console.log(profileItems)
     }
     
     return (

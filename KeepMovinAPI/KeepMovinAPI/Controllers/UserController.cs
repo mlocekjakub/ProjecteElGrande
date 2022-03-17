@@ -71,9 +71,7 @@ namespace KeepMovinAPI.Controllers
             {
                 User user = _userDao.GetUserByEmail(userEmail.Email);
                 if (_userDao.CheckIfUserExists(user))
-                {
-                    // Some Actions Made
-                    return StatusCode(200);
+                { return StatusCode(200);
                 }
 
                 return StatusCode(303);

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using System;
 using System.Linq;
+using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Dtos;
 using AutoMapper;
@@ -29,13 +30,6 @@ namespace KeepMovinAPI.Controllers
             _mapper = mapper; 
 
         }
-        
-        
-        
-        
-        
-
-
 
         [HttpGet("uploadProfileInformation")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
@@ -59,8 +53,13 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogError(Convert.ToString(e));
                 return Unauthorized();
             }
-            
-
+        }
+        
+        [HttpGet("{id}")]
+        public ProfilePersonalInfoDto GetProfileById([FromHeader(Name = "etag")] string userId)
+        {
+            var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
+            return profilePage;
         }
 
 

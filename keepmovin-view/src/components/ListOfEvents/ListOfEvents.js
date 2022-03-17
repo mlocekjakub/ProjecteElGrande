@@ -118,6 +118,7 @@ function SportEventsPage() {
     function Events(props) {
         return props.display.map((event) =>
             (<EventCard key={event.eventId}
+                        eventId={event.eventId}
                         eventName={event.name}
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}

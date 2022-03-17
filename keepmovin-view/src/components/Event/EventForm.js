@@ -4,12 +4,16 @@ import NameInput from "./eventForm/NameInput";
 import PictureInput from "./eventForm/PictureInput";
 import DateTimeInput from "./eventForm/DateTimeInput";
 import SportSelect from "./eventForm/SportSelect";
+import TypeSelect from "./eventForm/TypeSelect";
 import ParticipantsInput from "./eventForm/ParticipantsInput";
 import ExperienceSelect from "./eventForm/ExperienceSelect";
 import PriceInput from "./eventForm/PriceInput";
 import InfoInput from "./eventForm/InfoInput";
 import {createEvent} from "../API/Api";
 import {Button} from "@mui/material";
+import CityInput from "./eventForm/CityInput";
+import CountryInput from "./eventForm/CountryInput";
+import ZipCodeInput from "./eventForm/ZipCodeInput";
 
 
 export default function EventForm() {
@@ -30,6 +34,10 @@ export default function EventForm() {
                     name="EndEvent"
                 />
                 <SportSelect/>
+                <TypeSelect/>
+                <CityInput/>
+                <CountryInput/>
+                <ZipCodeInput/>
                 <ParticipantsInput/>
                 <ExperienceSelect/>
                 <PriceInput/>

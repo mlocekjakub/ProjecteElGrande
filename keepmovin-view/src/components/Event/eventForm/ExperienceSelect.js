@@ -4,7 +4,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import * as React from "react";
 
-
+const items = []
+fetch('/api/Experience')
+    .then(response => response.json())
+    .then(data => {
+        for (const [index, value] of data.entries()) {
+            console.log(value)
+            items.push(<MenuItem value={JSON.stringify(value)}>{value["name"]}</MenuItem>)
+        }
+    });
 
 export default function ExperienceSelect(){
 
@@ -12,7 +20,7 @@ export default function ExperienceSelect(){
     const handleExperienceLevelChange = (event) => {
         setExperienceLevel(event.target.value);
     };
-    
+
     return(
         <FormControl sx={{minWidth: 180}}>
             <InputLabel id="demo-controlled-open-select-label">Experience Level</InputLabel>
@@ -24,9 +32,7 @@ export default function ExperienceSelect(){
                 label="Experience Level"
                 onChange={handleExperienceLevelChange}
             >
-                <MenuItem value={"Beginner"}>Beginner</MenuItem>
-                <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
-                <MenuItem value={"Expert"}>Expert</MenuItem>
+                {items}
             </Select>
         </FormControl>
     )

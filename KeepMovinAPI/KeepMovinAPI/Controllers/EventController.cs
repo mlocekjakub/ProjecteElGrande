@@ -10,6 +10,7 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -25,7 +26,7 @@ namespace KeepMovinAPI.Controllers
         private IValidation _validation;
 
         public EventController(ILogger<EventController> logger, IEventDao daoEvent,
-            IMapper mapper,IValidation validation)
+            IMapper mapper, IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
@@ -33,7 +34,7 @@ namespace KeepMovinAPI.Controllers
             _validation = validation;
         }
 
-        [HttpGet("id/{id}")]
+        [HttpGet("{id}")]
         public Event Get(Guid id)
         {
             try
@@ -46,7 +47,6 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
             }
-            
         }
 
 
@@ -58,12 +58,11 @@ namespace KeepMovinAPI.Controllers
                 var listOfEvents = _daoEvent.GetByInput(input);
                 return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
             }
-            
         }
         
         [HttpGet("user-events/{userId}")]
@@ -86,57 +85,59 @@ namespace KeepMovinAPI.Controllers
                     return NoContent();
                 }
 
-                    // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
+                // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
                 return Ok(listOfEvents);
-
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return NoContent();
             }
-            
         }
-        
+
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
             try
             {
-                 var listOfEvents = _daoEvent.GetAll();
-                 return listOfEvents;    
+                var listOfEvents = _daoEvent.GetAll();
+                return listOfEvents;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
-
             }
-           
         }
-
+        
+        [HttpGet("join")]
+        public void JoinToEvent([FromQuery]Guid userId, [FromQuery] Guid eventId)
+        {
+            try
+            {
+                Console.WriteLine(userId);
+                Console.WriteLine(eventId);
+                _daoEvent.JoinToEvent(userId,eventId);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+            }
+        }
+        
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {
             try
-            {       
-                string jwt = Request.Cookies["token"];
-                if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
-                {
-                    _daoEvent.Add(eventModel);
-                    return Ok();
-                }
-
-                return Unauthorized();
+            {
+                _daoEvent.Add(eventModel);
+                return Ok();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
         }
-
-
-
     }
 }
