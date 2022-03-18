@@ -36,7 +36,7 @@ function Previous(props) {
         if (currentPagePrevious >= numberOfPagesPrevious) {
             setIsLimitNextPrevious(true);
         }
-    })
+    }, [])
 
     const nextPagePrevious = () => {
         if(currentPagePrevious + 1 === numberOfPagesPrevious) {

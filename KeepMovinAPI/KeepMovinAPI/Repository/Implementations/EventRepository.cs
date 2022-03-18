@@ -133,6 +133,7 @@ namespace KeepMovinAPI.Repository.Implementations
             var eventsPerPage = 6;
             var eventsPage = _context.Event
                 .Include(e => e.Users)
+                .Include(e => e.Sports)
                 .Where(i => i.Users.Any(j => j.Userid == id) && (i.Status == "Upcoming"));
             
             var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
@@ -150,6 +151,7 @@ namespace KeepMovinAPI.Repository.Implementations
             var eventsPerPage = 6;
             var eventsPage = _context.Event
                 .Include(e => e.Users)
+                .Include(e => e.Sports)
                 .Where(i => i.Users.Any(j => j.Userid == id) && (i.Status == "Finished"));
             
             var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
@@ -164,8 +166,6 @@ namespace KeepMovinAPI.Repository.Implementations
         }
         
         
-        
-
         public void JoinToEvent(Guid userId, Guid eventId)
         {
             var user = _context.User.Find(userId);

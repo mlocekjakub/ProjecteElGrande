@@ -3,19 +3,15 @@ import EventCard from "./EventCard";
 import EventsSearchedCard from "../../NavbarComponents/EventsSearchedCard";
 
 function EventsMenu(props) {
-    let numberOfEmptyCards = 5 - props.content.length
+    let numberOfEmptyCards = 6 - props.content.length
+    console.log(props.content)
     return (
         <div className="events-menu">
-            <EventCard key={1202}
-                       eventName="Runmageddon"
-                       eventDateStart="2022-03-03 14:05:06.8633333"
-                       sportName="Running"
-                       maxParticipants="30" />
             {props.content.map((event) =>
                 (<EventCard key={event.eventId}
                             eventName={event.name}
                             eventDateStart={event.startEvent}
-                            sportName={event.sport}
+                            sportName={event.sports.name}
                             maxParticipants={event.maxParticipants}/>))
             }
             {Array.from({ length: numberOfEmptyCards }, (_, i) =>

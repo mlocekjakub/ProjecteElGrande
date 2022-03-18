@@ -37,7 +37,7 @@ function Upcoming(props) {
         if (currentPageUpcoming >= numberOfPagesUpcoming) {
             setIsLimitNextUpcoming(true);
         }
-    })
+    },[])
 
     const nextPageUpcoming = () => {
         if(currentPageUpcoming + 1 === numberOfPagesUpcoming) {
