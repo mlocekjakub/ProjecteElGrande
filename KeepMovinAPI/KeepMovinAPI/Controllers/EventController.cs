@@ -10,6 +10,7 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -70,6 +71,22 @@ namespace KeepMovinAPI.Controllers
         public IEnumerable<Event> GetUserEvents(Guid userId)
         {
             var listOfUserEvents = _daoEvent.GetUserEventsByUserId(userId);
+            return listOfUserEvents;
+        }
+        
+        [HttpGet("events-user/upcoming")]
+        public UserUpcomingEventsDto GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+                                                        [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            var listOfUserEvents = _daoEvent.GetUpcomingEventsById(Guid.Parse(userId), int.Parse(currentPage));
+            return listOfUserEvents;
+        }
+        
+        [HttpGet("events-user/previous")]
+        public UserPreviousEventsDto GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+                                                        [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            var listOfUserEvents = _daoEvent.GetPreviousEventsById(Guid.Parse(userId), int.Parse(currentPage));
             return listOfUserEvents;
         }
 

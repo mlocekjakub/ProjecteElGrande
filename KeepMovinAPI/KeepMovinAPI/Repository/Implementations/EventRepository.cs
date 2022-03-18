@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -120,5 +121,43 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Where(i => i.Users.Any(j => j.Userid == id));
             return query;
         }
+        
+        public UserUpcomingEventsDto GetUpcomingEventsById(Guid id, int currentPage)
+        {
+            var eventsPerPage = 6;
+            var eventsPage = _context.Event
+                .Include(e => e.Users)
+                .Where(i => i.Users.Any(j => j.Userid == id) && (i.Status == "Upcoming"));
+            
+            var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
+            
+            eventsPage = eventsPage
+                .Skip((currentPage - 1) * eventsPerPage)
+                .Take(eventsPerPage);
+
+            var profilePageContent = new UserUpcomingEventsDto(numberOfPages, eventsPage);
+            
+            return profilePageContent;
+        }
+        public UserPreviousEventsDto GetPreviousEventsById(Guid id, int currentPage)
+        {
+            var eventsPerPage = 6;
+            var eventsPage = _context.Event
+                .Include(e => e.Users)
+                .Where(i => i.Users.Any(j => j.Userid == id) && (i.Status == "Finished"));
+            
+            var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
+
+            eventsPage = eventsPage
+                .Skip((currentPage - 1) * eventsPerPage)
+                .Take(eventsPerPage);
+            
+            var profilePageContent = new UserPreviousEventsDto(numberOfPages, eventsPage);
+
+            return profilePageContent;
+        }
+        
+        
+        
     }
 }

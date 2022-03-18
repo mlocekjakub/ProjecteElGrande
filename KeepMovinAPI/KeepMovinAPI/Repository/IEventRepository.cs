@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Repository
 
@@ -14,5 +15,11 @@ namespace KeepMovinAPI.Repository
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate);
         public EventsSearchedDto GetFiltered([FromQuery] Filter filter);
         public IEnumerable<Event> GetUserEventsByUserId(Guid id);
+
+        public UserUpcomingEventsDto GetUpcomingEventsById(Guid id, int currentPage);
+        
+        public UserPreviousEventsDto GetPreviousEventsById(Guid id, int currentPage);
+        
+        
     }
 }
