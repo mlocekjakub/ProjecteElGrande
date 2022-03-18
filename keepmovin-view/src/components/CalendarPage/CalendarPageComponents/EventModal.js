@@ -8,7 +8,7 @@ export default function EventModal({show, eventId, onClose}) {
 
     useEffect(() => {
         if (eventId) {
-            fetch(`api/Event/id/${eventId}`)
+            fetch(`api/Event/${eventId}`)
                 .then(response => {
                     if (response.ok) {
                         return response.json();
