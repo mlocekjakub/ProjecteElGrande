@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 
 const items = []
-fetch('/api/Sport')
+fetch('/api/Type')
     .then(response => response.json())
     .then(data => {
         for (const [index, value] of data.entries()) {
@@ -15,23 +15,23 @@ fetch('/api/Sport')
         }
     });
 
-export default function SportSelect() {
+export default function TypeSelect() {
 
-    const [sportId, setSportId] = React.useState('');
-    const handleSportIdChange = (event) => {
-        setSportId(event.target.value);
+    const [typeId, setTypeId] = React.useState('');
+    const handleTypeIdChange = (event) => {
+        setTypeId(event.target.value);
     };
 
     return (
         <FormControl sx={{minWidth: 120}}>
-            <InputLabel id="demo-controlled-open-select-label">Sport</InputLabel>
+            <InputLabel id="demo-controlled-open-select-label">Type</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
-                id="sport-select"
-                value={sportId}
-                name="SportId"
-                label="Sport"
-                onChange={handleSportIdChange}
+                id="type-select"
+                value={typeId}
+                name="TypeId"
+                label="Type"
+                onChange={handleTypeIdChange}
             >
                 {items}
             </Select>

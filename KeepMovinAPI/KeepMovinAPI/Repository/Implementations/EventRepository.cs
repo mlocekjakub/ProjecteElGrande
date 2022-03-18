@@ -24,6 +24,12 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public void Add(Event eventModel)
         {
+            ExperienceLevel explvl = _context.ExperienceLevel.Find(eventModel.ExperienceLevel.ExperienceLevelId);
+            eventModel.ExperienceLevel = explvl;
+            Sport sport = _context.Sport.Find(eventModel.Sports.SportId);
+            eventModel.Sports = sport;
+            EventType eventType = _context.EventType.Find(eventModel.Type.TypeId);
+            eventModel.Type = eventType;
             _context.Event.Add(eventModel);
             _context.SaveChanges();
         }
@@ -102,7 +108,7 @@ namespace KeepMovinAPI.Repository.Implementations
             
             return searchedEvents;
         }
-
+        
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate)
         {
             var query = _context.Event
@@ -159,5 +165,17 @@ namespace KeepMovinAPI.Repository.Implementations
         
         
         
+
+        public void JoinToEvent(Guid userId, Guid eventId)
+        {
+            var user = _context.User.Find(userId);
+            var eventModel = _context.Event.Find(eventId);
+            user.Events = new List<Event>();
+            user.Events.Add(eventModel);
+            // eventModel.Users.Add(user);
+            // _context.User.Update(user);
+            // _context.Event.Update(eventModel);
+            _context.SaveChanges();
+        }
     }
 }

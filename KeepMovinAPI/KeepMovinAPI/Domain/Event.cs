@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace KeepMovinAPI.Domain
@@ -21,7 +22,7 @@ namespace KeepMovinAPI.Domain
         [Required]
         public DateTime EndEvent { get; set; }
 
-        [Required]
+        // [Required]
         public UserProfile User { get; set; }
 
         [Required]
@@ -61,6 +62,5 @@ namespace KeepMovinAPI.Domain
         
         [JsonIgnore]
         public List<User> Users { get; set; }
-
     }
 }

@@ -6,7 +6,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
-
+function JoinToEvent(eventId){
+    fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
+}
 
 function EventCard(props) {
     const isUserLogged = useSelector((state) => state.isLogged.value)
@@ -43,7 +45,7 @@ function EventCard(props) {
                 </div>
             </div>
             <article className="events__card-nav">
-                {isUserLogged ? <div className="sign-up-event">Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
+                {isUserLogged ? <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
             </article>
         </div>
     )
