@@ -97,7 +97,7 @@ export default function EventCalendar() {
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 customButtons={{
                     userEventsButton: {
-                        text: "My events",
+                        text: "my events",
                         click: function () {
                             alert("clicked");
                         }
@@ -112,19 +112,9 @@ export default function EventCalendar() {
                 firstDay={1} // 1 = Monday
                 initialView="dayGridMonth"
                 headerToolbar={{
-                    left: "userEventsButton prev next",
+                    left: "userEventsButton",
                     center: "title",
-                    right: "dayGridMonth list"
-                }}
-                views={{
-                    list: {
-                        duration: {months: 1}, // full month in list
-                        displayEventTime: true,
-                        eventClick: (e) => {
-                            setGivenId(e.event.id);
-                            setShow(true);
-                        }
-                    }
+                    right: "today prev next"
                 }}
                 displayEventTime={false}
                 events={listOfEvents}
