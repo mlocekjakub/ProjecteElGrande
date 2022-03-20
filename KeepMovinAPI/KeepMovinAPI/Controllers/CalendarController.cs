@@ -46,8 +46,6 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("user-events")]
         public IEnumerable<Event> GetUserEvents([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
         {
-            Console.WriteLine(userId.GetType());
-            Console.WriteLine(userId);
             var listOfEvents =
                 _daoEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
                     endDate.AddDays(1)); // added one day to catch all events in calendar view
