@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using System;
-using System.Linq;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Dtos;
@@ -78,6 +77,31 @@ namespace KeepMovinAPI.Controllers
             
         }
 
+        [HttpGet("editProfileInformation")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Edit(UserProfileDto userProfileDto)
+        {
+            userProfileDto.Picture = new Picture();
+            userProfileDto.Organisation = new Organisation();
+            userProfileDto.Name = "AbraKadabra";
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(userProfileDto.UserId, jwt))
+                    return Unauthorized();
+                _userProfileDao.UpdateUserProfile(userProfileDto);
+                return Ok();
 
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+          
+        }
+        
     }
 }

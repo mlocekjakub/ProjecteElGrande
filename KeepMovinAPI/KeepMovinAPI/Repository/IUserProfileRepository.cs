@@ -2,6 +2,7 @@
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using System;
+using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Repository
 {
@@ -9,6 +10,8 @@ namespace KeepMovinAPI.Repository
     {
         public ProfilePersonalInfoDto GetProfilePersonalInfoById(Guid userId);
         public Setting GetSettingsByUserId(Guid userId);
+
+        public void UpdateUserProfile(UserProfileDto upDated ); 
 
 
 

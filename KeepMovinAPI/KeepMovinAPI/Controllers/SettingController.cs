@@ -1,16 +1,12 @@
 ﻿using KeepMovinAPI.Authentication;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Dtos;
-using KeepMovinAPI.Domain.Dtos;
 using KeepMovinAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using static KeepMovinAPI.Dtos.SettingsDto;
 using Microsoft.AspNetCore.Http;
-using AutoMapper;
-using KeepMovinAPI.Repository.Implementations;
+
 
 namespace KeepMovinAPI.Controllers
 {
