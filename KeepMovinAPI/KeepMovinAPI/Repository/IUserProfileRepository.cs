@@ -9,5 +9,11 @@ namespace KeepMovinAPI.Repository
     {
         public ProfilePersonalInfoDto GetProfilePersonalInfoById(Guid userId);
         public Setting GetSettingsByUserId(Guid userId);
+
+
+
+
+
+
     }
 }

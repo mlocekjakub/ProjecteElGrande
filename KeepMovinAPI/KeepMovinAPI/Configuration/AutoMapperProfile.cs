@@ -10,6 +10,7 @@ namespace KeepMovinAPI.Configuration
         public AutoMapperProfile()
         {
             CreateMap<UserProfile, UserProfileDto>();
+            CreateMap<SettingsDto, Setting>();
         }
     }
 }

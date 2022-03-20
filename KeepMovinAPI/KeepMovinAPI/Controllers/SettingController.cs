@@ -39,12 +39,14 @@ namespace KeepMovinAPI.Controllers
         [HttpPost("edit")]  
         public IActionResult Edit(SettingsDto settings) 
         {
+         
             try
             {
                 string jwt = Request.Cookies["token"];
                 if (_validation.Validate(settings.UserId, jwt))
                 {
-                    SafeChanges(settings);
+                    Setting currentSettings = _userProfileDao.GetSettingsByUserId(settings.UserId);
+                    _settingDao.Update(currentSettings, settings);
                     return Ok();
                 }
                 return Unauthorized();
@@ -65,7 +67,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")]string userId)
         {
-
+     
             try
             {
                 if (!Guid.TryParse(userId, out _))
@@ -84,14 +86,7 @@ namespace KeepMovinAPI.Controllers
 
         }
 
-        [NonAction]
-        public void SafeChanges(SettingsDto settings)
-        {
-            var userProfile = _userProfileDao.Get(settings.UserId);
-            
-            //Setting dataBaseSettings = _settingDao.Get(settingsId);
-            //_settingDao.Update(_mapper.Map<Setting>(settings));
-        }
+      
 
 
 
