@@ -57,14 +57,25 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ProfilePersonalInfoDto GetProfileById([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetProfileById([FromHeader(Name = "etag")] string userId)
         {
-
-            var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
-            return profilePage;
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
+                return Ok(profilePage);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+            
         }
 
 

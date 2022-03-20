@@ -21,3 +21,25 @@ a {
 .fc-daygrid-event :hover {
     cursor: pointer;
 }
+
+tbody tr {
+    height: 12vh;
+}
+
+.fc-daygrid-day-frame {
+    height: 12vh;
+}
+
+.fc-daygrid-day-events {
+    height: 10vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.fc-daygrid-day-events::-webkit-scrollbar {
+    display: none;
+}
+
+.fc-daygrid-block-event {
+    overflow: visible !important;
+}

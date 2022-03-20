@@ -7,26 +7,73 @@ import listPlugin from "@fullcalendar/list";
 import EventModal from "./EventModal";
 
 export default function EventCalendar() {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [calendarStartDate, setCalendarStartDate] = useState(new Date());
+    const [calendarEndDate, setCalendarEndDate] = useState(new Date());
     const [url, setUrl] = useState(null);
-    const [events, setEvents] = useState([]);
     const [listOfEvents, setListOfEvents] = useState([]);
 
     const [show, setShow] = useState(false);
     const [givenId, setGivenId] = useState(null);
-    
-    // console.log(localStorage.getItem('session'));
+
+    const [showUserEvents, setShowUserEvents] = useState(false);
+
+    const eventMultiplier = (events) => {
+        let tempList = [];
+        events.forEach(event => {
+            const start = new Date(event.startEvent).getDate();
+            const end = new Date(event.endEvent).getDate();
+
+            if ((end - start) !== 0) {
+                for (let i = 0; i <= (end - start); i++) {
+                    let newStart = new Date(event.startEvent);
+                    let newEnd = new Date(event.endEvent);
+
+                    switch (i) {
+                        case 0: // first day of event
+                            newEnd.setDate(newStart.getDate());
+                            newEnd.setHours(23, 59, 59);
+                            break;
+                        case (end - start): // last day of event 
+                            newStart.setDate(newStart.getDate() + i);
+                            newStart.setHours(0, 0, 0);
+                            break;
+                        default: // middle days
+                            newStart.setDate(newStart.getDate() + i);
+                            newStart.setHours(0, 0, 0);
+                            newEnd.setDate(newStart.getDate());
+                            newEnd.setHours(23, 59, 59);
+                    }
+                    tempList.push(
+                        {
+                            'id': event.eventId,
+                            'title': event.name,
+                            'start': newStart,
+                            'end': newEnd,
+                        })
+                }
+            } else { // one-day events
+                tempList.push(
+                    {
+                        'id': event.eventId,
+                        'title': event.name,
+                        'start': new Date(event.startEvent),
+                        'end': new Date(event.endEvent),
+                    }
+                )
+            }
+        })
+        setListOfEvents(tempList);
+    }
 
     useEffect(() => {
-        if (startDate != null && endDate != null) {
-            setUrl(`api/Calendar?startDate=${startDate.toJSON().slice(0, 10)}&endDate=${endDate.toJSON().slice(0, 10)}`);
+        if (calendarStartDate != null && calendarEndDate != null) {
+            setUrl(`api/Calendar${showUserEvents === true ? "/user-events" : ""}?startDate=${calendarStartDate.toJSON().slice(0, 10)}&endDate=${calendarEndDate.toJSON().slice(0, 10)}`);
         }
-    }, [startDate, endDate])
+    }, [calendarStartDate, calendarEndDate, showUserEvents])
 
     useEffect(() => {
         if (url != null) {
-            fetch(url)
+            fetch(url, requestOptions)
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -34,25 +81,19 @@ export default function EventCalendar() {
                     throw response;
                 })
                 .then(data => {
-                    let tempList = [];
-                    setEvents(data);
-                    data.forEach(element => {
-                        tempList.push(
-                            {
-                                'id': element.eventId,
-                                'title': element.name,
-                                'start': new Date(element.startEvent),
-                                'end': new Date(element.endEvent),
-                            }
-                        )
-                    })
-                    setListOfEvents(tempList);
+                    eventMultiplier(data);
                 })
                 .catch(error => {
                     console.error("Error fetching data: ", error);
                 })
         }
     }, [url])
+
+    const requestOptions = {
+        headers: {
+            'userId': `${localStorage.getItem("session")}`,
+        }
+    }
 
     return (
         <div className="calendar-container">
@@ -64,9 +105,9 @@ export default function EventCalendar() {
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 customButtons={{
                     userEventsButton: {
-                        text: "My events",
-                        click: function() {
-                            alert("clicked");
+                        text: `${showUserEvents === true ? "all events" : "my events"}`,
+                        click: function () {
+                            setShowUserEvents(!showUserEvents);
                         }
                     }
                 }}
@@ -74,24 +115,14 @@ export default function EventCalendar() {
                     hour: '2-digit',
                     minute: '2-digit',
                     meridiem: false,
-                    hour12: false
+                    hourCycle: 'h23' // necessary, to do not have time like 24:00 instead of 00:00 
                 }}
                 firstDay={1} // 1 = Monday
                 initialView="dayGridMonth"
                 headerToolbar={{
-                    left: "userEventsButton prev next",
+                    left: "userEventsButton",
                     center: "title",
-                    right: "dayGridMonth list"
-                }}
-                views={{
-                    list: {
-                        duration: {months: 1}, // full month in list
-                        displayEventTime: true,
-                        eventClick: (e) => {
-                            setGivenId(e.event.id);
-                            setShow(true);
-                        }
-                    }
+                    right: "today prev next"
                 }}
                 displayEventTime={false}
                 events={listOfEvents}
@@ -101,10 +132,10 @@ export default function EventCalendar() {
                 }}
                 dateClick={(e) => console.log(e.dateStr)}
                 datesSet={(dateInfo) => {
-                    setStartDate(dateInfo.start); // start of the range the calendar date
-                    setEndDate(dateInfo.end); // end of the range the calendar date
+                    setCalendarStartDate(dateInfo.start); // start of the range the calendar date
+                    setCalendarEndDate(dateInfo.end); // end of the range the calendar date
                 }}
-                contentHeight={"80vh"}
+                contentHeight={"90vh"}
             />
         </div>
     );

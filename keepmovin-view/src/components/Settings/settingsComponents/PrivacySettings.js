@@ -41,7 +41,7 @@ export default function PrivacySettings() {
 
 
     function SetSettingsStatesFromDataBase(data) {
-        setLocation(data.aboutMe);
+        setLocation(data.location);
         setFollow(data.followersFollowing);
         setStats(data.statistics);
         setAboutMe(data.aboutMe);

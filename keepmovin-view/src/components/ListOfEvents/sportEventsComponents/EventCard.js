@@ -3,18 +3,28 @@ import eventImage from "../../../Images/News-Trailer-Web-4Sep20.png";
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from "@mui/icons-material/Person";
-import {useSelector} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import axios from "axios";
+import {changeEventsJoined} from "../../../features/EventsJoined";
 
 
 function EventCard(props) {
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
+    const dispatch = useDispatch();
+    
+    const eventsJoined = useSelector((state) => state.eventsJoined.value)
+
+    function JoinToEvent(eventId){
+        fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
+    }
+    
     return (
         <div className="event-1">
             <img src={eventImage} alt="" />
             <div className="description">
-                <div className="info">
+                <div className="info__event-list">
                     <div className="category">
                         {props.sport}
                     </div>
@@ -42,7 +52,7 @@ function EventCard(props) {
                 </div>
             </div>
             <article className="events__card-nav">
-                {isUserLogged ? <div className="sign-up-event">Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
+                {isUserLogged ? <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
             </article>
         </div>
     )

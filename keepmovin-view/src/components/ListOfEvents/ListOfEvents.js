@@ -77,7 +77,6 @@ function SportEventsPage() {
         setInputTimeout(
             setTimeout(() => {
                 let correctFetchUrl = getUrl();
-                console.log(correctFetchUrl)
                 axios
                     .get(correctFetchUrl)
                     .then(response => {
@@ -87,7 +86,6 @@ function SportEventsPage() {
                         else {
                             setFoundEvents(response.data.eventsFound)
                             setNumberOfPages(response.data.numberOfPages)
-                            console.log(foundEvents)
                         }
                         setIsFetchingData(false);
                     });
@@ -118,6 +116,7 @@ function SportEventsPage() {
     function Events(props) {
         return props.display.map((event) =>
             (<EventCard key={event.eventId}
+                        eventId={event.eventId}
                         eventName={event.name}
                         dateStart={event.startEvent}
                         dateEnd={event.endEvent}

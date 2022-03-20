@@ -20,7 +20,7 @@ namespace KeepMovinAPI.Controllers
         private IValidation _validation;
 
         public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
-             IValidation validation)
+            IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
@@ -34,32 +34,26 @@ namespace KeepMovinAPI.Controllers
             try
             {
                 var listOfEvents =
-                _daoEvent.GetAllByDateRange(startDate,
-                    endDate.AddDays(1)); // added one day to catch all events in calendar view
-                return listOfEvents;    
-
-
+                    _daoEvent.GetAllByDateRange(startDate,
+                        endDate.AddDays(1)); // added one day to catch all events in calendar view
+                return listOfEvents;
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
             }
-            
-                
-            
         }
 
-        // [HttpGet("user-events")]
-        // public IEnumerable<Event> GetUserEvents(Guid userId)
-        // {
-        //     var listOfUserEvents = _eventUserDao.GetByUserId(userId);
-        //     var listOfEvents = new List<Event>();
-        //     foreach (var userEvent in listOfUserEvents)
-        //     {
-        //         listOfEvents.Add(_daoEvent.Get(userEvent.EventsEventId));
-        //     }
-        //     return listOfEvents;
-        // }
+        [HttpGet("user-events")]
+        public IEnumerable<Event> GetUserEvents([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
+        {
+            Console.WriteLine(userId.GetType());
+            Console.WriteLine(userId);
+            var listOfEvents =
+                _daoEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
+                    endDate.AddDays(1)); // added one day to catch all events in calendar view
+            return listOfEvents;
+        }
     }
 }

@@ -5,13 +5,14 @@ import Footer from "./Footer";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {changeIsLogged} from "../features/IsLogged";
+import axios from "axios";
+import {changeEventsJoined} from "../features/EventsJoined";
 
 export default function Layout() {
     
     const dispatch = useDispatch();
     
     useEffect(() => {
-        
         if (localStorage["session"]) {
             dispatch(changeIsLogged(true))
         }

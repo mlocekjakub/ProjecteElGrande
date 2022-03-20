@@ -10,6 +10,7 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Domain.Dtos;
+using KeepMovinAPI.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,8 +25,9 @@ namespace KeepMovinAPI.Controllers
         private readonly IMapper _mapper;
         private IValidation _validation;
 
+
         public EventController(ILogger<EventController> logger, IEventDao daoEvent,
-            IMapper mapper,IValidation validation)
+            IMapper mapper, IValidation validation)
         {
             _logger = logger;
             _daoEvent = daoEvent;
@@ -33,21 +35,25 @@ namespace KeepMovinAPI.Controllers
             _validation = validation;
         }
 
+
+
         [HttpGet("{id}")]
-        public Event Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Get(Guid id)
         {
             try
             {
                 Event eventModel = _daoEvent.Get(id);
-                return eventModel;
+                return Ok(eventModel);
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
-            
         }
+
 
 
         [HttpGet("input/{input}")]
@@ -58,20 +64,89 @@ namespace KeepMovinAPI.Controllers
                 var listOfEvents = _daoEvent.GetByInput(input);
                 return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
             }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+        }
+        
+
+
+        [HttpGet("user-events/{userId}")]  
+        public IEnumerable<Event> GetUserEvents(Guid userId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(userId, jwt))
+                    return null;
+                var listOfUserEvents = _daoEvent.GetUserEventsByUserId(userId);
+                return listOfUserEvents;
+
+            }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
             }
+           
+        }
+
+
+        
+        [HttpGet("events-user/upcoming")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserUpcomingEventsDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+                                                        [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _daoEvent.GetUpcomingEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
             
         }
         
-        [HttpGet("user-events/{userId}")]
-        public IEnumerable<Event> GetUserEvents(Guid userId)
+
+
+        [HttpGet("events-user/previous")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserPreviousEventsDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+                                                        [FromHeader(Name = "currentPage")] string currentPage)
         {
-            var listOfUserEvents = _daoEvent.GetUserEventsByUserId(userId);
-            return listOfUserEvents;
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _daoEvent.GetPreviousEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+
+            
         }
+
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -85,60 +160,70 @@ namespace KeepMovinAPI.Controllers
                 {
                     return NoContent();
                 }
-
-                    // var mappedListOfEvents = _mapper.Map<IEnumerable<EventDto>>(listOfEvents);
                 return Ok(listOfEvents);
-
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return NoContent();
             }
-            
         }
-        
+
+
+
         [HttpGet("all")]
         public IEnumerable<Event> GetAll()
         {
             try
             {
-                 var listOfEvents = _daoEvent.GetAll();
-                 return listOfEvents;    
+                var listOfEvents = _daoEvent.GetAll();
+                return listOfEvents;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return null;
-
             }
-           
         }
+        
+
+
+        [HttpGet("join")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult JoinToEvent([FromQuery]Guid userId, [FromQuery] Guid eventId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(userId, jwt))
+                    return Unauthorized();
+                _daoEvent.JoinToEvent(userId,eventId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+
 
         [HttpPost]
         public IActionResult Add(Event eventModel)
         {
             try
-            {       
-                string jwt = Request.Cookies["token"];
-                _logger.LogError(jwt);
-                if (_validation.Validate(eventModel.User.Organiser.Userid, jwt))
-                {
-                    _logger.LogError("Dupa");
-                    _daoEvent.Add(eventModel);
-                    return Ok();
-                }
-
-                return Unauthorized();
+            {
+                _daoEvent.Add(eventModel);
+                return Ok();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
         }
-
-
-
     }
 }

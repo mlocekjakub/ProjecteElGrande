@@ -22,21 +22,24 @@ namespace KeepMovinAPI.Controllers
         private IUserProfileRepository _userProfileDao;
         private ISettingDao _settingDao;
         private IValidation _validation;
-        private readonly IMapper _mapper;
+
 
         public SettingController(ILogger<SettingController> logger, ISettingDao settingDao,
-             IValidation validation, IUserProfileRepository userProfileDao, IMapper mapper)
+             IValidation validation, IUserProfileRepository userProfileDao)
         {
             _logger = logger;
             _settingDao = settingDao;
             _validation = validation;
             _userProfileDao = userProfileDao;
-            _mapper = mapper;
+
 
         }
 
 
-        [HttpPost("edit")]  
+        [HttpPost("edit")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(SettingsDto settings) 
         {
          
@@ -54,7 +57,7 @@ namespace KeepMovinAPI.Controllers
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }
             
 
@@ -65,6 +68,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("upload")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Upload([FromHeader(Name = "etag")]string userId)
         {
      
@@ -81,7 +85,7 @@ namespace KeepMovinAPI.Controllers
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }            
 
         }
