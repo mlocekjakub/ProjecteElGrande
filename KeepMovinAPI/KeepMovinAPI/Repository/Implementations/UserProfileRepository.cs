@@ -6,6 +6,7 @@ using System.Linq;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
@@ -28,7 +29,10 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public UserProfile Get(Guid userId)
         {
-            var query = _context.UserProfile.Where(u => u.Organiser.Userid == userId);
+            var query = _context.UserProfile.Include(e=> e.Organisation).Include(e=> e.Location)
+                .Where(u => u.Organiser.Userid == userId);
+
+
             UserProfile userProfile = query.FirstOrDefault();
             return userProfile;
         }
@@ -68,6 +72,35 @@ namespace KeepMovinAPI.Repository.Implementations
             UserProfile userProfile = query.FirstOrDefault();
             Setting settings = userProfile.Setting;
             return settings;
+
+        }
+
+        public Guid GetSettingsIdByUserId(Guid userId)
+        {
+            var query = _context.UserProfile
+                .Include(e => e.Setting)
+                .Where(u => u.Organiser.Userid == userId);
+            UserProfile userProfile = query.FirstOrDefault();
+            Setting settings = userProfile.Setting;
+            
+            return settings.SettingsId;
+
+        }
+
+        public void UpdateUserProfile(UserProfileDto upDated)
+        {
+            var current = Get(upDated.UserId);
+            current.Name = upDated.Name;
+            current.Surname = upDated.Surname;
+            current.Picture = upDated.Picture;
+            current.BirthDate = upDated.BirthDate;
+            current.PersonalInfo = upDated.PersonalInfo;
+            current.Organisation = upDated.Organisation;
+            current.Location = upDated.Location;
+            current.PhoneNumber = upDated.PhoneNumber;
+            _context.UserProfile.Update(current);
+            _context.SaveChanges();
+
 
         }
 

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KeepMovinAPI.Authentication;
 using System;
-using System.Linq;
 using KeepMovinAPI.Domain.Dtos;
 using Microsoft.AspNetCore.Http;
 using KeepMovinAPI.Dtos;
@@ -33,6 +32,7 @@ namespace KeepMovinAPI.Controllers
 
         [HttpGet("uploadProfileInformation")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")] string userId)
         {
@@ -51,17 +51,57 @@ namespace KeepMovinAPI.Controllers
             catch(Exception e)
             {
                 _logger.LogError(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }
         }
         
-        [HttpGet("id")]
-        public ProfilePersonalInfoDto GetProfileById([FromHeader(Name = "etag")] string userId)
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult GetProfileById([FromHeader(Name = "etag")] string userId)
         {
-            var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
-            return profilePage;
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var profilePage = _userProfileDao.GetProfilePersonalInfoById(Guid.Parse(userId));
+                return Ok(profilePage);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+            
         }
 
+        [HttpGet("editProfileInformation")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Edit(UserProfileDto userProfileDto)
+        {
+            userProfileDto.Picture = new Picture();
+            userProfileDto.Organisation = new Organisation();
+            userProfileDto.Name = "AbraKadabra";
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(userProfileDto.UserId, jwt))
+                    return Unauthorized();
+                _userProfileDao.UpdateUserProfile(userProfileDto);
+                return Ok();
 
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+          
+        }
+        
     }
 }

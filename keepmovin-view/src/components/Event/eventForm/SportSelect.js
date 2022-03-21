@@ -10,7 +10,6 @@ fetch('/api/Sport')
     .then(response => response.json())
     .then(data => {
         for (const [index, value] of data.entries()) {
-            console.log(value)
             items.push(<MenuItem value={JSON.stringify(value)}>{value["name"]}</MenuItem>)
         }
     });

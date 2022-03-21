@@ -15,6 +15,8 @@ export default function EventCalendar() {
     const [show, setShow] = useState(false);
     const [givenId, setGivenId] = useState(null);
 
+    const [showUserEvents, setShowUserEvents] = useState(false);
+
     const eventMultiplier = (events) => {
         let tempList = [];
         events.forEach(event => {
@@ -65,13 +67,13 @@ export default function EventCalendar() {
 
     useEffect(() => {
         if (calendarStartDate != null && calendarEndDate != null) {
-            setUrl(`api/Calendar?startDate=${calendarStartDate.toJSON().slice(0, 10)}&endDate=${calendarEndDate.toJSON().slice(0, 10)}`);
+            setUrl(`api/Calendar${showUserEvents === true ? "/user-events" : ""}?startDate=${calendarStartDate.toJSON().slice(0, 10)}&endDate=${calendarEndDate.toJSON().slice(0, 10)}`);
         }
-    }, [calendarStartDate, calendarEndDate])
+    }, [calendarStartDate, calendarEndDate, showUserEvents])
 
     useEffect(() => {
         if (url != null) {
-            fetch(url)
+            fetch(url, requestOptions)
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -87,6 +89,12 @@ export default function EventCalendar() {
         }
     }, [url])
 
+    const requestOptions = {
+        headers: {
+            'userId': `${localStorage.getItem("session")}`,
+        }
+    }
+
     return (
         <div className="calendar-container">
             <EventModal onClose={() => {
@@ -97,9 +105,9 @@ export default function EventCalendar() {
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 customButtons={{
                     userEventsButton: {
-                        text: "My events",
+                        text: `${showUserEvents === true ? "all events" : "my events"}`,
                         click: function () {
-                            alert("clicked");
+                            setShowUserEvents(!showUserEvents);
                         }
                     }
                 }}
@@ -112,19 +120,9 @@ export default function EventCalendar() {
                 firstDay={1} // 1 = Monday
                 initialView="dayGridMonth"
                 headerToolbar={{
-                    left: "userEventsButton prev next",
+                    left: "userEventsButton",
                     center: "title",
-                    right: "dayGridMonth list"
-                }}
-                views={{
-                    list: {
-                        duration: {months: 1}, // full month in list
-                        displayEventTime: true,
-                        eventClick: (e) => {
-                            setGivenId(e.event.id);
-                            setShow(true);
-                        }
-                    }
+                    right: "today prev next"
                 }}
                 displayEventTime={false}
                 events={listOfEvents}

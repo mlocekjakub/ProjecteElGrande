@@ -1,4 +1,5 @@
 ﻿using KeepMovinAPI.Domain;
+using KeepMovinAPI.Dtos;
 using System;
 
 namespace KeepMovinAPI.Repository
@@ -6,7 +7,7 @@ namespace KeepMovinAPI.Repository
     public interface ISettingDao:IDao<Setting>
     {
 
-        public void Update(Setting setting);
+        public void Update(Setting current,SettingsDto upDated);
 
        
     }

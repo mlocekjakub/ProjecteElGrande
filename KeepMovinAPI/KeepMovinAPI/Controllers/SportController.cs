@@ -4,8 +4,7 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections;
-using System.Linq;
+
 
 namespace KeepMovinAPI.Controllers
 {
