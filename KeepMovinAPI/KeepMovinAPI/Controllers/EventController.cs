@@ -221,7 +221,7 @@ namespace KeepMovinAPI.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogWarning(Convert.ToString(e));g
+                _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
         }
