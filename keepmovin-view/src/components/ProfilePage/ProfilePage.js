@@ -27,7 +27,7 @@ export default function ProfilePage() {
     useEffect(() => {
         if (isUserLogged) {
             axios
-                .get(`/api/UserProfile/id`)
+                .get(`/api/UserProfile/${localStorage['session']}`)
                 .then(response => setProfileItems(response.data))
         }
     }, [])

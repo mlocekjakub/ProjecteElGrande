@@ -219,6 +219,41 @@ input[type=submit]:disabled {
     pointer-events: none;
 }
 
+.register-validation__error, .login-validation__error {
+    position: absolute;
+    color: #FFFFFF;
+    background: #B81D13;
+    max-width: 24rem;
+    border-radius: 2rem;
+    padding: 0.8rem 3rem 0.8rem 3rem;
+    top: 7.5rem;
+    opacity: 0;
+    transition: 0.2s;
+}
+.register-validation__success, .login-validation__success {
+    position: absolute;
+    color: #FFFFFF;
+    background: #4BB543;
+    max-width: 24rem;
+    border-radius: 2rem;
+    padding: 0.8rem 3rem 0.8rem 3rem;
+    top: 7.5rem;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+
+.register-modal__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open-modal__register-validation {
+    top: 8rem;
+    opacity: 1;
+}
+
 
 
 

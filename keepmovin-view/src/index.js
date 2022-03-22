@@ -16,6 +16,7 @@ import maxPriceReducer from "./features/MaxPrice"
 import rangeDateReducer from "./features/RangeDate"
 import eventsJoinedReducer from "./features/EventsJoined"
 import isLoggedReducer from "./features/IsLogged"
+import loginActiveButtonReducer from "./features/LoginActiveButton"
 import {Provider} from "react-redux";
 
 const store = configureStore({
@@ -30,6 +31,7 @@ const store = configureStore({
         maxPrice: maxPriceReducer,
         rangeDate: rangeDateReducer,
         eventsJoined: eventsJoinedReducer,
+        loginActiveButton: loginActiveButtonReducer,
         isLogged: isLoggedReducer
     },
 })
