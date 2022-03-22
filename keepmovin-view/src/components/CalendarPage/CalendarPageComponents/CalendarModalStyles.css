@@ -1,4 +1,4 @@
-﻿.event-calendar-modal {
+﻿.event-calendar-modal{
     position: absolute;
     z-index: 1055;
     left: 0;
@@ -8,11 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .event-modal-content {
-    background-color: #ff0000;
+    background-color: #f3f3f3;
     width: 20rem;
+    border-radius: 0.3rem;
 }
 
 .event-modal-buttons {
@@ -35,6 +37,13 @@
 
 .event-modal-title {
     text-align: center;
+}
+
+.event-modal-date {
+    padding: 0.5rem;
+    border-top: 0.1rem solid black;
+    text-align: center;
+    font-size: 1rem;
 }
 
 .event-modal-body {

@@ -9,11 +9,12 @@ import ForgottenPassword from "./ForgottenPassword";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {changeIsLogged} from "../../../features/IsLogged";
+import {changeLoginActiveButton} from "../../../features/LoginActiveButton";
 
 
 
 
-export default function LoginForm() {
+export default function LoginForm(props) {
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -27,26 +28,21 @@ export default function LoginForm() {
     })
 
     useEffect(() => {
-        if (redirectToMainPage === true) {
-            navigate("/list-of-events")
+        if (redirectToMainPage) {
+            setTimeout(() => {
+                navigate("/list-of-events")
+            }, 1000)
         }
     }, [redirectToMainPage])
     
 
-    const HandleSubmit = (e) => {
+    function HandleSubmit(e) {
         e.preventDefault()
-        if (ValidateLogin(details.email, details.password)) {
-            FetchLoginData(details.email, details.password);
-        }
-    }
-    
-
-    async function FetchLoginData(email, password) {
         let data_package_form = {
-            "Email": email,
-            "Password": password
+            "Email": details.email,
+            "Password": details.password
         }
-        const response = await fetch("/user/login", {
+        fetch("/user/login", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -54,15 +50,20 @@ export default function LoginForm() {
             },
             credentials: 'include',
             body: JSON.stringify(data_package_form)
+        }).then(response => {
+            if (response.ok) {
+                let content = response.json()
+                    .then(content => {
+                        localStorage.setItem('session', content)
+                        dispatch(changeIsLogged(true))
+                    })
+                props.emailSuccessModal.current.classList.add("open-modal__register-validation")
+                setRedirectToMainPage(true);
+            }
+            else {
+                props.emailErrorModal.current.classList.add("open-modal__register-validation")
+            }
         })
-        if (response.ok) {
-            let content = await response.json()
-                .then(content => {
-                    localStorage.setItem('session', content)
-                    dispatch(changeIsLogged(true))
-                })
-            setRedirectToMainPage(true);
-        }
     }
     
     return (

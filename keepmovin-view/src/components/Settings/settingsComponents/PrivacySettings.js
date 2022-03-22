@@ -28,9 +28,6 @@ export default function PrivacySettings() {
         })
         const content = await response.json()
             .then(content => {
-
-                console.log(content.aboutMe)
-                console.log(content.location)
                 SetSettingsStatesFromDataBase(content)
             })
      
@@ -44,9 +41,9 @@ export default function PrivacySettings() {
 
 
     function SetSettingsStatesFromDataBase(data) {
-        setLocation(data.aboutMe);
-        setFollow(data.aboutMe);
-        setStats(data.stat);
+        setLocation(data.location);
+        setFollow(data.followersFollowing);
+        setStats(data.statistics);
         setAboutMe(data.aboutMe);
         setUpEvents(data.upcomingEvents);
         setPrEvents(data.previousEvents);
@@ -58,13 +55,13 @@ export default function PrivacySettings() {
     useEffect(() => {
         let privacy = {};
         privacy = {
-            'location': location,
-            'follow': follow,
-            'stats': stats,
-            'aboutMe': aboutMe,
-            'upEvents': upEvents,
-            'prEvents': prEvents,
-            'photo': photo,
+            'Location': location,
+            'FollowersFollowing': follow,
+            'Statistics': stats,
+            'AboutMe': aboutMe,
+            'UpcomingEvents': upEvents,
+            'PreviousEvents': prEvents,
+            'Photo': photo,
             'userId': localStorage.getItem('session')
         }
         localStorage.setItem("privacy", JSON.stringify(privacy));

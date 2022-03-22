@@ -13,6 +13,7 @@ namespace KeepMovinAPI.Repository
     {
         public IEnumerable<EventCardDto> GetByInput(string input);
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate);
+        public IEnumerable<Event> GetUserEventsByDateRange(Guid userId, DateTime startDate, DateTime endDate);
         public EventsSearchedDto GetFiltered([FromQuery] Filter filter);
         public void JoinToEvent(Guid userId, Guid eventId);
         public IEnumerable<Event> GetUserEventsByUserId(Guid id);

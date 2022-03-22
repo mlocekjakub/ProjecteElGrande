@@ -1,10 +1,7 @@
 import {useDispatch} from "react-redux";
 import {changeIsLogged} from "../../features/IsLogged";
 
-/*export function LogOut(uri) {
-    /!*const dispatch = useDispatch();*!/
-    /!*dispatch(changeIsLogged(false))*!/
-}*/
+
 
 export function SendChangePasswordForm(collectUserInputs) {
     fetch('/user/changePassword', {

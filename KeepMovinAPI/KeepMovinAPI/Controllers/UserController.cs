@@ -34,29 +34,32 @@ namespace KeepMovinAPI.Controllers
 
         [HttpPost]
         [Route("/user/changePassword")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public StatusCodeResult ChangePassword(ChangePasswordDto changePasswordItems)
         {
             try
             {
                 if (changePasswordItems.NewPassword != changePasswordItems.ConfirmPassword)
-                    return StatusCode(303);
+                    return Unauthorized();
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(changePasswordItems.Userid, jwt))
-                    return StatusCode(303);
+                    return Unauthorized();
 
                 User user = _userDao.Get(changePasswordItems.Userid);
 
-                if (!_userDao.ComparePasswords(changePasswordItems.OldPassword,user.Password))
-                    return StatusCode(303);
+                if (!_userDao.ComparePasswords(changePasswordItems.OldPassword, user.Password))
+                    return Unauthorized();
 
                 _userDao.UpdatePassword(user, changePasswordItems.NewPassword);
-                return StatusCode(200);
+                return Ok();
 
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return StatusCode(303);
+                return BadRequest() ;
             }
             
         }
@@ -65,43 +68,52 @@ namespace KeepMovinAPI.Controllers
 
         [HttpPost]
         [Route("/user/reminder")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public StatusCodeResult Reminder(UserEmail userEmail)
         {
             try
             {
                 User user = _userDao.GetUserByEmail(userEmail.Email);
                 if (_userDao.CheckIfUserExists(user))
-                { return StatusCode(200);
+                {
+                    // Some Actions Made
+                    return Ok();
                 }
 
-                return StatusCode(303);
+                return BadRequest();
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return StatusCode(303);
+                return BadRequest();
             }
         }
 
         [HttpPost]
         [Route("/user/register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public StatusCodeResult Register(User user)
         {
             try
             {
                 if (_userDao.CheckIfUserExists(user))
                 {
-                    return StatusCode(303);
+
+                    return StatusCode(409);
                 }
                 CreateAUserInfrastructure(user);
-                return StatusCode(200);
+                return Ok();
 
 
             }
             catch(Exception e)
             {
+                
                 _logger.LogWarning(Convert.ToString(e));
-                return StatusCode(303);
+                return BadRequest();
             }
             
         }
@@ -109,6 +121,8 @@ namespace KeepMovinAPI.Controllers
 
         [HttpPost]
         [Route("/user/login")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Login(User user)
         {
             try
@@ -128,7 +142,7 @@ namespace KeepMovinAPI.Controllers
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return StatusCode(303);
+                return Unauthorized();
             }
             
 
@@ -137,6 +151,8 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpPost("/user/logOut")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(String))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Logout()
         {
             try
@@ -154,6 +170,8 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("/user/validate")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(String))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Validate()
         {
 

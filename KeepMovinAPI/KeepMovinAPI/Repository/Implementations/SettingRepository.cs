@@ -3,7 +3,7 @@ using KeepMovinAPI.Domain;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-
+using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Repository.Implementations
 
@@ -38,18 +38,26 @@ namespace KeepMovinAPI.Repository.Implementations
         }
 
 
-
-
-
-
         public IEnumerable<Setting> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public void Update(Setting setting)
+
+
+        public void Update(Setting current,SettingsDto upDated)
         {
-            _context.Setting.Update(setting);
+            current.AboutMe = upDated.AboutMe;
+            current.PreviousEvents = upDated.PreviousEvents;
+            current.FollowersFollowing = upDated.FollowersFollowing;
+            current.Statistics = upDated.Statistics;
+            current.UpcomingEvents = upDated.UpcomingEvents;
+            current.Location = upDated.Location;
+            current.Photo = upDated.Photo;
+
+            _context.Setting.Update(current);
+            _context.SaveChanges();
+
         }
 
 

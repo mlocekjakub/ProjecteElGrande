@@ -8,19 +8,18 @@ import {
     ValidateRegister
 } from './ValidateInputs';
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import {changeLoginActiveButton} from "../../../features/LoginActiveButton";
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
-    const confirmPasswordRef = useRef(null)
-    const [redirectToLogin, setRedirectToLogin] = useState(false);
     const [isRegisterValid, setIsRegisterValid] = useState(false)
+    const [isOkRequest, setIsOkRequest] = useState(false)
+    const [redirectToLogin, setRedirectToLogin] = useState(false);
     const [details, setDetails] = useState({
         email: "",
         password: "",
@@ -28,11 +27,6 @@ export default function RegisterForm() {
     })
     
     
-    useEffect(() => {
-        if (redirectToLogin === true) {
-            navigate("/login")
-        }
-    }, [redirectToLogin])
     
     useEffect(() => {
         if (ValidateRegister(details.email, details.password, details.confirmPassword)) {
@@ -44,24 +38,38 @@ export default function RegisterForm() {
         
     }, [details])
     
-    function HandleSubmit() {
-        FetchRegisterData(details.email, details.password)
-    }
-
-    async function FetchRegisterData(email, password) {
-        let data_package_form = {
-            "Email": email,
-            "Password": password
+    
+    useEffect(() => {
+        if (redirectToLogin) {
+            setTimeout(() => {
+                dispatch(changeLoginActiveButton('login'))
+            }, 500)
         }
-        await fetch("/user/register", {
+    }, [isOkRequest])
+    
+    function HandleSubmit(e) {
+        e.preventDefault()
+        let data_package_form = {
+            "Email": details.email,
+            "Password": details.password
+        }
+        fetch("/user/register", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data_package_form)
+        }).then(response => {
+            setRedirectToLogin(true);
+            setIsOkRequest(response.ok)
+            if (!response.ok) {
+                props.emailErrorModal.current.classList.add("open-modal__register-validation")
+            }
+            else {
+                props.emailSuccessModal.current.classList.add("open-modal__register-validation")
+            }
         })
-        setRedirectToLogin(true);
     }
 
     return (
@@ -161,14 +169,15 @@ export default function RegisterForm() {
                     ComparePasswords(details.password, details.confirmPassword)
                         ? ""
                         : <span>Passwords does not match</span>
-                           
-                }</div>
+                }
+                </div>
             </div>
             <div className="submit-container">
                 <label htmlFor="register-submit"></label>
-                <input type="submit" name="submit" id="register-submit" onClick={HandleSubmit} disabled={!isRegisterValid} value="register"/>
+                <input type="submit" name="submit" id="register-submit" onClick={(e) => HandleSubmit(e)} disabled={!isRegisterValid} value="register"/>
             </div>
         </form>
+        
 
     );
 
