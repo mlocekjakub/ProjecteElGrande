@@ -225,5 +225,21 @@ namespace KeepMovinAPI.Controllers
                 return Unauthorized();
             }
         }
+        
+         
+        [HttpGet("status-update")]
+        public IActionResult StatusUpdate()
+        {
+            try
+            {
+                _daoEvent.UpdateStatus();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return Unauthorized();
+            }
+        }
     }
 }

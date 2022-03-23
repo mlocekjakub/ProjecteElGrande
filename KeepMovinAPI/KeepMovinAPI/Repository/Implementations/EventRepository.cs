@@ -51,7 +51,7 @@ namespace KeepMovinAPI.Repository.Implementations
             var sports = _context.Sport.ToList();
             var events = _context.Event.ToList();
             var experiences = _context.ExperienceLevel.ToList();
-
+            //TODO refactor includes
             var joinedTables =
                 from eventModel in events
                 join sport in sports on eventModel.Sports.SportId equals sport.SportId
@@ -181,15 +181,23 @@ namespace KeepMovinAPI.Repository.Implementations
         }
 
 
+        
         public void JoinToEvent(Guid userId, Guid eventId)
         {
             var user = _context.User.Find(userId);
             var eventModel = _context.Event.Find(eventId);
             user.Events = new List<Event>();
             user.Events.Add(eventModel);
-            // eventModel.Users.Add(user);
-            // _context.User.Update(user);
-            // _context.Event.Update(eventModel);
+            _context.SaveChanges();
+        }
+        
+        public void UpdateStatus()
+        {
+            var eventModelList = _context.Event.Where(eve =>eve.EndEvent<DateTime.Now && eve.Status == "Upcoming" ).ToList();
+            foreach (var eventModel in eventModelList)
+            {
+                eventModel.Status = "Finished";
+            }
             _context.SaveChanges();
         }
     }
