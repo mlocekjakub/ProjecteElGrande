@@ -92,6 +92,26 @@ namespace KeepMovinAPI.Controllers
             }
            
         }
+        
+        [HttpGet("events-user")]  
+        public IEnumerable<Event> GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(eventsId), jwt))
+                    return null;
+                var listOfUserEvents = _daoEvent.GetUserEventsByUserId(Guid.Parse(eventsId));
+                return listOfUserEvents;
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+           
+        }
 
 
         

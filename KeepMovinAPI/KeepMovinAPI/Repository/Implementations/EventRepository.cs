@@ -220,5 +220,13 @@ namespace KeepMovinAPI.Repository.Implementations
             }
             _context.SaveChanges();
         }
+        
+        public IEnumerable<User> GetUserEventsByEventId(Guid id)
+        {
+            var query = _context.User
+                .Include(e => e.Events)
+                .Where(i => i.Events.Any(j => j.EventId == id));
+            return query;
+        }
     }
 }
