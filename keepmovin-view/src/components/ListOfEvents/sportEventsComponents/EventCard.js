@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, {useEffect, useState} from 'react';
 import eventImage from "../../../Images/News-Trailer-Web-4Sep20.png";
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -12,13 +12,50 @@ import {changeEventsJoined} from "../../../features/EventsJoined";
 function EventCard(props) {
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
-    const dispatch = useDispatch();
+    /*const dispatch = useDispatch();*/
     
-    const eventsJoined = useSelector((state) => state.eventsJoined.value)
+    /*const eventsJoined = useSelector((state) => state.eventsJoined.value)*/
+    
+    const [usersJoined, setUsersJoined] = useState([])
+    
+    const [joinButtonState, setJoinButtonState] = useState('')
 
     function JoinToEvent(eventId){
         fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
     }
+    
+    useEffect(() => {
+        axios
+            .get(`/api/Event/events-user`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "eventsId": props.eventId
+                }
+            })
+            .then(response => {
+                setUsersJoined(response.data)
+                if (isUserLogged) {
+                    response.data.map((user) => {
+                        if (user.userid === localStorage['session']) {
+                            setJoinButtonState('joined')
+                        }
+                        else {
+                            setJoinButtonState('join')
+                        }
+                    })
+                }
+                
+            })
+    }, [])
+    
+    useEffect(() => {
+        if (isUserLogged === false) {
+            setJoinButtonState('signIn')
+        }
+    }, [isUserLogged])
+    
+    
     
     return (
         <div className="event-1">
@@ -47,12 +84,14 @@ function EventCard(props) {
                     </div>
                     <div className="events-participants">
                         <PersonIcon className="participants-icon" />
-                        0 / {props.maxParticipants}
+                        {usersJoined.length} / {props.maxParticipants}
                     </div>
                 </div>
             </div>
             <article className="events__card-nav">
-                {isUserLogged ? <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div> : <div className="sign-up-event__disable">Sign in to join</div>}
+                {joinButtonState === 'join' && <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div>}
+                {joinButtonState === 'signIn' && <div className="sign-up-event__disable">Sign in to join</div>}
+                {joinButtonState === 'joined' && <div className="sign-up-event__joined">You Joined</div>}
             </article>
         </div>
     )

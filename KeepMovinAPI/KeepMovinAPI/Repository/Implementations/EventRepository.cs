@@ -221,7 +221,7 @@ namespace KeepMovinAPI.Repository.Implementations
             _context.SaveChanges();
         }
         
-        public IEnumerable<User> GetUserEventsByEventId(Guid id)
+        public IEnumerable<User> GetUsersByEventId(Guid id)
         {
             var query = _context.User
                 .Include(e => e.Events)

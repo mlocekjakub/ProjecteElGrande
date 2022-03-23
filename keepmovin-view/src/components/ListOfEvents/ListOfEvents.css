@@ -110,6 +110,15 @@
     cursor: pointer;
 }
 
+.sign-up-event__joined {
+    color: #FFFFFF;
+    background: #4BB543;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+}
+
+
+
 .events__card-nav-price {
     background: var(--bg-primary-dark);
     border-radius: 0.4rem;

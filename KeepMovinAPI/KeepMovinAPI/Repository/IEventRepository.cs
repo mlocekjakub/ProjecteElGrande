@@ -26,6 +26,6 @@ namespace KeepMovinAPI.Repository
         
         public void UpdateStatus();
 
-        public IEnumerable<User> GetUserEventsByEventId(Guid id);
+        public IEnumerable<User> GetUsersByEventId(Guid id);
     }
 }
