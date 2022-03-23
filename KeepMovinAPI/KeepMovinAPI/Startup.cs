@@ -29,13 +29,17 @@ namespace KeepMovinAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var key = "Tu ustawiamy nasz tajny klucz jakby co";
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme  = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
                 x.RequireHttpsMetadata = false;
@@ -47,9 +51,7 @@ namespace KeepMovinAPI
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-
             });
-
 
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
 
