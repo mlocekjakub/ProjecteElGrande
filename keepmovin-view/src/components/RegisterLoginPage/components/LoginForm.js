@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {ValidateLogin} from "./ValidateInputs";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ForgottenPassword from "./ForgottenPassword";

@@ -87,7 +87,6 @@ export default function RegisterForm(props) {
                                      : 'input-active'}`}>
                         <MailOutlineIcon />
                     </div>
-                    <label htmlFor="register-email"></label>
                     <input type="email" 
                            name="email" 
                            id="register-email" 
@@ -120,7 +119,6 @@ export default function RegisterForm(props) {
                                      : 'input-active'}`}>
                         <LockOpenIcon />
                     </div>
-                    <label htmlFor="register-password"></label>
                     <input type="password"
                            name="password"
                            id="register-password"
@@ -155,7 +153,6 @@ export default function RegisterForm(props) {
                                      : 'input-active'}`}>
                         <LockOpenIcon />
                     </div>
-                    <label htmlFor="register-confirm-password"></label>
                     <input type="password"
                            name="confirm-password"
                            id="register-confirm-password"
@@ -173,7 +170,6 @@ export default function RegisterForm(props) {
                 </div>
             </div>
             <div className="submit-container">
-                <label htmlFor="register-submit"></label>
                 <input type="submit" name="submit" id="register-submit" onClick={(e) => HandleSubmit(e)} disabled={!isRegisterValid} value="register"/>
             </div>
         </form>
