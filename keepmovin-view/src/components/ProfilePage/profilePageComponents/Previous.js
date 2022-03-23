@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import EventsMenu from "./EventsMenu";
+import EventsPreviousMenu from "./EventsPreviousMenu";
 
 function Previous(props) {
 
@@ -11,7 +11,7 @@ function Previous(props) {
     const [currentPagePrevious, setCurrentPagePrevious] = useState(1);
     const [isLimitNextPrevious, setIsLimitNextPrevious] = useState(false)
     const [isLimitBackPrevious, setIsLimitBackPrevious] = useState(true)
-    const [numberOfPagesPrevious, setNumberOfPagesPrevious] = useState(0);
+    const [numberOfPagesPrevious, setNumberOfPagesPrevious] = useState(1);
 
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
@@ -24,19 +24,23 @@ function Previous(props) {
                         'Content-Type': 'application/json',
                         "etag" : localStorage.getItem('session'),
                         "currentPage": currentPagePrevious
-
                     }
                 })
                 .then(response => {
                     setNumberOfPagesPrevious(response.data["numberOfPages"])
                     setPreviousEvents(response.data["eventsFound"])
-
                 })
         }
+    }, [currentPagePrevious])
+
+    useEffect(() => {
         if (currentPagePrevious >= numberOfPagesPrevious) {
             setIsLimitNextPrevious(true);
         }
-    }, [])
+        else {
+            setIsLimitNextPrevious(false);
+        }
+    }, [numberOfPagesPrevious])
 
     const nextPagePrevious = () => {
         if(currentPagePrevious + 1 === numberOfPagesPrevious) {
@@ -57,7 +61,7 @@ function Previous(props) {
     
     return (
         <div className="info-content">
-            <EventsMenu content={previousEvents}/>
+            <EventsPreviousMenu content={previousEvents}/>
             <div className="profile__paginate">
                 {isLimitBackPrevious ?
                     <div className="paginate-back__profile-previous">

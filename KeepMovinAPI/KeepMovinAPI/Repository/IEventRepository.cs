@@ -18,10 +18,12 @@ namespace KeepMovinAPI.Repository
         public void JoinToEvent(Guid userId, Guid eventId);
         public IEnumerable<Event> GetUserEventsByUserId(Guid id);
 
-        public UserUpcomingEventsDto GetUpcomingEventsById(Guid id, int currentPage);
+        public UserEventsDto GetUpcomingEventsById(Guid id, int currentPage);
         
-        public UserPreviousEventsDto GetPreviousEventsById(Guid id, int currentPage);
-
+        public UserEventsDto GetPreviousEventsById(Guid id, int currentPage);
+        
+        public UserEventsDto GetHostedEventsById(Guid id, int currentPage);
+        
         public void UpdateStatus();
     }
 }

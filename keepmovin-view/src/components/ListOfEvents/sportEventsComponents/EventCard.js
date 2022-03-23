@@ -32,7 +32,7 @@ function EventCard(props) {
                         <h4>{props.eventName}</h4>
                     </div>
                     <div className="date">
-                        {(props.dateStart).slice(0,10)} <span className="info__to">to</span> {(props.dateEnd).slice(0,10)}
+                        {(props.dateStart).slice(0,10)}
                     </div>
                     <div className="events__card-nav-price">{props.price} {props.currency}</div>
                 </div>

@@ -3,7 +3,7 @@ import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsMenu from "./EventsMenu";
+import EventsUpcomingMenu from "./EventsUpcomingMenu";
 
 function Upcoming(props) {
     
@@ -11,7 +11,7 @@ function Upcoming(props) {
     const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1);
     const [isLimitNextUpcoming, setIsLimitNextUpcoming] = useState(false)
     const [isLimitBackUpcoming, setIsLimitBackUpcoming] = useState(true)
-    const [numberOfPagesUpcoming, setNumberOfPagesUpcoming] = useState(0);
+    const [numberOfPagesUpcoming, setNumberOfPagesUpcoming] = useState(1);
 
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
@@ -31,13 +31,18 @@ function Upcoming(props) {
                 .then(response => {
                     setNumberOfPagesUpcoming(response.data["numberOfPages"])
                     setUpcomingEvents(response.data["eventsFound"])
-
                 })
         }
+    },[currentPageUpcoming])
+
+    useEffect(() => {
         if (currentPageUpcoming >= numberOfPagesUpcoming) {
             setIsLimitNextUpcoming(true);
         }
-    },[])
+        else {
+            setIsLimitNextUpcoming(false);
+        }
+    }, [numberOfPagesUpcoming])
 
     const nextPageUpcoming = () => {
         if(currentPageUpcoming + 1 === numberOfPagesUpcoming) {
@@ -58,7 +63,7 @@ function Upcoming(props) {
     
     return (
         <div className="info-content">
-            <EventsMenu content={upcomingEvents}/>
+            <EventsUpcomingMenu content={upcomingEvents}/>
             <div className="profile__paginate">
                 {isLimitBackUpcoming ?
                     <div className="paginate-back__profile-upcoming">

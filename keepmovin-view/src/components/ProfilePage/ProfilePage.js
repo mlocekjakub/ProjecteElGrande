@@ -1,16 +1,13 @@
 ﻿import "./ProfilePage.css"
 import "../../index.css"
-import profileImage from "../../Images/pexels-photo-771742.jpeg"
 import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
 import React, {useEffect, useState} from "react";
 import Statistics from "./profilePageComponents/Statistics";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {ArrowBackIos} from "@material-ui/icons";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsMenu from "./profilePageComponents/EventsMenu";
 import Upcoming from "./profilePageComponents/Upcoming";
 import Previous from "./profilePageComponents/Previous";
+import Hosted from "./profilePageComponents/Hosted";
 
 export default function ProfilePage() {
     
@@ -90,6 +87,11 @@ export default function ProfilePage() {
                                 onClick={() => setActive('previous')}>
                                 Previous Events
                             </div>
+                            <div
+                                className={`hosted__nav ${activeEvent === 'hosted' && 'button-active'}`}
+                                onClick={() => setActive('hosted')}>
+                                Hosted
+                            </div>
                             <div 
                                 className={`stats__nav ${activeEvent === 'statistics' && 'button-active'}`} 
                                 onClick={() => setActive('statistics')}>
@@ -99,6 +101,7 @@ export default function ProfilePage() {
                     {activeEvent === 'upcoming' && <Upcoming />}
                     {activeEvent === 'previous' && <Previous />}
                     {activeEvent === 'statistics' && <Statistics />}
+                    {activeEvent === 'hosted' && <Hosted />}
                 </div>
             </div>
         </div>

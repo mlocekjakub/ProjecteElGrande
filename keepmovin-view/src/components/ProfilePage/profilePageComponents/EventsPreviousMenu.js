@@ -1,18 +1,16 @@
 ﻿import React from 'react';
-import EventCard from "./EventCard";
 import EventsSearchedCard from "../../NavbarComponents/EventsSearchedCard";
+import EventCardPrevious from "./EventCardPrevious";
 
-function EventsMenu(props) {
+function EventsPreviousMenu(props) {
     let numberOfEmptyCards = 6 - props.content.length
-    console.log(props.content)
     return (
         <div className="events-menu">
             {props.content.map((event) =>
-                (<EventCard key={event.eventId}
+                (<EventCardPrevious key={event.eventId}
                             eventName={event.name}
                             eventDateStart={event.startEvent}
-                            sportName={event.sports.name}
-                            maxParticipants={event.maxParticipants}/>))
+                            sportName={event.sports.name}/>))
             }
             {Array.from({ length: numberOfEmptyCards }, (_, i) =>
                 <div className="empty-card"></div>)}
@@ -20,7 +18,4 @@ function EventsMenu(props) {
     );
 }
 
-export default EventsMenu;
-
-
-
+export default EventsPreviousMenu;
