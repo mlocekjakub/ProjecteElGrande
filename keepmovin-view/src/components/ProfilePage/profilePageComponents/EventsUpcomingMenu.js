@@ -14,7 +14,7 @@ function EventsUpcomingMenu(props) {
                             maxParticipants={event.maxParticipants}/>))
             }
             {Array.from({ length: numberOfEmptyCards }, (_, i) =>
-                <div className="empty-card"></div>)}
+                <div key={i} className="empty-card"></div>)}
         </div>
     );
 }

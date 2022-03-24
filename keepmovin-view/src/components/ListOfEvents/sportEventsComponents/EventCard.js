@@ -7,24 +7,24 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {changeEventsJoined} from "../../../features/EventsJoined";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 function EventCard(props) {
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
-    /*const dispatch = useDispatch();*/
-    
-    /*const eventsJoined = useSelector((state) => state.eventsJoined.value)*/
-    
     const [usersJoined, setUsersJoined] = useState([])
     
-    const [joinButtonState, setJoinButtonState] = useState('')
+    const [joinButtonState, setJoinButtonState] = useState('join')
+    
+    const [isFetchingData, setIsFetchingData] = useState(false)
 
     function JoinToEvent(eventId){
         fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
     }
     
     useEffect(() => {
+        setIsFetchingData(true);
         axios
             .get(`/api/Event/events-user`, {
                 headers: {
@@ -40,12 +40,9 @@ function EventCard(props) {
                         if (user.userid === localStorage['session']) {
                             setJoinButtonState('joined')
                         }
-                        else {
-                            setJoinButtonState('join')
-                        }
                     })
                 }
-                
+                setIsFetchingData(false);
             })
     }, [])
     
@@ -89,9 +86,13 @@ function EventCard(props) {
                 </div>
             </div>
             <article className="events__card-nav">
-                {joinButtonState === 'join' && <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div>}
-                {joinButtonState === 'signIn' && <div className="sign-up-event__disable">Sign in to join</div>}
-                {joinButtonState === 'joined' && <div className="sign-up-event__joined">You Joined</div>}
+                {isFetchingData ? <button className="btn" type="button" disabled>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button> : <div>
+                    {joinButtonState === 'join' && <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div>}
+                    {joinButtonState === 'signIn' && <div className="sign-up-event__disable">Sign in to join</div>}
+                    {joinButtonState === 'joined' && <div className="sign-up-event__joined">You Joined</div>}
+                </div>}
             </article>
         </div>
     )

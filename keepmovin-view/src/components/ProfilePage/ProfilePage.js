@@ -24,8 +24,16 @@ export default function ProfilePage() {
     useEffect(() => {
         if (isUserLogged) {
             axios
-                .get(`/api/UserProfile/${localStorage['session']}`)
-                .then(response => setProfileItems(response.data))
+                .get(`/api/UserProfile/Get`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "etag" : localStorage.getItem('session'),
+                }
+                })
+                .then(response => {
+                    setProfileItems(response.data)
+                })
         }
     }, [])
     
@@ -56,11 +64,11 @@ export default function ProfilePage() {
                     </div>
                     <div className="profile__socials-info">
                         <div className="profile__following">
-                            <div className="number">{!profileItems && `${0}`}</div>
+                            <div className="number">{profileItems && profileItems.followed && `${profileItems.followed.length}`}</div>
                             <div className="heading">Following</div>
                         </div>
                         <div className="profile__followed">
-                            <div className="number">{!profileItems && `${0}`}</div>
+                            <div className="number">{profileItems && profileItems.followers && `${profileItems.followers.length}`}</div>
                             <div className="heading">Followed</div>
                         </div>
                         <div className="profile__rating">

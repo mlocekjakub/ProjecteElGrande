@@ -215,6 +215,10 @@
     color: var(--clr-header);
 }
 
+.events-card__loading {
+    max-width: 0.5rem;
+}
+
 /*___________________*/
 
 

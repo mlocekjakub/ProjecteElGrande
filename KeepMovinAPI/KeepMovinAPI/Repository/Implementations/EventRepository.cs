@@ -138,6 +138,10 @@ namespace KeepMovinAPI.Repository.Implementations
         {
             var query = _context.Event
                 .Include(e => e.Users)
+                .Include(eventModel => eventModel.Location)
+                .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.Type)
+                .Include(eventModel => eventModel.ExperienceLevel)
                 .Where(i => i.Users.Any(j => j.Userid == id));
             return query;
         }

@@ -7,13 +7,14 @@ function EventsPreviousMenu(props) {
     return (
         <div className="events-menu">
             {props.content.map((event) =>
-                (<EventCardPrevious key={event.eventId}
+                (<EventCardPrevious 
+                            key={event.eventId}
                             eventName={event.name}
                             eventDateStart={event.startEvent}
                             sportName={event.sports.name}/>))
             }
             {Array.from({ length: numberOfEmptyCards }, (_, i) =>
-                <div className="empty-card"></div>)}
+                <div key={i} className="empty-card"></div>)}
         </div>
     );
 }

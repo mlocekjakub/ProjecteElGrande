@@ -55,7 +55,7 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
