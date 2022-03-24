@@ -28,6 +28,7 @@ export default function Layout() {
             .get('/api/Event/status-update')
     }, 180000)
     
+    
     return (
         <div>
             <Navbar />

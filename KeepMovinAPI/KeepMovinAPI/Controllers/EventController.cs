@@ -94,7 +94,7 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet("events-user")]  
-        public IEnumerable<User> GetEventsUser([FromQuery]string eventsId)
+        public IEnumerable<User> GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace KeepMovinAPI.Controllers
 
         
         [HttpGet("events-user/upcoming")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserUpcomingEventsDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
@@ -138,7 +138,7 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("events-user/previous")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserPreviousEventsDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
@@ -153,6 +153,28 @@ namespace KeepMovinAPI.Controllers
                 return Ok(listOfUserEvents);
 
 
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("events-user/hosted")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId,
+            [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
             }
             catch(Exception e)
             {

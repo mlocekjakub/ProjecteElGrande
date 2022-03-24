@@ -110,6 +110,15 @@
     cursor: pointer;
 }
 
+.sign-up-event__joined {
+    color: #FFFFFF;
+    background: #4BB543;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+}
+
+
+
 .events__card-nav-price {
     background: var(--bg-primary-dark);
     border-radius: 0.4rem;
@@ -198,6 +207,10 @@
 .location-icon, .level-icon, .participants-icon {
     max-width: 1rem;
     color: var(--clr-header);
+}
+
+.events-card__loading {
+    max-width: 0.5rem;
 }
 
 /*___________________*/

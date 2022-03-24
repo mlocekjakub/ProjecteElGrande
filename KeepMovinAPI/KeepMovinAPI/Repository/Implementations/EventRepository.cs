@@ -141,11 +141,15 @@ namespace KeepMovinAPI.Repository.Implementations
         {
             var query = _context.Event
                 .Include(e => e.Users)
+                .Include(eventModel => eventModel.Location)
+                .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.Type)
+                .Include(eventModel => eventModel.ExperienceLevel)
                 .Where(i => i.Users.Any(j => j.Userid == id));
             return query;
         }
 
-        public UserUpcomingEventsDto GetUpcomingEventsById(Guid id, int currentPage)
+        public UserEventsDto GetUpcomingEventsById(Guid id, int currentPage)
         {
             var eventsPerPage = 6;
             var eventsPage = _context.Event
@@ -159,12 +163,12 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Skip((currentPage - 1) * eventsPerPage)
                 .Take(eventsPerPage);
 
-            var profilePageContent = new UserUpcomingEventsDto(numberOfPages, eventsPage);
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
 
             return profilePageContent;
         }
 
-        public UserPreviousEventsDto GetPreviousEventsById(Guid id, int currentPage)
+        public UserEventsDto GetPreviousEventsById(Guid id, int currentPage)
         {
             var eventsPerPage = 6;
             var eventsPage = _context.Event
@@ -178,7 +182,27 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Skip((currentPage - 1) * eventsPerPage)
                 .Take(eventsPerPage);
 
-            var profilePageContent = new UserPreviousEventsDto(numberOfPages, eventsPage);
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
+
+            return profilePageContent;
+        }
+
+        public UserEventsDto GetHostedEventsById(Guid id, int currentPage)
+        {
+            var eventsPerPage = 6;
+            var eventsPage = _context.Event
+                .Include(e => e.Users)
+                .Include(e => e.User)
+                .Include(e => e.Sports)
+                .Where(i => i.User.Organiser.Userid == id);
+
+            var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
+
+            eventsPage = eventsPage
+                .Skip((currentPage - 1) * eventsPerPage)
+                .Take(eventsPerPage);
+
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
 
             return profilePageContent;
         }
