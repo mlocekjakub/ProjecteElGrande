@@ -16,15 +16,15 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<SettingController> _logger;
         private IUserProfileRepository _userProfileDao;
-        private ISettingDao _settingDao;
+        private ISettingRepository _settingRepository;
         private IValidation _validation;
 
 
-        public SettingController(ILogger<SettingController> logger, ISettingDao settingDao,
+        public SettingController(ILogger<SettingController> logger, ISettingRepository settingRepository,
              IValidation validation, IUserProfileRepository userProfileDao)
         {
             _logger = logger;
-            _settingDao = settingDao;
+            _settingRepository = settingRepository;
             _validation = validation;
             _userProfileDao = userProfileDao;
 
@@ -45,7 +45,7 @@ namespace KeepMovinAPI.Controllers
                 if (_validation.Validate(settings.UserId, jwt))
                 {
                     Setting currentSettings = _userProfileDao.GetSettingsByUserId(settings.UserId);
-                    _settingDao.Update(currentSettings, settings);
+                    _settingRepository.Update(currentSettings, settings);
                     return Ok();
                 }
                 return Unauthorized();

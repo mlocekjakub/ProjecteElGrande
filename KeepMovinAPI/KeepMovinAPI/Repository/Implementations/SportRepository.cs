@@ -6,11 +6,11 @@ using KeepMovinAPI.Domain;
 namespace KeepMovinAPI.Repository.Implementations
 
 {
-    public class SportDao : ISportDao
+    public class SportRepository : ISportRepository
     {
         private readonly KeepMovinDbContext _context;
 
-        public SportDao(KeepMovinDbContext context)
+        public SportRepository(KeepMovinDbContext context)
         {
             _context = context;
         }

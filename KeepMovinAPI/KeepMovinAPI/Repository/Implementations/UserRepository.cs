@@ -8,11 +8,11 @@ using BCryptNet = BCrypt.Net.BCrypt;
 namespace KeepMovinAPI.Repository.Implementations
 
 {
-    public class UserDao : IUserDao
+    public class UserRepository : IUserRepository
     {
         private readonly KeepMovinDbContext _context;
 
-        public UserDao(KeepMovinDbContext context)
+        public UserRepository(KeepMovinDbContext context)
         {
             _context = context;
         }

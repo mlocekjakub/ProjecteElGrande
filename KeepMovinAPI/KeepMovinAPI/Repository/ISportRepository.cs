@@ -3,7 +3,7 @@ using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.Repository
 {
-    public interface ISportDao : IDao<Sport>
+    public interface ISportRepository : IRepository<Sport>
     {
         public IEnumerable<Sport> GetByInput(string input);
         

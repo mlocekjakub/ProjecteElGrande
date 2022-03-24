@@ -19,10 +19,10 @@ namespace KeepMovinAPI.Authentication
             Pkey = secretKey;
 
         }
-        public string Authenticate(User dataBaseUser, User loginUser, IUserDao userDao)
+        public string Authenticate(User dataBaseUser, User loginUser, IUserRepository userRepository)
         {
 
-            if (!userDao.CompareUsers(dataBaseUser, loginUser))
+            if (!userRepository.CompareUsers(dataBaseUser, loginUser))
             {
                 return null;
             }

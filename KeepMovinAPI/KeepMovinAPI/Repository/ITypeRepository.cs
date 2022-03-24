@@ -2,7 +2,7 @@
 
 namespace KeepMovinAPI.Repository
 {
-    public interface ITypeDao : IDao<EventType>
+    public interface ITypeRepository : IRepository<EventType>
     {
         
     }

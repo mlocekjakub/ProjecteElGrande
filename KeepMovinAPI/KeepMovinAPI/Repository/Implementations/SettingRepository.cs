@@ -9,11 +9,11 @@ namespace KeepMovinAPI.Repository.Implementations
 
 
 {
-    public class SettingDao : ISettingDao
+    public class SettingRepository : ISettingRepository
     {
         private readonly KeepMovinDbContext _context;
 
-        public SettingDao(KeepMovinDbContext context)
+        public SettingRepository(KeepMovinDbContext context)
         {
             _context = context;
         }

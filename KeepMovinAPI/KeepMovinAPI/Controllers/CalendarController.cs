@@ -13,15 +13,15 @@ namespace KeepMovinAPI.Controllers
     public class CalendarController : ControllerBase
     {
         private readonly ILogger<CalendarController> _logger;
-        private IEventDao _daoEvent;
+        private IEventRepository _repositoryEvent;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IValidation _validation;
 
-        public CalendarController(ILogger<CalendarController> logger, IEventDao daoEvent, IJwtAuthenticationManager jwt,
+        public CalendarController(ILogger<CalendarController> logger, IEventRepository repositoryEvent, IJwtAuthenticationManager jwt,
             IValidation validation)
         {
             _logger = logger;
-            _daoEvent = daoEvent;
+            _repositoryEvent = repositoryEvent;
             _jwtAuthenticationManager = jwt;
             _validation = validation;
         }
@@ -32,7 +32,7 @@ namespace KeepMovinAPI.Controllers
             try
             {
                 var listOfEvents =
-                    _daoEvent.GetAllByDateRange(startDate,
+                    _repositoryEvent.GetAllByDateRange(startDate,
                         endDate.AddDays(1)); // added one day to catch all events in calendar view
                 return listOfEvents;
             }
@@ -47,7 +47,7 @@ namespace KeepMovinAPI.Controllers
         public IEnumerable<Event> GetUserEvents([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
         {
             var listOfEvents =
-                _daoEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
+                _repositoryEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
                     endDate.AddDays(1)); // added one day to catch all events in calendar view
             return listOfEvents;
         }

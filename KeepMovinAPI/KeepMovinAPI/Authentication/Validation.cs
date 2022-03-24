@@ -11,14 +11,14 @@ public class Validation:IValidation
 {
 
     private IJwtAuthenticationManager _jwtAuthenticationManager;
-    private IUserDao _userDao;
+    private IUserRepository _userRepository;
     private readonly ILogger<Validation> _logger;
 
 
-    public Validation(IJwtAuthenticationManager jwt,IUserDao userDao, ILogger<Validation> logger)
+    public Validation(IJwtAuthenticationManager jwt,IUserRepository userRepository, ILogger<Validation> logger)
 	{
         _jwtAuthenticationManager = jwt;
-        _userDao = userDao;
+        _userRepository = userRepository;
         _logger = logger;
 
 
@@ -30,7 +30,7 @@ public class Validation:IValidation
         {
             var token = _jwtAuthenticationManager.Verify(jwt);
             var tokenClaims = token.Claims.ToList();
-            var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
+            var user = _userRepository.GetUserByEmail(tokenClaims[0].Value);
             if (userId == user.Userid)
                 return true;
             return false;

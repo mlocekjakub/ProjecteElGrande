@@ -6,10 +6,10 @@ using KeepMovinAPI.Domain;
 namespace KeepMovinAPI.Repository.Implementations
 
 {
-    public class TypeDao : ITypeDao
+    public class TypeRepository : ITypeRepository
     {
         private readonly KeepMovinDbContext _context;
-        public TypeDao(KeepMovinDbContext context)
+        public TypeRepository(KeepMovinDbContext context)
         {
             _context = context;
         }
