@@ -60,6 +60,16 @@
     padding: 1.5rem 0 1.5rem 0;
 }
 
+.number {
+    font-size: 1.1rem;
+}
+
+.heading {
+    font-size: 0.9rem;
+    min-height: 100%;
+    align-self: center;
+}
+
 .profile__following, .profile__followed, .profile__rating {
     display: flex;
     flex-direction: column;

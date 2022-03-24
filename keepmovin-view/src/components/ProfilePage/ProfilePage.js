@@ -73,7 +73,7 @@ export default function ProfilePage() {
                         </div>
                         <div className="profile__rating">
                             <div className="number">0</div>
-                            <div className="heading">Rating</div>
+                            <div className="heading">Organiser Rating</div>
                         </div>
                     </div>
                     <div className="about">

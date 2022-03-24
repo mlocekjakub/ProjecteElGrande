@@ -160,8 +160,8 @@ function SportEventsPage() {
                     </div>
                     <div>
                         {isFetchingData && <LoadingSpinner />}
-                        {eventsNotFound && <div className="events__not-found">Events not found</div>}
-                        <Events display={foundEvents} />
+                        {eventsNotFound ? <div className="events__not-found">Events not found</div>
+                        : <Events display={foundEvents} />}
                     </div>
                 </div>
             </div>
