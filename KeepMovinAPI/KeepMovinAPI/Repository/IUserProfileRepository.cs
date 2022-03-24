@@ -6,7 +6,7 @@ using KeepMovinAPI.Dtos;
 
 namespace KeepMovinAPI.Repository
 {
-    public interface IUserProfileRepository : IDao<UserProfile>
+    public interface IUserProfileRepository : IRepository<UserProfile>
     {
         public ProfilePersonalInfoDto GetProfilePersonalInfoById(Guid userId);
         public Setting GetSettingsByUserId(Guid userId);

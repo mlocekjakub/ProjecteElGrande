@@ -4,7 +4,7 @@ using System;
 
 namespace KeepMovinAPI.Repository
 {
-    public interface ISettingDao:IDao<Setting>
+    public interface ISettingRepository:IRepository<Setting>
     {
 
         public void Update(Setting current,SettingsDto upDated);

@@ -55,11 +55,12 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
-        [HttpGet("{id}")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetProfileById([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetProfileById([FromHeader] string userId)
+        
         {
             try
             {

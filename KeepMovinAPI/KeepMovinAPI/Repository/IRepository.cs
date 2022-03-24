@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KeepMovinAPI.Repository
 {
-    public interface IDao<T>
+    public interface IRepository<T>
     {
         void Add(T item);
         void Remove(Guid id);

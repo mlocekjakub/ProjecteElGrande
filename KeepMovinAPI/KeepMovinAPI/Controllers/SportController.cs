@@ -13,12 +13,12 @@ namespace KeepMovinAPI.Controllers
     public class SportController : ControllerBase
     {
         private readonly ILogger<SportController> _logger;
-        private ISportDao _daoSport;
+        private ISportRepository _repositorySport;
 
-        public SportController(ILogger<SportController> logger, ISportDao daoSport)
+        public SportController(ILogger<SportController> logger, ISportRepository repositorySport)
         {
             _logger = logger;
-            _daoSport = daoSport;
+            _repositorySport = repositorySport;
         }
         
         [HttpGet]
@@ -26,7 +26,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfSports = _daoSport.GetAll();
+                var listOfSports = _repositorySport.GetAll();
                 return listOfSports;
             }
             catch (Exception e)
@@ -44,7 +44,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfEvents = _daoSport.GetByInput(input);
+                var listOfEvents = _repositorySport.GetByInput(input);
                 return listOfEvents;
             }
             catch(Exception e)
@@ -61,7 +61,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var sport = _daoSport.Get(id);
+                var sport = _repositorySport.Get(id);
                 return sport;
             }
             catch(Exception e)

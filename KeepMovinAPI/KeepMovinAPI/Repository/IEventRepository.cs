@@ -9,7 +9,7 @@ using KeepMovinAPI.Dtos;
 namespace KeepMovinAPI.Repository
 
 {
-    public interface IEventDao : IDao<Event>
+    public interface IEventRepository : IRepository<Event>
     {
         public IEnumerable<EventCardDto> GetByInput(string input);
         public IEnumerable<Event> GetAllByDateRange(DateTime startDate, DateTime endDate);
@@ -24,6 +24,8 @@ namespace KeepMovinAPI.Repository
 
         public void UpdateStatus();
 
-        public IEnumerable<User> GetUserEventsByEventId(Guid id);
+        public IEnumerable<User> GetUsersByEventId(Guid id);
+
+        public void Add(Event eventModel, Guid userId);
     }
 }

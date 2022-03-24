@@ -12,12 +12,12 @@ namespace KeepMovinAPI.Controllers
     public class TypeController : ControllerBase
     {
         private readonly ILogger<SportController> _logger;
-        private ITypeDao _daoType;
+        private ITypeRepository _repositoryType;
 
-        public TypeController(ILogger<SportController> logger, ITypeDao daoType)
+        public TypeController(ILogger<SportController> logger, ITypeRepository repositoryType)
         {
             _logger = logger;
-            _daoType = daoType;
+            _repositoryType = repositoryType;
         }
         
         [HttpGet]
@@ -25,7 +25,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfTypes = _daoType.GetAll();
+                var listOfTypes = _repositoryType.GetAll();
                 return listOfTypes;
             }
             catch(Exception e)

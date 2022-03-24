@@ -14,8 +14,6 @@ export function SendChangePasswordForm(collectUserInputs) {
 
     }).then(response => response.status)
         .then(data => console.log(data))
-
-
 }
 
 
@@ -36,7 +34,6 @@ export function EditUserSettings() {
 
 export function createEvent() {
     let status = "upcoming";
-    let owner = localStorage["session"];
     let name = document.querySelector("#name").value;
     let start_event = document.querySelector("#datetime-local-start").value;
     let end_event = document.querySelector("#datetime-local-end").value;
@@ -51,8 +48,6 @@ export function createEvent() {
     let country = document.querySelector("#country").value;
     let zipCode = document.querySelector("#zipCode").value;
 
-
-
     let event_model_json = {
         "Name": name,
         "StartEvent": start_event,
@@ -64,7 +59,6 @@ export function createEvent() {
         "Currency": currency,
         "Link": "",
         "Price": price,
-    //     "User": objects,
         "Location":{
             "City": city,
             "Country": country,
@@ -76,6 +70,7 @@ export function createEvent() {
     fetch("/api/event", {
         method: 'POST',
         headers: {
+            'userId': localStorage["session"],
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },

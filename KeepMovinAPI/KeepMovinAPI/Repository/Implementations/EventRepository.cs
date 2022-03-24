@@ -1,38 +1,41 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using KeepMovinAPI.Dtos;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.Extensions.Logging;
+
 
 namespace KeepMovinAPI.Repository.Implementations
 {
-    public class EventDao : IEventDao
+    public class EventRepository : IEventRepository
     {
         private readonly KeepMovinDbContext _context;
 
-        public EventDao(KeepMovinDbContext context)
+        public EventRepository(KeepMovinDbContext context)
         {
             _context = context;
         }
 
-        public void Add(Event eventModel)
+        public void Add(Event eventModel, Guid userId)
         {
-            ExperienceLevel explvl = _context.ExperienceLevel.Find(eventModel.ExperienceLevel.ExperienceLevelId);
-            eventModel.ExperienceLevel = explvl;
+            ExperienceLevel experienceLevel = _context.ExperienceLevel.Find(eventModel.ExperienceLevel.ExperienceLevelId);
+            eventModel.ExperienceLevel = experienceLevel;
             Sport sport = _context.Sport.Find(eventModel.Sports.SportId);
             eventModel.Sports = sport;
             EventType eventType = _context.EventType.Find(eventModel.Type.TypeId);
             eventModel.Type = eventType;
+            UserProfile userProfile = _context.UserProfile.FirstOrDefault(userProfile => userProfile.Organiser.Userid == userId);
+            eventModel.User = userProfile;
+            
             _context.Event.Add(eventModel);
             _context.SaveChanges();
+        }
+
+        public void Add(Event item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(Guid id)
@@ -78,7 +81,7 @@ namespace KeepMovinAPI.Repository.Implementations
             return _context.Event.ToList();
         }
 
-        public EventsSearchedDto GetFiltered([FromQuery] Filter filter)
+        public EventsSearchedDto GetFiltered(Filter filter)
         {
             var eventsPerPage = 4;
 
@@ -201,7 +204,7 @@ namespace KeepMovinAPI.Repository.Implementations
             _context.SaveChanges();
         }
         
-        public IEnumerable<User> GetUserEventsByEventId(Guid id)
+        public IEnumerable<User> GetUsersByEventId(Guid id)
         {
             var query = _context.User
                 .Include(e => e.Events)

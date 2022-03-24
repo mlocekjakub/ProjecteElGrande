@@ -65,14 +65,14 @@ namespace KeepMovinAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .LogTo(Console.WriteLine, LogLevel.Information)
                     .EnableSensitiveDataLogging());
-            services.AddScoped<IEventDao, EventDao>();
-            services.AddScoped<IUserDao, UserDao>();
-            services.AddScoped<ISportDao, SportDao>();
-            services.AddScoped<ISettingDao, SettingDao>();
-            services.AddScoped<ITypeDao, TypeDao>();
-            services.AddScoped<IExperienceDao, ExperienceDao>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISportRepository, SportRepository>();
+            services.AddScoped<ISettingRepository, SettingRepository>();
+            services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddScoped<IExperienceDao, ExperienceDao>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IValidation, Validation>();
         }
