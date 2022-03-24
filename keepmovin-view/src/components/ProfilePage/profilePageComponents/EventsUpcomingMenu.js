@@ -8,6 +8,7 @@ function EventsUpcomingMenu(props) {
         <div className="events-menu">
             {props.content.map((event) =>
                 (<EventCardUpcoming key={event.eventId}
+                            eventCardId={event.eventId}
                             eventName={event.name}
                             eventDateStart={event.startEvent}
                             sportName={event.sports.name}
