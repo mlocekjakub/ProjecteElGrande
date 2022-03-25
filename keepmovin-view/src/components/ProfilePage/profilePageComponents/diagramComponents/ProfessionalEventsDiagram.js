@@ -10,8 +10,6 @@ function ProfessionalEventsDiagram() {
 
     const isUserLogged = useSelector((state) => state.isLogged.value);
 
-    const [events, setEvents] = useState([])
-
     const [sportsList, SetSportsList] = useState([])
 
     const [isSportsFetched, SetIsSportsFetched] = useState(false)
@@ -58,22 +56,22 @@ function ProfessionalEventsDiagram() {
                 {
                     label: 'Professional Events',
                     backgroundColor: [
+                        '#FF4136',
                         '#B21F00',
                         '#C9DE00',
                         '#2FDE00',
                         '#001f3f',
-                        '#FF4136',
                         '#39CCCC',
                         '#85144b',
                         '#FF851B',
                         '#6b5b95'
                     ],
                     hoverBackgroundColor: [
+                        '#865a55',
                         '#501800',
                         '#4B5000',
                         '#175000',
-                        '#13314f',
-                        '#865a55',
+                        '#214a70',
                         '#547777',
                         '#694255',
                         '#a17c5a',

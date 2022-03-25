@@ -23,6 +23,8 @@ namespace KeepMovinAPI.Repository
         public UserEventsDto GetPreviousEventsById(Guid id, int currentPage);
         
         public UserEventsDto GetHostedEventsById(Guid id, int currentPage);
+
+        public IEnumerable<Event> GetHostedEventsStatisticsById(Guid id);
         
         public void UpdateStatus();
 

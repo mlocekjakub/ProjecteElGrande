@@ -19,7 +19,8 @@ function EventCardUpcoming(props) {
             .then(response => {
                 setUsersJoined(response.data)
             })
-    });
+    }, []);
+    
     return (
         <div className="event-card">
             <div className="profile-event-card__image">

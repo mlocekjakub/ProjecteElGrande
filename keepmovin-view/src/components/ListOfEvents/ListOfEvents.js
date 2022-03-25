@@ -96,6 +96,15 @@ function SportEventsPage() {
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
         minPriceFilter, maxPriceFilter,datesFilter, currentPage])
+
+    useEffect(() => {
+        if (currentPage >= numberOfPages) {
+            setIsLimitNext(true);
+        }
+        else {
+            setIsLimitNext(false);
+        }
+    }, [numberOfPages])
     
 
     const NextPage = () => {

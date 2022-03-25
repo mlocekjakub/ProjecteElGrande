@@ -181,9 +181,30 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogWarning(Convert.ToString(e));
                 return BadRequest();
             }
-
-            
         }
+        
+        [HttpGet("events-user/hosted-statistics")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsStatisticsById(Guid.Parse(userId));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        
 
 
 

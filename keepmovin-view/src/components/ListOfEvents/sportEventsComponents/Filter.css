@@ -70,7 +70,6 @@
 }
 .date-separator {
     min-width: 0.4rem;
-    font-weight: 700;
 }
 .dates-clear-button {
     color: var(--clr-header);
@@ -80,31 +79,32 @@
     min-height: 100%;
     padding: 0 0.3rem;
     border-radius: 0 0.4rem 0.4rem 0;
-    transition: 0.2s;
+    transition: 0.1s;
 }
 .dates-clear-button:hover {
-    background: rgba(66, 133, 244, 0.4);
+    background: var(--bg-btn-primary-blue);
+    color: #FFFFFF;
     cursor: pointer;
 }
 .date-picker__first-date, .date-picker__second-date {
     text-align: center;
     padding: 0.8rem;
-    transition: 0.2s;
+    transition: 0.1s;
     width: 12ch;
-    background: rgb(223, 224, 227);
+    color: var(--clr-header);
+    font-weight: bold;
+    border-bottom: 2px solid rgba(66, 133, 244, 0);
 }
 .date-picker__first-date {
-    border-radius: 0.4rem;
 }
 
 .date-picker__second-date {
-    border-radius: 0.4rem 0 0 0.4rem; 
 }
 
 
 .date-picker__first-date:hover, .date-picker__second-date:hover {
     cursor: pointer;
-    background: rgba(66, 133, 244, 0.4);
+    border-bottom: 2px solid var(--bg-btn-primary-blue);
 }
 
 

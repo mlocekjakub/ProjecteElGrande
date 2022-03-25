@@ -6,8 +6,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {changeEventsJoined} from "../../../features/EventsJoined";
-import LoadingSpinner from "./LoadingSpinner";
 
 
 function EventCard(props) {
@@ -41,6 +39,9 @@ function EventCard(props) {
                             setJoinButtonState('joined')
                         }
                     })
+                    if (props.organiserId === localStorage['session']) {
+                        setJoinButtonState('hosting')
+                    }
                 }
                 setIsFetchingData(false);
             })
@@ -65,10 +66,10 @@ function EventCard(props) {
                     <div className="event__title">
                         <h4>{props.eventName}</h4>
                     </div>
+                    <div className="events__card-nav-price">{props.price} {props.currency}</div>
                     <div className="date">
                         {(props.dateStart).slice(0,10)}
                     </div>
-                    <div className="events__card-nav-price">{props.price} {props.currency}</div>
                 </div>
                 <div className="events-statistics">
                     <div className="location">
@@ -92,6 +93,7 @@ function EventCard(props) {
                     {joinButtonState === 'join' && <div className="sign-up-event" onClick={()=>JoinToEvent(props.eventId)}>Join</div>}
                     {joinButtonState === 'signIn' && <div className="sign-up-event__disable">Sign in to join</div>}
                     {joinButtonState === 'joined' && <div className="sign-up-event__joined">You Joined</div>}
+                    {joinButtonState === 'hosting' && <div className="sign-up-event__hosting"><span>You host</span> <span>this event</span></div>}
                 </div>}
             </article>
         </div>

@@ -8,7 +8,9 @@ function EventsHostedMenu(props) {
             {props.content.map((event) =>
                 (<EventCardHosted key={event.eventId}
                             eventName={event.name}
-                            sportName={event.sports.name}/>))
+                            sportName={event.sports.name}
+                            eventDateStart={event.startEvent}
+                            maxParticipants={event.maxParticipants}/>))
             }
             {Array.from({ length: numberOfEmptyCards }, (_, i) =>
                 <div key={i} className="empty-card"></div>)}
