@@ -57,10 +57,6 @@ function SportEventsPage() {
         typeFilter.map((eventType) => {
             types += `Type=${eventType.name}&`
         })
-        console.log(`&MinPrice=${minPriceFilter}`)
-        console.log(`&MaxPrice=${maxPriceFilter}`)
-        console.log(`&MaxParticipants=${maxParticipantsFilter}`)
-        
         let minParticipants = `MinParticipants=${minParticipantsFilter}`;
         let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
         let minPrice = `&MinPrice=${minPriceFilter}`;
@@ -73,8 +69,6 @@ function SportEventsPage() {
     
     
     useEffect(() => {
-        console.log(minPriceFilter);
-        console.log(maxPriceFilter);
         
         setIsFetchingData(true);
         setEventsNotFound(false);

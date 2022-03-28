@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import "./Slider.css"
 import {useSelector} from "react-redux";
 
-export default function PrivacySettings() {
+export default function PrivacySettings(props) {
     const theme = useSelector((state) => state.theme.value)
     
     const [privacyDetails, setPrivacyDetails] = useState({
         userId: localStorage.getItem('session'),
         location: false,
-        follow: false,
-        stats: false,
+        followersFollowing: false,
+        statistics: false,
         aboutMe: false,
         upcomingEvents: false,
         previousEvents: false,
@@ -18,41 +18,49 @@ export default function PrivacySettings() {
     })
 
     useEffect(async () => {
-        const response = await fetch("api/Setting/upload", {
+        const response = await fetch("/api/Setting/upload", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "etag": localStorage.getItem('session')
 
-            },
-            credentials: 'include',
+            }
         })
         const content = await response.json()
             .then(content => {
                 setPrivacyDetails({
                     location: content.location,
-                    follow: content.followersFollowing,
-                    stats: content.statistics,
+                    followersFollowing: content.followersFollowing,
+                    statistics: content.statistics,
                     aboutMe: content.aboutMe,
                     upcomingEvents: content.upcomingEvents,
                     previousEvents: content.previousEvents,
-                    photo: content.photo
+                    photo: content.photo,
+                    userId: localStorage.getItem('session')
                 })
             })
         
-    },[])
+    },[props.buttonState])
+    
     
     function HandleSubmit(e) {
         e.preventDefault()
-        fetch('api/Setting/edit', {
+        fetch('/api/Setting/edit', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(privacyDetails)
-
-        }).then(response => response.status)
+        }).then(response => {
+            if (response.ok) {
+                props.successModal.current.classList.add('open-modal__settings-validation')
+            }
+            else {
+                props.errorModal.current.classList.add('open-modal__settings-validation')
+            }
+            window.scrollTo(0, 0);
+        })
     }
 
     return (
@@ -91,7 +99,7 @@ export default function PrivacySettings() {
                         id="followers-privacy"
                         className="toggle"
                         checked={privacyDetails.follow}
-                        onChange={e => setPrivacyDetails({...privacyDetails, follow: e.target.checked})}/>
+                        onChange={e => setPrivacyDetails({...privacyDetails, followersFollowing: e.target.checked})}/>
                     <label htmlFor="followers-privacy">Hide Followers</label>
                 </div>
                 <p>Anyone who does not follow 
@@ -107,7 +115,7 @@ export default function PrivacySettings() {
                         id="statistics-privacy"
                         className="toggle"
                         checked={privacyDetails.stats}
-                        onChange={e => setPrivacyDetails({...privacyDetails, stats: e.target.checked})}/>
+                        onChange={e => setPrivacyDetails({...privacyDetails, statistics: e.target.checked})}/>
                     <label htmlFor="statistics-privacy">Hide Statistics</label>
                 </div>
                 <p>Your statistics, including the number of 

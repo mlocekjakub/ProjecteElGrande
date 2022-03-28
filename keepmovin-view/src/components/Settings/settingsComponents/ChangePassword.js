@@ -1,12 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Settings.css";
-import {SendChangePasswordForm} from '../../API/Api'
 import {useSelector} from "react-redux";
 
 
 
-export default function ChangePassword() {
+export default function ChangePassword(props) {
 
     const theme = useSelector((state) => state.theme.value)
     
@@ -41,7 +40,15 @@ export default function ChangePassword() {
             },
             body: JSON.stringify(passwordData)
 
-        }).then(response => response.status)
+        }).then(response => {
+            if (response.ok) {
+                props.successModal.current.classList.add('open-modal__settings-validation')
+            }
+            else {
+                props.errorModal.current.classList.add('open-modal__settings-validation')
+            }
+            window.scrollTo(0, 0);
+        })
         
     }
 

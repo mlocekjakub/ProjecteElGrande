@@ -2,63 +2,74 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Settings.css";
 import {useSelector} from "react-redux";
+import axios from "axios";
 
 
 
-export default function EditProfile() {
+export default function EditProfile(props) {
     const theme = useSelector((state) => state.theme.value)
     
     const [profileDetails, setProfileDetails] = useState({
         userId: localStorage.getItem('session'),
         name: "",
         surname: "",
-        city: "",
-        country: "",
-        ageDate: "",
+        location: {city: "", country: "", zipCode: ""},
+        birthDate: Date.now().toLocaleString(),
         phoneNumber: "",
-        aboutMe: "",
-        organization: "",
-        krs: "",
+        personalInfo: "",
+        organisation: {name: "", isVerify: "verified"},
     })
 
     useEffect(async () => {
-        const response = await fetch("api/UserProfile/uploadProfileInformation", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                "etag": localStorage.getItem('session')
-
-            },
-            credentials: 'include',
-        })
-        const content = await response.json()
-            .then(response => {
+        const response = await axios
+            .get(`/api/UserProfile/uploadProfileInformation`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "etag" : localStorage.getItem('session'),
+                }
+        }).then(content => {
                setProfileDetails({
-                   ...profileDetails,
-                   name: `${response.name === null ? '' : response.name}`,
-                   surname: `${response.surname === null ? '' : response.surname}`,
-                   city: `${response.location.city === null ? '' : response.location.city}`,
-                   country: `${response.location.country === null ? '' : response.location.country}`,
-                   ageDate: `${response.ageDate === null ? '' : response.ageDate}`,
-                   phoneNumber: `${response.phoneNumber === null ? '' : response.phoneNumber}`,
-                   aboutMe: `${response.aboutMe === null ? '' : response.aboutMe}`,
-                   organization: `${response.organization.name === null ? '' : response.organization.name}`,
+                   name: `${content.data.name === null ? '' : content.data.name}`,
+                   surname: `${content.data.surname === null ? '' : content.data.surname}`,
+                   location: {
+                       city: `${content.data.location === null ? '' : content.data.location?.city}`,
+                       country: `${content.data.location === null ? '' : content.data.location?.country}`, 
+                       zipCode: `${content.data.location === null ? '' : content.data.location?.zipCode}`,
+                   },
+                   birthDate: `${content.data.birthDate === undefined ? Date.now().toLocaleString() : content.data.birthDate}`,
+                   phoneNumber: `${content.data.phoneNumber === null ? '' : content.data.phoneNumber}`,
+                   personalInfo: `${content.data.aboutMe === undefined ? '' : content.data.aboutMe}`,
+                   organisation: {
+                       ...profileDetails.organisation,
+                       name: `${content.data.organisation === null ? '' : content.data.organisation?.name}`
+                   },
+                   userId: localStorage.getItem('session')
                }) 
             })
 
-    }, [])
+    }, [props.buttonState])
     
     
     function HandleSubmit(e) {
         e.preventDefault()
-        fetch("api/userProfile/editProfileInformation", {
+        console.log(profileDetails)
+        fetch("/api/UserProfile/editProfileInformation", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(profileDetails)
-        }.then(response => console.log(response)))
+        }).then(response => {
+            if (response.ok) {
+                props.successModal.current.classList.add('open-modal__settings-validation')
+            }
+            else {
+                props.errorModal.current.classList.add('open-modal__settings-validation') 
+            }
+            window.scrollTo(0, 0);
+        })
         
     }
     
@@ -72,7 +83,6 @@ export default function EditProfile() {
                        id="userName"
                        autoComplete="off"
                        placeholder="Name"
-                       required
                        value={profileDetails.name}
                        onChange={e => setProfileDetails({...profileDetails, name: e.target.value})}
                 />
@@ -81,7 +91,6 @@ export default function EditProfile() {
                        id="userSurname"
                        autoComplete="off"
                        placeholder="Surname"
-                       required
                        value={profileDetails.surname}
                        onChange={e => setProfileDetails({...profileDetails, surname: e.target.value})}
                 />
@@ -93,18 +102,25 @@ export default function EditProfile() {
                        id="city"
                        autoComplete="off"
                        placeholder="City"
-                       required
-                       value={profileDetails.city}
-                       onChange={e => setProfileDetails({...profileDetails, city: e.target.value})}
+                       value={profileDetails.location.city}
+                       onChange={e => setProfileDetails({...profileDetails, location: {...profileDetails.location, city: e.target.value}})}
                 />
                 <input type="text"
                        name="country"
                        id="country"
                        autoComplete="off"
                        placeholder="country"
-                       required
-                       value={profileDetails.country}
-                       onChange={e => setProfileDetails({...profileDetails, country: e.target.value})}
+                       value={profileDetails.location.country}
+                       onChange={e => setProfileDetails({...profileDetails, location: {...profileDetails.location, country: e.target.value}})}
+                />
+                <input type="text"
+                       name="zip"
+                       id="zip"
+                       autoComplete="off"
+                       placeholder="Zip-code"
+                       value={profileDetails.location.zipCode}
+                       pattern="[0-9]*"
+                       onChange={e => setProfileDetails({...profileDetails, location: {...profileDetails.location, zipCode: e.target.value}})}
                 />
             </div>
             <div className={`edit-profile__phone-number ${theme === 'light' ? 'edit-profile__light' : 'edit-profile__dark' }`}>
@@ -114,41 +130,29 @@ export default function EditProfile() {
                        id="phoneNumber"
                        autoComplete="off"
                        placeholder="Phone number"
-                       required
                        value={profileDetails.phoneNumber}
                        onChange={e => setProfileDetails({...profileDetails, phoneNumber: e.target.value})}
                 />
             </div>
             <div className={`edit-profile__aboutMe ${theme === 'light' ? 'edit-profile__light' : 'edit-profile__dark' }`}>
-                <label className={`edit-profile-labels ${theme === 'light' ? 'edit-profile-labels__light' : 'edit-profile-labels__dark' }`} htmlFor="aboutMe">About me</label>
-                <textarea name="AboutMe"
-                       id="aboutMe"
+                <label className={`edit-profile-labels ${theme === 'light' ? 'edit-profile-labels__light' : 'edit-profile-labels__dark' }`} htmlFor="personalInfo">About me</label>
+                <textarea name="personalInfo"
+                       id="personalInfo"
                        autoComplete="off"
                        placeholder="About me"
-                       required
-                       value={profileDetails.aboutMe}
-                       onChange={e => setProfileDetails({...profileDetails, aboutMe: e.target.value})}
+                       value={profileDetails.personalInfo}
+                       onChange={e => setProfileDetails({...profileDetails, personalInfo: e.target.value})}
                 />
             </div>
             <div className={`edit-profile__organization ${theme === 'light' ? 'edit-profile__light' : 'edit-profile__dark' }`}>
-                <div className={`edit-profile-labels ${theme === 'light' ? 'edit-profile-labels__light' : 'edit-profile-labels__dark' }`}>Organization and KRS</div>
+                <label className={`edit-profile-labels ${theme === 'light' ? 'edit-profile-labels__light' : 'edit-profile-labels__dark' }`} htmlFor="organisation">Organisation</label>
                 <input type="text"
-                       name="organization"
-                       id="organization"
+                       name="organisation"
+                       id="organisation"
                        autoComplete="off"
-                       placeholder="Organization Name"
-                       required
-                       value={profileDetails.organization}
-                       onChange={e => setProfileDetails({...profileDetails, organization: e.target.value})}
-                />
-                <input type="text"
-                       name="organization-krs"
-                       id="organization-krs"
-                       autoComplete="off"
-                       placeholder="Organization KRS"
-                       required
-                       value={profileDetails.krs}
-                       onChange={e => setProfileDetails({...profileDetails, krs: e.target.value})}
+                       placeholder="Organisation Name"
+                       value={profileDetails.organisation.name}
+                       onChange={e => setProfileDetails({...profileDetails, organisation: {...profileDetails.organisation, name: e.target.value } } ) }
                 />
             </div>
             <input type="submit"
