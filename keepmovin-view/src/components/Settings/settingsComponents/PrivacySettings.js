@@ -1,13 +1,16 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Slider.css"
+import {useSelector} from "react-redux";
 
-export default function PrivacySettings() {
+export default function PrivacySettings(props) {
+    const theme = useSelector((state) => state.theme.value)
     
     const [privacyDetails, setPrivacyDetails] = useState({
+        userId: localStorage.getItem('session'),
         location: false,
-        follow: false,
-        stats: false,
+        followersFollowing: false,
+        statistics: false,
         aboutMe: false,
         upcomingEvents: false,
         previousEvents: false,
@@ -15,53 +18,54 @@ export default function PrivacySettings() {
     })
 
     useEffect(async () => {
-        const response = await fetch("api/Setting/upload", {
+        const response = await fetch("/api/Setting/upload", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "etag": localStorage.getItem('session')
 
-            },
-            credentials: 'include',
+            }
         })
         const content = await response.json()
             .then(content => {
-                SetSettingsStatesFromDataBase(content)
+                setPrivacyDetails({
+                    location: content.location,
+                    followersFollowing: content.followersFollowing,
+                    statistics: content.statistics,
+                    aboutMe: content.aboutMe,
+                    upcomingEvents: content.upcomingEvents,
+                    previousEvents: content.previousEvents,
+                    photo: content.photo,
+                    userId: localStorage.getItem('session')
+                })
             })
         
-    },[])
-
+    },[props.buttonState])
     
-    function SetSettingsStatesFromDataBase(data) {
-        setPrivacyDetails({
-            location: data.location, 
-            follow: data.followersFollowing,
-            stats: data.statistics,
-            aboutMe: data.aboutMe,
-            upcomingEvents: data.upcomingEvents,
-            previousEvents: data.previousEvents,
-            photo: data.photo
-        })
-    }
     
     function HandleSubmit(e) {
         e.preventDefault()
-        let privacy = {
-            'Location': privacyDetails.location,
-            'FollowersFollowing': privacyDetails.follow,
-            'Statistics': privacyDetails.stats,
-            'AboutMe': privacyDetails.aboutMe,
-            'UpcomingEvents': privacyDetails.upcomingEvents,
-            'PreviousEvents': privacyDetails.previousEvents,
-            'Photo': privacyDetails.photo,
-            'userId': localStorage.getItem('session')
-        }
-        localStorage.setItem("privacy", JSON.stringify(privacy));
+        fetch('/api/Setting/edit', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(privacyDetails)
+        }).then(response => {
+            if (response.ok) {
+                props.successModal.current.classList.add('open-modal__settings-validation')
+            }
+            else {
+                props.errorModal.current.classList.add('open-modal__settings-validation')
+            }
+            window.scrollTo(0, 0);
+        })
     }
 
     return (
         <form className="settings__privacy-container">
-            <div className="privacy__header">
+            <div className={` ${theme === 'light' ? 'privacy__header' : 'privacy__header__dark' }`}>
                 <h2>Privacy</h2>
                 <p> These options will allow 
                     You to set up Your privacy policy 
@@ -70,9 +74,9 @@ export default function PrivacySettings() {
                     group will be limited to these settings</p>  
             </div>
             
-            <div className="privacy__localization-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Localization</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input 
                         type="checkbox" 
                         id="localization-privacy" 
@@ -87,15 +91,15 @@ export default function PrivacySettings() {
                     see Your data.</p>
             </div>
             
-            <div className="privacy__followers-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Followers</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="followers-privacy"
                         className="toggle"
                         checked={privacyDetails.follow}
-                        onChange={e => setPrivacyDetails({...privacyDetails, follow: e.target.checked})}/>
+                        onChange={e => setPrivacyDetails({...privacyDetails, followersFollowing: e.target.checked})}/>
                     <label htmlFor="followers-privacy">Hide Followers</label>
                 </div>
                 <p>Anyone who does not follow 
@@ -103,15 +107,15 @@ export default function PrivacySettings() {
                     You are following or following You.</p>
             </div>
             
-            <div className="privacy__statistics-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Hide Statistics</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="statistics-privacy"
                         className="toggle"
                         checked={privacyDetails.stats}
-                        onChange={e => setPrivacyDetails({...privacyDetails, stats: e.target.checked})}/>
+                        onChange={e => setPrivacyDetails({...privacyDetails, statistics: e.target.checked})}/>
                     <label htmlFor="statistics-privacy">Hide Statistics</label>
                 </div>
                 <p>Your statistics, including the number of 
@@ -120,9 +124,9 @@ export default function PrivacySettings() {
                     and the percentage results</p>
             </div>
 
-            <div className="privacy__aboutMe-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>About Me</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="about-me-privacy"
@@ -135,9 +139,9 @@ export default function PrivacySettings() {
                     profile will be blurred</p>
             </div>
 
-            <div className="privacy__upcoming-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Upcoming Events</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="upcoming-privacy"
@@ -152,9 +156,9 @@ export default function PrivacySettings() {
                     in the future.</p>
             </div>
 
-            <div className="privacy__previous-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Previous Events</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="previous-privacy"
@@ -168,9 +172,9 @@ export default function PrivacySettings() {
                     in which you have already participated</p>
             </div>
 
-            <div className="privacy__photo-container">
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
                 <h4>Photo</h4>
-                <div className="privacy-switch">
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
                     <input
                         type="checkbox"
                         id="photo-privacy"

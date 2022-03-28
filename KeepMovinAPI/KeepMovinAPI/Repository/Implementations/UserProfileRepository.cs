@@ -12,11 +12,13 @@ namespace KeepMovinAPI.Repository.Implementations
 {
     public class UserProfileRepository : IUserProfileRepository
     {
+        private readonly ILogger<UserProfileRepository> _logger;
         private readonly KeepMovinDbContext _context;
 
 
-        public UserProfileRepository(KeepMovinDbContext context)
+        public UserProfileRepository(ILogger<UserProfileRepository> logger, KeepMovinDbContext context)
         {
+            _logger = logger;
             _context = context;
         }
 
@@ -92,11 +94,13 @@ namespace KeepMovinAPI.Repository.Implementations
             var current = Get(upDated.UserId);
             current.Name = upDated.Name;
             current.Surname = upDated.Surname;
-            current.Picture = upDated.Picture;
+            /*current.Picture = upDated.Picture;*/
             current.BirthDate = upDated.BirthDate;
             current.PersonalInfo = upDated.PersonalInfo;
             current.Organisation = upDated.Organisation;
+            var x = current.Organisation;
             current.Location = upDated.Location;
+            var y = current.Location;
             current.PhoneNumber = upDated.PhoneNumber;
             _context.UserProfile.Update(current);
             _context.SaveChanges();

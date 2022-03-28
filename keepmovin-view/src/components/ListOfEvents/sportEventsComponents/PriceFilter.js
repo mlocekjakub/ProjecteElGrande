@@ -6,6 +6,8 @@ import "./PriceFilter.css";
 import {useDispatch, useSelector} from "react-redux";
 import {changeMinPrice} from "../../../features/MinPrice";
 import {changeMaxPrice} from "../../../features/MaxPrice";
+import {changeMinParticipants} from "../../../features/MinParticipants";
+import {changeMaxParticipants} from "../../../features/MaxParticipants";
 
 
 function PriceFilter() {
@@ -15,6 +17,8 @@ function PriceFilter() {
     const maxPrice = useSelector((state) => state.maxPrice.value)
     
     const dispatch = useDispatch();
+    
+    const theme = useSelector((state) => state.theme.value)
     
     useEffect(() => {
 
@@ -31,11 +35,15 @@ function PriceFilter() {
                     if (e.target.className === "input-min") {
                         rangeInput[0].value = minPrice;
                         range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
-                        dispatch(changeMinPrice(minPrice))
+                        setTimeout(() => {
+                            dispatch(changeMinPrice(minPrice))
+                        }, 1000)
                     } else {
                         rangeInput[1].value = maxPrice;
                         range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-                        dispatch(changeMaxPrice(maxPrice))
+                        setTimeout(() => {
+                            dispatch(changeMaxPrice(maxPrice))
+                        }, 1000)
                     }
                 }
             });
@@ -68,7 +76,7 @@ function PriceFilter() {
     
     return (
         <div className="filter-parent">
-            <div onClick={ExpandFilter} className="filter">
+            <div onClick={ExpandFilter} className={`filter ${theme === 'light' ? 'filter-light' : 'filter-dark'}`}>
                 <div className="filter-type">Price</div>
                 <ExpandMoreIcon />
             </div>
@@ -76,21 +84,21 @@ function PriceFilter() {
                 <div className="price-filter-wrapper">
                     <div className="price-input">
                         <div className="field">
-                            <span className="min-max">Min PLN</span>
-                            <input type="number" className="input-min" defaultValue={minPrice} />
+                            <span className={`min-max ${theme === 'light' ? '' : 'min-max-dark'}`}>Min PLN</span>
+                            <input type="number" className={`input-min ${theme === 'light' ? '' : 'input-min-dark'}`} defaultValue={minPrice} />
                         </div>
                         <div className="separator">-</div>
                         <div className="field">
-                            <span className="min-max">Max PLN</span>
-                            <input type="number" className="input-max" defaultValue={maxPrice} />
+                            <span className={`min-max ${theme === 'light' ? '' : 'min-max-dark'}`}>Max PLN</span>
+                            <input type="number" className={`input-max ${theme === 'light' ? '' : 'input-min-dark'}`} defaultValue={maxPrice} />
                         </div>
                     </div>
                     <div className="slider">
                         <div className="progress"></div>
                     </div>
                     <div className="range-input">
-                        <input type="range" className="range-min" min="0" max="10000" defaultValue={minPrice} step="10" />
-                            <input type="range" className="range-max" min="0" max="10000" defaultValue={maxPrice} step="10" />
+                        <input type="range" className="range-min" min="0" max="10000" defaultValue={minPrice} step="1" />
+                            <input type="range" className="range-max" min="0" max="10000" defaultValue={maxPrice} step="1" />
                     </div>
                 </div>
             </div>

@@ -12,33 +12,35 @@ function ParticipantsCountFilter() {
     const minParticipants = useSelector((state) => state.minParticipants.value)
     
     const maxParticipants = useSelector((state) => state.maxParticipants.value)
+
+    const theme = useSelector((state) => state.theme.value)
     
     const dispatch = useDispatch()
     
     useEffect(() => {
 
         const rangeInput = document.querySelectorAll(".range-input__participants input"),
-            priceInput = document.querySelectorAll(".price-input__participants input"),
+            participantsInput = document.querySelectorAll(".price-input__participants input"),
             range = document.querySelector(".slider__participants .progress__participants");
         let priceGap = 500;
 
-        priceInput.forEach(input => {
+        participantsInput.forEach(input => {
             input.addEventListener("input", e => {
-                let minPrice = parseInt(priceInput[0].value),
-                    maxPrice = parseInt(priceInput[1].value);
-                if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
+                let minParticipants = parseInt(participantsInput[0].value),
+                    maxParticipants = parseInt(participantsInput[1].value);
+                if ((maxParticipants - minParticipants >= priceGap) && maxParticipants <= rangeInput[1].max) {
                     if (e.target.className === "input-min__participants") {
-                        rangeInput[0].value = minPrice;
-                        range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                        rangeInput[0].value = minParticipants;
+                        range.style.left = ((minParticipants / rangeInput[0].max) * 100) + "%";
                         setTimeout(() => {
-                            dispatch(changeMinParticipants(minPrice))
-                        }, 1500)
+                            dispatch(changeMinParticipants(minParticipants))
+                        }, 1000)
                     } else {
-                        rangeInput[1].value = maxPrice;
-                        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                        rangeInput[1].value = maxParticipants;
+                        range.style.right = 100 - (maxParticipants / rangeInput[1].max) * 100 + "%";
                         setTimeout(() => {
-                            dispatch(changeMaxParticipants(maxPrice))
-                        }, 1500)
+                            dispatch(changeMaxParticipants(maxParticipants))
+                        }, 1000)
                     }
                 }
             });
@@ -58,9 +60,9 @@ function ParticipantsCountFilter() {
                         dispatch(changeMaxParticipants(maxVal + priceGap))
                     }
                 } else {
-                    priceInput[0].value = minVal;
+                    participantsInput[0].value = minVal;
                     dispatch(changeMinParticipants(minVal))
-                    priceInput[1].value = maxVal;
+                    participantsInput[1].value = maxVal;
                     dispatch(changeMaxParticipants(maxVal))
                     range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
                     range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
@@ -73,7 +75,7 @@ function ParticipantsCountFilter() {
 
     return (
         <div className="filter-parent">
-            <div onClick={ExpandFilter} className="filter">
+            <div onClick={ExpandFilter} className={`filter ${theme === 'light' ? 'filter-light' : 'filter-dark'}`}>
                 <div className="filter-type">Participants</div>
                 <ExpandMoreIcon />
             </div>
@@ -81,13 +83,13 @@ function ParticipantsCountFilter() {
                 <div className="price-filter-wrapper__participants">
                     <div className="price-input__participants">
                         <div className="field__participants">
-                            <span className="min-max__participants">Min</span>
-                            <input type="number" className="input-min__participants" defaultValue={minParticipants}/>
+                            <span className={`min-max__participants ${theme === 'light' ? '' : 'min-max-dark'}`}>Min</span>
+                            <input type="number" className={`input-min__participants ${theme === 'light' ? '' : 'input-min-dark'}`} defaultValue={minParticipants}/>
                         </div>
                         <div className="separator__participants">-</div>
                         <div className="field__participants">
-                            <span className="min-max__participants">Max</span>
-                            <input type="number" className="input-max__participants" defaultValue={maxParticipants} />
+                            <span className={`min-max__participants ${theme === 'light' ? '' : 'min-max-dark'}`}>Max</span>
+                            <input type="number" className={`input-max ${theme === 'light' ? '' : 'input-min-dark'}`} defaultValue={maxParticipants} />
                         </div>
                     </div>
                     <div className="slider__participants">

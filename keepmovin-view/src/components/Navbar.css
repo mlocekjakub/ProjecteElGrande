@@ -5,7 +5,7 @@ header {
    justify-content: space-between;
    align-items: center;
    padding: 20px 18%;
-   background: #242626;
+   background: #18181b;
    position: fixed;
    top: 0; left: 0; right: 0;
    z-index: 1000;
@@ -95,8 +95,6 @@ header {
 }
 
 /*-------*/
-
-
 
 
 /*profile menu */

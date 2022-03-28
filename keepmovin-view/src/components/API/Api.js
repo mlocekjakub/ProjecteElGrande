@@ -3,34 +3,7 @@ import {changeIsLogged} from "../../features/IsLogged";
 
 
 
-export function SendChangePasswordForm(collectUserInputs) {
-    fetch('/user/changePassword', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(collectUserInputs)
 
-    }).then(response => response.status)
-        .then(data => console.log(data))
-}
-
-
-export function EditUserSettings() {
-    var privacyData = JSON.parse(localStorage.getItem("privacy"));
-    fetch('api/Setting/edit', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(privacyData)
-
-    }).then(response => response.status)
-        .then(localStorage.removeItem('privacy'))
-
-}
 
 export function createEvent() {
     let status = "upcoming";

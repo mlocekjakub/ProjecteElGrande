@@ -13,9 +13,9 @@ namespace KeepMovinAPI.Domain.Dtos
 
         public List<string> Type { get; set; } = new List<string>();
 
-        public int MinPrice { get; set; } = 0;
+        public Decimal MinPrice { get; set; }
 
-        public int MaxPrice { get; set; } = 9999;
+        public Decimal MaxPrice { get; set; }
         
         public string MinDate { get; set; }
         

@@ -15,6 +15,8 @@ function TypeFilter() {
     
     const typesSelected = useSelector((state) => state.type.value)
 
+    const theme = useSelector((state) => state.theme.value)
+
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -28,7 +30,7 @@ function TypeFilter() {
     
     return (
         <div className="filter-parent">
-            <div onClick={ExpandFilter} className="filter">
+            <div onClick={ExpandFilter} className={`filter ${theme === 'light' ? 'filter-light' : 'filter-dark'}`}>
                 <div className="filter-type">Type</div>
                 <ExpandMoreIcon className="expand-icon"/>
             </div>

@@ -78,13 +78,12 @@ namespace KeepMovinAPI.Controllers
             
         }
 
-        [HttpGet("editProfileInformation")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
+        [HttpPost("editProfileInformation")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(UserProfileDto userProfileDto)
         {
-
             try
             {
                 string jwt = Request.Cookies["token"];

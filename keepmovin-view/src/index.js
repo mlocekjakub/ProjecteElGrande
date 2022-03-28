@@ -17,6 +17,7 @@ import rangeDateReducer from "./features/RangeDate"
 import eventsJoinedReducer from "./features/EventsJoined"
 import isLoggedReducer from "./features/IsLogged"
 import loginActiveButtonReducer from "./features/LoginActiveButton"
+import themeReducer from "./features/Theme"
 import {Provider} from "react-redux";
 
 const store = configureStore({
@@ -32,7 +33,8 @@ const store = configureStore({
         rangeDate: rangeDateReducer,
         eventsJoined: eventsJoinedReducer,
         loginActiveButton: loginActiveButtonReducer,
-        isLogged: isLoggedReducer
+        isLogged: isLoggedReducer,
+        theme: themeReducer
     },
 })
 
