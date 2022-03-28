@@ -60,6 +60,16 @@
     padding: 1.5rem 0 1.5rem 0;
 }
 
+.number {
+    font-size: 1.1rem;
+}
+
+.heading {
+    font-size: 0.9rem;
+    min-height: 100%;
+    align-self: center;
+}
+
 .profile__following, .profile__followed, .profile__rating {
     display: flex;
     flex-direction: column;
@@ -117,6 +127,7 @@
 .info__nav {
     display: flex;
     gap: 5.5rem;
+    user-select: none;
 }
 
 .info__nav > div {
@@ -294,6 +305,7 @@
     padding: 0.3rem;
     z-index: 10;
     border-radius: 0 0 0.4rem 0.4rem;
+    font-size: 0.85rem;
 }
 
 .people-icon__profile {
@@ -312,11 +324,16 @@
     flex-direction: column;
     border-radius: 0 0 0.4rem 0.4rem;
     padding: 0.4rem;
+    font-size: 0.85rem;
 }
 
 .event-date-card__day {
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+}
+
+.date-finished {
+    opacity: 0.6;
 }
 
 

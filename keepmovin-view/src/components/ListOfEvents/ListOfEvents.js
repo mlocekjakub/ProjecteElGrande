@@ -14,6 +14,7 @@ import LoadingSpinner from "./sportEventsComponents/LoadingSpinner";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Link} from "react-router-dom";
+import Events from "./Events";
 
 
 function SportEventsPage() {
@@ -95,6 +96,15 @@ function SportEventsPage() {
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
         minPriceFilter, maxPriceFilter,datesFilter, currentPage])
+
+    useEffect(() => {
+        if (currentPage >= numberOfPages) {
+            setIsLimitNext(true);
+        }
+        else {
+            setIsLimitNext(false);
+        }
+    }, [numberOfPages])
     
 
     const NextPage = () => {
@@ -112,21 +122,6 @@ function SportEventsPage() {
         setCurrentPage(currentPage - 1)
         setIsLimitNext(false)
     }
-    
-    function Events(props) {
-        return props.display.map((event) =>
-            (<EventCard key={event.eventId}
-                        eventId={event.eventId}
-                        eventName={event.name}
-                        dateStart={event.startEvent}
-                        dateEnd={event.endEvent}
-                        maxParticipants={event.maxParticipants}
-                        sport={event.sports.name}
-                        experienceLevels={event.experienceLevel.name}
-                        price={event.price}
-                        currency={event.currency}
-                        location={event.location.city}/>))
-        }
         
     return (
         <div className="events-page-wrapper">
@@ -138,7 +133,6 @@ function SportEventsPage() {
                     {isUserLogged ? <Link className="create-button-link" to="/event/create">Create Event</Link> 
                         : <div className="create-button-link__disable">Sign in to create event</div> 
                     }
-                    
                     <SportFilter />
                     <ExperienceFilter />
                     <PriceFilter />
@@ -175,8 +169,8 @@ function SportEventsPage() {
                     </div>
                     <div>
                         {isFetchingData && <LoadingSpinner />}
-                        {eventsNotFound && <div className="events__not-found">Events not found</div>}
-                        <Events display={foundEvents} />
+                        {eventsNotFound ? <div className="events__not-found">Events not found</div>
+                        : <Events display={foundEvents} />}
                     </div>
                 </div>
             </div>

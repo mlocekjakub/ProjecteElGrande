@@ -1,8 +1,4 @@
 import * as React from "react";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Button } from "@mui/material";
-import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from "react";
 import "./Settings.css";
 import {SendChangePasswordForm} from '../../API/Api'
@@ -10,60 +6,76 @@ import {SendChangePasswordForm} from '../../API/Api'
 
 
 export default function ChangePassword() {
+    
+    const [passwordData, setPasswordData] = useState({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+    })
+    const [isPasswordDataValid, setIsPasswordDataValid] = useState(false)
+    
+    
+    useEffect(() => {
+        if (passwordData.oldPassword 
+            && passwordData.newPassword 
+            && passwordData.confirmPassword) {
+            setIsPasswordDataValid(true);
+        }
+        else {
+            setIsPasswordDataValid(false);
+        }
+    }, [passwordData])
 
-    const ChangePassword = () => {
-        var collectUserInputs = {
+    function HandleSubmit(e) {
+        e.preventDefault()
+        let collectUserInputs = {
             'Userid': localStorage.getItem('session'),
-            'OldPassword': document.getElementById("OldPassword").value,
-            'NewPassword': document.getElementById("NewPassword").value,
-            'ConfirmPassword': document.getElementById("ConfirmNewPassword").value
+            'OldPassword': passwordData.oldPassword,
+            'NewPassword': passwordData.newPassword,
+            'ConfirmPassword': passwordData.confirmPassword
         }
         SendChangePasswordForm(collectUserInputs);
     }
 
     return (
-        
-        <div className="centered" >
-            <Box className="centered"
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                
-                <div>
-                    <TextField
-                        id ="OldPassword"
-                        label="Old password"                     
-                        size="small"
-                    />
-                </div>
-                <div>
-                    <TextField
-                        id="NewPassword"
-                        label="New password"
-                        size="small"
-                    />
-                </div>
-                <div>
-                    <TextField
-                        id="ConfirmNewPassword"
-                        label="Confirm new password"
-                        size="small"
-                    />
-                  
-                </div>
-            </Box>
-            <div className="save-button">
-
-                <Button onClick={ChangePassword} variant="contained" endIcon={<SendIcon />} >
-                    Save
-                </Button>
-
+        <form className="settings__change-password-container">
+            <div className="settings__old-password">
+                <label htmlFor="old-password">Old Password</label>
+                <input type="password"
+                       name="old-password"
+                       id="old-password"
+                       autoComplete="off"
+                       required
+                       onChange={e => setPasswordData({...passwordData, oldPassword: e.target.value})}
+                />
             </div>
-        </div>
+            <div className="settings__new-password">
+                <label htmlFor="new-password">New Password</label>
+                <input type="password"
+                       name="new-password"
+                       id="new-password"
+                       autoComplete="off"
+                       required
+                       onChange={e => setPasswordData({...passwordData, newPassword: e.target.value})}
+                />
+            </div>
+            <div className="settings__confirm-new-password">
+                <label htmlFor="confirm-new-password">Confirm New Password</label>
+                <input type="password"
+                       name="confirm-new-password"
+                       id="confirm-new-password"
+                       autoComplete="off"
+                       required
+                       onChange={e => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                />
+            </div>
+            <input type="submit" 
+                   name="submit" 
+                   id="change-password-submit" 
+                   onClick={(e) => HandleSubmit(e)} 
+                   disabled={!isPasswordDataValid} 
+                   value="Change password"/>
+        </form>
 
     )
 }

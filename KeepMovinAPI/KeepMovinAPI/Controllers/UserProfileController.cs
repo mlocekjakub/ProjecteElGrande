@@ -55,11 +55,12 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetProfileById([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetProfileById([FromHeader] string userId)
+        
         {
             try
             {
@@ -83,9 +84,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(UserProfileDto userProfileDto)
         {
-            userProfileDto.Picture = new Picture();
-            userProfileDto.Organisation = new Organisation();
-            userProfileDto.Name = "AbraKadabra";
+
             try
             {
                 string jwt = Request.Cookies["token"];

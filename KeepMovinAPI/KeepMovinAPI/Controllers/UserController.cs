@@ -14,18 +14,18 @@ namespace KeepMovinAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private IUserDao _userDao;
-        private ISettingDao _settingDao;
+        private IUserRepository _userRepository;
+        private ISettingRepository _settingRepository;
         private IUserProfileRepository _profileRepository;
         private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IValidation _validation;
 
-        public UserController(ILogger<UserController> logger, IUserDao userDao, IJwtAuthenticationManager jwt, ISettingDao setting,
+        public UserController(ILogger<UserController> logger, IUserRepository userRepository, IJwtAuthenticationManager jwt, ISettingRepository setting,
            IUserProfileRepository profileRepository, IValidation validation)
         {
-            _settingDao = setting;
+            _settingRepository = setting;
             _logger = logger;
-            _userDao = userDao;
+            _userRepository = userRepository;
             _jwtAuthenticationManager = jwt;
             _profileRepository = profileRepository;
             _validation = validation;
@@ -47,12 +47,12 @@ namespace KeepMovinAPI.Controllers
                 if (!_validation.Validate(changePasswordItems.Userid, jwt))
                     return Unauthorized();
 
-                User user = _userDao.Get(changePasswordItems.Userid);
+                User user = _userRepository.Get(changePasswordItems.Userid);
 
-                if (!_userDao.ComparePasswords(changePasswordItems.OldPassword, user.Password))
+                if (!_userRepository.ComparePasswords(changePasswordItems.OldPassword, user.Password))
                     return Unauthorized();
 
-                _userDao.UpdatePassword(user, changePasswordItems.NewPassword);
+                _userRepository.UpdatePassword(user, changePasswordItems.NewPassword);
                 return Ok();
 
             }
@@ -74,8 +74,8 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                User user = _userDao.GetUserByEmail(userEmail.Email);
-                if (_userDao.CheckIfUserExists(user))
+                User user = _userRepository.GetUserByEmail(userEmail.Email);
+                if (_userRepository.CheckIfUserExists(user))
                 {
                     // Some Actions Made
                     return Ok();
@@ -99,7 +99,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                if (_userDao.CheckIfUserExists(user))
+                if (_userRepository.CheckIfUserExists(user))
                 {
 
                     return StatusCode(409);
@@ -127,8 +127,8 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var dataBaseUser = _userDao.GetUserByEmail(user);
-                var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userDao);
+                var dataBaseUser = _userRepository.GetUserByEmail(user);
+                var token = _jwtAuthenticationManager.Authenticate(dataBaseUser, user, _userRepository);
                 if (token == null)
                     return Unauthorized();
 
@@ -180,7 +180,7 @@ namespace KeepMovinAPI.Controllers
                 var jwt = Request.Cookies["token"];
                 var token = _jwtAuthenticationManager.Verify(jwt);
                 var tokenClaims = token.Claims.ToList();
-                var user = _userDao.GetUserByEmail(tokenClaims[0].Value);
+                var user = _userRepository.GetUserByEmail(tokenClaims[0].Value);
                 return Ok(Convert.ToString(user.Userid));
             }
             catch (Exception e)
@@ -193,9 +193,9 @@ namespace KeepMovinAPI.Controllers
         [NonAction]
         private void CreateAUserInfrastructure(User user)
         {
-            _userDao.Add(user);
+            _userRepository.Add(user);
             Setting settings = new Setting();
-            _settingDao.Add(settings);
+            _settingRepository.Add(settings);
             UserProfile profile = new UserProfile();
             profile.AddUser(user);
             profile.AddSettings(settings);

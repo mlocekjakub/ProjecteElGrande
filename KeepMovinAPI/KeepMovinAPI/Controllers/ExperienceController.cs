@@ -12,12 +12,12 @@ namespace KeepMovinAPI.Controllers
     public class ExperienceController : ControllerBase
     {
         private readonly ILogger<ExperienceController> _logger;
-        private IExperienceDao _daoExperience;
+        private IExperienceRepository _repositoryExperience;
 
-        public ExperienceController(ILogger<ExperienceController> logger, IExperienceDao daoExperience)
+        public ExperienceController(ILogger<ExperienceController> logger, IExperienceRepository repositoryExperience)
         {
             _logger = logger;
-            _daoExperience = daoExperience;
+            _repositoryExperience = repositoryExperience;
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfExperiences = _daoExperience.GetAll();
+                var listOfExperiences = _repositoryExperience.GetAll();
                 return listOfExperiences;
             }
             catch(Exception e)

@@ -21,16 +21,16 @@ namespace KeepMovinAPI.Controllers
     public class EventController : ControllerBase
     {
         private readonly ILogger<EventController> _logger;
-        private IEventDao _daoEvent;
+        private IEventRepository _repositoryEvent;
         private readonly IMapper _mapper;
         private IValidation _validation;
 
 
-        public EventController(ILogger<EventController> logger, IEventDao daoEvent,
+        public EventController(ILogger<EventController> logger, IEventRepository repositoryEvent,
             IMapper mapper, IValidation validation)
         {
             _logger = logger;
-            _daoEvent = daoEvent;
+            _repositoryEvent = repositoryEvent;
             _mapper = mapper;
             _validation = validation;
         }
@@ -44,7 +44,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                Event eventModel = _daoEvent.Get(id);
+                Event eventModel = _repositoryEvent.Get(id);
                 return Ok(eventModel);
             }
             catch (Exception e)
@@ -61,7 +61,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfEvents = _daoEvent.GetByInput(input);
+                var listOfEvents = _repositoryEvent.GetByInput(input);
                 return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
             }
             catch (Exception e)
@@ -81,7 +81,24 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
                     return null;
-                var listOfUserEvents = _daoEvent.GetUserEventsByUserId(Guid.Parse(userId));
+                var listOfUserEvents = _repositoryEvent.GetUserEventsByUserId(Guid.Parse(userId));
+                return listOfUserEvents;
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+           
+        }
+        
+        [HttpGet("events-user")]  
+        public IEnumerable<User> GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetUsersByEventId(Guid.Parse(eventsId));
                 return listOfUserEvents;
 
             }
@@ -96,7 +113,7 @@ namespace KeepMovinAPI.Controllers
 
         
         [HttpGet("events-user/upcoming")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserUpcomingEventsDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
@@ -107,7 +124,7 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
                     return Unauthorized();
-                var listOfUserEvents = _daoEvent.GetUpcomingEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                var listOfUserEvents = _repositoryEvent.GetUpcomingEventsById(Guid.Parse(userId), int.Parse(currentPage));
                 return Ok(listOfUserEvents);
             }
             catch(Exception e)
@@ -121,7 +138,7 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("events-user/previous")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserPreviousEventsDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
@@ -132,7 +149,7 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
                     return Unauthorized();
-                var listOfUserEvents = _daoEvent.GetPreviousEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                var listOfUserEvents = _repositoryEvent.GetPreviousEventsById(Guid.Parse(userId), int.Parse(currentPage));
                 return Ok(listOfUserEvents);
 
 
@@ -142,9 +159,52 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogWarning(Convert.ToString(e));
                 return BadRequest();
             }
-
-            
         }
+        
+        [HttpGet("events-user/hosted")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId,
+            [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("events-user/hosted-statistics")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsStatisticsById(Guid.Parse(userId));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        
 
 
 
@@ -155,7 +215,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfEvents = _daoEvent.GetFiltered(filter);
+                var listOfEvents = _repositoryEvent.GetFiltered(filter);
                 if (!listOfEvents.EventsFound.Any())
                 {
                     return NoContent();
@@ -176,7 +236,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                var listOfEvents = _daoEvent.GetAll();
+                var listOfEvents = _repositoryEvent.GetAll();
                 return listOfEvents;
             }
             catch (Exception e)
@@ -199,7 +259,7 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(userId, jwt))
                     return Unauthorized();
-                _daoEvent.JoinToEvent(userId,eventId);
+                _repositoryEvent.JoinToEvent(userId,eventId);
                 return Ok();
             }
             catch (Exception e)
@@ -212,11 +272,11 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpPost]
-        public IActionResult Add(Event eventModel)
+        public IActionResult Add(Event eventModel, [FromHeader] Guid userId)
         {
             try
             {
-                _daoEvent.Add(eventModel);
+                _repositoryEvent.Add(eventModel, userId);
                 return Ok();
             }
             catch (Exception e)
@@ -232,7 +292,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                _daoEvent.UpdateStatus();
+                _repositoryEvent.UpdateStatus();
                 return Ok();
             }
             catch (Exception e)

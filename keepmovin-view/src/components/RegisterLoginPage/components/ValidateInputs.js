@@ -30,13 +30,6 @@ export function IsPasswordTooShort(password) {
     return (password.length <= 5 && password.length > 0)
 }
 
-export function ValidateLogin(email, password) {
-    return (
-        ValidateEmail(email) && 
-        ValidatePassword(password)
-    );
-}
-
 export function ValidateRegister(email, password, passwordConfirmation) {
     return (
         ValidateEmail(email) &&

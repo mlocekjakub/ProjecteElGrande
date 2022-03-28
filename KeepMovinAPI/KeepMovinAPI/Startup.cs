@@ -29,13 +29,17 @@ namespace KeepMovinAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var key = "Tu ustawiamy nasz tajny klucz jakby co";
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme  = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
                 x.RequireHttpsMetadata = false;
@@ -47,9 +51,7 @@ namespace KeepMovinAPI
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-
             });
-
 
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
 
@@ -63,14 +65,14 @@ namespace KeepMovinAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .LogTo(Console.WriteLine, LogLevel.Information)
                     .EnableSensitiveDataLogging());
-            services.AddScoped<IEventDao, EventDao>();
-            services.AddScoped<IUserDao, UserDao>();
-            services.AddScoped<ISportDao, SportDao>();
-            services.AddScoped<ISettingDao, SettingDao>();
-            services.AddScoped<ITypeDao, TypeDao>();
-            services.AddScoped<IExperienceDao, ExperienceDao>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISportRepository, SportRepository>();
+            services.AddScoped<ISettingRepository, SettingRepository>();
+            services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddScoped<IExperienceDao, ExperienceDao>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IValidation, Validation>();
         }

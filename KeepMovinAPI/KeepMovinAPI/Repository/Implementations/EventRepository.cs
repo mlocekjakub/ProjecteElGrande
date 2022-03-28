@@ -1,38 +1,41 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using KeepMovinAPI.Dtos;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.Extensions.Logging;
+
 
 namespace KeepMovinAPI.Repository.Implementations
 {
-    public class EventDao : IEventDao
+    public class EventRepository : IEventRepository
     {
         private readonly KeepMovinDbContext _context;
 
-        public EventDao(KeepMovinDbContext context)
+        public EventRepository(KeepMovinDbContext context)
         {
             _context = context;
         }
 
-        public void Add(Event eventModel)
+        public void Add(Event eventModel, Guid userId)
         {
-            ExperienceLevel explvl = _context.ExperienceLevel.Find(eventModel.ExperienceLevel.ExperienceLevelId);
-            eventModel.ExperienceLevel = explvl;
+            ExperienceLevel experienceLevel = _context.ExperienceLevel.Find(eventModel.ExperienceLevel.ExperienceLevelId);
+            eventModel.ExperienceLevel = experienceLevel;
             Sport sport = _context.Sport.Find(eventModel.Sports.SportId);
             eventModel.Sports = sport;
             EventType eventType = _context.EventType.Find(eventModel.Type.TypeId);
             eventModel.Type = eventType;
+            UserProfile userProfile = _context.UserProfile.FirstOrDefault(userProfile => userProfile.Organiser.Userid == userId);
+            eventModel.User = userProfile;
+            
             _context.Event.Add(eventModel);
             _context.SaveChanges();
+        }
+
+        public void Add(Event item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(Guid id)
@@ -78,13 +81,15 @@ namespace KeepMovinAPI.Repository.Implementations
             return _context.Event.ToList();
         }
 
-        public EventsSearchedDto GetFiltered([FromQuery] Filter filter)
+        public EventsSearchedDto GetFiltered(Filter filter)
         {
             var eventsPerPage = 4;
 
             var filteredEvents = _context.Event
                 .Include(eventModel => eventModel.Location)
                 .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.User)
+                .Include(eventModel => eventModel.User.Organiser)
                 .Include(eventModel => eventModel.Type)
                 .Include(eventModel => eventModel.ExperienceLevel)
                 .Where(i =>
@@ -138,11 +143,15 @@ namespace KeepMovinAPI.Repository.Implementations
         {
             var query = _context.Event
                 .Include(e => e.Users)
+                .Include(eventModel => eventModel.Location)
+                .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.Type)
+                .Include(eventModel => eventModel.ExperienceLevel)
                 .Where(i => i.Users.Any(j => j.Userid == id));
             return query;
         }
 
-        public UserUpcomingEventsDto GetUpcomingEventsById(Guid id, int currentPage)
+        public UserEventsDto GetUpcomingEventsById(Guid id, int currentPage)
         {
             var eventsPerPage = 6;
             var eventsPage = _context.Event
@@ -156,12 +165,12 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Skip((currentPage - 1) * eventsPerPage)
                 .Take(eventsPerPage);
 
-            var profilePageContent = new UserUpcomingEventsDto(numberOfPages, eventsPage);
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
 
             return profilePageContent;
         }
 
-        public UserPreviousEventsDto GetPreviousEventsById(Guid id, int currentPage)
+        public UserEventsDto GetPreviousEventsById(Guid id, int currentPage)
         {
             var eventsPerPage = 6;
             var eventsPage = _context.Event
@@ -175,13 +184,43 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Skip((currentPage - 1) * eventsPerPage)
                 .Take(eventsPerPage);
 
-            var profilePageContent = new UserPreviousEventsDto(numberOfPages, eventsPage);
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
 
             return profilePageContent;
         }
 
+        public UserEventsDto GetHostedEventsById(Guid id, int currentPage)
+        {
+            var eventsPerPage = 6;
+            var eventsPage = _context.Event
+                .Include(e => e.Users)
+                .Include(e => e.User)
+                .Include(e => e.Sports)
+                .Where(i => i.User.Organiser.Userid == id);
 
-        
+            var numberOfPages = Math.Ceiling((decimal) eventsPage.ToList().Count / eventsPerPage);
+
+            eventsPage = eventsPage
+                .Skip((currentPage - 1) * eventsPerPage)
+                .Take(eventsPerPage);
+
+            var profilePageContent = new UserEventsDto(numberOfPages, eventsPage);
+
+            return profilePageContent;
+        }
+
+        public IEnumerable<Event> GetHostedEventsStatisticsById(Guid id)
+        {
+            var eventsList = _context.Event
+                .Include(e => e.User)
+                .Include(e => e.Sports)
+                .Where(i => i.User.Organiser.Userid == id);
+
+            return eventsList;
+        }
+
+
+
         public void JoinToEvent(Guid userId, Guid eventId)
         {
             var user = _context.User.Find(userId);
@@ -199,6 +238,14 @@ namespace KeepMovinAPI.Repository.Implementations
                 eventModel.Status = "Finished";
             }
             _context.SaveChanges();
+        }
+        
+        public IEnumerable<User> GetUsersByEventId(Guid id)
+        {
+            var query = _context.User
+                .Include(e => e.Events)
+                .Where(i => i.Events.Any(j => j.EventId == id));
+            return query;
         }
     }
 }

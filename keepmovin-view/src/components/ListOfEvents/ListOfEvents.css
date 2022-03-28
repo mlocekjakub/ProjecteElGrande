@@ -48,7 +48,7 @@
     border: 2px solid rgba(255, 255, 255, 0.18);
     padding: 1.5rem 1rem 1.5rem 1rem;
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
-    color: var(--clr-paragraph);
+    color: #8e8e8e;
     
 }
 .event-1 > div{
@@ -92,12 +92,13 @@
 .sign-up-event {
     background: var(--bg-btn-primary-blue);
     color: #FFFFFF;
-    transition: 0.2s;
+    transition: var(--transition);
     padding: 0.2rem 1rem;
     border-radius: 0.3rem;
 }
 .sign-up-event:hover {
     cursor: pointer;
+    transform: translateY(-3px);
     background: var(--bg-primary-dark);
 }
 .sign-up-event__disable {
@@ -110,19 +111,31 @@
     cursor: pointer;
 }
 
-.events__card-nav-price {
-    background: var(--bg-primary-dark);
-    border-radius: 0.4rem;
-    padding: 0.4rem;
+.sign-up-event__joined {
     color: #FFFFFF;
-    max-width: 4.5rem;
-    text-align: center;
-    font-size: 0.8rem;
+    background: #4BB543;
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem;
+}
+
+.sign-up-event__hosting {
+    background: var(--bg-primary-dark);
+    color: #FFFFFF;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
 }
 
 
 
-
+.events__card-nav-price {
+    font-weight: 700;
+    color: var(--clr-header);
+    font-size: 1.3rem;
+}
 
 .create-button-link {
     text-decoration: none;
@@ -132,10 +145,11 @@
     background: var(--bg-btn-primary-blue);
     padding: 0.7rem 0;
     margin-bottom: 1.5rem;
-    transition: 0.2s;
+    transition: var(--transition);
     border-radius: 0.3rem;
 }
 .create-button-link:hover {
+    transform: translateY(-3px);
     background: var(--bg-primary-dark);
     color: #FFFFFF;
 }
@@ -156,14 +170,11 @@
 
 /*___________________*/
 
-
-
 /*event info */
 
 .description {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
     justify-content: space-between;
 }
 
@@ -173,18 +184,18 @@
 
 .event__title {
     font-weight: bold;
-    color: var(--clr-header);
     font-size: 2.3rem;
-    letter-spacing: .00001em;
+    color: var(--clr-header);
+    padding: 0 0 0.5rem 0;
+}
+
+.event__title > h4 {
+    padding: 0;
+    margin: 0;
 }
 .date {
     font-weight: 500;
     font-size: 0.85rem;
-    padding-bottom: 0.3rem;
-}
-.info__to {
-    color: var(--bg-primary-dark);
-    font-weight: 700;
 }
 .category {
     font-weight: 500;
@@ -204,6 +215,10 @@
 .location-icon, .level-icon, .participants-icon {
     max-width: 1rem;
     color: var(--clr-header);
+}
+
+.events-card__loading {
+    max-width: 0.5rem;
 }
 
 /*___________________*/

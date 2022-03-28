@@ -3,7 +3,7 @@ using System;
 
 namespace KeepMovinAPI.Repository
 {
-    public interface IUserDao : IDao<User>
+    public interface IUserRepository : IRepository<User>
     {
         public User GetUserByEmail(User user);
         public User GetUserByEmail(string email);

@@ -11,6 +11,8 @@
     --event-border: 1px solid rgba(5, 5, 5, 0.20);
     --clr-paragraph-info: hsl(217, 19%, 35%);
     
+    --transition: 250ms ease-in-out;
+    
     --page-margin-events-page: 7rem 18%;
     --page-margin-profile-page: 8rem 18% 8rem 18%;
     

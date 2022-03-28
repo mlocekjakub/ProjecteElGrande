@@ -3,13 +3,13 @@ using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.Dtos
 {
-    public class UserUpcomingEventsDto
+    public class UserEventsDto
     {
         public decimal NumberOfPages { get; set; }
         
         public IEnumerable<Event> EventsFound { get; set; }
 
-        public UserUpcomingEventsDto(decimal numberOfPages, IEnumerable<Event> events)
+        public UserEventsDto(decimal numberOfPages, IEnumerable<Event> events)
         {
             NumberOfPages = numberOfPages;
             EventsFound = events;

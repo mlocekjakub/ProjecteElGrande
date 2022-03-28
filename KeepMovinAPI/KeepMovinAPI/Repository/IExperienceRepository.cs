@@ -3,7 +3,7 @@
 namespace KeepMovinAPI.Repository
 
 {
-    public interface IExperienceDao : IDao<ExperienceLevel>
+    public interface IExperienceRepository : IRepository<ExperienceLevel>
     {
     }
 }

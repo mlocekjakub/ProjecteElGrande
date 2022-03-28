@@ -7,6 +7,7 @@ namespace KeepMovinAPI.Dtos
     public class UserProfileDto
     {
         public Guid UserProfileId { get; set; } = Guid.Empty;
+
         public Guid UserId { get; set; }     
 
         [MaxLength(20)]

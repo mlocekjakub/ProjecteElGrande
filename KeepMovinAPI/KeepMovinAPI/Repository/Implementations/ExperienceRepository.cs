@@ -5,11 +5,11 @@ using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.Repository.Implementations
 {
-    public class ExperienceDao : IExperienceDao
+    public class ExperienceRepository : IExperienceRepository
     {
         private readonly KeepMovinDbContext _context;
         
-        public ExperienceDao(KeepMovinDbContext context)
+        public ExperienceRepository(KeepMovinDbContext context)
         {
             _context = context;
         }
