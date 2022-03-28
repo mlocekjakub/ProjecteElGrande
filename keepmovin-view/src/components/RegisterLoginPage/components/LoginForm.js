@@ -67,7 +67,7 @@ export default function LoginForm(props) {
     
     return (
         <form className="register-login__login">
-            <div className="email-container__login">
+            <div className='email-container__login'>
                 <div className={`register-icon-container ${details.email === "" ? "" : 'input-active' }`}>
                     <MailOutlineIcon />
                 </div>
@@ -80,7 +80,7 @@ export default function LoginForm(props) {
                        onChange={e => setDetails({...details, email: e.target.value})} />
             </div>
             <div className="password-container__login">
-                <div className="password-input-container__login">
+                <div className='password-input-container__login'>
                     <div className={`register-icon-container ${details.password === "" ? "" : 'input-active' }`}>
                         <LockOpenIcon />
                     </div>
