@@ -100,8 +100,6 @@ namespace KeepMovinAPI.Repository.Implementations
             current.PhoneNumber = upDated.PhoneNumber;
             _context.UserProfile.Update(current);
             _context.SaveChanges();
-
-
         }
 
 
