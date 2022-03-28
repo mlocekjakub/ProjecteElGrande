@@ -84,9 +84,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(UserProfileDto userProfileDto)
         {
-            userProfileDto.Picture = new Picture();
-            userProfileDto.Organisation = new Organisation();
-            userProfileDto.Name = "AbraKadabra";
+
             try
             {
                 string jwt = Request.Cookies["token"];
