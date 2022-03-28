@@ -215,7 +215,6 @@ namespace KeepMovinAPI.Repository.Implementations
                 .Include(e => e.User)
                 .Include(e => e.Sports)
                 .Where(i => i.User.Organiser.Userid == id);
-
             return eventsList;
         }
 

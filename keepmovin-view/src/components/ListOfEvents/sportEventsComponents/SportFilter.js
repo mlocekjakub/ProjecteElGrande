@@ -19,6 +19,8 @@ function SportFilter() {
     
     const markedSports = useSelector((state) => state.sports.value)
     
+    const theme = useSelector((state) => state.theme.value)
+    
     
     useEffect(() => {
         axios
@@ -60,13 +62,13 @@ function SportFilter() {
     
     return (
         <div className="filter-parent">
-            <div onClick={ExpandFilter} className="filter">
+            <div onClick={ExpandFilter} className={`filter ${theme === 'light' ? 'filter-light' : 'filter-dark'}`}>
                 <div className="filter-type">Sport</div>
                 <ExpandMoreIcon className="expand-icon"/>
             </div>
             <div className="filter-sport-expanded-container filter-box">
                 <div className="search-bar-sport-filter">
-                    <input type="text" className="search-txt-sport-filter" placeholder="Search.."
+                    <input type="text" className={`${theme === 'dark' ? 'searchbar-sport-dark' : 'search-txt-sport-filter'} `} placeholder="Search.."
                            required value={sportSearch}
                            onChange={(e) => {
                                setSportSearch(e.target.value)
@@ -74,7 +76,7 @@ function SportFilter() {
                            
                     />
                 </div>
-                <div className="expanded-header">Sports:</div>
+                <div className={`${theme === 'light' ? 'expanded-header' : 'expanded-header-dark'}`}>Sports:</div>
                 <div className="check-hide-container">
                     <div onClick={CheckAllSports} className="check-hide-all-sports sport-item">Choose All</div>
                     <div onClick={UncheckAllSports} className="check-hide-all-sports sport-item hide-btn">Hide All</div>

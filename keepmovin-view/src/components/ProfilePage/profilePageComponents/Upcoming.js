@@ -7,6 +7,8 @@ import EventsUpcomingMenu from "./EventsUpcomingMenu";
 
 function Upcoming(props) {
     
+    const theme = useSelector((state) => state.theme.value)
+    
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1);
     const [isLimitNextUpcoming, setIsLimitNextUpcoming] = useState(false)
@@ -62,26 +64,26 @@ function Upcoming(props) {
     
     
     return (
-        <div className="info-content">
+        <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
             <EventsUpcomingMenu content={upcomingEvents}/>
-            <div className="profile__paginate">
+            <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackUpcoming ?
                     <div className="paginate-back__profile-upcoming">
-                        <ArrowBackIos className="arrow-paginate__disabled"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-back__profile-upcoming" onClick={backPageUpcoming}>
-                        <ArrowBackIos className="arrow-paginate"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
                 {currentPageUpcoming} of {numberOfPagesUpcoming}
                 {isLimitNextUpcoming ?
                     <div className="paginate-next__profile-upcoming">
-                        <ArrowForwardIosIcon className="arrow-paginate__disabled"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-next__profile-upcoming" onClick={nextPageUpcoming}>
-                        <ArrowForwardIosIcon className="arrow-paginate"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
             </div>

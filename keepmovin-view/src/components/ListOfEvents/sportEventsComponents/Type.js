@@ -8,6 +8,8 @@ const Type = (props) => {
     const ref = useRef(null);
 
     const markedTypes = useSelector((state) => state.type.value)
+    
+    const theme = useSelector((state) => state.theme.value)
 
     const dispatch = useDispatch();
 
@@ -27,7 +29,7 @@ const Type = (props) => {
     }
 
     return (
-        <div onClick={MarkAsChecked} className="type-item">
+        <div onClick={MarkAsChecked} className={`${theme === 'light' ? 'type-item' : 'dark-type-item'}`}>
             {props.typeName}<CheckIcon className="check-icon check-icon__toggle" ref={ref}/>
         </div>
     )

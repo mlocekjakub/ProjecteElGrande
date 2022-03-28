@@ -2,12 +2,16 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Settings.css";
 import {SendChangePasswordForm} from '../../API/Api'
+import {useSelector} from "react-redux";
 
 
 
 export default function ChangePassword() {
+
+    const theme = useSelector((state) => state.theme.value)
     
     const [passwordData, setPasswordData] = useState({
+        userid: localStorage.getItem('session'),
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
@@ -20,6 +24,7 @@ export default function ChangePassword() {
             && passwordData.newPassword 
             && passwordData.confirmPassword) {
             setIsPasswordDataValid(true);
+            
         }
         else {
             setIsPasswordDataValid(false);
@@ -28,18 +33,21 @@ export default function ChangePassword() {
 
     function HandleSubmit(e) {
         e.preventDefault()
-        let collectUserInputs = {
-            'Userid': localStorage.getItem('session'),
-            'OldPassword': passwordData.oldPassword,
-            'NewPassword': passwordData.newPassword,
-            'ConfirmPassword': passwordData.confirmPassword
-        }
-        SendChangePasswordForm(collectUserInputs);
+        fetch('/user/changePassword', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(passwordData)
+
+        }).then(response => response.status)
+        
     }
 
     return (
-        <form className="settings__change-password-container">
-            <div className="settings__old-password">
+        <form className="settings__change-password-container" autoComplete="off">
+            <div className={`settings__old-password ${theme === 'light' ? 'settings-password__light' : 'settings-password__dark'}`}>
                 <label htmlFor="old-password">Old Password</label>
                 <input type="password"
                        name="old-password"
@@ -49,7 +57,7 @@ export default function ChangePassword() {
                        onChange={e => setPasswordData({...passwordData, oldPassword: e.target.value})}
                 />
             </div>
-            <div className="settings__new-password">
+            <div className={`settings__new-password ${theme === 'light' ? 'settings-password__light' : 'settings-password__dark'}`}>
                 <label htmlFor="new-password">New Password</label>
                 <input type="password"
                        name="new-password"
@@ -59,7 +67,7 @@ export default function ChangePassword() {
                        onChange={e => setPasswordData({...passwordData, newPassword: e.target.value})}
                 />
             </div>
-            <div className="settings__confirm-new-password">
+            <div className={`settings__confirm-new-password ${theme === 'light' ? 'settings-password__light' : 'settings-password__dark'}`}>
                 <label htmlFor="confirm-new-password">Confirm New Password</label>
                 <input type="password"
                        name="confirm-new-password"

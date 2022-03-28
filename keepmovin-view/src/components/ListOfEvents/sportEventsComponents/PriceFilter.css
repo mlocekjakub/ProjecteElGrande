@@ -77,3 +77,13 @@ input[type="range"]::-moz-range-thumb{
     -moz-appearance: none;
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
 }
+
+.min-max-dark {
+    color: #efeff1;
+}
+
+.input-min-dark {
+    background: #464649;
+    border: 0 !important;
+    color: #efeff1;
+}

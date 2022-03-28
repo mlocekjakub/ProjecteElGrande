@@ -15,6 +15,8 @@ function HostedEventsDiagram() {
     const [sportsList, SetSportsList] = useState([])
 
     const [isSportsFetched, SetIsSportsFetched] = useState(false)
+    
+    const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
         if (isUserLogged) {
@@ -53,13 +55,15 @@ function HostedEventsDiagram() {
     }
 
     useEffect(() => {
+        let sports = sportsList.map((sport) => sport.sportName);
+        let counts = sportsList.map((sport) => sport.count)
         setData({
-            labels: sportsList.map((sport) => sport.sportName),
+            labels: sports.length !== 0 ? sportsList.map((sport) => sport.sportName) : ['none'],
             datasets: [
                 {
                     label: 'Hosted Events',
                     backgroundColor: [
-                        '#FF4136',
+                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#FF4136'}`,
                         '#B21F00',
                         '#C9DE00',
                         '#2FDE00',
@@ -70,7 +74,7 @@ function HostedEventsDiagram() {
                         '#6b5b95'
                     ],
                     hoverBackgroundColor: [
-                        '#865a55',
+                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#865a55'}`,
                         '#501800',
                         '#4B5000',
                         '#175000',
@@ -80,7 +84,7 @@ function HostedEventsDiagram() {
                         '#a17c5a',
                         '#877f9a'
                     ],
-                    data: sportsList.map((sport) => sport.count),
+                    data: sports.length !== 0 ? sportsList.map((sport) => sport.count) : [1],
                     borderColor: "rgba(247, 103, 7, 0)"
                 }
             ]
@@ -88,7 +92,7 @@ function HostedEventsDiagram() {
     }, [isSportsFetched])
 
     return (
-        <div className="diagram">
+        <div className={`${theme === 'light' ? 'diagram dark-hosted' : 'diagram__dark dark-hosted'}`}>
             <Doughnut
                 data={data}
                 options={{
@@ -96,16 +100,15 @@ function HostedEventsDiagram() {
                         display:true,
                         text: 'Hosted Events',
                         fontSize: 18,
-                        fontColor: "#1D1E35",
-                        fontWeight: 700,
-                        paddingBottom: '0.3rem'
+                        fontColor: `${theme === 'light' ? '#1D1E35' : '#efeff1'}`,
+                        fontWeight: theme === 'light' ? 700 : 400,
 
                     },
                     legend:{
                         display:true,
                         position:'right',
                         fontSize: 100,
-                        fontColor: "hsl(237, 12%, 33%)"
+                        fontColor: `${theme === 'light' ? 'hsl(237, 12%, 33%)' : '#adadb8'}`
                     }
                 }}
             />

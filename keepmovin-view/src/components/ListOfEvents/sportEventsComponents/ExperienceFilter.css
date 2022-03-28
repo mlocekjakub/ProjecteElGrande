@@ -16,11 +16,22 @@
     transition: 0.1s;
     display: flex;
     justify-content: space-between;
-    
 }
+
 .experience-item:hover {
     cursor: pointer;
     background: #F3F3F3;
+}
+
+.dark-experience-item {
+    transition: 0.1s;
+    display: flex;
+    justify-content: space-between;
+    color:  #efeff1;
+}
+.dark-experience-item:hover {
+    cursor: pointer;
+    background: rgba(38, 38, 44, 0.7);
 }
 
 .active-filter {

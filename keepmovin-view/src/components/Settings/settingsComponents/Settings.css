@@ -3,13 +3,55 @@
     min-height: 100vh;
     margin: 7rem 24%;;
     font-family: "Manrope", "sans-serif";
-    background: #FFFFFF;
-    border: 1px solid rgba(5, 5, 5, 0.20);
 }
 
 .settings__content {
     width: 100%;
 }
+
+.settings__container__light {
+    background: #FFFFFF;
+    border: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+.settings__buttons__light {
+    border-right: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+/*dark theme */
+
+.settings__container__dark {
+    gap: 2rem;
+}
+
+.settings__content__dark {
+    background: #1F1F23;
+    border-radius: 0.4rem;
+}
+
+.settings__buttons__dark {
+    background: #1F1F23;
+    border-radius: 0.4rem;
+    color: #efeff1;
+}
+
+.settings__inactive-button__dark {
+    padding: 1rem 2rem;
+    width: 100%;
+    border-left: 2px solid rgba(66, 133, 244, 0);
+    transition: 0.1s;
+}
+.settings__inactive-button__dark:hover {
+    cursor: pointer;
+    border-left: 2px solid rgba(66, 133, 244, 0.6);
+    background: rgba(38, 38, 44, 0.7);
+}
+
+.edit-profile-button__dark {
+    border-radius: 0.4rem 0.4rem 0 0;
+}
+
+/*________*/
 
 
 /*BUTTONS */
@@ -19,7 +61,6 @@
     flex-direction: column;
     align-items: start;
     min-width: 33ch;
-    border-right: 1px solid rgba(5, 5, 5, 0.20);
     user-select: none;
 }
 
@@ -54,17 +95,25 @@
     padding-top: 3rem;
 }
 
-.settings__old-password,
-.settings__new-password,
-.settings__confirm-new-password {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+.settings-password__dark > input[type=password] {
+    background: #464649;
+    color: #efeff1;
+    border: 2px solid hsla(0, 0%, 100%, 0.1);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    min-width: 30ch;
 }
 
-.settings__old-password > input[type=password],
-.settings__new-password > input[type=password],
-.settings__confirm-new-password > input[type=password] {
+.settings-password__dark > input[type=password]:focus {
+    color: #efeff1;
+    border: 2px solid #adadb8;
+}
+
+.settings-password__dark > label {
+    color: #efeff1;
+}
+
+.settings-password__light > input[type=password] {
     border: 1px solid rgba(5, 5, 5, 0.20);
     background: #F3F3F3;
     border-radius: 0.5rem;
@@ -72,10 +121,21 @@
     min-width: 30ch;
 }
 
-.settings__old-password > input[type=password]:focus,
-.settings__new-password > input[type=password]:focus,
-.settings__confirm-new-password > input[type=password]:focus {
+.settings-password__light > input[type=password]:focus {
     border: 1px solid rgba(5, 5, 5, 0.5);
+}
+
+.settings-password__light > label {
+    color: var(--clr-header);
+}
+
+
+.settings__old-password,
+.settings__new-password,
+.settings__confirm-new-password {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 label {
@@ -85,7 +145,6 @@ label {
 .settings__old-password > label, 
 .settings__new-password > label,
 .settings__confirm-new-password > label {
-    color: var(--clr-header);
     min-width: 18ch;
     font-weight: 700;
     font-size: 1rem;
@@ -95,7 +154,44 @@ label {
 /*______*/
 
 
+
+
+
+
 /*EditProfile*/
+
+.edit-profile__dark > input[type=text],
+.edit-profile__dark > textarea {
+    background: #464649;
+    color: #efeff1;
+    border: 2px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.edit-profile__dark > input[type=text]:focus,
+.edit-profile__dark > textarea:focus  {
+    background: #464649;
+    color: #efeff1;
+    border: 2px solid #adadb8;
+}
+
+.edit-profile-labels__dark {
+    color: #efeff1;
+}
+
+.edit-profile-labels__light {
+    color: var(--clr-header);
+}
+
+.edit-profile__light > input[type=text],
+.edit-profile__light > textarea {
+    background: #FFFFFF;
+    border: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+.edit-profile__light > input[type=text]:focus,
+.edit-profile__light > textarea:focus{
+    border: 1px solid rgba(5, 5, 5, 0.5);
+}
 
 .settings__edit-profile-container {
     display: flex;
@@ -119,23 +215,11 @@ label {
 .edit-profile__phone-number > input[type=text],
 .edit-profile__organization > input[type=text],
 .edit-profile__aboutMe > textarea {
-    background: #FFFFFF;
-    border: 1px solid rgba(5, 5, 5, 0.20);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
 }
 
-.edit-profile__name-surname > input[type=text]:focus,
-.edit-profile__localization > input[type=text]:focus,
-.edit-profile__phone-number > input[type=text]:focus,
-.edit-profile__aboutMe > textarea:focus,
-.edit-profile__organization > input[type=text]:focus{
-    outline: none;
-    border: 1px solid rgba(5, 5, 5, 0.5);
-}
-
 .edit-profile-labels {
-    color: var(--clr-header);
     font-weight: 700;
     font-size: 1rem;
 }
@@ -169,39 +253,55 @@ label {
     color: var(--clr-header);
 }
 
-.privacy__localization-container > p,
-.privacy__followers-container > p,
-.privacy__statistics-container > p,
-.privacy__aboutMe-container > p,
-.privacy__upcoming-container > p,
-.privacy__previous-container > p,
-.privacy__photo-container > p {
-    color: #8e8e8e;
-    font-size: 0.9rem; 
-    padding-top: 0.4rem;
+.privacy__header__dark > p {
+    color: #adadb8;
+    font-size: 0.9rem;
 }
 
-.privacy__localization-container > h4,
-.privacy__followers-container > h4,
-.privacy__statistics-container > h4,
-.privacy__aboutMe-container > h4,
-.privacy__upcoming-container > h4,
-.privacy__previous-container >h4,
-.privacy__photo-container > h4 {
-    padding-bottom: 0.8rem;
+.privacy__header__dark > h2 {
+    color: #efeff1;
 }
 
-.privacy__localization-container,
-.privacy__followers-container,
-.privacy__statistics-container,
-.privacy__aboutMe-container,
-.privacy__upcoming-container,
-.privacy__previous-container {
+.privacy-container__light {
+    
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
 }
 
-.privacy-switch > label {
+.privacy-container__light > p {
+    color: #8e8e8e;
+    font-size: 0.9rem;
+    padding-top: 0.4rem;
+}
+
+.privacy-container__light > h4 {
+    padding-bottom: 0.8rem;
+}
+
+.privacy-container__dark {
+
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.privacy-container__dark > p {
+    color: #adadb8;
+    font-size: 0.8rem;
+    padding-top: 0.4rem;
+}
+
+.privacy-container__dark > h4 {
+    color: rgb(163, 163, 173);
+    font-size: 0.9rem;
+    padding-top: 0.4rem;
+}
+
+.privacy-switch__light > label{
     color: var(--clr-header);
+}
+.privacy-switch__dark > label {
+    color: #efeff1;
+}
+
+.privacy-switch > label {
     font-weight: 700;
     user-select: none;
 }

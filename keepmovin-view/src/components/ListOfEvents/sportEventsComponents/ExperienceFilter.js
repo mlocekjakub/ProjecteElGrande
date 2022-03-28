@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./ExperienceFilter.css";
 import ExperienceLevel from "./ExperienceLevel";
 import {ExpandFilter} from "./Filter";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeExperience, clearExperience} from "../../../features/Experience";
 import axios from "axios";
 
@@ -12,6 +12,8 @@ function ExperienceFilter() {
     const dispatch = useDispatch();
     
     const [level, setLevel] = useState([])
+
+    const theme = useSelector((state) => state.theme.value)
     
     
 
@@ -46,7 +48,7 @@ function ExperienceFilter() {
     
     return (
         <div className="filter-parent">
-            <div onClick={ExpandFilter} className="filter">
+            <div onClick={ExpandFilter} className={`filter ${theme === 'light' ? 'filter-light' : 'filter-dark'}`}>
                 <div className="filter-type">Experience</div>
                 <ExpandMoreIcon />
             </div>
