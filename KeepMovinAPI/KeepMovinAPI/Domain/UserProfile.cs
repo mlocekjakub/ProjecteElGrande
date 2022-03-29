@@ -28,6 +28,12 @@ namespace KeepMovinAPI.Domain
         
         [MaxLength(12)]
         public string PhoneNumber { get; set; }
+
+
+
+
+
+
         public void AddUser(User user)
         {
             Organiser = user;
@@ -35,6 +41,15 @@ namespace KeepMovinAPI.Domain
         public void AddSettings(Setting settings)
         {
             Setting = settings;
+        }
+
+        public void AddLocation(Location location)
+        {
+            Location = location;
+        }
+        public void AddOrganization(Organisation organisation)
+        {
+            Organisation = organisation;
         }
     }
 }

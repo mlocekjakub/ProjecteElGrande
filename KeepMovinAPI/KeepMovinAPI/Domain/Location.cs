@@ -15,7 +15,6 @@ namespace KeepMovinAPI.Domain
         public string Country { get; set; }
         
         [MaxLength(10)]
-        [Required]
         public string ZipCode { get; set; }
 
     }
