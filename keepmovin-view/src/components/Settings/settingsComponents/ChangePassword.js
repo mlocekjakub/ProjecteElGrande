@@ -1,13 +1,19 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import "./Settings.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {changeIsLogged} from "../../../features/IsLogged";
+import {useNavigate} from "react-router-dom";
 
 
 
 export default function ChangePassword(props) {
 
     const theme = useSelector((state) => state.theme.value)
+    
+    const dispatch = useDispatch();
+    
+    const navigate = useNavigate()
     
     const [passwordData, setPasswordData] = useState({
         userid: localStorage.getItem('session'),
@@ -43,6 +49,20 @@ export default function ChangePassword(props) {
         }).then(response => {
             if (response.ok) {
                 props.successModal.current.classList.add('open-modal__settings-validation')
+                fetch('/user/logOut', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify("")})
+                    .then(() => {
+                        localStorage.removeItem("session")
+                        dispatch(changeIsLogged(false))
+                        setTimeout(() => {
+                            navigate('/login')
+                        }, 1000)
+                    });
             }
             else {
                 props.errorModal.current.classList.add('open-modal__settings-validation')

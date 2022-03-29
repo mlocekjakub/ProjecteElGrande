@@ -39,8 +39,11 @@ function Profile(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify("")})
-            .then(localStorage.removeItem("session"));
-        dispatch(changeIsLogged(false))
+            .then(() => {
+                localStorage.removeItem("session")
+                dispatch(changeIsLogged(false))
+            });
+        
     }
     
     const switchTheme = () => {

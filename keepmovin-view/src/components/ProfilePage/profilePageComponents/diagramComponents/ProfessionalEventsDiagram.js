@@ -33,7 +33,7 @@ function ProfessionalEventsDiagram() {
     function SetSportData(events) {
         let sports = [];
         events.map((event) => {
-            if (event.type.name === "Professional") {
+            if (event.type.name === "Professional" && event.status === "finished") {
                 let newSport = {id: event.sports.sportId, sportName: event.sports.name, count: 1}
                 if(sports.some(sport => sport.id === newSport.id)) {
                     sports.forEach(sport => {
