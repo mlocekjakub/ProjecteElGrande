@@ -300,6 +300,9 @@ namespace KeepMovinAPI.Controllers
         }
         
         
+        
+        
+        
         [HttpGet("events-visited-user/upcoming")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

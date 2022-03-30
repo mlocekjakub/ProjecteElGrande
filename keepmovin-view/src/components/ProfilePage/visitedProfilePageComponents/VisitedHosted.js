@@ -32,24 +32,26 @@ function VisitedHosted(props) {
                 }
             })
             .then(response => {
-                axios
-                    .get(`/api/Event/events-visited-user/hosted`, {
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                            "etag": visitedUserId,
-                            "currentPage": currentPageHosted
+                if (response.data.hostedEvents === false) {
+                    axios
+                        .get(`/api/Event/events-visited-user/hosted`, {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                "etag": visitedUserId,
+                                "currentPage": currentPageHosted
 
-                        }
-                    })
-                    .then(response => {
-                        setNumberOfPagesHosted(response.data["numberOfPages"])
-                        setHostedEvents(response.data["eventsFound"])
-                    })
-                setIsSectionPrivate(false);
-                /*else {
+                            }
+                        })
+                        .then(response => {
+                            setNumberOfPagesHosted(response.data["numberOfPages"])
+                            setHostedEvents(response.data["eventsFound"])
+                        })
+                    setIsSectionPrivate(false);
+                }
+                else {
                     setIsSectionPrivate(true);
-                }*/
+                }
             })
 
     },[currentPageHosted, routeChange])

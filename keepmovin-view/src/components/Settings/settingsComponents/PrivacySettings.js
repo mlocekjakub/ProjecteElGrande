@@ -14,6 +14,7 @@ export default function PrivacySettings(props) {
         aboutMe: false,
         upcomingEvents: false,
         previousEvents: false,
+        hostedEvents: false,
         photo: false
     })
 
@@ -28,6 +29,7 @@ export default function PrivacySettings(props) {
         })
         const content = await response.json()
             .then(content => {
+                console.log(content)
                 setPrivacyDetails({
                     location: content.location,
                     followersFollowing: content.followersFollowing,
@@ -35,6 +37,7 @@ export default function PrivacySettings(props) {
                     aboutMe: content.aboutMe,
                     upcomingEvents: content.upcomingEvents,
                     previousEvents: content.previousEvents,
+                    hostedEvents: content.hostedEvents,
                     photo: content.photo,
                     userId: localStorage.getItem('session')
                 })
@@ -170,6 +173,22 @@ export default function PrivacySettings(props) {
                 <p>No one other than your followers 
                     will have access to the list of events 
                     in which you have already participated</p>
+            </div>
+
+            <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
+                <h4>Hosted Events</h4>
+                <div className={`privacy-switch ${theme === 'light' ? 'privacy-switch__light' : 'privacy-switch__dark' }`}>
+                    <input
+                        type="checkbox"
+                        id="hosted-privacy"
+                        className="toggle"
+                        checked={privacyDetails.hostedEvents}
+                        onChange={e => setPrivacyDetails({...privacyDetails, hostedEvents: e.target.checked})}/>
+                    <label htmlFor="hosted-privacy">Hide Hosted Events</label>
+                </div>
+                <p>No one other than your followers
+                    will have access to the list of events
+                    which you hosted</p>
             </div>
 
             <div className={` ${theme === 'light' ? 'privacy-container__light' : 'privacy-container__dark' }`}>
