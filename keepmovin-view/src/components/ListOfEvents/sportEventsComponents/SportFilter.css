@@ -28,27 +28,35 @@
     padding: 0.6rem 0 0.3rem 0
 }
 
-.search-bar-sport-filter {
-}
-.search-txt-sport-filter {
-    background: #F3F3F3;
-    border: 0;
-    transition: 0.2s;
-    width: 100%;
+
+.sport-filter-searchbar {
+    padding: 0.3rem 0 0.3rem 0.3rem;
+    border-radius: 0.4rem;
 }
 
 .searchbar-sport-dark {
     background: #464649;
     color: #efeff1;
-    border: 0;
     transition: 0.2s;
     width: 100%;
+    border: 1px solid hsla(0, 0%, 100%, 0) !important;
+}
+
+.searchbar-sport-dark:focus {
+    outline: none !important;
+    border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+}
+
+.search-txt-sport-filter {
+    background: #F3F3F3;
+    transition: 0.2s;
+    width: 100%;
+    border: 1px solid hsla(0, 0%, 100%, 0) !important;
 }
 
 .search-txt-sport-filter:focus {
     outline: none !important;
-    background: #fff;
-    border: 0;
+    border: 1px solid var(--clr-paragraph) !important;
 }
 
 .search-button-sport-filter {

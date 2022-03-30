@@ -68,7 +68,7 @@ function SportFilter() {
             </div>
             <div className="filter-sport-expanded-container filter-box">
                 <div className="search-bar-sport-filter">
-                    <input type="text" className={`${theme === 'dark' ? 'searchbar-sport-dark' : 'search-txt-sport-filter'} `} placeholder="Search.."
+                    <input type="text" className={`sport-filter-searchbar ${theme === 'dark' ? 'searchbar-sport-dark' : 'search-txt-sport-filter'} `} placeholder="Search.."
                            required value={sportSearch}
                            onChange={(e) => {
                                setSportSearch(e.target.value)

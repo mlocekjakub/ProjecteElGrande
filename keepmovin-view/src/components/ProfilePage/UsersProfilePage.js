@@ -10,6 +10,7 @@ import VisitedHosted from "./visitedProfilePageComponents/VisitedHosted";
 import VisitedStatistics from "./visitedProfilePageComponents/VisitedStatistics";
 import VisitedPrevious from "./visitedProfilePageComponents/VisitedPrevious";
 import VisitedUpcoming from "./visitedProfilePageComponents/VisitedUpcoming";
+import LockIcon from "@mui/icons-material/Lock";
 
 export default function UsersProfilePage() {
     
@@ -33,6 +34,8 @@ export default function UsersProfilePage() {
         personalInfo: "",
         organisation: {name: ""},
     })
+    
+    const [privacySettings, setPrivacySettings] = useState({});
 
 
     useEffect(() => {
@@ -62,6 +65,14 @@ export default function UsersProfilePage() {
                     userId: visitedUserId
                 })
             })
+        axios
+            .get(`/api/Setting/upload/visited-user`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "etag" : visitedUserId,
+                }
+            }).then(response => setPrivacySettings(response.data))
        
     }, [routeChange])
 
@@ -79,11 +90,13 @@ export default function UsersProfilePage() {
                 <img className="profile-image" src={defaultProfileImage} alt="" />
                 <div className="about-me__container">
                     <div className="about-header">about me</div>
-                    {profileDetails.personalInfo  ?
-                        <div className="user-data">{profileDetails.personalInfo}</div>
-                        : <div className={`profile-incomplete__visiting
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
-                            No info about user</div>}
+                    {privacySettings.aboutMe === false ? profileDetails.personalInfo 
+                        ? <div className="user-data">{profileDetails.personalInfo} </div>
+                        : <div className={`profile-incomplete__visiting${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
+                            No info about user
+                        </div> 
+                        : <div className={`${theme === 'light' ? 'section-about-me-light' : 'section-about-me-dark'}`}><LockIcon /> private</div>
+                    }
                 </div>
             </div>
 
@@ -99,10 +112,19 @@ export default function UsersProfilePage() {
                             {!profileDetails.userName && !profileDetails.surname && <span className={`profile-incomplete__visiting
                             ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>No info about username</span>}
                         </div>
-                        {profileDetails.location.city && profileDetails.location.country ?
-                            <div className="user-data-paragraph">{profileDetails.location.city} {profileDetails.location.country}</div>
-                            : <div className={`profile-incomplete__visiting 
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>No info about location</div>}
+                        {privacySettings.location === false ? 
+                            profileDetails.location.city && profileDetails.location.country 
+                                ? 
+                                <div
+                                    className="user-data-paragraph">{profileDetails.location.city} {profileDetails.location.country}
+                                </div>
+                                : 
+                                <div className={`profile-incomplete__visiting${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
+                                    No info about location
+                                </div> 
+                            : 
+                            <div className={`${theme === 'light' ? 'section-location-light' : 'section-location-dark'}`}><LockIcon className="lock-location-icon"/>Location is private</div>
+                        }
                         {profileDetails.organisation.name ?
                             <div className="user-data-paragraph">Organisation: {profileDetails.organisation.name}</div>
                             : <div className={`profile-incomplete__visiting 

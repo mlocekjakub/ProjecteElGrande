@@ -99,9 +99,7 @@ function EventCard(props) {
                         <h4>{props.eventName}</h4>
                     </div>
                     <div className={`events__card-nav-price ${theme === 'light' ? 'event-price-light' : 'event-price-dark'}`}>{props.price} {props.currency}</div>
-                    <div className="date">
-                        {(props.dateStart).slice(0,10)}
-                    </div>
+                    <div className="date"> {(props.dateStart).slice(0,10)}</div>
                 </div>
                 <div className="events-statistics">
                     <div className="location">
@@ -126,7 +124,12 @@ function EventCard(props) {
                     : isUserOrganiser === false && <Link to={`/profile/${props.organiserId}`} className={`events__organiser-info ${theme === 'light' ? 'event__organiser-light' : 'event__organiser-dark'}`}>
                         <img className="events__organiser-image" src={defaultProfileImage} alt="" />
                         <p className="events__organiser-name">
-                            <span>{organiserProfile.name ? organiserProfile.name : 'Organiser'} {organiserProfile.surname ? organiserProfile.surname : ''}</span>
+                            <span>
+                                {!organiserProfile.name && !organiserProfile.surname && 'Organiser'}
+                                {organiserProfile.name && organiserProfile.name}
+                                &nbsp;
+                                {organiserProfile.surname && organiserProfile.surname}
+                            </span>
                         </p>
                     </Link>}
                 {isFetchingData ? <button className="btn" type="button" disabled>

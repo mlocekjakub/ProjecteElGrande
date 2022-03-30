@@ -45,3 +45,28 @@
     padding-top: 4rem;
 }
 
+.section-about-me-light {
+    color: var(--clr-header);
+}
+
+.section-about-me-dark {
+    color: #efeff1;
+}
+
+.section-location-light {
+    color: var(--clr-paragraph);
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.section-location-dark {
+    color: #adadb8;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+}
+.lock-location-icon {
+    max-width: 1em;
+    padding-left: 0.4rem;
+}
