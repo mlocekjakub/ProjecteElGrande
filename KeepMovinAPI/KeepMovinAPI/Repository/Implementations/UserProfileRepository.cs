@@ -92,7 +92,7 @@ namespace KeepMovinAPI.Repository.Implementations
             var x = upDated;
             var current = Get(upDated.UserId);
 
-            current.Name = upDated.UserName;
+            current.Name = upDated.Name;
             current.Surname = upDated.Surname;
             current.BirthDate = upDated.BirthDate;
             current.PersonalInfo = upDated.PersonalInfo;

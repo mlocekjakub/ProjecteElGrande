@@ -31,7 +31,7 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpGet("uploadProfileInformation")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfile))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Upload([FromHeader(Name = "etag")] string userId)
@@ -45,7 +45,7 @@ namespace KeepMovinAPI.Controllers
                     return Unauthorized();
 
                 UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
-                return Ok(userProfile);
+                return Ok(_mapper.Map<UserProfileDto>(userProfile));
 
             }
             catch(Exception e)

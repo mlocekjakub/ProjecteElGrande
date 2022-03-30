@@ -11,7 +11,7 @@ export default function EditProfile(props) {
     
     const [profileDetails, setProfileDetails] = useState({
         userId: localStorage.getItem('session'),
-        userName: "",
+        name: "",
         surname: "",
         location: {city: "", country: "", zipCode: ""},
         birthDate: "",
@@ -30,7 +30,7 @@ export default function EditProfile(props) {
                 }
         }).then(content => {
                setProfileDetails({
-                   userName: `${content.data.name ? content.data.name : ''}`,
+                   name: `${content.data.name ? content.data.name : ''}`,
                    surname: `${content.data.surname ? content.data.surname : ''}`,
                    location: {
                        city: `${content.data.location && content.data.location.city ? content.data.location.city : ''}`,
@@ -82,8 +82,8 @@ export default function EditProfile(props) {
                        id="userName"
                        autoComplete="off"
                        placeholder="Name"
-                       value={profileDetails.userName}
-                       onChange={e => setProfileDetails({...profileDetails, userName: e.target.value})}
+                       value={profileDetails.name}
+                       onChange={e => setProfileDetails({...profileDetails, name: e.target.value})}
                 />
                 <input type="text"
                        name="userSurname"

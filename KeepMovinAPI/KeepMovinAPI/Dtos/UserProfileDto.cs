@@ -11,7 +11,7 @@ namespace KeepMovinAPI.Dtos
         public Guid UserId { get; set; }     
 
         [MaxLength(20)]
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(20)]
         public string Surname { get; set; }
