@@ -54,6 +54,7 @@ namespace KeepMovinAPI.Repository.Implementations
             current.UpcomingEvents = upDated.UpcomingEvents;
             current.Location = upDated.Location;
             current.Photo = upDated.Photo;
+            current.HostedEvents = upDated.HostedEvents;
 
             _context.Setting.Update(current);
             _context.SaveChanges();

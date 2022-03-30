@@ -127,7 +127,7 @@ namespace KeepMovinAPI.Repository.Implementations
             }
             else
             {
-                current.Name = upDated.Organisation.Name;
+                current.Organisation.Name = upDated.Organisation.Name;
             }
            
             

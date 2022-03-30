@@ -39,7 +39,7 @@ export default function EditProfile(props) {
                    },
                    birthDate: `${content.data.birthDate === undefined ? Date.now().toLocaleString() : content.data.birthDate}`,
                    phoneNumber: `${content.data.phoneNumber === null ? '' : content.data.phoneNumber}`,
-                   personalInfo: `${content.data.aboutMe === undefined ? '' : content.data.aboutMe}`,
+                   personalInfo: `${content.data.personalInfo === undefined ? '' : content.data.personalInfo}`,
                    organisation: {
                        ...profileDetails.organisation,
                        name: `${content.data.organisation === null ? '' : content.data.organisation?.name}`
