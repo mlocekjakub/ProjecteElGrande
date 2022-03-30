@@ -43,13 +43,6 @@ namespace KeepMovinAPI.Domain
             Setting = settings;
         }
 
-        public void AddLocation(Location location)
-        {
-            Location = location;
-        }
-        public void AddOrganization(Organisation organisation)
-        {
-            Organisation = organisation;
-        }
+        
     }
 }
