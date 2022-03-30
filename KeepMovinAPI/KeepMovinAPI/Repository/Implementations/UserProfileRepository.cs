@@ -89,9 +89,10 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public void UpdateUserProfile(UserProfileDto upDated)
         {
+            var x = upDated;
             var current = Get(upDated.UserId);
 
-            current.Name = upDated.Name;
+            current.Name = upDated.UserName;
             current.Surname = upDated.Surname;
             current.BirthDate = upDated.BirthDate;
             current.PersonalInfo = upDated.PersonalInfo;
@@ -127,7 +128,7 @@ namespace KeepMovinAPI.Repository.Implementations
             }
             else
             {
-                current.Name = upDated.Organisation.Name;
+                current.Organisation.Name = upDated.Organisation.Name;
             }
            
             

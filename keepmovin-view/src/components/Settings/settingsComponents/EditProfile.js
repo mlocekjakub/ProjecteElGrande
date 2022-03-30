@@ -11,13 +11,13 @@ export default function EditProfile(props) {
     
     const [profileDetails, setProfileDetails] = useState({
         userId: localStorage.getItem('session'),
-        name: "",
+        userName: "",
         surname: "",
         location: {city: "", country: "", zipCode: ""},
-        birthDate: Date.now().toLocaleString(),
+        birthDate: "",
         phoneNumber: "",
         personalInfo: "",
-        organisation: {name: "", isVerify: "verified"},
+        organisation: {name: ""},
     })
 
     useEffect(async () => {
@@ -30,19 +30,18 @@ export default function EditProfile(props) {
                 }
         }).then(content => {
                setProfileDetails({
-                   name: `${content.data.name === null ? '' : content.data.name}`,
-                   surname: `${content.data.surname === null ? '' : content.data.surname}`,
+                   userName: `${content.data.name ? content.data.name : ''}`,
+                   surname: `${content.data.surname ? content.data.surname : ''}`,
                    location: {
-                       city: `${content.data.location === null ? '' : content.data.location?.city}`,
-                       country: `${content.data.location === null ? '' : content.data.location?.country}`, 
-                       zipCode: `${content.data.location === null ? '' : content.data.location?.zipCode}`,
+                       city: `${content.data.location && content.data.location.city ? content.data.location.city : ''}`,
+                       country: `${content.data.location && content.data.location.country ? content.data.location.country : ''}`, 
+                       zipCode: `${content.data.location && content.data.location.zipCode ? content.data.location.zipCode : ''}`,
                    },
-                   birthDate: `${content.data.birthDate === undefined ? Date.now().toLocaleString() : content.data.birthDate}`,
-                   phoneNumber: `${content.data.phoneNumber === null ? '' : content.data.phoneNumber}`,
-                   personalInfo: `${content.data.aboutMe === undefined ? '' : content.data.aboutMe}`,
+                   birthDate: `${content.data.birthDate ? content.data.birthDate : ''}`,
+                   phoneNumber: `${content.data.phoneNumber ? content.data.phoneNumber : ''}`,
+                   personalInfo: `${content.data.personalInfo ? content.data.personalInfo : ''}`,
                    organisation: {
-                       ...profileDetails.organisation,
-                       name: `${content.data.organisation === null ? '' : content.data.organisation?.name}`
+                       name: `${content.data.organisation && content.data.organisation.name ? content.data.organisation.name : ''}`
                    },
                    userId: localStorage.getItem('session')
                }) 
@@ -83,8 +82,8 @@ export default function EditProfile(props) {
                        id="userName"
                        autoComplete="off"
                        placeholder="Name"
-                       value={profileDetails.name}
-                       onChange={e => setProfileDetails({...profileDetails, name: e.target.value})}
+                       value={profileDetails.userName}
+                       onChange={e => setProfileDetails({...profileDetails, userName: e.target.value})}
                 />
                 <input type="text"
                        name="userSurname"

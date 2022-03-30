@@ -1,50 +1,84 @@
 ﻿import "./ProfilePage.css"
 import "../../index.css"
 import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Statistics from "./profilePageComponents/Statistics";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import Upcoming from "./profilePageComponents/Upcoming";
 import Previous from "./profilePageComponents/Previous";
 import Hosted from "./profilePageComponents/Hosted";
+import {useNavigate} from "react-router-dom";
 
 export default function ProfilePage() {
     
     const theme = useSelector((state) => state.theme.value)
+    
     const [activeEvent, setActiveEvent] = useState('upcoming');
     
-    const [statistics, setStatistics] = useState();
-    
     const isUserLogged = useSelector((state) => state.isLogged.value)
+    
+    const navigate = useNavigate();
+    
+    const [pageReload, setPageReload] = useState(true);
 
-    const [profileItems, setProfileItems] = useState();
+    const routeChange = useSelector((state) => state.isRouteChanged.value);
+
+    const [profileDetails, setProfileDetails] = useState({
+        userId: localStorage.getItem('session'),
+        userName: "",
+        surname: "",
+        location: {city: "", country: "", zipCode: ""},
+        birthDate: "",
+        phoneNumber: "",
+        personalInfo: "",
+        organisation: {name: ""},
+    })
     
     
     useEffect(() => {
         if (isUserLogged) {
             axios
-                .get(`/api/UserProfile/Get`, {
+                .get(`/api/UserProfile/uploadProfileInformation`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     "etag" : localStorage.getItem('session'),
                 }
                 })
-                .then(response => {
-                    setProfileItems(response.data)
+                .then(content => {
+                    setProfileDetails({
+                        userName: `${content.data.name ? content.data.name : ''}`,
+                        surname: `${content.data.surname ? content.data.surname : ''}`,
+                        location: {
+                            city: `${content.data.location && content.data.location.city ? content.data.location.city : ''}`,
+                            country: `${content.data.location && content.data.location.country ? content.data.location.country : ''}`,
+                            zipCode: `${content.data.location && content.data.location.zipCode ? content.data.location.zipCode : ''}`,
+                        },
+                        birthDate: `${content.data.birthDate ? content.data.birthDate : ''}`,
+                        phoneNumber: `${content.data.phoneNumber ? content.data.phoneNumber : ''}`,
+                        personalInfo: `${content.data.personalInfo ? content.data.personalInfo : ''}`,
+                        organisation: {
+                            name: `${content.data.organisation && content.data.organisation.name ? content.data.organisation.name : ''}`
+                        },
+                        userId: localStorage.getItem('session')
+                    })
                 })
         }
-    }, [])
+    }, [routeChange])
     
     const setActive = (status) => {
         setActiveEvent(status)
     }
     
+    const RedirectToSettings = () => {
+        navigate('/settings')
+    }
+    
     
     
     return (
-        <div className={`profile-page-wrapper 
+        <div data-theme={theme} className={`profile-page-wrapper 
         ${theme === 'light' ? 'profile-page-wrapper__light' : 'profile-page-wrapper__dark'}`}>
             
             
@@ -52,11 +86,11 @@ export default function ProfilePage() {
         ${theme === 'light' ? 'profile-card__container__light' : 'profile-card__container__dark'}`}>
                 <img className="profile-image" src={defaultProfileImage} alt="" />
                 <div className="about-me__container">
-                    <div className="about-header">about</div>
-                    {profileItems && profileItems.personalInfo  ?
-                        <div>{profileItems.personalInfo}</div>
-                        : <div className={`about-header__incomplete 
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
+                    <div className="about-header">about me</div>
+                    {profileDetails.personalInfo  ?
+                        <div className="user-data">{profileDetails.personalInfo}</div>
+                        : <div className={`profile-incomplete
+        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`} onClick={RedirectToSettings}>
                             Fill in your aboutme</div>}
                 </div>
             </div>
@@ -67,19 +101,23 @@ export default function ProfilePage() {
                 <div className={`socials-name__container 
         ${theme === 'light' ? 'socials-name__container__light' : 'socials-name__container__dark'}`}>
                     <div className="personal-content">
-                        <div className="profile__name">{profileItems && profileItems.name ?
-                            <span>{profileItems.name}</span>
+                        <div className="profile__name">{profileDetails.userName ?
+                            <span className='user-data user-data-align'>{profileDetails.userName}</span>
                             : <span className={`profile-incomplete
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>fill in your name</span> }
-                            {profileItems && profileItems.surname ?
-                                <span>{profileItems.surname}</span>
+        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`} onClick={RedirectToSettings}>fill in your name</span> }
+                            {profileDetails.surname ?
+                                <span className="user-data">{profileDetails.surname}</span>
                                 :<span className={`profile-incomplete
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>fill in your surname</span>}
+        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`} onClick={RedirectToSettings}>fill in your surname</span>}
                         </div>
-                        {profileItems && profileItems.locationCity && profileItems.locationCountry ?
-                            <div className="profile__location">{profileItems.locationCity} {profileItems.locationCountry}</div>
-                            : <div className={`profile__location__incomplete 
-        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>Fill in your location</div>}
+                        {profileDetails.location.city && profileDetails.location.country ?
+                            <div className="user-data-paragraph">{profileDetails.location.city} {profileDetails.location.country}</div>
+                            : <div className={`profile-incomplete 
+        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`} onClick={RedirectToSettings}>Fill in your location</div>}
+                        {profileDetails.organisation.name ?
+                            <div className="user-data-paragraph">Organisation: {profileDetails.organisation.name}</div>
+                            : <div className={`profile-incomplete 
+        ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`} onClick={RedirectToSettings}>Fill in your organisation</div>}
                     </div>
                     <div className={`profile__socials-info 
         ${theme === 'light' ? 'profile__socials-info__light' : 'profile__socials-info__dark'}`}>
@@ -116,10 +154,10 @@ export default function ProfilePage() {
                             Statistics
                         </div>
                     </div>
-                    {activeEvent === 'upcoming' && <Upcoming />}
-                    {activeEvent === 'previous' && <Previous />}
-                    {activeEvent === 'statistics' && <Statistics />}
-                    {activeEvent === 'hosted' && <Hosted />}
+                    {activeEvent === 'upcoming' && <Upcoming ButtonState={activeEvent} />}
+                    {activeEvent === 'previous' && <Previous ButtonState={activeEvent}/>}
+                    {activeEvent === 'statistics' && <Statistics ButtonState={activeEvent}/>}
+                    {activeEvent === 'hosted' && <Hosted ButtonState={activeEvent}/>}
                 </div>
                 
                 
