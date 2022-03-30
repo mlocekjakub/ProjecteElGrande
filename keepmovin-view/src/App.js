@@ -26,7 +26,7 @@ function App() {
               <Route path="event/:id" element={<EventPage />}/>
               <Route path="event/create" element={<EventForm />} />
               <Route path="list-of-events" element={<ListOfEvents />} />
-              <Route path="Settings" element={<Settings />} />
+              <Route path="settings" element={<Settings />} />
           </Route>
       </Routes>
   );

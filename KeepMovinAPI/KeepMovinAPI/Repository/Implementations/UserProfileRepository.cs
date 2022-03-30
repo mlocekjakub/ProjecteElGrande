@@ -89,6 +89,7 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public void UpdateUserProfile(UserProfileDto upDated)
         {
+            var x = upDated;
             var current = Get(upDated.UserId);
 
             current.Name = upDated.Name;

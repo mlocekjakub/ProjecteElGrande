@@ -90,6 +90,7 @@ namespace KeepMovinAPI.Controllers
                 if (!_validation.Validate(userProfileDto.UserId, jwt))
                     return Unauthorized();
                 _userProfileDao.UpdateUserProfile(userProfileDto);
+                var x = userProfileDto;
                 return Ok();
 
             }

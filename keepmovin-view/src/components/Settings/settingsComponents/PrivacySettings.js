@@ -98,7 +98,7 @@ export default function PrivacySettings(props) {
                         type="checkbox"
                         id="followers-privacy"
                         className="toggle"
-                        checked={privacyDetails.follow}
+                        checked={privacyDetails.followersFollowing}
                         onChange={e => setPrivacyDetails({...privacyDetails, followersFollowing: e.target.checked})}/>
                     <label htmlFor="followers-privacy">Hide Followers</label>
                 </div>
@@ -114,7 +114,7 @@ export default function PrivacySettings(props) {
                         type="checkbox"
                         id="statistics-privacy"
                         className="toggle"
-                        checked={privacyDetails.stats}
+                        checked={privacyDetails.statistics}
                         onChange={e => setPrivacyDetails({...privacyDetails, statistics: e.target.checked})}/>
                     <label htmlFor="statistics-privacy">Hide Statistics</label>
                 </div>

@@ -1,10 +1,16 @@
 ﻿:root {
     --clr-header: #1D1E35;
-    
     --clr-paragraph: hsl(237, 12%, 33%);
-    
-    
+    --clr-user-data: #1D1E35;
+    --clr-user-data-paragraph: hsl(237, 12%, 33%);
 }
+
+[data-theme="dark"] {
+    --clr-user-data: #efeff1;
+    --clr-user-data-paragraph: #adadb8;
+}
+
+
 
 /*_________________________________________*/
 /*profile*/
@@ -162,10 +168,8 @@
 .profile__name {
     font-weight: 700;
     display: flex;
+    align-items: center;
     gap: 0.5rem;
-}
-.profile__location {
-    color: var(--clr-paragraph);
 }
 .personal-content {
     display: flex;
@@ -488,11 +492,14 @@
 
 
 .profile-incomplete {
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.4rem;
     border-radius: 0.4rem;
-    margin: 0.3rem 0 0.3rem 0;
+    font-weight: 700;
+}
+.profile-incomplete:hover {
+    cursor: pointer;
+    user-select: none;
 }
 
 .profile-incomplete__light {
@@ -539,6 +546,20 @@
     opacity: 0.2;
 }
 
+
+.user-data {
+    color: var(--clr-user-data);
+}
+.user-data-paragraph {
+    color: var(--clr-user-data-paragraph);
+    font-size: 0.9rem;
+    padding-left: 0.4rem;
+}
+
+
+.user-data-align {
+    padding-left: 0.4rem;
+}
 
 
 

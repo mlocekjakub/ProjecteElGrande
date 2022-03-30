@@ -3,17 +3,17 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialStateValue = false;
-export const IsLoggedSlice = createSlice({
-    name: "isLogged",
+export const IsRouteChangedSlice = createSlice({
+    name: "IsRouteChanged",
     initialState: {value: initialStateValue},
     reducers: {
-        changeIsLogged: (state, action) => {
+        changeIsRouteChanged: (state, action) => {
             state.value = action.payload
         },
     },
 });
 
 
-export const {changeIsLogged} = IsLoggedSlice.actions;
+export const {changeIsRouteChanged} = IsRouteChangedSlice.actions;
 
-export default IsLoggedSlice.reducer;
+export default IsRouteChangedSlice.reducer;

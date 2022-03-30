@@ -16,6 +16,8 @@ function Upcoming(props) {
     const [numberOfPagesUpcoming, setNumberOfPagesUpcoming] = useState(1);
 
     const isUserLogged = useSelector((state) => state.isLogged.value)
+
+    const routeChange = useSelector((state) => state.isRouteChanged.value);
     
 
     useEffect(() => {
@@ -35,7 +37,7 @@ function Upcoming(props) {
                     setUpcomingEvents(response.data["eventsFound"])
                 })
         }
-    },[currentPageUpcoming])
+    },[currentPageUpcoming, routeChange])
 
     useEffect(() => {
         if (currentPageUpcoming >= numberOfPagesUpcoming) {
