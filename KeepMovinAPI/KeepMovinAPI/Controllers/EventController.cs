@@ -132,11 +132,8 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogWarning(Convert.ToString(e));
                 return BadRequest();
             }
-            
         }
         
-
-
         [HttpGet("events-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -300,6 +297,98 @@ namespace KeepMovinAPI.Controllers
                 _logger.LogWarning(Convert.ToString(e));
                 return Unauthorized();
             }
+        }
+        
+        
+        [HttpGet("events-visited-user/upcoming")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+            [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetUpcomingEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("events-visited-user/previous")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+            [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetPreviousEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("events-visited-user/hosted")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId,
+            [FromHeader(Name = "currentPage")] string currentPage)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsById(Guid.Parse(userId), int.Parse(currentPage));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet("events-visited-user/hosted-statistics")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetHostedEventsStatisticsById(Guid.Parse(userId));
+                return Ok(listOfUserEvents);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        
+        [HttpGet("visited-user-events")]  
+        public IEnumerable<Event> GetVisitedUserEvents([FromHeader(Name = "userId")] string userId)
+        {
+            try
+            {
+                var listOfUserEvents = _repositoryEvent.GetUserEventsByUserId(Guid.Parse(userId));
+                return listOfUserEvents;
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return null;
+            }
+           
         }
     }
 }

@@ -49,6 +49,7 @@ export default function Layout() {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch(changeIsRouteChanged(!routeChange))
     },[location]);
 

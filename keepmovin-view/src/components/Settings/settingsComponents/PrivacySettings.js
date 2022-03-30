@@ -165,7 +165,7 @@ export default function PrivacySettings(props) {
                         className="toggle"
                         checked={privacyDetails.previousEvents}
                         onChange={e => setPrivacyDetails({...privacyDetails, previousEvents: e.target.checked})}/>
-                    <label htmlFor="previous-privacy">Hide Upcoming Events</label>
+                    <label htmlFor="previous-privacy">Hide Previous Events</label>
                 </div>
                 <p>No one other than your followers 
                     will have access to the list of events 

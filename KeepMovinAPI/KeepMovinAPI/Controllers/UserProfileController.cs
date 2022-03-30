@@ -55,6 +55,28 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
+        [HttpGet("GetUserProfile")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserProfileById([FromHeader(Name = "etag")] string userId)
+        {
+            try
+            {
+                UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
+                return Ok(_mapper.Map<UserProfileDto>(userProfile));
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        
+
+
+
         [HttpGet("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -4,8 +4,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import EventsUpcomingMenu from "./EventsUpcomingMenu";
+import {useParams} from "react-router-dom";
 
 function Upcoming(props) {
+
+    let { visitedUserId } = useParams();
     
     const theme = useSelector((state) => state.theme.value)
     

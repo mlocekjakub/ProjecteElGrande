@@ -2,7 +2,6 @@
 import EventCard from "./sportEventsComponents/EventCard";
 
 function Events(props) {
-    console.log(props);
     return props.display.map((event) =>
         (<EventCard key={event.eventId}
                     eventId={event.eventId}

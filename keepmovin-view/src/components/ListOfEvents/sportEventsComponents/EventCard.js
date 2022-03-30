@@ -4,6 +4,7 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from "@mui/icons-material/Person";
 import {useDispatch, useSelector} from "react-redux";
+import defaultProfileImage from "../../../Images/DefaultProfileImage.jpg";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -18,6 +19,15 @@ function EventCard(props) {
     const [isFetchingData, setIsFetchingData] = useState(false)
     
     const theme = useSelector((state) => state.theme.value)
+    
+    const [isUserOrganiser, setIsUserOrganiser] = useState(false);
+    
+    const [organiserProfile, setOrganiserProfile] = useState({
+        name: "",
+        surname: "",
+    });
+
+    const routeChange = useSelector((state) => state.isRouteChanged.value);
 
     function JoinToEvent(eventId){
         fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
@@ -45,9 +55,29 @@ function EventCard(props) {
                         setJoinButtonState('hosting')
                     }
                 }
+                if (props.organiserId !== localStorage['session']) {
+                    axios
+                        .get(`/api/UserProfile/GetUserProfile`, {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                "etag": props.organiserId,
+                            }
+                        }).then(content => {
+                        setOrganiserProfile({
+                            name: `${content.data.name ? content.data.name : ''}`,
+                            surname: `${content.data.surname ? content.data.surname : ''}`
+                        })
+                    })
+                    setIsUserOrganiser(false);
+                }
+                else {
+                  setIsUserOrganiser(true)
+                }
                 setIsFetchingData(false);
             })
-    }, [])
+        
+    }, [routeChange])
     
     useEffect(() => {
         if (isUserLogged === false) {
@@ -88,9 +118,19 @@ function EventCard(props) {
                     </div>
                 </div>
             </div>
-            <article className="events__card-nav">
+            <article className='events__card-nav'>
+                {isFetchingData 
+                    ? <button className="btn" type="button" disabled>
+                        <span className={`spinner-border spinner-border-sm ${theme === 'light' ? 'event-btn-light' : 'event-btn-dark'}`} role="status" aria-hidden="true"></span>
+                    </button> 
+                    : isUserOrganiser === false && <Link to={`/profile/${props.organiserId}`} className={`events__organiser-info ${theme === 'light' ? 'event__organiser-light' : 'event__organiser-dark'}`}>
+                        <img className="events__organiser-image" src={defaultProfileImage} alt="" />
+                        <p className="events__organiser-name">
+                            <span>{organiserProfile.name ? organiserProfile.name : 'Organiser'} {organiserProfile.surname ? organiserProfile.surname : ''}</span>
+                        </p>
+                    </Link>}
                 {isFetchingData ? <button className="btn" type="button" disabled>
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span className={`spinner-border spinner-border-sm ${theme === 'light' ? 'event-btn-light' : 'event-btn-dark'}`} role="status" aria-hidden="true"></span>
                 </button> : <div>
                     {joinButtonState === 'join' && <div className={`${theme === 'light' 
                         ? 'sign-up-event' 

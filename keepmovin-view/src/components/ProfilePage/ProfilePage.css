@@ -141,6 +141,7 @@
     align-items: center;
     text-align: center;
     gap: 3rem;
+    padding-left: 0.4rem;
 }
 
 .profile__socials-info__light {
@@ -171,6 +172,7 @@
     align-items: center;
     gap: 0.5rem;
 }
+
 .personal-content {
     display: flex;
     flex-direction: column;

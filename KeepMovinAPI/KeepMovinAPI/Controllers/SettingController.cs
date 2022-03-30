@@ -84,6 +84,25 @@ namespace KeepMovinAPI.Controllers
             }            
 
         }
+        
+        [HttpGet("upload/visited-user")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UploadVisited([FromHeader(Name = "etag")]string userId)
+        {
+            var id = userId;
+            try
+            {
+                Setting settings = _userProfileDao.GetSettingsByUserId(Guid.Parse(userId));
+                return Ok(settings);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }            
+
+        }
 
       
 
