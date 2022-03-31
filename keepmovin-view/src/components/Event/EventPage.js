@@ -1,79 +1,58 @@
-import React, {useState} from 'react';
-import NamePlace from "./eventPage/NamePlace";
-import PicturePlace from "./eventPage/PicturePlace";
-import Info from "./eventPage/Info";
+import React, {useEffect, useState} from 'react';
+import "./EventPage.css";
+import axios from "axios";
 import {useParams} from "react-router-dom";
-import { Button } from "@mui/material";
-import { useEffect} from "react";
-
-
-
 
 
 function EventPage() {
-    useEffect(async () => {
-        const response = await fetch("/user/validate", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        })
-        const content = await response.json()
-            .then(content => localStorage.setItem('session', content))
-
-    })
-    
-
     let {id} = useParams();
-    const [eventName, setEventName] = useState("")
-    const [price, setPrice] = useState("")
-    const [start, setStart] = useState("")
-    const [end, setEnd] = useState("")
-    const [sport, setSport] = useState("")
-    const [limit, setLimit] = useState("")
-    const [experience, setExperience] = useState("")
+    const [eventModel, setEventModel] = useState();
 
-    fetch(`/api/Event/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            setEventName(data.name)
-            setPrice("5 USD")
-            setStart(data.startEvent)
-            setEnd(data.endEvent)
-            setSport(data.sportId)
-            setLimit(data.maxParticipants)
-            setExperience(data.experienceLevel)
-
-        });
+    useEffect(() => {
+        axios
+            .get(`/api/Event/${id}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                setEventModel(response.data)
+            })
+    }, [])
     return (
-        <div className="grid-container-3">
-            <NamePlace
-                    name={eventName}/>
-            <Info label="Price" text={price}/>
-            <Button id="save-button" variant="contained" onClick="" disableElevation sx={{
-                top: '30ch', width: '80ch', position: 'none'
-            }}>
-                Join Now
-            </Button>
-            
-            <PicturePlace
-                src="/Images/tempevent.jpg"/>
-            <div className="grid-container-infos">
-                <Info label="Start" text={start.slice(0,10)}/>
-                <Info label="End" text={end.slice(0,10)}/>
-                <Info label="Sport" text={sport}/>
-                <Info label="Limit participants" text={limit}/>
-                <Info label="Experience" text={experience}/>
+        <div className="site">
+            <div className="flex-title">
+                <div className="left-column">
+                    <div className="event-title">{eventModel ? eventModel.name : ""}</div>
+                    <div className="event-category">Category: {eventModel ? eventModel.sports.name : ""}</div>
+                    <div
+                        className="event-date">Date: {eventModel ? `${eventModel.startEvent.slice(0, 10).replaceAll("-", "/")}-${eventModel.endEvent.slice(0, 10).replaceAll("-", "/")}` : ""}</div>
+                </div>
+                <div className="right-column">
+                    <div
+                        className="event-cost">{eventModel ? eventModel.price : ""} {eventModel ? eventModel.currency : ""}</div>
+                    {/*<div className="join-button">Join</div>*/}
+                </div>
             </div>
-
-
-            {/*<Button id="save-button" variant="contained" onClick="" disableElevation sx={{*/}
-            {/*    top: '30ch', width: '80ch', position: 'none'*/}
-            {/*}}>*/}
-            {/*    Edit*/}
-            {/*</Button>*/}
-        </div>);
+            <div className="grid-infos">
+                <div className="about-event-title"> About Event:</div>
+                <div className="about-event">{eventModel ? eventModel.eventInfo : ""}</div>
+                <div className="experience-place">{eventModel ? eventModel.experienceLevel.name : ""}</div>
+                {/*<div className="time-place">data</div>*/}
+                <div className="map">
+                    <div className="mapouter">
+                        <div className="gmap_canvas">
+                            <iframe width="600" height="500" id="gmap_canvas"
+                                    src="https://maps.google.com/maps?q=%C5%81%C4%85cko&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                        </div>
+                    </div>
+                    <div>Location: {eventModel ? eventModel.location.city : ""}</div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default EventPage;

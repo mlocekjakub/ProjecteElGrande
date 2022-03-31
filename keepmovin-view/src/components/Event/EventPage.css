@@ -1,0 +1,100 @@
+.flex-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    margin: 6em 2em;
+    width: 96%;
+    height: 15em;
+    background-color: deepskyblue;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+
+.event-title {
+    font-size: 2em
+}
+
+.event-date {
+    font-size: 1.5em;
+}
+
+.event-category {
+    font-size: 1em;
+}
+
+.event-cost {
+    font-size: 2em;
+}
+
+.join-button {
+    height: 3.8em;
+    align-items: center;
+    padding: 1em 1.2em;
+}
+
+.grid-infos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 3em 3em auto;
+    margin: 6em 2em;
+    width: 100%;
+}
+
+.about-event-title {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.7em;
+}
+
+.about-event {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+}
+
+.experience-place {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    font-size: 1.7em;
+}
+
+.time-place {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+}
+
+.map {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+}
+
+.site {
+    width: 70%;
+    margin: auto;
+}
+
+.mapouter {
+    text-align: right;
+    height: 500px;
+    width: 600px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 500px;
+    width: 600px;
+}

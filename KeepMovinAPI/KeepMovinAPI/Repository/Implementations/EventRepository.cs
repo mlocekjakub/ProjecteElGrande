@@ -45,7 +45,12 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public Event Get(Guid id)
         {
-            var query = _context.Event.Find(id);
+            var query = _context.Event
+                    .Include(eventModel => eventModel.Location)
+                    .Include(eventModel => eventModel.Sports)
+                    .Include(eventModel => eventModel.Type)
+                    .Include(eventModel => eventModel.ExperienceLevel)
+                    .First(eventModel => eventModel.EventId == id);
             return query;
         }
 
