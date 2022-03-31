@@ -28,24 +28,35 @@
     padding: 0.6rem 0 0.3rem 0
 }
 
-.search-bar-sport-filter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 0 1rem 1rem 1rem;
+
+.sport-filter-searchbar {
+    padding: 0.3rem 0 0.3rem 0.3rem;
+    border-radius: 0.4rem;
 }
+
+.searchbar-sport-dark {
+    background: #464649;
+    color: #efeff1;
+    transition: 0.2s;
+    width: 100%;
+    border: 1px solid hsla(0, 0%, 100%, 0) !important;
+}
+
+.searchbar-sport-dark:focus {
+    outline: none !important;
+    border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+}
+
 .search-txt-sport-filter {
     background: #F3F3F3;
-    padding: 0.3rem 1rem 0.3rem 0.3rem;
-    border: 0;
     transition: 0.2s;
-
+    width: 100%;
+    border: 1px solid hsla(0, 0%, 100%, 0) !important;
 }
+
 .search-txt-sport-filter:focus {
     outline: none !important;
-    background: #fff;
-    border: 0;
+    border: 1px solid var(--clr-paragraph) !important;
 }
 
 .search-button-sport-filter {
@@ -55,14 +66,31 @@
 
 .expanded-header {
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+.expanded-header-dark {
+    color: #efeff1;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
     
 }
 .sport-item {
     transition: 0.1s;
     display: flex;
     justify-content: space-between;
-
 }
+
+.dark-sport-item {
+    transition: 0.1s;
+    display: flex;
+    justify-content: space-between;
+    color:  #efeff1;
+}
+.dark-sport-item:hover {
+    cursor: pointer;
+    background: rgba(38, 38, 44, 0.7);
+}
+
+
 .sport-item:hover {
     cursor: pointer;
     background: #F3F3F3;

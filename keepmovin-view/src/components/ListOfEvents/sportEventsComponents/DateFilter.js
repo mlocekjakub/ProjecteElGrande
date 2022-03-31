@@ -3,9 +3,9 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import {useDetectClickOutside} from "react-detect-click-outside";
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import {useDispatch, useSelector} from "react-redux";
 import {changeRangeDate, clearRangeDate} from "../../../features/RangeDate";
+import "./DataFilter.scss";
 import CrossIcon from '@material-ui/icons/Close';
 import moment from "moment";
 
@@ -32,6 +32,8 @@ export default function DateFilter() {
 
     const refFoundEventsClickOutside = useDetectClickOutside(
         { onTriggered: CloseMenu });
+
+    const theme = useSelector((state) => state.theme.value)
    
    function CloseMenu() {
        setOpen(false)
@@ -39,15 +41,15 @@ export default function DateFilter() {
     
     return (
         <div className="date-selector-container" ref={refFoundEventsClickOutside}>
-            <div className="date-picker__selected-dates-container">
+            <div className={`date-picker__selected-dates-container ${theme === 'light' ? 'date-picker-selected-dates__light' : 'date-picker-selected-dates__dark'}`}>
                 <div className="date-picker__selected-dates">
-                    <div className="date-picker__first-date" onClick={(e)=> setOpen(!open)}>{
+                    <div className={`date-picker__first-date ${theme === 'light' ? 'date-light' : 'date-dark'}`} onClick={(e)=> setOpen(!open)}>{
                         compareDates ? dates[0].startDate.toLocaleDateString() : <span>select date</span>}</div>
-                    <div className="date-separator"> To </div>
-                    <div className="date-picker__second-date" onClick={(e)=> setOpen(!open)}>{
+                    <div className={`date-separator ${theme === 'dark' ? 'date-separator-dark' : ''}`}> To </div>
+                    <div className={`date-picker__first-date ${theme === 'light' ? 'date-light' : 'date-dark'}`} onClick={(e)=> setOpen(!open)}>{
                         compareDates ? dates[0].endDate.toLocaleDateString() : <span> select date</span>}</div>
                 </div>
-                <div className="dates-clear-button" onClick={() => {
+                <div className={`${theme === 'light' ? 'dates-clear-button-light' : 'dates-clear-button-dark' }`} onClick={() => {
                     setDates([
                         {
                             startDate: new Date(new Date().getFullYear(), 0, 1),
@@ -62,12 +64,24 @@ export default function DateFilter() {
                 
             </div> 
             {open &&
-            <div className="date-picker">
-                <DateRange
-                    editableDateInputs={true}
-                    onChange={(item) => setDates([item.selection])}
-                    ranges={dates}
-                />
+            <div className={`date-picker ${theme === 'light' ? 'date-picker-selected-dates__light' : 'date-picker-selected-dates__dark'}`}>
+                {theme === 'light' 
+                    ? 
+                    <div className="calendar-light">
+                        <DateRange
+                        editableDateInputs={true}
+                        onChange={(item) => setDates([item.selection])}
+                        ranges={dates}
+                    />
+                </div> : 
+                    <div className="calendar-dark">
+                        <DateRange
+                            editableDateInputs={true}
+                            onChange={(item) => setDates([item.selection])}
+                            ranges={dates}
+                        /> 
+                    </div>
+                }
             </div>
             }
         

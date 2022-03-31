@@ -1,13 +1,13 @@
 import * as React from "react";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm"
-import {useEffect, useRef, useState} from "react";
-import ForgottenPassword from "./components/ForgottenPassword";
+import {useRef} from "react";
 import "../../index.css"
 import "./RegisterLoginPage.css";
 import {useDispatch, useSelector} from "react-redux";
 import {changeLoginActiveButton} from "../../features/LoginActiveButton";
 import {useDetectClickOutside} from "react-detect-click-outside";
+import "./components/InputAutofill.scss";
 
 
 export default function RegisterLoginPage(props) {
@@ -19,6 +19,8 @@ export default function RegisterLoginPage(props) {
     const modalErrorLoginRef = useRef(null);
     const modalSuccessLoginRef = useRef(null);
     const loginActiveButton = useSelector((state) => state.loginActiveButton.value)
+    
+    const theme = useSelector((state) => state.theme.value)
     
     const changeContent = (state) => {
         dispatch(changeLoginActiveButton(state))
@@ -32,7 +34,7 @@ export default function RegisterLoginPage(props) {
     }
     
     return (
-        <div className="register-login__page">
+        <div className="register-login__page" data-theme={theme}>
             <div className="register-modal__container" ref={modalClickOutside}>
                 <div className="register-validation__error" ref={modalErrorRegisterRef}>
                     Account with this email already exists
@@ -47,7 +49,7 @@ export default function RegisterLoginPage(props) {
                     Sucessfully logged in
                 </div>
             </div>
-            <div className="register-login__container">
+            <div className='register-login__container'>
                 <div className="register-login__bg-container">
                     {loginActiveButton === "register" 
                         ?
@@ -66,13 +68,13 @@ export default function RegisterLoginPage(props) {
                         {loginActiveButton === "register"
                         ?
                         <div className="header-info">
-                            <div className="register__header">Welcome Friend!</div>
-                            <div className="register__paragraph">Enter your personal details and start journey with us</div>
+                            <div className='register__header'>Welcome Friend!</div>
+                            <div className='register__paragraph'>Enter your personal details and start journey with us</div>
                         </div>
                             :
                             <div className="header-info">
-                                <div className="register__header">Welcome Back!</div>
-                                <div className="register__paragraph">To keep connected with us please login with your personal info</div>
+                                <div className='register__header'>Welcome Back!</div>
+                                <div className='register__paragraph'>To keep connected with us please login with your personal info</div>
                             </div>
                         }
                     </div>

@@ -14,5 +14,6 @@ namespace KeepMovinAPI.Domain
         public bool UpcomingEvents { get; set; } = false;
         public bool PreviousEvents { get; set; } = false;
         public bool Photo { get; set; } = false;  
+        public bool HostedEvents { get; set; } = false; 
     }
 }

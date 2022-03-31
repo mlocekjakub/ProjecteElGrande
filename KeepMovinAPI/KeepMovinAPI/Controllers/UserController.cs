@@ -197,6 +197,7 @@ namespace KeepMovinAPI.Controllers
             Setting settings = new Setting();
             _settingRepository.Add(settings);
             UserProfile profile = new UserProfile();
+           
             profile.AddUser(user);
             profile.AddSettings(settings);
             _profileRepository.Add(profile);

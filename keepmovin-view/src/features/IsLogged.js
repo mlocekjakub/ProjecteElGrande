@@ -10,13 +10,10 @@ export const IsLoggedSlice = createSlice({
         changeIsLogged: (state, action) => {
             state.value = action.payload
         },
-        clearIsLogged: (state, action) => {
-            state.value = initialStateValue
-        },
     },
 });
 
 
-export const {changeIsLogged, clearIsLogged} = IsLoggedSlice.actions;
+export const {changeIsLogged} = IsLoggedSlice.actions;
 
 export default IsLoggedSlice.reducer;

@@ -93,6 +93,8 @@ namespace KeepMovinAPI.Repository.Implementations
             var filteredEvents = _context.Event
                 .Include(eventModel => eventModel.Location)
                 .Include(eventModel => eventModel.Sports)
+                .Include(eventModel => eventModel.User)
+                .Include(eventModel => eventModel.User.Organiser)
                 .Include(eventModel => eventModel.Type)
                 .Include(eventModel => eventModel.ExperienceLevel)
                 .Where(i =>
@@ -212,8 +214,17 @@ namespace KeepMovinAPI.Repository.Implementations
             return profilePageContent;
         }
 
+        public IEnumerable<Event> GetHostedEventsStatisticsById(Guid id)
+        {
+            var eventsList = _context.Event
+                .Include(e => e.User)
+                .Include(e => e.Sports)
+                .Where(i => i.User.Organiser.Userid == id);
+            return eventsList;
+        }
 
-        
+
+
         public void JoinToEvent(Guid userId, Guid eventId)
         {
             var user = _context.User.Find(userId);

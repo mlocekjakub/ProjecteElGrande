@@ -55,6 +55,28 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
+        [HttpGet("GetUserProfile")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserProfileById([FromHeader(Name = "etag")] string userId)
+        {
+            try
+            {
+                UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
+                return Ok(_mapper.Map<UserProfileDto>(userProfile));
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+        
+        
+
+
+
         [HttpGet("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,21 +100,19 @@ namespace KeepMovinAPI.Controllers
             
         }
 
-        [HttpGet("editProfileInformation")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
+        [HttpPost("editProfileInformation")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(UserProfileDto userProfileDto)
         {
-            userProfileDto.Picture = new Picture();
-            userProfileDto.Organisation = new Organisation();
-            userProfileDto.Name = "AbraKadabra";
             try
             {
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(userProfileDto.UserId, jwt))
                     return Unauthorized();
                 _userProfileDao.UpdateUserProfile(userProfileDto);
+                var x = userProfileDto;
                 return Ok();
 
             }

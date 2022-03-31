@@ -8,6 +8,8 @@ const Sport = (props) => {
     const ref = useRef(null);
 
     const markedSports = useSelector((state) => state.sports.value)
+    
+    const theme = useSelector((state) => state.theme.value)
 
     const dispatch = useDispatch();
     
@@ -27,7 +29,7 @@ const Sport = (props) => {
         
     }
     return (
-        <div onClick={MarkAsChecked} className="sport-item sport">
+        <div onClick={MarkAsChecked} className={`sport ${theme === 'light' ? 'sport-item' : 'dark-sport-item'}`}>
             {props.type}<CheckIcon className="check-icon check-icon__toggle" ref={ref}/>
         </div>
     )

@@ -1,13 +1,24 @@
 .filter {
-    background: var(--font-btn);
     border-top: 1px solid rgba(5, 5, 5, 0.13);
     display: flex;
     justify-content: space-between;
     padding: 1rem 0.1rem 1rem 0.1rem;
     transition: all 0.3s ease-in-out;
-    color: var(--clr-header);
     font-weight: 700;
 }
+
+.filter-light {
+    background: var(--font-btn);
+    color: var(--clr-header);
+}
+
+.filter-dark {
+    background: #26262C;
+    color: #efeff1;
+    border-radius: 0.3rem;
+    padding-left: 0.5rem;
+}
+
 .filter:hover {
     cursor: pointer;
 }
@@ -24,6 +35,15 @@
     padding: 0.5rem;
     background: #EDEFF1;
     z-index: 1000;
+}
+
+.date-picker-dark {
+    background: #26262C;
+    color: #efeff1;
+}
+
+.date-picker-light {
+    background: #EDEFF1;
 }
 
 .date-selector-container {
@@ -62,17 +82,26 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--bg-website);
     border-radius: 0.4rem;
 }
+.date-picker-selected-dates__light {
+    background: var(--bg-website);
+}
+
+.date-picker-selected-dates__dark {
+    background: #26262C;
+}
+
 .date-selector-container {
     padding-left: 1rem;
 }
 .date-separator {
     min-width: 0.4rem;
-    font-weight: 700;
 }
-.dates-clear-button {
+.date-separator-dark {
+    color: #adadb8;
+}
+.dates-clear-button-light {
     color: var(--clr-header);
     display: flex;
     justify-content: center;
@@ -80,31 +109,61 @@
     min-height: 100%;
     padding: 0 0.3rem;
     border-radius: 0 0.4rem 0.4rem 0;
-    transition: 0.2s;
+    transition: 0.1s;
 }
-.dates-clear-button:hover {
-    background: rgba(66, 133, 244, 0.4);
+.dates-clear-button-light:hover {
+    background: var(--bg-btn-primary-blue);
+    color: #FFFFFF;
     cursor: pointer;
 }
+
+.dates-clear-button-dark {
+    color: #adadb8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    padding: 0 0.3rem;
+    border-radius: 0 0.4rem 0.4rem 0;
+    transition: 0.1s;
+}
+.dates-clear-button-dark:hover {
+    color: var(--bg-btn-primary-blue);
+    cursor: pointer;
+}
+
+
 .date-picker__first-date, .date-picker__second-date {
     text-align: center;
     padding: 0.8rem;
-    transition: 0.2s;
+    transition: 0.1s;
     width: 12ch;
-    background: rgb(223, 224, 227);
+    font-weight: bold;
+    border-bottom: 2px solid rgba(66, 133, 244, 0);
+}
+
+.date-dark {
+    color: #adadb8;
+    transition: var(--transition);
+}
+
+.date-dark:hover {
+    color: #efeff1;
+}
+
+.date-light {
+    color: var(--clr-header); 
 }
 .date-picker__first-date {
-    border-radius: 0.4rem;
 }
 
 .date-picker__second-date {
-    border-radius: 0.4rem 0 0 0.4rem; 
 }
 
 
 .date-picker__first-date:hover, .date-picker__second-date:hover {
     cursor: pointer;
-    background: rgba(66, 133, 244, 0.4);
+    border-bottom: 2px solid var(--bg-btn-primary-blue);
 }
 
 
@@ -141,6 +200,21 @@
 .inactive-expand-icon {
     animation: icon-move-down 0.3s forwards 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

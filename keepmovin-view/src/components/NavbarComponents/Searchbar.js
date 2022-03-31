@@ -29,12 +29,14 @@ function Searchbar(props) {
     }
 
     useEffect(() => {
-        axios
-            .get(`/api/Event/input/${typedInput}`)
-            .then(response => {
-                setEventsFound(response.data)
+        if (typedInput !== '') {
+            axios
+                .get(`/api/Event/input/${typedInput}`)
+                .then(response => {
+                    setEventsFound(response.data)
 
-            })
+                })
+        }
     }, [typedInput])
     
     function EventsMenu() {

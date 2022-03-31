@@ -10,6 +10,8 @@ const ExperienceLevel = (props) => {
     const markedLevels = useSelector((state) => state.experience.value)
 
     const dispatch = useDispatch();
+    
+    const theme = useSelector((state) => state.theme.value)
 
     function MarkAsChecked() {
         
@@ -28,7 +30,7 @@ const ExperienceLevel = (props) => {
     }
     
     return (
-        <div onClick={MarkAsChecked} className="experience-item level">
+        <div onClick={MarkAsChecked} className={`${theme === 'light' ? 'experience-item' : 'dark-experience-item'} level`}>
             {props.level}<CheckIcon ref={ref} className="check-icon check-icon__toggle"/>
         </div>
     )

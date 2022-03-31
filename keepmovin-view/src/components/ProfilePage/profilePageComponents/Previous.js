@@ -6,7 +6,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import EventsPreviousMenu from "./EventsPreviousMenu";
 
 function Previous(props) {
-
+    const theme = useSelector((state) => state.theme.value)
+    
     const [previousEvents, setPreviousEvents] = useState([]);
     const [currentPagePrevious, setCurrentPagePrevious] = useState(1);
     const [isLimitNextPrevious, setIsLimitNextPrevious] = useState(false)
@@ -60,26 +61,26 @@ function Previous(props) {
     
     
     return (
-        <div className="info-content">
+        <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
             <EventsPreviousMenu content={previousEvents}/>
-            <div className="profile__paginate">
+            <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackPrevious ?
                     <div className="paginate-back__profile-previous">
-                        <ArrowBackIos className="arrow-paginate__disabled"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-back__profile-previous" onClick={backPagePrevious}>
-                        <ArrowBackIos className="arrow-paginate"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
                 {currentPagePrevious} of {numberOfPagesPrevious}
                 {isLimitNextPrevious ?
                     <div className="paginate-back__profile-previous">
-                        <ArrowForwardIosIcon className="arrow-paginate__disabled"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-back__profile-previous" onClick={nextPagePrevious}>
-                        <ArrowForwardIosIcon className="arrow-paginate"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
             </div>

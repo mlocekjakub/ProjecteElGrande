@@ -89,19 +89,51 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public void UpdateUserProfile(UserProfileDto upDated)
         {
+            var x = upDated;
             var current = Get(upDated.UserId);
+
             current.Name = upDated.Name;
             current.Surname = upDated.Surname;
-            current.Picture = upDated.Picture;
             current.BirthDate = upDated.BirthDate;
             current.PersonalInfo = upDated.PersonalInfo;
-            current.Organisation = upDated.Organisation;
-            current.Location = upDated.Location;
             current.PhoneNumber = upDated.PhoneNumber;
+
+            if(current.Location == null)
+            {
+                Location location = new Location()
+                {
+                    City = upDated.Location.City,
+                    Country = upDated.Location.Country,
+                    ZipCode = upDated.Location.ZipCode,
+                };
+                _context.Location.Add(location);
+                current.Location = location;
+            }
+            else
+            {
+                current.Location.City = upDated.Location.City;  
+                current.Location.Country = upDated.Location.Country;
+                current.Location.ZipCode = upDated.Location.ZipCode;
+            }
+
+            if(current.Organisation == null)
+            {
+                Organisation organisation = new Organisation()
+                {
+                    Name = upDated.Organisation.Name,
+                };
+                _context.Organisation.Add(organisation);
+                current.Organisation = organisation;
+
+            }
+            else
+            {
+                current.Organisation.Name = upDated.Organisation.Name;
+            }
+           
+            
             _context.UserProfile.Update(current);
             _context.SaveChanges();
-
-
         }
 
 

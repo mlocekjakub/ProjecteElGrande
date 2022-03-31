@@ -38,6 +38,7 @@ function SportEventsPage() {
     const [isLimitNext, setIsLimitNext] = useState(false);
     const [isLimitPrevious, setIsLimitPrevious] = useState(true);
     const isUserLogged = useSelector((state) => state.isLogged.value)
+    const theme = useSelector((state) => state.theme.value)
     
     
     function getUrl() {
@@ -56,7 +57,6 @@ function SportEventsPage() {
         typeFilter.map((eventType) => {
             types += `Type=${eventType.name}&`
         })
-        
         let minParticipants = `MinParticipants=${minParticipantsFilter}`;
         let maxParticipants = `&MaxParticipants=${maxParticipantsFilter}`;
         let minPrice = `&MinPrice=${minPriceFilter}`;
@@ -69,6 +69,7 @@ function SportEventsPage() {
     
     
     useEffect(() => {
+        
         setIsFetchingData(true);
         setEventsNotFound(false);
         setFoundEvents([])
@@ -96,6 +97,15 @@ function SportEventsPage() {
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 
         minPriceFilter, maxPriceFilter,datesFilter, currentPage])
+
+    useEffect(() => {
+        if (currentPage >= numberOfPages) {
+            setIsLimitNext(true);
+        }
+        else {
+            setIsLimitNext(false);
+        }
+    }, [numberOfPages])
     
 
     const NextPage = () => {
@@ -119,9 +129,9 @@ function SportEventsPage() {
             <div className="header">
                 <h1>Events</h1>
             </div>
-            <div className="events-filters__container">
+            <div className={`events-filters__container ${theme === 'light' ? 'events-container-light' : 'events-container-dark'}`}>
                 <div className="filter-container">
-                    {isUserLogged ? <Link className="create-button-link" to="/event/create">Create Event</Link> 
+                    {isUserLogged ? <Link className={`${theme === 'light' ? 'create-button-link' : 'create-button-link-dark'}`} to="/event/create">Create Event</Link> 
                         : <div className="create-button-link__disable">Sign in to create event</div> 
                     }
                     <SportFilter />
@@ -134,34 +144,35 @@ function SportEventsPage() {
                     <div className="events-page__locating">
                         <DateFilter />
                         {!eventsNotFound &&
-                            <div className="events-page__pagination">
+                            <div className={`events-page__pagination ${theme === 'light' ? 'events-page-pagination-light' : 'events-page-pagination-dark'}`}>
                                 {isLimitPrevious
                                     ?
-                                    <div className="events-page__paginate-button-disabled">
+                                    <div className={`${theme === 'light' ? 'events-page__paginate-button-disabled' : 'events-page__paginate-button-disabled-dark'}`}>
                                         <ArrowBackIosIcon className="events__back-icon"/>
                                     </div>
                                     :
-                                    <div className="events-page__paginate-button">
-                                        <ArrowBackIosIcon onClick={PreviousPage}/>
+                                    <div className={`${theme === 'light' ? 'events-page__paginate-button-back' : 'events-page__paginate-dark'}`} onClick={PreviousPage}>
+                                        <ArrowBackIosIcon/>
                                     </div>}
-                                <div className="pagination__number">
-                                    <span>{currentPage}</span> of <span>{numberOfPages}</span></div>
+                                <div className={`pagination__number ${theme === 'light' ? 'paginate-number-light' : 'paginate-number-dark'}`}>
+                                    <span>{currentPage}</span>of<span>{numberOfPages}</span>
+                                </div>
                                 {isLimitNext
                                     ?
-                                    <div className="events-page__paginate-button-disabled">
+                                    <div className={`${theme === 'light' ? 'events-page__paginate-button-disabled' : 'events-page__paginate-button-disabled-dark'}`}>
                                         <ArrowForwardIosIcon className="events__forward-icon"/>
                                     </div>
                                     :
-                                    <div className="events-page__paginate-button">
-                                        <ArrowForwardIosIcon onClick={NextPage} className="events__forward-icon"/>
+                                    <div className={`${theme === 'light' ? 'events-page__paginate-button-forward' : 'events-page__paginate-dark'}`} onClick={NextPage}>
+                                        <ArrowForwardIosIcon className="events__forward-icon"/>
                                     </div>}
                             </div>
                         }
                     </div>
                     <div>
                         {isFetchingData && <LoadingSpinner />}
-                        {eventsNotFound && <div className="events__not-found">Events not found</div>}
-                        <Events display={foundEvents} />
+                        {eventsNotFound ? <div className="events__not-found">Events not found</div>
+                        : <Events display={foundEvents} />}
                     </div>
                 </div>
             </div>

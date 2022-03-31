@@ -6,13 +6,15 @@
     --font-btn: #FFFFFF;
     
     --bg-btn-primary-blue-hover: rgba(66, 133, 244, 0.56);
-    --bg-primary-dark: #242626;
+    --bg-primary-dark: #18181b;
     --bg-website: #EDEFF1;
     --event-border: 1px solid rgba(5, 5, 5, 0.20);
     --clr-paragraph-info: hsl(217, 19%, 35%);
     
+    --transition: 250ms ease-in-out;
+    
     --page-margin-events-page: 7rem 18%;
-    --page-margin-profile-page: 8rem 18% 8rem 18%;
+    --page-margin-profile-page: 8rem 19% 8rem 19%;
     
     --box-shadow-containers: 0 1px 5px rgba(50, 50, 50, 0.1);
     --border-containers: 1px solid rgba(5, 5, 5, 0.13);
@@ -21,4 +23,9 @@
     --clr-header: #1D1E35;
 
     --clr-paragraph: hsl(237, 12%, 33%);
+}
+
+
+#body {
+    background: var(--bg-website);
 }

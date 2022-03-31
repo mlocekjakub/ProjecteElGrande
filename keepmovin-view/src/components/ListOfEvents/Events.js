@@ -13,7 +13,8 @@ function Events(props) {
                     experienceLevels={event.experienceLevel.name}
                     price={event.price}
                     currency={event.currency}
-                    location={event.location.city}/>))
+                    location={event.location.city}
+                    organiserId={event.user.organiser.userid}/>))
 }
 
 export default Events;

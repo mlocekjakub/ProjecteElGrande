@@ -19,6 +19,8 @@ namespace KeepMovinAPI
         public DbSet<Location> Location { get; set; }
         public DbSet<UserProfile> UserProfile { get; set; }
 
+        public DbSet<Organisation> Organisation { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>()

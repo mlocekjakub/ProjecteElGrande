@@ -38,17 +38,16 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(SettingsDto settings) 
         {
-         
             try
             {
                 string jwt = Request.Cookies["token"];
-                if (_validation.Validate(settings.UserId, jwt))
+                if (!_validation.Validate(settings.UserId, jwt))
                 {
-                    Setting currentSettings = _userProfileDao.GetSettingsByUserId(settings.UserId);
-                    _settingRepository.Update(currentSettings, settings);
-                    return Ok();
+                    return Unauthorized();
                 }
-                return Unauthorized();
+                Setting currentSettings = _userProfileDao.GetSettingsByUserId(settings.UserId);
+                _settingRepository.Update(currentSettings, settings);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -75,8 +74,27 @@ namespace KeepMovinAPI.Controllers
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
                     return Unauthorized();
-                 Setting settings = _userProfileDao.GetSettingsByUserId(Guid.Parse(userId));
-                 return Ok(settings);
+                Setting settings = _userProfileDao.GetSettingsByUserId(Guid.Parse(userId));
+                return Ok(settings);
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }            
+
+        }
+        
+        [HttpGet("upload/visited-user")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UploadVisited([FromHeader(Name = "etag")]string userId)
+        {
+            var id = userId;
+            try
+            {
+                Setting settings = _userProfileDao.GetSettingsByUserId(Guid.Parse(userId));
+                return Ok(settings);
             }
             catch(Exception e)
             {

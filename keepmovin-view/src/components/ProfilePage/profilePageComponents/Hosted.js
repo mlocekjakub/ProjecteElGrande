@@ -6,7 +6,8 @@ import {useSelector} from "react-redux";
 import EventsHostedMenu from "./EventsHostedMenu";
 
 function Hosted(props) {
-
+    const theme = useSelector((state) => state.theme.value)
+    
     const [hostedEvents, setHostedEvents] = useState([]);
     const [currentPageHosted, setCurrentPageHosted] = useState(1);
     const [isLimitNextHosted, setIsLimitNextHosted] = useState(false)
@@ -63,26 +64,26 @@ function Hosted(props) {
 
 
     return (
-        <div className="info-content">
+        <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
             <EventsHostedMenu content={hostedEvents}/>
-            <div className="profile__paginate">
+            <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackHosted ?
                     <div className="paginate-back__profile-hosted">
-                        <ArrowBackIos className="arrow-paginate__disabled"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-back__profile-hosted" onClick={backPageHosted}>
-                        <ArrowBackIos className="arrow-paginate"/>
+                        <ArrowBackIos className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
                 {currentPageHosted} of {numberOfPagesHosted}
                 {isLimitNextHosted ?
                     <div className="paginate-next__profile-hosted">
-                        <ArrowForwardIosIcon className="arrow-paginate__disabled"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__disabled' : 'arrow-paginate__disabled__dark'}`}/>
                     </div>
                     :
                     <div className="paginate-next__profile-hosted" onClick={nextPageHosted}>
-                        <ArrowForwardIosIcon className="arrow-paginate"/>
+                        <ArrowForwardIosIcon className={`${theme === 'light' ? 'arrow-paginate__light' : 'arrow-paginate__dark'}`}/>
                     </div>
                 }
             </div>

@@ -10,11 +10,11 @@ function RecreationalEventsDiagram() {
     
     const isUserLogged = useSelector((state) => state.isLogged.value);
     
-    const [events, setEvents] = useState([])
-    
     const [sportsList, SetSportsList] = useState([])
     
     const [isSportsFetched, SetIsSportsFetched] = useState(false)
+
+    const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
         if (isUserLogged) {
@@ -33,7 +33,7 @@ function RecreationalEventsDiagram() {
     function SetSportData(events) {
         let sports = [];
         events.map((event) => {
-            if (event.type.name === "Recreational") {
+            if (event.type.name === "Recreational" && event.status === "Finished") {
                 let newSport = {id: event.sports.sportId, sportName: event.sports.name, count: 1}
                 if(sports.some(sport => sport.id === newSport.id)) {
                     sports.forEach(sport => {
@@ -53,34 +53,36 @@ function RecreationalEventsDiagram() {
     }
     
     useEffect(() => {
+        let sports = sportsList.map((sport) => sport.sportName);
+        let counts = sportsList.map((sport) => sport.count)
         setData({
-            labels: sportsList.map((sport) => sport.sportName),
+            labels: sports.length !== 0 ? sportsList.map((sport) => sport.sportName) : ['none'],
             datasets: [
                 {
                     label: 'Recreational Events',
                     backgroundColor: [
+                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#FF4136'}`,
                         '#B21F00',
                         '#C9DE00',
                         '#2FDE00',
                         '#001f3f',
-                        '#FF4136',
                         '#39CCCC',
                         '#85144b',
                         '#FF851B',
                         '#6b5b95'
                     ],
                     hoverBackgroundColor: [
+                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#865a55'}`,
                         '#501800',
                         '#4B5000',
                         '#175000',
-                        '#13314f',
-                        '#865a55',
+                        '#214a70',
                         '#547777',
                         '#694255',
                         '#a17c5a',
                         '#877f9a'
                     ],
-                    data: sportsList.map((sport) => sport.count),
+                    data: sports.length !== 0 ? sportsList.map((sport) => sport.count) : [1],
                     borderColor: "rgba(247, 103, 7, 0)"
                 }
             ]
@@ -88,7 +90,7 @@ function RecreationalEventsDiagram() {
     }, [isSportsFetched])
 
     return (
-        <div className="diagram">
+        <div className={`${theme === 'light' ? 'diagram' : 'diagram__dark'}`}>
             <Doughnut
                 data={data}
                 options={{
@@ -96,14 +98,13 @@ function RecreationalEventsDiagram() {
                         display:true,
                         text:'Recreational Events',
                         fontSize:18,
-                        fontColor: "#1D1E35",
-                        fontWeight: 700,
-                        paddingBottom: '0.3rem'
+                        fontColor: `${theme === 'light' ? '#1D1E35' : '#efeff1'}`,
+                        fontWeight: theme === 'light' ? 700 : 400,
                     },
                     legend:{
                         display:true,
                         position:'right',
-                        fontColor: "hsl(237, 12%, 33%)"
+                        fontColor: `${theme === 'light' ? 'hsl(237, 12%, 33%)' : '#adadb8'}`
                     }
                 }}
             />

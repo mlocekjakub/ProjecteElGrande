@@ -1,4 +1,45 @@
-﻿.register-login__page {
+﻿:root {
+    --bg-container: #FFFFFF;
+    --bg-image-clr: #4285F4FF;
+    --header-clr: #18181BFF;
+    --paragraph-clr: rgba(74, 75, 94, 0.5);
+    --bg-input: 0;
+    --border-widths: 0 0 1px 0;
+    --border-input: rgba(36, 38, 38, 0.2);
+    --icons-opacity: 0.2;
+    --icons-active: #4285F4FF;
+    --active-opacity: 0.7;
+    --valid-border-bottom: #4BB543;
+    --validation-info-color: rgba(74, 75, 94, 0.75);
+    --border-radius-input: 0;
+    --paragarph-font-size: 1rem;
+    
+
+}
+
+[data-theme='dark'] {
+    --bg-container: #1F1F23;
+    --bg-image-clr: #18181b;
+    --header-clr: #efeff1;
+    --paragraph-clr: #adadb8;
+    --bg-input: #464649;
+    --border-widths: 1px 1px 1px 1px;
+    --border-input: hsla(0, 0%, 100%, 0.1);
+    --icons-opacity: 0.7;
+    --icons-active: #efeff1;
+    --active-opacity: 1;
+    --valid-border-bottom: hsla(0, 0%, 100%, 0.1);
+    --validation-info-color: rgba(173, 173, 184, 0.9);
+    --border-radius-input: 0.4rem;
+    --paragarph-font-size: 0.9rem;
+    
+    --autofill-color: white !important;
+    --autofill-bg: text !important;
+    
+}
+
+
+.register-login__page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,14 +49,15 @@
 
 .register-login__container {
     display: flex;
-    box-shadow: var(--box-shadow-containers);
     min-height: 32rem;
-    background: #FFFFFF;
     border-radius: 0.7rem;
+    background: var(--bg-container);
+    box-shadow: var(--box-shadow-containers);
 }
 
+
+
 .register-login__bg-container {
-   /* background: rgba(66, 133, 244, 0.8);*/
     min-width: 20rem;
     border-radius: 0.7rem 0 0 0.7rem;
     position: relative;
@@ -23,7 +65,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--bg-btn-primary-blue);
+    background: var(--bg-image-clr);
 }
 
 .register-login__bg-container::before {
@@ -50,16 +92,17 @@
 }
 
 .register__header {
-    color: var(--bg-primary-dark);
     font-size: 1.6rem;
     letter-spacing: .0001em;
     font-weight: 500;
     padding-bottom: 0.2rem;
+    color: var(--header-clr);
 }
+
 .register__paragraph {
-    font-size: 1rem;
+    font-size: var(--paragarph-font-size);
     padding-top: 0.5rem;
-    color: rgba(74, 75, 94, 0.5);
+    color: var(--paragraph-clr);
     font-weight: 500;
 }
 .header-info {
@@ -76,10 +119,12 @@
     padding-right: 5rem;
 }
 
+
 .go-to__login, .go-to__register {
     cursor: pointer;
     color: #FFFFFF;
-    background: rgba(36, 38, 38, 0.85);
+    /*background: rgba(173, 173, 184, 0.7);*/
+    background: rgba(36, 38, 38, 0.8);
     border-radius: 1.3rem;
     padding: 0.6rem 1.5rem 0.6rem 1.5rem;
     box-shadow: var(--box-shadow-containers);
@@ -88,7 +133,7 @@
 }
 
 .go-to__login:hover, .go-to__register:hover {
-    background: var(--bg-primary-dark);
+    background: #1F1F23;
     transform: translateY(-3px);
     cursor: pointer;
 }
@@ -106,14 +151,26 @@
     padding-bottom: 7.75rem;
 }
 
-input[type=password], input[type=email], input[type=text] {
-    outline: none !important;
+.input-container__register > input[type=email],
+.input-container__register > input[type=password],
+.input-container__register > input[type=password],
+.email-container__login > input[type=email],
+.password-input-container__login > input[type=password],
+.password-input-container__login > input[type=text] {
     min-width: 13rem;
     border: 0;
     padding: 0.3rem 0.3rem 0.3rem 0.3rem;
-    border-bottom: 1px solid rgba(36, 38, 38, 0.2);
     transition: 0.5s;
+    outline: none !important;
+    border-width: var(--border-widths);
+    border-style: solid solid solid solid;
+    border-color: var(--border-input);
+    background: var(--bg-input);
+    color: var(--header-clr);
+    border-radius: var(--border-radius-input)
 }
+
+
 
 input[type=submit] {
     background: var(--bg-btn-primary-blue);
@@ -140,28 +197,30 @@ input[type=submit]:hover {
 }
 .forgot-password-button {
     font-size: 0.82em;
-    color: rgba(74, 75, 94, 0.75);
+    color: var(--paragraph-clr);
     height: 1.5em;
 }
 .forgot-password-button:hover {
     cursor: pointer;
 }
 .register-icon-container {
-    opacity: 0.2;
+    opacity: var(--icons-opacity);
     transition: 0.3s;
+    color: var(--header-clr)
 }
 .password__visible {
     position: relative;
     bottom: 2.3rem;
     left: 5.9rem;
+    color: var(--paragraph-clr)
 }
 .password__visible:hover {
     cursor: pointer;
 }
 
 .input-active {
-    color: var(--bg-btn-primary-blue);
-    opacity: 0.7;
+    color: var(--icons-active);
+    opacity: var(--active-opacity);
 }
 
 .email-container__login {
@@ -195,7 +254,7 @@ input[type=submit]:hover {
 }
 .validation__info {
     font-size: 0.82em;
-    color: rgba(74, 75, 94, 0.75);
+    color: var(--validation-info-color);
     height: 1.5em;
 }
 .input-valid {
@@ -205,13 +264,13 @@ input[type=submit]:hover {
 
 
 .input-email-valid input[type=email] {
-    border-bottom: 1px solid #4BB543;
+    border-bottom: 1px solid var(--valid-border-bottom);
 }
 .input-password-valid input[type=password] {
-    border-bottom: 1px solid #4BB543;
+    border-bottom: 1px solid var(--valid-border-bottom);
 }
 .input-confirm-valid input[type=password] {
-    border-bottom: 1px solid #4BB543;
+    border-bottom: 1px solid var(--valid-border-bottom);
 }
 
 input[type=submit]:disabled {
@@ -253,6 +312,9 @@ input[type=submit]:disabled {
     top: 8rem;
     opacity: 1;
 }
+
+
+
 
 
 

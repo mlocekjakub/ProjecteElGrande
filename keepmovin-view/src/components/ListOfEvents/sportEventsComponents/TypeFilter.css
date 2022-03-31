@@ -17,11 +17,21 @@
     /*border-bottom: 1px solid rgba(5, 5, 5, 0.20);*/
     display: flex;
     justify-content: space-between;
-
 }
 .type-item:hover {
     cursor: pointer;
     background: #F3F3F3;
+}
+
+.dark-type-item {
+    transition: 0.1s;
+    display: flex;
+    justify-content: space-between;
+    color:  #efeff1;
+}
+.dark-type-item:hover {
+    cursor: pointer;
+    background: rgba(38, 38, 44, 0.7);
 }
 
 .active-filter {
