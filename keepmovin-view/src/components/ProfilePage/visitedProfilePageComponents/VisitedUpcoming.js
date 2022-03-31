@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import EventsUpcomingMenu from "../profilePageComponents/EventsUpcomingMenu";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import LockIcon from '@mui/icons-material/Lock';
 
 function VisitedUpcoming() {
@@ -20,6 +20,8 @@ function VisitedUpcoming() {
     const [numberOfPagesUpcoming, setNumberOfPagesUpcoming] = useState(1);
     const [isSectionPrivate, setIsSectionPrivate] = useState(false);
     const [isFetchingData, setIsFetchingData] = useState(false);
+    
+    const navigate = useNavigate();
 
     const routeChange = useSelector((state) => state.isRouteChanged.value);
 

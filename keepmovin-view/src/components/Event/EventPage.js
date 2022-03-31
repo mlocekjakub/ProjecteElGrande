@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import "./EventPage.css";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import LoadingSpinner from "../ListOfEvents/sportEventsComponents/LoadingSpinner";
 
 
 function EventPage() {
     let {id} = useParams();
     const [eventModel, setEventModel] = useState();
+
+    const routeChange = useSelector((state) => state.isRouteChanged.value);
 
     useEffect(() => {
         axios
@@ -19,7 +23,8 @@ function EventPage() {
             .then(response => {
                 setEventModel(response.data)
             })
-    }, [])
+    }, [routeChange])
+    
     return (
         <div className="site">
             <div className="flex-title">
@@ -45,7 +50,8 @@ function EventPage() {
                         <div className="gmap_canvas">
                             <iframe width="600" height="500" id="gmap_canvas"
                                     src="https://maps.google.com/maps?q=%C5%81%C4%85cko&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                                    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0">
+                            </iframe>
                         </div>
                     </div>
                     <div>Location: {eventModel ? eventModel.location.city : ""}</div>

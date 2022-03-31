@@ -5,7 +5,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from "@mui/icons-material/Person";
 import {useDispatch, useSelector} from "react-redux";
 import defaultProfileImage from "../../../Images/DefaultProfileImage.jpg";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 
@@ -21,6 +21,8 @@ function EventCard(props) {
     const theme = useSelector((state) => state.theme.value)
     
     const [isUserOrganiser, setIsUserOrganiser] = useState(false);
+    
+    const navigate = useNavigate();
     
     const [organiserProfile, setOrganiserProfile] = useState({
         name: "",
@@ -88,7 +90,7 @@ function EventCard(props) {
     
     
     return (
-        <div className={`event-1 ${theme === 'light' ? 'event-1-light' : 'event-1-dark'}`}>
+        <div className={`event-1 ${theme === 'light' ? 'event-1-light' : 'event-1-dark'}`} onClick={() => navigate(`/event/${props.eventId}`)}>
             <img src={eventImage} alt="" />
             <div className="description">
                 <div className="info__event-list">

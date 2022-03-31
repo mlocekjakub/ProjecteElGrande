@@ -3,10 +3,13 @@ import './CalendarModalStyles.css';
 import CloseIcon from '@mui/icons-material/Close';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import LoadingSpinner from "./LoadingSpinner";
+import {useNavigate} from "react-router-dom";
 
 export default function EventModal({show, eventId, onClose}) {
     const [eventData, setEventData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
+    
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (eventId) {
@@ -70,7 +73,7 @@ export default function EventModal({show, eventId, onClose}) {
                             {eventData.eventInfo}
                         </div>
                         <div className="event-modal-footer">
-                            <div className="event-details-button" role="button">
+                            <div className="event-details-button" onClick={() => navigate(`/event/${eventId}`)} role="button">
                                 Details
                             </div>
                         </div>
