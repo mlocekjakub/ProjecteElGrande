@@ -1,10 +1,12 @@
 ﻿import React from 'react';
 import PersonIcon from '@mui/icons-material/Person';
+import {useNavigate} from "react-router-dom";
 
 function EventsSearchedCard(props) {
+    const navigate = useNavigate();
     
     return (
-        <div className="event-searched-card">
+        <div className="event-searched-card" onClick={() => navigate(`/event/${props.eventSearchedId}`)}>
             <div className="event-searched-date">
                 <div className="event-searched-day">{props.eventDateStart.slice(8, 10)}</div>
                 <div className="event-searched-month">{props.eventDateStart.slice(5, 7)}</div>

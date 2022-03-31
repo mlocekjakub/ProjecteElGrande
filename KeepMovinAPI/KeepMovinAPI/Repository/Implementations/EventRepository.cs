@@ -50,6 +50,7 @@ namespace KeepMovinAPI.Repository.Implementations
                     .Include(eventModel => eventModel.Sports)
                     .Include(eventModel => eventModel.Type)
                     .Include(eventModel => eventModel.ExperienceLevel)
+                    .Include(eventModel => eventModel.User)
                     .First(eventModel => eventModel.EventId == id);
             return query;
         }
