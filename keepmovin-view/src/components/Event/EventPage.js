@@ -7,7 +7,8 @@ import {useParams} from "react-router-dom";
 function EventPage() {
     let {id} = useParams();
     const [eventModel, setEventModel] = useState();
-
+    const [timer, setTimer] = useState();
+    
     useEffect(() => {
         axios
             .get(`/api/Event/${id}`, {
@@ -20,6 +21,23 @@ function EventPage() {
                 setEventModel(response.data)
             })
     }, [])
+
+    setInterval(() => {
+        {
+            var startDate = new Date(eventModel ? eventModel.startEvent : 0).getTime();
+            var now = new Date().getTime();
+            var countdown = startDate - now;
+
+            var days = Math.floor(countdown / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+            
+            setTimer(`Days: ${days} Hours: ${hours} Minutes ${minutes} Seconds ${seconds}`);
+        }
+        
+    }, 1000)
+
     return (
         <div className="site">
             <div className="flex-title">
@@ -39,7 +57,7 @@ function EventPage() {
                 <div className="about-event-title"> About Event:</div>
                 <div className="about-event">{eventModel ? eventModel.eventInfo : ""}</div>
                 <div className="experience-place">{eventModel ? eventModel.experienceLevel.name : ""}</div>
-                {/*<div className="time-place">data</div>*/}
+                <div className="time-place">{timer}</div>
                 <div className="map">
                     <div className="mapouter">
                         <div className="gmap_canvas">

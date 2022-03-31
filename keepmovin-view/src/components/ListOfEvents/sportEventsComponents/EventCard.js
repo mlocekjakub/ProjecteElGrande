@@ -86,7 +86,6 @@ function EventCard(props) {
     }, [isUserLogged])
     
     
-    
     return (
         <div className={`event-1 ${theme === 'light' ? 'event-1-light' : 'event-1-dark'}`}>
             <img src={eventImage} alt="" />
