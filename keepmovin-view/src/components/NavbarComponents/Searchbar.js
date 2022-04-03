@@ -46,6 +46,7 @@ function Searchbar(props) {
        else {
            return eventsFound.map((event) =>
                (<EventsSearchedCard key={event.eventId}
+                                    eventSearchedId={event.eventId}
                                     eventName={event.name}
                                     eventDateStart={event.startEvent}
                                     sportName={event.sport}
