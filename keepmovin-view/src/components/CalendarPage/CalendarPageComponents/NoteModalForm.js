@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-export default function NoteModal({openNote, eventId, onClose}) {
+export default function NoteModalForm({openNote, eventId, onClose}) {
     const [noteTitle, setNoteTitle] = useState("");
     const [noteData, setNoteData] = useState("");
 
@@ -15,6 +15,33 @@ export default function NoteModal({openNote, eventId, onClose}) {
 
     const handleMessageChange = (message) => {
         setNoteData(message);
+    }
+
+    let noteModel =
+        {
+            "time": new Date(),
+            "title": noteTitle,
+            "message": noteData,
+            "eventId": eventId,
+            "userid": localStorage.getItem("session"),
+        }
+
+    const handleNoteSave = () => {
+        fetch("/api/UserNote/add-note", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(noteModel)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Note saved!"); //TODO add close modal after successful added note
+                } else {
+                    alert("ERROR!");
+                }
+            })
     }
 
     if (!openNote) {
@@ -63,7 +90,7 @@ export default function NoteModal({openNote, eventId, onClose}) {
                         </div>
                         <div className="event-modal-footer">
                             <div role="button" onClick={() => {
-                                console.log({noteTitle, noteData})
+                                handleNoteSave();
                             }}>
                                 Save note!
                             </div>
