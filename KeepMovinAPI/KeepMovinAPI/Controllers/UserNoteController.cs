@@ -36,15 +36,7 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                UserNote userNote = new UserNote //TODO refactor, need to use automapper
-                {
-                    Time = newUserNote.Time,
-                    Title = newUserNote.Title,
-                    Message = newUserNote.Message,
-                    EventId = newUserNote.EventId,
-                    UserId = newUserNote.UserId
-                };
-                // // var userNote = _mapper.Map<UserNote>(newUserNote);
+                var userNote = _mapper.Map<UserNote>(newUserNote);
                 _userNoteRepository.Add(userNote);
                 return Ok();
             }

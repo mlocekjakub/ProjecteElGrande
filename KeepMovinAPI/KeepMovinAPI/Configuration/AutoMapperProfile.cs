@@ -11,6 +11,7 @@ namespace KeepMovinAPI.Configuration
         {
             CreateMap<UserProfile, UserProfileDto>();
             CreateMap<SettingsDto, Setting>();
+            CreateMap<UserNoteDto, UserNote>();
         }
     }
 }
