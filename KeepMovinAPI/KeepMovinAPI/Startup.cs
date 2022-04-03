@@ -74,6 +74,7 @@ namespace KeepMovinAPI
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IUserNoteRepository, UserNoteRepository>();
             services.AddScoped<IValidation, Validation>();
         }
 
