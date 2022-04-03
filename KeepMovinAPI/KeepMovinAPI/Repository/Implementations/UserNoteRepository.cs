@@ -12,11 +12,6 @@ namespace KeepMovinAPI.Repository.Implementations
         {
             _context = context;
         }
-        // public void Add(UserNote newUserNote)
-        // {
-        //     _context.UserNote.Add(newUserNote);
-        //     _context.SaveChanges();
-        // }
 
         public void Add(UserNote item)
         {
