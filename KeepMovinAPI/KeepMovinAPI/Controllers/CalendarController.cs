@@ -27,7 +27,7 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Event> GetEventsByRange(DateTime startDate, DateTime endDate)
+        public IEnumerable<Event> GetEventsByRange([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
         {
             try
             {
