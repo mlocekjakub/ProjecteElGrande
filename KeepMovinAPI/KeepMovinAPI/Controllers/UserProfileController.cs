@@ -58,10 +58,14 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("GetUserProfile")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserProfileById([FromHeader(Name = "etag")] string userId)
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult GetUserProfileById([FromHeader(Name = "etag")] string userId)   /// zmina na UserId
         {
             try
             {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
                 UserProfile userProfile = _userProfileDao.Get(Guid.Parse(userId));
                 return Ok(_mapper.Map<UserProfileDto>(userProfile));
 
@@ -76,13 +80,11 @@ namespace KeepMovinAPI.Controllers
         
 
 
-
         [HttpGet("Get")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetProfileById([FromHeader] string userId)
-        
+        public IActionResult GetProfileById([FromHeader] string userId)       
         {
             try
             {
@@ -101,7 +103,7 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpPost("editProfileInformation")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Edit(UserProfileDto userProfileDto)

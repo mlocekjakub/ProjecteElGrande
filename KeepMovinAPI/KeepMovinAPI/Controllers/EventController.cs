@@ -58,7 +58,6 @@ namespace KeepMovinAPI.Controllers
 
         [HttpGet("input/{input}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EventCardDto>))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetByInput(string input)
         {
@@ -101,13 +100,11 @@ namespace KeepMovinAPI.Controllers
         
         [HttpGet("events-user")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<User>))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
         {
             try
             {
-                ////////Wymaga walidacji ????? jak tak to potrzeba user Id TAK SAMO
                 var listOfUserEvents = _repositoryEvent.GetUsersByEventId(Guid.Parse(eventsId));
                 return Ok(listOfUserEvents);
 
@@ -148,7 +145,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,   //// zmiana z etag na userID
                                                         [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -301,7 +298,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("status-update")]
-        public IActionResult StatusUpdate() ///// czy to wymaga walidacji uzytkownika i co to robi ?
+        public IActionResult StatusUpdate() 
         {
             try
             {
@@ -340,7 +337,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "etag")] string userId,    ////  e tag na UserId
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -360,7 +357,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId,     //// e tag na UserId
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -378,7 +375,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted-statistics")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId)    //// e tag na userId
         {
             try
             {
@@ -393,19 +390,21 @@ namespace KeepMovinAPI.Controllers
         }
         
         
-        [HttpGet("visited-user-events")]  
-        public IEnumerable<Event> GetVisitedUserEvents([FromHeader(Name = "userId")] string userId)
+        [HttpGet("visited-user-events")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserEvents([FromHeader(Name = "userId")] string userId)
         {
             try
             {
                 var listOfUserEvents = _repositoryEvent.GetUserEventsByUserId(Guid.Parse(userId));
-                return listOfUserEvents;
+                return Ok(listOfUserEvents);
 
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest() ;
             }
            
         }

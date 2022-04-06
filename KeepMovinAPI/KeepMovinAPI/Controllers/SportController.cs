@@ -4,7 +4,7 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -21,18 +21,21 @@ namespace KeepMovinAPI.Controllers
             _repositorySport = repositorySport;
         }
         
+
         [HttpGet]
-        public IEnumerable<Sport> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Sport>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetAll()
         {
             try
             {
                 var listOfSports = _repositorySport.GetAll();
-                return listOfSports;
+                return Ok(listOfSports);
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
             
         }
@@ -40,35 +43,39 @@ namespace KeepMovinAPI.Controllers
 
         [HttpGet]
         [Route("{input}")]
-        public IEnumerable<Sport> GetByInput(string input)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Sport>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetByInput(string input)
         {
             try
             {
                 var listOfEvents = _repositorySport.GetByInput(input);
-                return listOfEvents;
+                return Ok(listOfEvents);
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
             
         }
         
         [HttpGet]
         [Route("id/{id}")]
-        public Sport Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Sport))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Get(Guid id)
         {
             try
             {
                 var sport = _repositorySport.Get(id);
-                return sport;
+                return Ok(sport);
             }
             catch(Exception e)
             {
 
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
             
         }

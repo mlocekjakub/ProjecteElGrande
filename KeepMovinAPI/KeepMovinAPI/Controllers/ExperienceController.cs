@@ -4,6 +4,7 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -20,18 +21,21 @@ namespace KeepMovinAPI.Controllers
             _repositoryExperience = repositoryExperience;
         }
 
+
         [HttpGet]
-        public IEnumerable<ExperienceLevel> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ExperienceLevel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetAll()
         {
             try
             {
                 var listOfExperiences = _repositoryExperience.GetAll();
-                return listOfExperiences;
+                return Ok(listOfExperiences);
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
             
         }

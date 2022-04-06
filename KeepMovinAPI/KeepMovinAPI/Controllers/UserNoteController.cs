@@ -5,6 +5,7 @@ using KeepMovinAPI.Domain;
 using KeepMovinAPI.Domain.Dtos;
 using KeepMovinAPI.Dtos;
 using KeepMovinAPI.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,26 +17,35 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<UserNoteController> _logger;
         private readonly IMapper _mapper;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
+        private IValidation _validation;
         private IUserNoteRepository _userNoteRepository;
         private IUserRepository _userRepository;
 
         public UserNoteController(ILogger<UserNoteController> logger, IUserNoteRepository userNoteRepository,
-            IUserRepository userRepository, IMapper mapper,
-            IJwtAuthenticationManager jwt)
+            IUserRepository userRepository, IMapper mapper, IValidation validation)
+            
         {
             _logger = logger;
             _mapper = mapper;
             _userNoteRepository = userNoteRepository;
             _userRepository = userRepository;
-            _jwtAuthenticationManager = jwt;
+            _validation = validation;
+            
         }
 
+
         [HttpPost("add-note")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Add(UserNoteDto newUserNote)
         {
+            
             try
             {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(newUserNote.UserId, jwt))
+                    return Unauthorized();
                 var userNote = _mapper.Map<UserNote>(newUserNote);
                 _userNoteRepository.Add(userNote);
                 return Ok();
@@ -43,7 +53,7 @@ namespace KeepMovinAPI.Controllers
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }
         }
     }

@@ -4,6 +4,7 @@ using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -20,18 +21,21 @@ namespace KeepMovinAPI.Controllers
             _repositoryType = repositoryType;
         }
         
+
         [HttpGet]
-        public IEnumerable<EventType> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EventType>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetAll()
         {
             try
             {
                 var listOfTypes = _repositoryType.GetAll();
-                return listOfTypes;
+                return Ok(listOfTypes);
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
             
         }
