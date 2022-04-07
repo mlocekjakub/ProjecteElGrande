@@ -26,7 +26,7 @@ function VisitedStatistics(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(response => {

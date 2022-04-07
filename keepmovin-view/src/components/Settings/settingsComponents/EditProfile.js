@@ -26,7 +26,7 @@ export default function EditProfile(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : localStorage.getItem('session'),
+                    "userId" : localStorage.getItem('session'),
                 }
         }).then(content => {
                setProfileDetails({
@@ -52,7 +52,6 @@ export default function EditProfile(props) {
     
     function HandleSubmit(e) {
         e.preventDefault()
-        console.log(profileDetails)
         fetch("/api/UserProfile/editProfileInformation", {
             method: 'POST',
             headers: {

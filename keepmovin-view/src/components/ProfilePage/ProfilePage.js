@@ -41,7 +41,7 @@ export default function ProfilePage() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : localStorage.getItem('session'),
+                    'userId': localStorage.getItem("session")
                 }
                 })
                 .then(content => {

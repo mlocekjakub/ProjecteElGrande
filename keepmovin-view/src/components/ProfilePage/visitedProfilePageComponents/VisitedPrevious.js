@@ -27,7 +27,7 @@ function VisitedPrevious(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(response => {
@@ -37,7 +37,7 @@ function VisitedPrevious(props) {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                "etag" : visitedUserId,
+                                "visitedUserId" : visitedUserId,
                                 "currentPage": currentPagePrevious
 
                             }

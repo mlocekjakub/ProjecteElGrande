@@ -23,7 +23,7 @@ function Previous(props) {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        "etag" : localStorage.getItem('session'),
+                        "UserId" : localStorage.getItem('session'),
                         "currentPage": currentPagePrevious
                     }
                 })

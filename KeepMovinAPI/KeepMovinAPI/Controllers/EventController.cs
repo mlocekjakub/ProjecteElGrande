@@ -123,7 +123,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId, /// zmiana z etagu na userId
+        public IActionResult GetUserUpcomingEvents([FromHeader(Name = "UserId")] string userId, 
                                                         [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -140,12 +140,13 @@ namespace KeepMovinAPI.Controllers
                 return BadRequest();
             }
         }
+
         
         [HttpGet("events-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,   //// zmiana z etag na userID
+        public IActionResult GetUserPreviousEvents([FromHeader(Name = "UserId")] string userId,   
                                                         [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -169,7 +170,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId,   //// zmiana na odpowiednik w API
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "UserId")] string userId,   
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -191,7 +192,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "userId")] string userId)
         {
             try
             {
@@ -319,7 +320,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/upcoming")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserUpcomingEvents([FromHeader(Name = "visitedUserId")] string userId,
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -337,7 +338,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "etag")] string userId,    ////  e tag na UserId
+        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "visitedUserId")] string userId,    
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -357,7 +358,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId,     //// e tag na UserId
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "visitedUserId")] string userId,     
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -375,7 +376,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted-statistics")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId)    //// e tag na userId
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "visitedUserId")] string userId)    
         {
             try
             {
@@ -393,7 +394,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("visited-user-events")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserEvents([FromHeader(Name = "userId")] string userId)
+        public IActionResult GetVisitedUserEvents([FromHeader(Name = "visitedUserId")] string userId)
         {
             try
             {

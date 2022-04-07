@@ -62,7 +62,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Upload([FromHeader(Name = "etag")]string userId)
+        public IActionResult Upload([FromHeader(Name = "userId")]string userId)
         {
      
             try
@@ -86,7 +86,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("upload/visited-user")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Setting))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UploadVisited([FromHeader(Name = "etag")]string userId)    ///// zmiana na UserId
+        public IActionResult UploadVisited([FromHeader(Name = "userId")]string userId)    
         {
             try
             {

@@ -25,7 +25,7 @@ function VisitedProfessionalEventsDiagram() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "userId" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(response => SetSportData(response.data))

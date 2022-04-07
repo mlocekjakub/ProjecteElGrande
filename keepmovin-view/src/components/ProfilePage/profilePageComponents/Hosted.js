@@ -24,7 +24,7 @@ function Hosted(props) {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        "etag" : localStorage.getItem('session'),
+                        "userId" : localStorage.getItem('session'),
                         "currentPage": currentPageHosted
 
                     }

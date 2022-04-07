@@ -34,7 +34,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult Upload([FromHeader(Name = "etag")] string userId)
+        public IActionResult Upload([FromHeader(Name = "userId")] string userId)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetUserProfileById([FromHeader(Name = "etag")] string userId)   /// zmina na UserId
+        public IActionResult GetUserProfileById([FromHeader(Name = "userId")] string userId)   
         {
             try
             {
@@ -84,7 +84,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProfilePersonalInfoDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult GetProfileById([FromHeader] string userId)       
+        public IActionResult GetProfileById([FromHeader(Name = "userId")] string userId)       
         {
             try
             {

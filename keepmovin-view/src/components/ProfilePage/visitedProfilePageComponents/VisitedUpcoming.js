@@ -33,7 +33,7 @@ function VisitedUpcoming() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(response => {
@@ -43,7 +43,7 @@ function VisitedUpcoming() {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                "etag" : visitedUserId,
+                                "visitedUserId" : visitedUserId,
                                 "currentPage": currentPageUpcoming
 
                             }
