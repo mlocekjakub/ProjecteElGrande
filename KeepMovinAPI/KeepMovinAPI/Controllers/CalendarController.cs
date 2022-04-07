@@ -5,6 +5,7 @@ using KeepMovinAPI.Repository;
 using KeepMovinAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace KeepMovinAPI.Controllers
 {
@@ -14,42 +15,66 @@ namespace KeepMovinAPI.Controllers
     {
         private readonly ILogger<CalendarController> _logger;
         private IEventRepository _repositoryEvent;
-        private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
         private IValidation _validation;
 
-        public CalendarController(ILogger<CalendarController> logger, IEventRepository repositoryEvent, IJwtAuthenticationManager jwt,
+        public CalendarController(ILogger<CalendarController> logger, IEventRepository repositoryEvent,
             IValidation validation)
         {
             _logger = logger;
             _repositoryEvent = repositoryEvent;
-            _jwtAuthenticationManager = jwt;
             _validation = validation;
         }
 
         [HttpGet]
-        public IEnumerable<Event> GetEventsByRange(DateTime startDate, DateTime endDate)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetEventsByRange([FromHeader(Name = "userId")] string userId ,DateTime startDate, DateTime endDate)
         {
             try
             {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
                 var listOfEvents =
                     _repositoryEvent.GetAllByDateRange(startDate,
                         endDate.AddDays(1)); // added one day to catch all events in calendar view
-                return listOfEvents;
+                return Ok(listOfEvents);
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
         }
 
+
+
+
         [HttpGet("user-events")]
-        public IEnumerable<Event> GetUserEvents([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserEvents([FromHeader(Name = "userId")] string userId, DateTime startDate, DateTime endDate)
         {
-            var listOfEvents =
-                _repositoryEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
-                    endDate.AddDays(1)); // added one day to catch all events in calendar view
-            return listOfEvents;
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(Guid.Parse(userId), jwt))
+                    return Unauthorized();
+                var listOfEvents =
+                    _repositoryEvent.GetUserEventsByDateRange(Guid.Parse(userId), startDate,
+                        endDate.AddDays(1)); // added one day to catch all events in calendar view
+                return Ok(listOfEvents);
+
+            }
+            catch(Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+            
         }
+
     }
 }

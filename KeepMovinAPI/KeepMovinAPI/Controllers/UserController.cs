@@ -41,17 +41,10 @@ namespace KeepMovinAPI.Controllers
         {
             try
             {
-                if (changePasswordItems.NewPassword != changePasswordItems.ConfirmPassword)
-                    return Unauthorized();
                 string jwt = Request.Cookies["token"];
-                if (!_validation.Validate(changePasswordItems.Userid, jwt))
-                    return Unauthorized();
-
                 User user = _userRepository.Get(changePasswordItems.Userid);
-
-                if (!_userRepository.ComparePasswords(changePasswordItems.OldPassword, user.Password))
+                if (!ChangePasswordProcedureValidation(changePasswordItems,jwt,user))
                     return Unauthorized();
-
                 _userRepository.UpdatePassword(user, changePasswordItems.NewPassword);
                 return Ok();
 
@@ -65,7 +58,6 @@ namespace KeepMovinAPI.Controllers
         }
 
 
-
         [HttpPost]
         [Route("/user/reminder")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -77,7 +69,7 @@ namespace KeepMovinAPI.Controllers
                 User user = _userRepository.GetUserByEmail(userEmail.Email);
                 if (_userRepository.CheckIfUserExists(user))
                 {
-                    // Some Actions Made
+                    // Some Actions Made // in construction
                     return Ok();
                 }
 
@@ -101,7 +93,6 @@ namespace KeepMovinAPI.Controllers
             {
                 if (_userRepository.CheckIfUserExists(user))
                 {
-
                     return StatusCode(409);
                 }
                 CreateAUserInfrastructure(user);
@@ -122,6 +113,7 @@ namespace KeepMovinAPI.Controllers
         [HttpPost]
         [Route("/user/login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Login(User user)
         {
@@ -142,7 +134,7 @@ namespace KeepMovinAPI.Controllers
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }
             
 
@@ -151,7 +143,7 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpPost("/user/logOut")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(String))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Logout()
         {
@@ -190,6 +182,7 @@ namespace KeepMovinAPI.Controllers
             }
         }
 
+
         [NonAction]
         private void CreateAUserInfrastructure(User user)
         {
@@ -201,6 +194,23 @@ namespace KeepMovinAPI.Controllers
             profile.AddUser(user);
             profile.AddSettings(settings);
             _profileRepository.Add(profile);
+        }
+
+        [NonAction]
+        private bool ChangePasswordProcedureValidation(ChangePasswordDto changePasswordItems, string jwt,User user)
+        {
+
+            if (changePasswordItems.NewPassword != changePasswordItems.ConfirmPassword)
+                return false;
+
+            if (!_validation.Validate(changePasswordItems.Userid, jwt))
+                return false;
+
+            
+            if (!_userRepository.ComparePasswords(changePasswordItems.OldPassword, user.Password))
+                return false;
+
+            return true;
         }
     }
 }

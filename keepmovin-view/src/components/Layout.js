@@ -45,7 +45,7 @@ export default function Layout() {
     setInterval(() => {
         axios
             .get('/api/Event/status-update')
-    }, 180000)
+    }, 1800000)
 
 
     useEffect(() => {

@@ -20,6 +20,8 @@ namespace KeepMovinAPI
         public DbSet<UserProfile> UserProfile { get; set; }
 
         public DbSet<Organisation> Organisation { get; set; }
+        
+        public DbSet<UserNote> UserNote { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

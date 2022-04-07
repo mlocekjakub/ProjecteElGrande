@@ -44,7 +44,7 @@ export default function UsersProfilePage() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(content => {
@@ -70,7 +70,7 @@ export default function UsersProfilePage() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             }).then(response => setPrivacySettings(response.data))
        

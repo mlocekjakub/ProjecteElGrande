@@ -20,7 +20,7 @@ function UserJoinedCard(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : props.user.userid,
+                    "visitedUserId" : props.user.userid,
                 }
             })
             .then(content => {

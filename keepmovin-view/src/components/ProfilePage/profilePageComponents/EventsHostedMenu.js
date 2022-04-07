@@ -11,6 +11,7 @@ function EventsHostedMenu(props) {
             {props.content.map((event) =>
                 (<EventCardHosted key={event.eventId}
                             eventName={event.name}
+                            eventCardId={event.eventId}      
                             sportName={event.sports.name}
                             eventDateStart={event.startEvent}
                             maxParticipants={event.maxParticipants}/>))

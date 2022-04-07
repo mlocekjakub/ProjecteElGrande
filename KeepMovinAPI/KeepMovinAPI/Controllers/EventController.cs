@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -57,55 +57,62 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("input/{input}")]
-        public IEnumerable<EventCardDto> GetByInput(string input)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<EventCardDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetByInput(string input)
         {
             try
             {
                 var listOfEvents = _repositoryEvent.GetByInput(input);
-                return _mapper.Map<IEnumerable<EventCardDto>>(listOfEvents);
+                return Ok(_mapper.Map<IEnumerable<EventCardDto>>(listOfEvents));
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
         }
         
 
 
-        [HttpGet("user-events")]  
-        public IEnumerable<Event> GetUserEvents([FromHeader(Name = "userId")] string userId)
+        [HttpGet("user-events")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetUserEvents([FromHeader(Name = "userId")] string userId)
         {
             try
             {
                 string jwt = Request.Cookies["token"];
                 if (!_validation.Validate(Guid.Parse(userId), jwt))
-                    return null;
+                    return Unauthorized();
                 var listOfUserEvents = _repositoryEvent.GetUserEventsByUserId(Guid.Parse(userId));
-                return listOfUserEvents;
+                return Ok(listOfUserEvents);
 
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
            
         }
         
-        [HttpGet("events-user")]  
-        public IEnumerable<User> GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
+        [HttpGet("events-user")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<User>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetEventsUser([FromHeader(Name = "eventsId")] string eventsId)
         {
             try
             {
                 var listOfUserEvents = _repositoryEvent.GetUsersByEventId(Guid.Parse(eventsId));
-                return listOfUserEvents;
+                return Ok(listOfUserEvents);
 
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
            
         }
@@ -116,7 +123,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetUserUpcomingEvents([FromHeader(Name = "UserId")] string userId, 
                                                         [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -133,12 +140,13 @@ namespace KeepMovinAPI.Controllers
                 return BadRequest();
             }
         }
+
         
         [HttpGet("events-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetUserPreviousEvents([FromHeader(Name = "UserId")] string userId,   
                                                         [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -162,7 +170,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "UserId")] string userId,   
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -184,7 +192,7 @@ namespace KeepMovinAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetUserHostedEvents([FromHeader(Name = "userId")] string userId)
         {
             try
             {
@@ -229,20 +237,22 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpGet("all")]
-        public IEnumerable<Event> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK,Type= typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetAll()
         {
             try
             {
                 var listOfEvents = _repositoryEvent.GetAll();
-                return listOfEvents;
+                return Ok(listOfEvents);
             }
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest();
             }
         }
-        
+
 
 
         [HttpGet("join")]
@@ -289,6 +299,9 @@ namespace KeepMovinAPI.Controllers
 
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Add(Event eventModel, [FromHeader] Guid userId)
         {
             try
@@ -302,10 +315,11 @@ namespace KeepMovinAPI.Controllers
                 return Unauthorized();
             }
         }
-        
-         
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("status-update")]
-        public IActionResult StatusUpdate()
+        public IActionResult StatusUpdate() 
         {
             try
             {
@@ -315,7 +329,7 @@ namespace KeepMovinAPI.Controllers
             catch (Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return Unauthorized();
+                return BadRequest();
             }
         }
         
@@ -326,7 +340,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/upcoming")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserUpcomingEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserUpcomingEvents([FromHeader(Name = "visitedUserId")] string userId,
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -344,7 +358,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/previous")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserPreviousEvents([FromHeader(Name = "visitedUserId")] string userId,    
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -364,7 +378,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserEventsDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId,
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "visitedUserId")] string userId,     
             [FromHeader(Name = "currentPage")] string currentPage)
         {
             try
@@ -382,7 +396,7 @@ namespace KeepMovinAPI.Controllers
         [HttpGet("events-visited-user/hosted-statistics")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "etag")] string userId)
+        public IActionResult GetVisitedUserHostedEvents([FromHeader(Name = "visitedUserId")] string userId)    
         {
             try
             {
@@ -397,19 +411,21 @@ namespace KeepMovinAPI.Controllers
         }
         
         
-        [HttpGet("visited-user-events")]  
-        public IEnumerable<Event> GetVisitedUserEvents([FromHeader(Name = "userId")] string userId)
+        [HttpGet("visited-user-events")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Event>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetVisitedUserEvents([FromHeader(Name = "visitedUserId")] string userId)
         {
             try
             {
                 var listOfUserEvents = _repositoryEvent.GetUserEventsByUserId(Guid.Parse(userId));
-                return listOfUserEvents;
+                return Ok(listOfUserEvents);
 
             }
             catch(Exception e)
             {
                 _logger.LogWarning(Convert.ToString(e));
-                return null;
+                return BadRequest() ;
             }
            
         }

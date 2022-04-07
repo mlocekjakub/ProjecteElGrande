@@ -109,7 +109,7 @@ function EventPageTest() {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        "etag": eventModel.user.organiser.userid
+                        "visitedUserId": eventModel.user.organiser.userid
                     }
                 }).then(content => {
                     setOrganiserProfile({

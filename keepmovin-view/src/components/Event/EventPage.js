@@ -1,7 +1,8 @@
+/*
 import React, {useEffect, useState} from 'react';
 import "./EventPage.css";
 import axios from "axios";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import defaultProfileImage from "../../Images/DefaultProfileImage.jpg";
 import LoadingSpinner from "../ListOfEvents/sportEventsComponents/LoadingSpinner";
@@ -37,7 +38,7 @@ function EventPage() {
         secondsEvent: "",
     })
 
-    /*setInterval(() => {
+    /!*setInterval(() => {
         let startDate = `${eventModel && new Date(eventModel.startEvent).getTime()}`;
         let now = new Date().getTime();
         let countdown = startDate - now
@@ -57,7 +58,7 @@ function EventPage() {
             secondsEvent: seconds,
         })
     }, 1000)
-*/
+*!/
 
     const [organiserProfile, setOrganiserProfile] = useState({
         name: "",
@@ -169,7 +170,7 @@ function EventPage() {
                         </div>
                     </div>
                     <div className="grid-infos">
-                        {/*<div className="time-place">data</div>*/}
+                        {/!*<div className="time-place">data</div>*!/}
                         <div className="left-column__events-page">
                             <div className="organiser-info__events-page" onClick={handleProfile}>
                                 <img src={defaultProfileImage} alt=""/>
@@ -238,4 +239,4 @@ function EventPage() {
     );
 }
 
-export default EventPage;
+export default EventPage;*/

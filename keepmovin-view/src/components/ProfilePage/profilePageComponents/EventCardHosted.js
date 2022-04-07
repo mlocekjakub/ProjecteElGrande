@@ -14,12 +14,13 @@ function EventCardHosted(props) {
     const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
+        let eventId = props.eventCardId
         axios
             .get(`/api/Event/events-user`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "eventsId": props.eventCardId
+                    "eventsId": eventId
                 }
             })
             .then(response => {

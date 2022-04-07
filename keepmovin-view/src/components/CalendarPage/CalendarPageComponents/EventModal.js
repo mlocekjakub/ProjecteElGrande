@@ -4,11 +4,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import LoadingSpinner from "./LoadingSpinner";
 import {useNavigate} from "react-router-dom";
+import NoteModalForm from "./NoteModalForm";
 
 export default function EventModal({show, eventId, onClose}) {
     const [eventData, setEventData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
-    
+
+    const [openNote, setOpenNote] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -49,10 +52,13 @@ export default function EventModal({show, eventId, onClose}) {
                 setIsFetching(true);
                 setEventData([]);
             }}>
+                <NoteModalForm onClose={() => {
+                    setOpenNote(false);
+                }} openNote={openNote} eventId={eventData.eventId}/>
                 <div className="event-modal-content" onClick={e => e.stopPropagation()}>
                     <div className="event-modal-buttons">
                         <div className="add-note-button" role="button" onClick={() => {
-                            console.log("add note")
+                            setOpenNote(true);
                         }}>
                             <NoteAltIcon/>
                         </div>
@@ -73,7 +79,7 @@ export default function EventModal({show, eventId, onClose}) {
                             {eventData.eventInfo}
                         </div>
                         <div className="event-modal-footer">
-                            <div className="event-details-button" onClick={() => navigate(`/event/${eventId}`)} role="button">
+                            <div className="event-details-button" role="button" onClick={() => {navigate(`/event/${eventData.eventId}`)}}>
                                 Details
                             </div>
                         </div>

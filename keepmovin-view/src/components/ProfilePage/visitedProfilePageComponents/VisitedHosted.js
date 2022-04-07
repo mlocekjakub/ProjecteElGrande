@@ -28,7 +28,7 @@ function VisitedHosted(props) {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "etag" : visitedUserId,
+                    "visitedUserId" : visitedUserId,
                 }
             })
             .then(response => {
@@ -38,7 +38,7 @@ function VisitedHosted(props) {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                "etag": visitedUserId,
+                                "visitedUserId": visitedUserId,
                                 "currentPage": currentPageHosted
 
                             }

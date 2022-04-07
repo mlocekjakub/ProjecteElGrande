@@ -64,7 +64,7 @@ function EventCard(props) {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
-                                "etag": props.organiserId,
+                                "visitedUserId": props.organiserId,
                             }
                         }).then(content => {
                         setOrganiserProfile({
@@ -87,7 +87,6 @@ function EventCard(props) {
             setJoinButtonState('signIn')
         }
     }, [isUserLogged])
-    
     
     
     return (
