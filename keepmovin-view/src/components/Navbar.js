@@ -17,8 +17,10 @@ export default function Navbar() {
     
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
+    const theme = useSelector((state) => state.theme.value)
+    
     return (
-        <header>
+        <header data-theme={theme}>
             <div className="logo-search">
                 <Logo />
                 <Searchbar />

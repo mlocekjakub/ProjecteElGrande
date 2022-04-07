@@ -13,9 +13,10 @@
 }
 
 .event-modal-content {
-    background-color: #f3f3f3;
+    /*background-color: #f3f3f3;*/
+    background: var(--container-clr-event);
     width: 20rem;
-    border-radius: 0.3rem;
+    border-radius: 0.4rem;
 }
 
 .event-modal-buttons {
@@ -42,13 +43,13 @@
 
 .event-modal-date {
     padding: 0.5rem;
-    border-top: 0.1rem solid black;
+    border-top: var(--calendar-border);
     text-align: center;
     font-size: 1rem;
 }
 
 .event-modal-body {
     padding: 1rem;
-    border-top: 0.1rem solid black;
-    border-bottom: 0.1rem solid black;
+    border-top: var(--calendar-border);
+    border-bottom: var(--calendar-border);
 }

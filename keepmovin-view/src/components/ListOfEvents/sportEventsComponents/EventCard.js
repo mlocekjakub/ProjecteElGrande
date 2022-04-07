@@ -33,6 +33,7 @@ function EventCard(props) {
 
     function JoinToEvent(eventId){
         fetch(`api/Event/join?userId=${localStorage["session"]}&eventId=${eventId}`)
+        window.location.reload(false);
     }
     
     useEffect(() => {
@@ -90,9 +91,9 @@ function EventCard(props) {
     
     
     return (
-        <div className={`event-1 ${theme === 'light' ? 'event-1-light' : 'event-1-dark'}`} onClick={() => navigate(`/event/${props.eventId}`)}>
+        <div className={`event-1 ${theme === 'light' ? 'event-1-light' : 'event-1-dark'}`}>
             <img src={eventImage} alt="" />
-            <div className="description">
+            <div className="description" onClick={() => navigate(`/event/${props.eventId}`)}>
                 <div className="info__event-list">
                     <div className="category">
                         {props.sport}
@@ -109,11 +110,11 @@ function EventCard(props) {
                         {props.location}
                     </div>
                     <div className="events-level">
-                        <SignalCellularAltIcon className="level-icon"/>
+                        <SignalCellularAltIcon className={`level-icon ${theme === 'light' ? 'event-card-icon-light' : 'event-card-icon-dark'}`}/>
                         {props.experienceLevels}
                     </div>
                     <div className="events-participants">
-                        <PersonIcon className="participants-icon" />
+                        <PersonIcon className={`participants-icon ${theme === 'light' ? 'event-card-icon-light' : 'event-card-icon-dark'}`} />
                         {usersJoined.length} / {props.maxParticipants}
                     </div>
                 </div>

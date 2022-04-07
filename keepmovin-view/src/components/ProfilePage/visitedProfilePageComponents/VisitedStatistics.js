@@ -1,7 +1,4 @@
 ﻿import React, {useEffect, useState} from 'react';
-import ProfessionalEventsDiagram from "../profilePageComponents/diagramComponents/ProfessionalEventsDiagram";
-import RecreationalEventsDiagram from "../profilePageComponents/diagramComponents/RecreationalEventsDiagram";
-import HostedEventsDiagram from "../profilePageComponents/diagramComponents/HostedEventsDiagram";
 import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import VisitedHostedEventsDiagram from "./visitedDiagramComponents/VisitedHostedEventsDiagram";

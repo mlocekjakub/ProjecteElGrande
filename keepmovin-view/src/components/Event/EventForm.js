@@ -15,6 +15,7 @@ import CountryInput from "./eventForm/CountryInput";
 import ZipCodeInput from "./eventForm/ZipCodeInput";
 import {useRef} from "react";
 import {createEvent} from "../API/Api";
+import {useSelector} from "react-redux";
 
 
 //
@@ -50,6 +51,8 @@ import {createEvent} from "../API/Api";
 // window.location.href = '/list-of-events';
 
 export default function EventForm() {
+    
+    const theme = useSelector((state) => state.theme.value)
     // const status = "upcoming";
     // const [name, setName] = useRef();
     // const [startEvent, setStartEvent] =  useRef();
@@ -66,7 +69,7 @@ export default function EventForm() {
     // const [zipCode, setZipCode] = useRef();
 
     return (
-        <div className="grid-container-3">
+        <div className="grid-container-3" data-theme={theme}>
             <NameInput/>
             <PictureInput
                 src="/Images/tempevent.jpg"/>

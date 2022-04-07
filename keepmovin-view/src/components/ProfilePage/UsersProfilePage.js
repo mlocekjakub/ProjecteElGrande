@@ -92,7 +92,7 @@ export default function UsersProfilePage() {
                     <div className="about-header">about me</div>
                     {privacySettings.aboutMe === false ? profileDetails.personalInfo 
                         ? <div className="user-data">{profileDetails.personalInfo} </div>
-                        : <div className={`profile-incomplete__visiting${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
+                        : <div className={`profile-incomplete__visiting ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
                             No info about user
                         </div> 
                         : <div className={`${theme === 'light' ? 'section-about-me-light' : 'section-about-me-dark'}`}><LockIcon /> private</div>
@@ -119,7 +119,7 @@ export default function UsersProfilePage() {
                                     className="user-data-paragraph">{profileDetails.location.city} {profileDetails.location.country}
                                 </div>
                                 : 
-                                <div className={`profile-incomplete__visiting${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
+                                <div className={`profile-incomplete__visiting ${theme === 'light' ? 'profile-incomplete__light' : 'profile-incomplete__dark'}`}>
                                     No info about location
                                 </div> 
                             : 

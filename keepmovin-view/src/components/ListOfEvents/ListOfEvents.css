@@ -32,8 +32,6 @@
 }
 
 .events-filters__container > div {
-    /*background: var(--bg-clr-containers);*/
-   /* border: var(--border-containers);*/
     border-radius: 0.3rem;
     width: 100%;
 }
@@ -323,6 +321,8 @@
     font-size: 0.6rem;
     gap: 0.2rem;
     transition: 0.2s;
+    text-decoration: none !important;
+    z-index: 1000;
 }
 
 .event__organiser-light {
@@ -355,6 +355,7 @@
 
 .events__organiser-name {
     padding-top: 0.8rem;
+    
 }
 
 /*___________________*/
@@ -373,6 +374,8 @@
     align-content: center;
     justify-content: center;
     text-align: center;
+    border-radius: 0.4rem;
+    user-select: none;
 }
 .header h1 {
     font-size: 4rem;

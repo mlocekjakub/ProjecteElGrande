@@ -266,6 +266,26 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
+        [HttpGet("cancel-attendance")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CancelEventAttendance([FromQuery]Guid userId, [FromQuery] Guid eventId)
+        {
+            try
+            {
+                string jwt = Request.Cookies["token"];
+                if (!_validation.Validate(userId, jwt))
+                    return Unauthorized();
+                _repositoryEvent.JoinToEvent(userId,eventId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
 
 
         [HttpPost]

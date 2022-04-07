@@ -1,4 +1,48 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+:root {
+   
+   --searchbar-background: #F3F3F3;
+   --header-clr-searchbar: #18181BFF;
+   --glass-cl-container: #F3F3F3;
+   --searchbar-clr-focus: #fff;
+   --box-shadow-container: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+   
+   
+   --expanded-hover-clr: #e3e3e3;
+   --expanded-clr: #F3F3F3;
+   --border-bottom-ezpanded-card: 1px solid rgba(5, 5, 5, 0.20);
+   --info-not-found-clr: rgba(36, 38, 38, 0.7);
+   --expanded-card-clr: #18181BFF;
+   
+   --expanded-containers-color: #242626;
+   --containers-hover-eff: rgba(36, 38, 38, 0.13);
+   --containers-hover-clr: #242626;
+}
+
+[data-theme='dark'] {
+
+   --searchbar-background: #464649;
+   --header-clr-searchbar: #efeff1;
+   --glass-cl-container: #26262C;
+   --searchbar-clr-focus: rgba(70, 70, 73, 0.7);
+   --box-shadow-container: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+   
+   
+   
+   --expanded-hover-clr: rgba(38, 38, 44, 0.7);
+   --expanded-clr: #18181B;
+   --border-bottom-ezpanded-card: 1px solid hsla(0, 0%, 100%, 0.1);
+   --info-not-found-clr: #adadb8;
+   --expanded-card-clr: #adadb8;
+   --expanded-card-title-clr: #efeff1;
+
+   --expanded-containers-color: rgba(239, 239, 241, 0.85);
+   --containers-hover-eff: rgba(38, 38, 44, 0.7);
+   --containers-hover-clr: #efeff1;
+
+}
+
 header {
    font-family: "Montserrat", "sans-serif";
    display: flex;
@@ -63,26 +107,26 @@ header {
    justify-content: center
 }
 .search-txt-header {
-   background: #F3F3F3;
+   background: var(--searchbar-background);
    padding: 0.3rem 1rem 0.3rem 0.5rem;
    border: 0;
    transition: 0.2s;
-   border-radius: 5px 0 0 5px ;
-
+   border-radius: 5px 0 0 5px;
+   color: var(--header-clr-searchbar);
 }
 .search-txt-header:focus {
    outline: none !important;
-   background: #fff;
+   background: var(--searchbar-clr-focus);
    border: 0 !important;
 }
 .glass-container {
    display: flex;
    justify-content: center;
-   background: #F3F3F3;
+   background: var(--glass-cl-container);
    border-radius: 0 5px 5px 0;
    border-left: 1px solid #242626;
    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
-   color: #242626;
+   color: var(--header-clr-searchbar);
    transition: 0.2s;
 }
 .glass-container:hover {
@@ -103,20 +147,21 @@ header {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   background: #F3F3F3;
+   background: var(--expanded-clr);
+   color: var(--expanded-containers-color);
    border-radius: 0.3rem;
    font-size: 1rem;
-   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+   box-shadow: var(--box-shadow-container);
 }
 
 .go__log-out {
    text-decoration: none;
-   color: #242626;
+   color: var(--expanded-containers-color);
    padding: 0.3rem 6rem 0.3rem 0.3rem;
-   border-top: 1px solid rgba(5, 5, 5, 0.20);
+   border-top: var(--border-bottom-ezpanded-card);
 }
 .go__profile, .go__settings {
-   color: #242626;
+   color: var(--expanded-containers-color);
    text-decoration: none;
    padding: 0.3rem 6rem 0.3rem 0.3rem;
    display: flex;
@@ -124,9 +169,9 @@ header {
 }
 
 .go__profile:hover, .go__settings:hover, .go__log-out:hover {
-   color: #242626;
+   color: var(--containers-hover-clr);
    cursor: pointer;
-   background: rgba(36, 38, 38, 0.13);
+   background: var(--containers-hover-eff)
 }
 
 .triangle__profile-menu {
@@ -143,6 +188,7 @@ header {
 .sign-in__button {
    color: #FFFFFF;
    transition: 0.2s;
+   text-decoration: none !important;
 }
 .sign-in__button:hover {
    color: var(--bg-btn-primary-blue);
@@ -189,10 +235,10 @@ header {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   background: #F3F3F3;
+   background: var(--expanded-clr);
    border-radius: 0.3rem;
-   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-   color: #242626;
+   box-shadow: var(--box-shadow-container);
+   color: var(--expanded-containers-color);
    font-size: 0.8rem;
 }
 
@@ -201,7 +247,7 @@ header {
    text-decoration: none;
    text-align: center;
    font-size: 1rem;
-   border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+   border-bottom: var(--border-bottom-ezpanded-card);
    font-weight: bold;
 }
 .notification-container {
@@ -215,18 +261,7 @@ header {
    transition: 0.2s;
 }
 .notification:hover {
-   background: rgba(36, 38, 38, 0.13);
-}
-
-.triangle__notification-menu {
-   position: absolute;
-   right: 10%;
-   bottom: 84%;
-   width: 2rem;
-   aspect-ratio: 1;
-   transform: rotate(45deg);
-   background: #F3F3F3;
-   z-index: -1;
+   background: var(--containers-hover-eff)
 }
 
 

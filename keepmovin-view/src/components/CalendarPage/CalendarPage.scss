@@ -1,0 +1,63 @@
+﻿.calendar-page {
+  a {
+    text-decoration: none !important;
+    color: var(--paragraph-clr-event) !important;
+    font-weight: 500 !important;
+  }
+
+  .calendar-container {
+    margin: var(--page-margin-events-page);
+    background-color: var(--container-clr-event);
+    padding: 1rem;
+    min-height: 100vh;
+    border-radius: 0.4rem;
+    color: var(--header-clr-event) !important;
+    text-decoration: none !important;
+  }
+  .fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid #ddd;
+    border: var(--calendar-border-body) !important;
+  }
+
+  .fc-theme-standard .fc-scrollgrid {
+    /*border: 1px solid #ddd;*/
+    border: var(--calendar-border-body) !important;
+  }
+
+  /*a {
+      text-decoration: none !important;
+      color: var(--paragraph-clr-event) !important;
+      font-weight: 500 !important;
+  }*/
+
+  .fc-daygrid-day-top :hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .fc-daygrid-event :hover {
+    cursor: pointer;
+  }
+
+  tbody tr {
+    height: 12vh;
+  }
+
+  .fc-daygrid-day-frame {
+    height: 12vh;
+  }
+
+  .fc-daygrid-day-events {
+    height: 10vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .fc-daygrid-day-events::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fc-daygrid-block-event {
+    overflow: visible !important;
+  }
+}

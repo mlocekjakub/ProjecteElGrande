@@ -28,6 +28,7 @@
 
 .go-to__github {
     color: #FFFFFF;
+    text-decoration: none !important;
 }
 .go-to__github:hover {
     color: rgba(128, 128, 128, 0.9);

@@ -1,17 +1,53 @@
-﻿.calendar-page {
-    background-color: var(--bg-website);
+﻿
+:root {
+    --primary-blue-clr: #4285F4FF;
+    --header-clr-event: #1D1E35FF;
+    --container-clr-event: #FFFFFF;
+    --border-bottom-event: 1px solid rgba(5, 5, 5, 0.20);
+    --event-header-background: rgba(66, 133, 244, 0.6);
+    --calendar-border: 0.1rem solid black;
+    --calendar-border-body: 1px solid rgba(5, 5, 5, 0.20);
 }
 
+[data-theme='dark'] {
+    --paragraph-clr-event: #adadb8;
+    --header-clr-event: #efeff1;
+    --container-clr-event: #1F1F23;
+    --border-bottom-event: 1px solid hsla(0, 0%, 100%, 0.1);
+    --calendar-border: 1px solid hsla(0, 0%, 100%, 0.1);
+    --calendar-border-body: 1px solid hsla(0, 0%, 100%, 0.1);
+
+}
+
+
+.calendar-page {
+    /*background-color: var(--bg-website);*/
+}
+
+/*
 .calendar-container {
     margin: var(--page-margin-events-page);
-    background-color: var(--bg-clr-containers);
+    background-color: var(--container-clr-event);
     padding: 1rem;
     min-height: 100vh;
+    border-radius: 0.4rem;
+    color: var(--header-clr-event) !important;
+}
+.fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid #ddd;
+    border: var(--calendar-border-body) !important;
 }
 
-a {
-    text-decoration: none !important;
+.fc-theme-standard .fc-scrollgrid {
+    !*border: 1px solid #ddd;*!
+    border: var(--calendar-border-body) !important;
 }
+
+!*a {
+    text-decoration: none !important;
+    color: var(--paragraph-clr-event) !important;
+    font-weight: 500 !important;
+}*!
 
 .fc-daygrid-day-top :hover {
     font-weight: bold;
@@ -42,4 +78,4 @@ tbody tr {
 
 .fc-daygrid-block-event {
     overflow: visible !important;
-}
+}*/

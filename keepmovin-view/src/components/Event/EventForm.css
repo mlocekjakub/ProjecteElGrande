@@ -1,3 +1,12 @@
+:root {
+    --clr-background-event-form: #FFFFFF;
+}
+
+[data-theme='dark'] {
+    --clr-background-event-form: #1F1F23;
+}
+
+
 .grid-container-3 {
     display: grid;
     grid-gap: 10px;
@@ -5,7 +14,7 @@
     grid-template-rows: 0.1fr 1fr 0.1fr;
     height: 100%;
     margin: 3rem 5rem;
-    background: #FFFFFF;
+    background: var(--clr-background-event-form);
     padding: 40px;
     box-shadow: 0 1px 5px rgba(50, 50, 50, 0.1);
 }
@@ -20,7 +29,7 @@
     grid-gap: 10px;
     grid-template-columns: repeat(1, 1fr);
     height: 100%;
-    background: #FFFFFF;
+    background: var(--clr-background-event-form);
     padding: 40px;
     grid-column: span 2;
 }

@@ -49,6 +49,8 @@ namespace KeepMovinAPI.Repository.Implementations
                     .Include(eventModel => eventModel.Location)
                     .Include(eventModel => eventModel.Sports)
                     .Include(eventModel => eventModel.Type)
+                    .Include(eventModel => eventModel.User)
+                    .Include(eventModel => eventModel.User.Organiser)
                     .Include(eventModel => eventModel.ExperienceLevel)
                     .First(eventModel => eventModel.EventId == id);
             return query;
@@ -233,6 +235,8 @@ namespace KeepMovinAPI.Repository.Implementations
             user.Events.Add(eventModel);
             _context.SaveChanges();
         }
+        
+        
         
         public void UpdateStatus()
         {

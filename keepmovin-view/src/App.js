@@ -10,6 +10,7 @@ import CalendarPage from "./components/CalendarPage/CalendarPage";
 import Settings from "./components/Settings/Settings";
 import './App.css';
 import UsersProfilePage from "./components/ProfilePage/UsersProfilePage";
+import EventPageTest from "./components/Event/EventPageTest";
 
 
 
@@ -25,7 +26,7 @@ function App() {
               <Route path="profile/:visitedUserId" element={<UsersProfilePage />}/>
               <Route path="register" element={<RegisterLoginPage />}/>
               <Route path="login" element={<RegisterLoginPage />}/>
-              <Route path="event/:id" element={<EventPage />}/>
+              <Route path="event/:id" element={<EventPageTest />}/>
               <Route path="event/create" element={<EventForm />} />
               <Route path="list-of-events" element={<ListOfEvents />} />
               <Route path="settings" element={<Settings />} />
