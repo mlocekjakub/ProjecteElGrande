@@ -69,6 +69,11 @@ function SportEventsPage() {
     
     
     useEffect(() => {
+        let arr = [[1,2,3], [1,2,3] , [1,2,3]]
+        let output = []
+       
+        output.push(...arr.shift())
+        
         
         setIsFetchingData(true);
         setEventsNotFound(false);
