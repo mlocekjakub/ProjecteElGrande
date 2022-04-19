@@ -33,6 +33,21 @@ namespace KeepMovinAPI.Controllers
             
         }
 
+        [HttpGet("note")]
+        public IActionResult Get([FromHeader(Name = "Note")]Guid noteId)
+        {
+            try
+            {
+                UserNote userNote = _userNoteRepository.Get(noteId);
+                return Ok(userNote);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+
 
         [HttpPost("add-note")]
         [ProducesResponseType(StatusCodes.Status200OK)]
