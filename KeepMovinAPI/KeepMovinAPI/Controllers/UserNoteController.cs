@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using KeepMovinAPI.Authentication;
 using KeepMovinAPI.Domain;
@@ -34,7 +35,7 @@ namespace KeepMovinAPI.Controllers
         }
 
         [HttpGet("note")]
-        public IActionResult Get([FromHeader(Name = "Note")]Guid noteId)
+        public IActionResult GetNoteById([FromHeader(Name = "Note")]Guid noteId)
         {
             try
             {
@@ -47,7 +48,21 @@ namespace KeepMovinAPI.Controllers
                 return BadRequest();
             }
         }
-
+        
+        [HttpGet("event-notes")]
+        public IActionResult GetNotesByEventId([FromHeader(Name = "Event")]Guid eventId)
+        {
+            try
+            {
+                IEnumerable<UserNote> userNote = _userNoteRepository.GetAllByEventId(eventId);
+                return Ok(userNote);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
 
         [HttpPost("add-note")]
         [ProducesResponseType(StatusCodes.Status200OK)]

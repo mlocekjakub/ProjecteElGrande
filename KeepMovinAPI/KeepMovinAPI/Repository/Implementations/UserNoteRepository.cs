@@ -31,6 +31,12 @@ namespace KeepMovinAPI.Repository.Implementations
             return query;
         }
 
+        public IEnumerable<UserNote> GetAllByEventId(Guid eventId)
+        {
+            var query = _context.UserNote.Where(i => i.EventId == eventId);
+            return query;
+        }
+
         public IEnumerable<UserNote> GetAll()
         {
             throw new NotImplementedException();
