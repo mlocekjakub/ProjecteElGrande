@@ -64,6 +64,21 @@ namespace KeepMovinAPI.Controllers
             }
         }
 
+        [HttpGet("user-notes")]
+        public IActionResult GetNotesByUserId([FromHeader(Name = "User")] Guid userId)
+        {
+            try
+            {
+                IEnumerable<UserNote> userNotes = _userNoteRepository.GetAllByUser(userId);
+                return Ok(userNotes);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+
         [HttpPost("add-note")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

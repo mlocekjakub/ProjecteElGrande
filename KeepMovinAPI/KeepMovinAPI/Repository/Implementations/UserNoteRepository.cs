@@ -37,12 +37,13 @@ namespace KeepMovinAPI.Repository.Implementations
             return query;
         }
 
-        public IEnumerable<UserNote> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<UserNote> GetAllByUser(Guid userId)
+        {
+            var query = _context.UserNote.Where(i => i.UserId == userId);
+            return query;
+        }
+        
+        public IEnumerable<UserNote> GetAll()
         {
             throw new NotImplementedException();
         }
