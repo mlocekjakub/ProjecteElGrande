@@ -15,21 +15,21 @@ Statistics, ratings, history of events and many other tools will allow the user 
 
 Backend technologies:
 
-ASP.NET Core 5.0
-Microsoft SQL Server 2019
-Microsoft Entity Framework Core 5.0.13
-JSON Web Tokens
+- ASP.NET Core 5.0
+- Microsoft SQL Server 2019
+- Microsoft Entity Framework Core 5.0.13
+- JSON Web Tokens
 
 
 Frontend technologies:
 
-React.JS 17.0.2
-React-redux  7.2.6
-React-router-dom 6.2.1
-Bootstrap 5.1.3
-SaSS: 1.49.9
-Material UI 5.4.0
-Chart.js 2.9.4
+- React.JS 17.0.2
+- React-redux  7.2.6
+- React-router-dom 6.2.1
+- Bootstrap 5.1.3
+- SaSS: 1.49.9
+- Material UI 5.4.0
+- Chart.js 2.9.4
 
 ## Launch
 
