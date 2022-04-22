@@ -31,9 +31,9 @@ namespace KeepMovinAPI.Repository.Implementations
             return query;
         }
 
-        public IEnumerable<UserNote> GetAllByEventId(Guid eventId)
+        public IEnumerable<UserNote> GetAllUserNotesByEventId(Guid userId, Guid eventId)
         {
-            var query = _context.UserNote.Where(i => i.EventId == eventId);
+            var query = _context.UserNote.Where(i => i.UserId == userId && i.EventId == eventId);
             return query;
         }
 

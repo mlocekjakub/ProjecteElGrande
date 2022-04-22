@@ -50,11 +50,11 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet("event-notes")]
-        public IActionResult GetNotesByEventId([FromHeader(Name = "Event")]Guid eventId)
+        public IActionResult GetUserNotesByEventId([FromHeader(Name = "Session")]Guid userId, [FromHeader(Name = "Event")]Guid eventId)
         {
             try
             {
-                IEnumerable<UserNote> userNote = _userNoteRepository.GetAllByEventId(eventId);
+                IEnumerable<UserNote> userNote = _userNoteRepository.GetAllUserNotesByEventId(userId, eventId);
                 return Ok(userNote);
             }
             catch (Exception e)
