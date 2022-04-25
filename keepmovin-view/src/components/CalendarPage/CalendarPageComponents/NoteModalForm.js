@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './CalendarModalStyles.css';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from "@mui/material/TextField";
