@@ -20,7 +20,7 @@ fetch('/api/Experience')
                     {expLvl.name}
                 </MenuItem>);
         }
-    })
+    });
 
 export default function ExperienceSelect() {
 

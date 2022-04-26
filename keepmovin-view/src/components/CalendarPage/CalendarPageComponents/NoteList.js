@@ -23,7 +23,6 @@ export default function NoteList({eventId}) {
                     throw response;
                 })
                 .then(data => {
-                    console.log(data);
                     setNotesData(data);
                 })
                 .then(() => {
