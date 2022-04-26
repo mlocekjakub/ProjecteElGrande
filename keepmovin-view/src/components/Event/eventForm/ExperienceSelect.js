@@ -16,7 +16,7 @@ fetch('/api/Experience')
         for (let expLvl of data) {
             items.push(
                 <MenuItem key={expLvl.experienceLevelId}
-                          value={expLvl.name}>
+                          value={JSON.stringify(expLvl)}>
                     {expLvl.name}
                 </MenuItem>);
         }
