@@ -5,7 +5,7 @@ import NoteCard from "./NoteCard";
 export default function NoteList({eventId}) {
     const [notesData, setNotesData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
-    
+
     const requestOptions = {
         headers: {
             'Session': `${localStorage.getItem("session")}`,
@@ -23,6 +23,7 @@ export default function NoteList({eventId}) {
                     throw response;
                 })
                 .then(data => {
+                    console.log(data);
                     setNotesData(data);
                 })
                 .then(() => {
@@ -35,12 +36,21 @@ export default function NoteList({eventId}) {
     }, [eventId]);
 
     if (!isFetching) {
-        return notesData.map((note) =>
-            (<NoteCard key={note.noteId} 
-                       noteId={note.noteId}
-                       time={note.time}
-                       title={note.title}
-                       message={note.message}/>))
+        if (notesData.length === 0) {
+            return (
+                <div style={{ textAlign: "center" }}>
+                    <div>There is no notes.</div>
+                    <div>Create your first one!</div>
+                </div>
+            )
+        } else {
+            return notesData.map((note) =>
+                (<NoteCard key={note.noteId}
+                           noteId={note.noteId}
+                           time={note.time}
+                           title={note.title}
+                           message={note.message}/>))
+        }
     } else {
         return (
             <div>
