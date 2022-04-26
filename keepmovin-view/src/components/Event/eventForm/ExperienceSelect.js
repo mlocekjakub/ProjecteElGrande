@@ -6,21 +6,30 @@ import * as React from "react";
 
 const items = []
 fetch('/api/Experience')
-    .then(response => response.json())
-    .then(data => {
-        for (const [index, value] of data.entries()) {
-            items.push(<MenuItem value={JSON.stringify(value)}>{value["name"]}</MenuItem>)
+    .then(response => {
+        if (response.ok) {
+            return response.json();
         }
-    });
+        throw response;
+    })
+    .then(data => {
+        for (let expLvl of data) {
+            items.push(
+                <MenuItem key={expLvl.experienceLevelId}
+                          value={expLvl.name}>
+                    {expLvl.name}
+                </MenuItem>);
+        }
+    })
 
-export default function ExperienceSelect(){
+export default function ExperienceSelect() {
 
     const [experienceLevel, setExperienceLevel] = React.useState('');
     const handleExperienceLevelChange = (event) => {
         setExperienceLevel(event.target.value);
     };
 
-    return(
+    return (
         <FormControl sx={{minWidth: 180}}>
             <InputLabel id="demo-controlled-open-select-label">Experience Level</InputLabel>
             <Select
