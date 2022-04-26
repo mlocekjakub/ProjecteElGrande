@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -73,7 +73,11 @@ export default function EventCalendar() {
 
     useEffect(() => {
         if (url != null) {
-            fetch(url, requestOptions)
+            fetch(url, {
+                headers: {
+                    'userId': `${localStorage.getItem("session")}`,
+                }
+            })
                 .then(response => {
                     if (response.ok) {
                         return response.json();
@@ -88,12 +92,6 @@ export default function EventCalendar() {
                 })
         }
     }, [url])
-
-    const requestOptions = {
-        headers: {
-            'userId': `${localStorage.getItem("session")}`,
-        }
-    }
 
     return (
         <div className="calendar-container">

@@ -6,16 +6,14 @@ export default function NoteList({eventId}) {
     const [notesData, setNotesData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
-    const requestOptions = {
-        headers: {
-            'Session': `${localStorage.getItem("session")}`,
-            'Event': `${eventId}`,
-        }
-    }
-
     useEffect(() => {
         if (eventId != null) {
-            fetch(`api/UserNote/event-notes`, requestOptions)
+            fetch(`api/UserNote/event-notes`, {
+                headers: {
+                    'Session': `${localStorage.getItem("session")}`,
+                    'Event': `${eventId}`,
+                }
+            })
                 .then(response => {
                     if (response.ok) {
                         return response.json();
