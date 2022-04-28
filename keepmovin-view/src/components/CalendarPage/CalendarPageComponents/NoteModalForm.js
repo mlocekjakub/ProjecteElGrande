@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './CalendarModalStyles.css';
-import CloseIcon from '@mui/icons-material/Close';
 import TextField from "@mui/material/TextField";
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import './NoteModalFormStyles.css';
 
 export default function NoteModalForm({openForm, eventId, onClose}) { // TODO change openNote to openForm, create handle openForm 
     const [noteTitle, setNoteTitle] = useState("");
@@ -51,6 +51,14 @@ export default function NoteModalForm({openForm, eventId, onClose}) { // TODO ch
     if (openForm) {
         return (
             <div className="note-form">
+                <div className="note-form-buttons-box">
+                    <div className="note-form-button note-dismiss" role="button">
+                        Dismiss
+                    </div>
+                    <div className="note-form-button note-save" role="button">
+                        Save
+                    </div>
+                </div>
                 <div className="note-form-title"
                      style={{
                          marginLeft: "0.5rem",
