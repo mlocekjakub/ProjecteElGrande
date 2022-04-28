@@ -39,7 +39,7 @@ export default function NoteModal({openNote, onClose, eventId}) {
                                 </div> : <NoteModalForm openForm={openNoteForm} eventId={eventId} closeForm={handleCloseNoteForm}/>}
                         </div>
                         <div className="note-modal-body" style={{padding: "0.5rem"}}>
-                            <NoteList eventId={eventId}/>
+                            <NoteList eventId={eventId} reload={openNoteForm}/>
                         </div>
                     </div>
                 </div>

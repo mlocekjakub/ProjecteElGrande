@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LoadingSpinner from "./LoadingSpinner";
 import NoteCard from "./NoteCard";
 
-export default function NoteList({eventId}) {
+export default function NoteList({eventId, reload}) {
     const [notesData, setNotesData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
@@ -30,7 +30,7 @@ export default function NoteList({eventId}) {
                     console.error("Error fetching data: ", error);
                 })
         }
-    }, [eventId]);
+    }, [eventId, reload]);
 
     if (!isFetching) {
         if (notesData.length === 0) {
