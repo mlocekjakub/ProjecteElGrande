@@ -10,6 +10,10 @@ export default function NoteModal({openNote, onClose, eventId}) {
     const handleOpenNoteForm = () => {
         setOpenNoteForm(true);
     }
+    
+    const handleCloseNoteForm = () => {
+        setOpenNoteForm(false);
+    }
 
     if (openNote) {
         return (
@@ -32,7 +36,7 @@ export default function NoteModal({openNote, onClose, eventId}) {
                             {openNoteForm === false ?
                                 <div className="create-note-button" role="button" onClick={handleOpenNoteForm}>
                                     Create note
-                                </div> : <NoteModalForm openForm={openNoteForm} eventId={eventId} onClose={onClose}/>}
+                                </div> : <NoteModalForm openForm={openNoteForm} eventId={eventId} closeForm={handleCloseNoteForm}/>}
                         </div>
                         <div className="note-modal-body" style={{padding: "0.5rem"}}>
                             <NoteList eventId={eventId}/>
