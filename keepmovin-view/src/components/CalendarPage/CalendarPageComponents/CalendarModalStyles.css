@@ -12,6 +12,10 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
+.event-modal-event-info {
+    padding: 0.5rem;
+}
+
 .event-modal-content {
     /*background-color: #f3f3f3;*/
     background: var(--container-clr-event);
@@ -28,6 +32,7 @@
 .event-modal-header {
     padding-bottom: 1rem;
     font-size: 1.5rem;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
 }
 
 .event-modal-footer {
@@ -43,15 +48,14 @@
 
 .event-modal-date {
     padding: 0.5rem;
-    border-top: var(--calendar-border);
+    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
     text-align: center;
     font-size: 1rem;
 }
 
 .event-modal-body {
     padding: 1rem;
-    border-top: var(--calendar-border);
-    border-bottom: var(--calendar-border);
+    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
 }
 
 .create-note-button {
@@ -61,7 +65,6 @@
     letter-spacing: 0.03rem;
     background: var(--bg-btn-primary-blue);
     padding: 0.7rem 0;
-    margin-bottom: 1.5rem;
     transition: var(--transition);
     border-radius: 0.3rem;
 }
