@@ -4,13 +4,16 @@ import FormControl from "@mui/material/FormControl";
 import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 
-
 const items = []
 fetch('/api/Type')
     .then(response => response.json())
     .then(data => {
-        for (const [index, value] of data.entries()) {
-            items.push(<MenuItem value={JSON.stringify(value)}>{value["name"]}</MenuItem>)
+        for (let sportType of data) {
+            items.push(
+                <MenuItem key={sportType.typeId}
+                          value={JSON.stringify(sportType)}>
+                    {sportType.name}
+                </MenuItem>);
         }
     });
 

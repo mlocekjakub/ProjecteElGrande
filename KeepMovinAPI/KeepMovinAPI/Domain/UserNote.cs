@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KeepMovinAPI.Domain
 {
@@ -20,10 +20,16 @@ namespace KeepMovinAPI.Domain
         [MaxLength(2000)]
         public string Message { get; set; }
         
-        [Required] 
+        [Required]
         public Guid EventId { get; set; }
+        
+        [ForeignKey("EventId")] 
+        public virtual Event Event { get; set; }
         
         [Required]
         public Guid UserId { get; set; }
+        
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
     }
 }

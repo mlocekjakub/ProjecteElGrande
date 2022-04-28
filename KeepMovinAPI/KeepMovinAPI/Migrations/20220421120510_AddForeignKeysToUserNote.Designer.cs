@@ -4,14 +4,16 @@ using KeepMovinAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KeepMovinAPI.Migrations
 {
     [DbContext(typeof(KeepMovinDbContext))]
-    partial class KeepMovinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220421120510_AddForeignKeysToUserNote")]
+    partial class AddForeignKeysToUserNote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

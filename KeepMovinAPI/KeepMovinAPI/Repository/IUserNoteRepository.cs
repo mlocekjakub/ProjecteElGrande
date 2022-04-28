@@ -8,6 +8,7 @@ namespace KeepMovinAPI.Repository
     public interface IUserNoteRepository : IRepository<UserNote>
     {
         public new void Add(UserNote item);
+        public IEnumerable<UserNote> GetAllUserNotesByEventId(Guid userId, Guid eventId);
         public IEnumerable<UserNote> GetAllByUser(Guid userId);
     }
 }

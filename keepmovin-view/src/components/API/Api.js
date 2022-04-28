@@ -1,10 +1,3 @@
-import {useDispatch} from "react-redux";
-import {changeIsLogged} from "../../features/IsLogged";
-
-
-
-
-
 export function createEvent() {
     let status = "upcoming";
     let name = document.querySelector("#name").value;

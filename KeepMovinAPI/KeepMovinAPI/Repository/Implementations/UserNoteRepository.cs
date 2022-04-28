@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using KeepMovinAPI.Domain;
 
 namespace KeepMovinAPI.Repository.Implementations
@@ -26,15 +27,23 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public UserNote Get(Guid id)
         {
-            throw new NotImplementedException();
+            var query = _context.UserNote.First(i => i.NoteId == id);
+            return query;
         }
 
-        public IEnumerable<UserNote> GetAll()
+        public IEnumerable<UserNote> GetAllUserNotesByEventId(Guid userId, Guid eventId)
         {
-            throw new NotImplementedException();
+            var query = _context.UserNote.Where(i => i.UserId == userId && i.EventId == eventId);
+            return query;
         }
 
         public IEnumerable<UserNote> GetAllByUser(Guid userId)
+        {
+            var query = _context.UserNote.Where(i => i.UserId == userId);
+            return query;
+        }
+        
+        public IEnumerable<UserNote> GetAll()
         {
             throw new NotImplementedException();
         }
