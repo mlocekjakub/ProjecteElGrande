@@ -20,6 +20,7 @@
     min-height: 70vh;
     border-radius: 0.4rem;
     display: flex;
+    margin-bottom: 20rem;
 }
 
 
@@ -315,15 +316,17 @@
 .empty-card__light {
     background: #F3F3F3;
     border-radius: 0.15rem;
+    min-height: 18rem;
 }
 
 .empty-card__dark {
     background: #26262C;
     border-radius: 0.4rem;
+    min-height: 18rem;
 }
 
 .profile-event-card__image {
-    min-height: 9rem;
+    height: 13rem;
     transition: 0.4s;
     position: relative;
     z-index: 1;
@@ -430,7 +433,7 @@
 .profile-event-card__info {
     display: flex;
     flex-direction: column;
-    padding: 0 0.6rem 0 0.6rem;
+    padding: 0.5rem 0.6rem 1rem 0.6rem;
 }
 .info-header {
     display: flex;

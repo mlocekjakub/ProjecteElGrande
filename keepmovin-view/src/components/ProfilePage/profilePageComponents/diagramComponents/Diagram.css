@@ -5,7 +5,7 @@
 }
 
 .diagram__dark {
-    width: 23rem;
+    width: 27rem;
     padding: 1rem;
 }
 .dark-hosted {
@@ -17,7 +17,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    min-height: 28rem;
+    min-height: 41.5rem;
     padding-bottom: 4.25rem;
 }
 .flex-row-container__dark {
