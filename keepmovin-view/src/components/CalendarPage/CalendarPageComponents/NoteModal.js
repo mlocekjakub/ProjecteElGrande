@@ -10,14 +10,14 @@ export default function NoteModal({openNote, onClose, eventId}) {
     const handleOpenNoteForm = () => {
         setOpenNoteForm(true);
     }
-    
+
     const handleCloseNoteForm = () => {
         setOpenNoteForm(false);
     }
 
     if (openNote) {
         return (
-            <div className="event-calendar-modal" onClick={onClose}>
+            <div className="event-calendar-modal" onClick={openNoteForm ? e => e.stopPropagation() : onClose}>
                 <div className="event-modal-content" onClick={e => e.stopPropagation()}>
                     <div className="event-modal-buttons" style={{justifyContent: "flex-end"}}>
                         <div className="close-button" role="button" onClick={() => {
@@ -36,7 +36,9 @@ export default function NoteModal({openNote, onClose, eventId}) {
                             {openNoteForm === false ?
                                 <div className="create-note-button" role="button" onClick={handleOpenNoteForm}>
                                     Create note
-                                </div> : <NoteModalForm openForm={openNoteForm} eventId={eventId} closeForm={handleCloseNoteForm}/>}
+                                </div> : <NoteModalForm openForm={openNoteForm}
+                                                        eventId={eventId}
+                                                        closeForm={handleCloseNoteForm}/>}
                         </div>
                         <div className="note-modal-body" style={{padding: "0.5rem"}}>
                             <NoteList eventId={eventId} reload={openNoteForm}/>
