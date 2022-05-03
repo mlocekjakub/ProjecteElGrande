@@ -101,5 +101,20 @@ namespace KeepMovinAPI.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpGet("remove-note")]
+        public IActionResult RemoveNoteById([FromHeader(Name = "session")] Guid userId, [FromHeader(Name = "Note")] Guid noteId)
+        {
+            try
+            {
+                _userNoteRepository.Remove(noteId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
     }
 }
