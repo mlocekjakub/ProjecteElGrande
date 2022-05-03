@@ -1,5 +1,8 @@
-﻿.note-card {
-    
+﻿.note-card-buttons {
+    position: fixed;
+    right: 40%;
+    margin-top: 1rem;
+    /*z-index: 1155;*/
 }
 
 .note-card-title {
@@ -20,4 +23,9 @@
 
 .note-card-body {
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+.note-card:hover {
+    background: #fafafa;
+    border-radius: 0.4rem;
 }
