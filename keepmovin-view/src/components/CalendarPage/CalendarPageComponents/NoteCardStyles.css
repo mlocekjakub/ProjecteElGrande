@@ -1,8 +1,7 @@
 ﻿.note-card-buttons {
-    position: fixed;
-    right: 40%;
+    position: absolute;
+    right: 43.2%;
     margin-top: 1rem;
-    /*z-index: 1155;*/
 }
 
 .note-card-title {
