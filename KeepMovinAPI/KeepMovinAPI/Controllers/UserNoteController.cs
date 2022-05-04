@@ -103,7 +103,7 @@ namespace KeepMovinAPI.Controllers
         }
         
         [HttpGet("remove-note")]
-        public IActionResult RemoveNoteById([FromHeader(Name = "session")] Guid userId, [FromHeader(Name = "Note")] Guid noteId)
+        public IActionResult RemoveNoteById([FromHeader(Name = "Session")] Guid userId, [FromHeader(Name = "Note")] Guid noteId)
         {
             try
             {
