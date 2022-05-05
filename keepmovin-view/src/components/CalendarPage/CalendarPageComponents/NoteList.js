@@ -35,7 +35,7 @@ export default function NoteList({eventId, reload, handleReload}) {
     if (!isFetching) {
         if (notesData.length === 0) {
             return (
-                <div style={{ textAlign: "center" }}>
+                <div className="note-empty-list">
                     <div>There is no notes.</div>
                     <div>Create your first one!</div>
                 </div>

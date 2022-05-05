@@ -59,6 +59,11 @@
     padding: 0.5rem 0;
 }
 
+.note-empty-list {
+    text-align: center;
+    margin-top: 1rem;
+}
+
 .create-note-button, .event-details-button {
     text-decoration: none;
     color: #FFFFFF;
