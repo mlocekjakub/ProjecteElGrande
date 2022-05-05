@@ -26,3 +26,7 @@
 .note-save {
     background: #00a300;
 }
+
+.note-save:hover, .note-dismiss:hover {
+    transform: translateY(-3px);
+}
