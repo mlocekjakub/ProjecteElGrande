@@ -1,7 +1,15 @@
-﻿.note-card-buttons {
-    position: absolute;
-    right: 43.2%;
-    margin-top: 1rem;
+﻿.note-card {
+    display: flex;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+}
+
+.note-card-content {
+    width: 100%;
+    margin-right: -1rem;
+}
+
+.note-card-buttons {
+    margin-top: 1.4rem;
 }
 
 .note-card-title {
@@ -20,11 +28,6 @@
     padding-bottom: 0.5rem;
 }
 
-.note-card-body {
-    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
-}
-
 .note-card:hover {
     background: #fafafa;
-    border-radius: 0.4rem;
 }

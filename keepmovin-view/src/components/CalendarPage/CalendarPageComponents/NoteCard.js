@@ -24,14 +24,6 @@ export default function NoteCard({noteId, time, title, message, handleReload}) {
 
     return (
         <div className="note-card">
-            <div className="note-card-buttons">
-                <div role="button">
-                    <EditIcon fontSize="small"/>
-                </div>
-                <div role="button" onClick={handleRemoveNote}>
-                    <DeleteForeverIcon fontSize="small"/>
-                </div>
-            </div>
             <div className="note-card-content">
                 <div className="note-card-header">
                     <div className="note-card-title">{title}</div>
@@ -39,6 +31,14 @@ export default function NoteCard({noteId, time, title, message, handleReload}) {
                 </div>
                 <div className="note-card-body">
                     {parse(message)}
+                </div>
+            </div>
+            <div className="note-card-buttons">
+                <div role="button">
+                    <EditIcon fontSize="small"/>
+                </div>
+                <div role="button" onClick={handleRemoveNote}>
+                    <DeleteForeverIcon fontSize="small"/>
                 </div>
             </div>
         </div>
