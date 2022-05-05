@@ -64,11 +64,7 @@ export default function NoteModalForm({openForm, eventId, closeForm}) {
                         Save
                     </div>
                 </div>
-                <div className="note-form-title"
-                     style={{
-                         marginLeft: "0.5rem",
-                         marginRight: "0.5rem"
-                     }}>
+                <div className="note-form-title">
                     <TextField
                         id="note-title"
                         label="Title" fullWidth
@@ -77,7 +73,7 @@ export default function NoteModalForm({openForm, eventId, closeForm}) {
                         onChange={handleTitleChange}
                     />
                 </div>
-                <div className="note-form-message" style={{padding: "0.5rem"}}>
+                <div className="note-form-message">
                     <CKEditor
                         editor={ClassicEditor}
                         config={{

@@ -35,11 +35,7 @@ export default function NoteModal({openNote, onClose, eventId}) {
                         </div>
                     </div>
                     <div className="event-modal-event-info">
-                        <div className="note-modal-header"
-                             style={{
-                                 marginLeft: "0.5rem",
-                                 marginRight: "0.5rem"
-                             }}>
+                        <div className="note-modal-header">
                             {openNoteForm === false ?
                                 <div className="create-note-button" role="button" onClick={handleOpenNoteForm}>
                                     Create note
@@ -47,7 +43,7 @@ export default function NoteModal({openNote, onClose, eventId}) {
                                                         eventId={eventId}
                                                         closeForm={handleCloseNoteForm}/>}
                         </div>
-                        <div className="note-modal-body" style={{padding: "0.5rem"}}>
+                        <div className="note-modal-body">
                             <NoteList eventId={eventId} reload={fetchNoteData} handleReload={handleRemoveOrEditNote} />
                         </div>
                     </div>

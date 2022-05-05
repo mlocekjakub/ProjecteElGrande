@@ -1,6 +1,6 @@
 ﻿.note-form-buttons-box {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .note-form-button {
@@ -9,10 +9,14 @@
     text-align: center;
     letter-spacing: 0.03rem;
     padding: 0.7rem 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     transition: var(--transition);
     border-radius: 0.3rem;
-    width: 30%;
+    width: 48.5%;
+}
+
+.note-form-message {
+    padding: 0.5rem 0;
 }
 
 .note-dismiss {

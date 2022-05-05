@@ -13,11 +13,10 @@
 }
 
 .event-modal-event-info {
-    padding: 0.5rem;
+    padding: 0 0.5rem 1.3rem;
 }
 
 .event-modal-content {
-    /*background-color: #f3f3f3;*/
     background: var(--container-clr-event);
     width: 20rem;
     border-radius: 0.4rem;
@@ -36,10 +35,8 @@
 }
 
 .event-modal-footer {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
 }
 
 .event-modal-title {
@@ -58,7 +55,11 @@
     border-bottom: 1px solid rgba(5, 5, 5, 0.20);
 }
 
-.create-note-button {
+.note-modal-body {
+    padding: 0.5rem 0;
+}
+
+.create-note-button, .event-details-button {
     text-decoration: none;
     color: #FFFFFF;
     text-align: center;
@@ -68,13 +69,13 @@
     transition: var(--transition);
     border-radius: 0.3rem;
 }
-.create-note-button:hover {
+.create-note-button:hover, .event-details-button:hover {
     transform: translateY(-3px);
     background: var(--bg-primary-dark);
     color: #FFFFFF;
 }
 
-.create-note-button-dark {
+.create-note-button-dark, .event-details-button-dark {
     text-decoration: none;
     color: #efeff1;
     text-align: center;
@@ -87,7 +88,7 @@
     border: 2px solid rgba(36, 38, 38, 0);
 }
 
-.create-note-button-dark:hover {
+.create-note-button-dark:hover, .event-details-button-dark:hover {
     border: 2px solid var(--bg-btn-primary-blue);
     background: 0;
     color: var(--bg-btn-primary-blue)
