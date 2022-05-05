@@ -4,7 +4,7 @@ import "./NoteCardStyles.css"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-export default function NoteCard({noteId, time, title, message}) {
+export default function NoteCard({noteId, time, title, message, handleReload}) {
     const handleRemoveNote = () => {
         fetch(`api/UserNote/remove-note`, {
             headers: {
@@ -14,9 +14,8 @@ export default function NoteCard({noteId, time, title, message}) {
         })
             .then(response => {
                 if (response.ok) {
-                    return response.json();
+                    handleReload();
                 }
-                throw response;
             })
             .catch(error => {
                 console.error("Error fetching data: ", error);
