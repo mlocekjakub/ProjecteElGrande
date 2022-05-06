@@ -3,9 +3,10 @@ import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsUpcomingMenu from "../profilePageComponents/EventsUpcomingMenu";
 import {useNavigate, useParams} from "react-router-dom";
 import LockIcon from '@mui/icons-material/Lock';
+import EventsMenu from "../profilePageComponents/EventsMenu";
+import EventCardUpcoming from "../profilePageComponents/EventCardUpcoming";
 
 function VisitedUpcoming() {
 
@@ -93,7 +94,7 @@ function VisitedUpcoming() {
             {isSectionPrivate 
                 ? <div className={`${theme === 'light' ? 'section-private-light' : 'section-private-dark'}`}><LockIcon /> This section is private</div> 
                 : <>
-                    <EventsUpcomingMenu content={upcomingEvents}/>
+                    <EventsMenu CardTag={EventCardUpcoming} content={upcomingEvents}/>
                     <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                         {isLimitBackUpcoming ?
                             <div className="paginate-back__profile-upcoming">

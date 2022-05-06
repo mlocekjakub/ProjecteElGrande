@@ -20,12 +20,19 @@ function TypeFilter() {
     const dispatch = useDispatch();
     
     useEffect(() => {
+        let isMounted = true;
         axios
             .get(`/api/type`)
             .then(response => {
-                setType(response.data)
-                dispatch(updateType(response.data))
+                if (isMounted) {
+                    setType(response.data)
+                    dispatch(updateType(response.data))
+                }
             })
+        
+        return () => {
+            isMounted = false
+        }
     },[])
     
     return (

@@ -3,9 +3,10 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import EventsPreviousMenu from "../profilePageComponents/EventsPreviousMenu";
 import {useParams} from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
+import EventsMenu from "../profilePageComponents/EventsMenu";
+import EventCardPrevious from "../profilePageComponents/EventCardPrevious";
 
 function VisitedPrevious(props) {
     const theme = useSelector((state) => state.theme.value)
@@ -86,7 +87,7 @@ function VisitedPrevious(props) {
             {isSectionPrivate 
                 ? <div className={`${theme === 'light' ? 'section-private-light' : 'section-private-dark'}`}><LockIcon /> This section is private</div>
                 : <>
-                    <EventsPreviousMenu content={previousEvents}/>
+                    <EventsMenu CardTag={EventCardPrevious} content={previousEvents}/>
                     <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                         {isLimitBackPrevious ?
                             <div className="paginate-back__profile-previous">

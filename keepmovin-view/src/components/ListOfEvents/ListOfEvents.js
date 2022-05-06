@@ -69,11 +69,7 @@ function SportEventsPage() {
     
     
     useEffect(() => {
-        let arr = [[1,2,3], [1,2,3] , [1,2,3]]
-        let output = []
-       
-        output.push(...arr.shift())
-        
+        let isMounted = true;
         
         setIsFetchingData(true);
         setEventsNotFound(false);
@@ -87,17 +83,22 @@ function SportEventsPage() {
                 axios
                     .get(correctFetchUrl)
                     .then(response => {
-                        if (response.data === '') {
-                            setEventsNotFound(true);
+                        if (isMounted) {
+                            if (response.data === '') {
+                                setEventsNotFound(true);
+                            }
+                            else {
+                                setFoundEvents(response.data.eventsFound)
+                                setNumberOfPages(response.data.numberOfPages)
+                            }
+                            setIsFetchingData(false); 
                         }
-                        else {
-                            setFoundEvents(response.data.eventsFound)
-                            setNumberOfPages(response.data.numberOfPages)
-                        }
-                        setIsFetchingData(false);
                     });
             }, 1000) 
         )
+        return () => {
+            isMounted = false;
+        }
     }, [sportsFilter,
         experienceFilter, typeFilter,
         minParticipantsFilter, maxParticipantsFilter, 

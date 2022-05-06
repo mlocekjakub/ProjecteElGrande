@@ -17,6 +17,7 @@ function ProfessionalEventsDiagram() {
     const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/Event/user-events`, {
@@ -26,8 +27,11 @@ function ProfessionalEventsDiagram() {
                         "userId" : localStorage.getItem('session'),
                     }
                 })
-                .then(response => SetSportData(response.data))
+                .then(response => isMounted && SetSportData(response.data))
         }
+        return () => {
+            isMounted = false;
+        };
     }, [])
 
     function SetSportData(events) {

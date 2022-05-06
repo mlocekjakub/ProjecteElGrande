@@ -76,9 +76,18 @@
     background: rgba(38, 38, 44, 0.7);
 }
 
-.event-1 > img{
+.img-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.img-section > img{
+    width: 100%;
     object-fit: scale-down;
-    max-width: 14rem;
+    max-width: 18rem;
     height: 100%;
     border-radius: 0.3rem;
     
@@ -96,18 +105,6 @@
 /*___________________*/
 
 /*go to */
-
-.events__card-nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
-    border-radius: 0.3rem;
-    min-width: 15ch;
-}
-
-
-
 
 .sign-up-event {
     background: var(--bg-btn-primary-blue);
@@ -313,18 +310,6 @@
     max-width: 0.5rem;
 }
 
-.events__organiser-info {
-    display: flex;
-    align-items: center;
-    align-self: end;
-    justify-content: center;
-    font-size: 0.6rem;
-    gap: 0.2rem;
-    transition: 0.2s;
-    text-decoration: none !important;
-    z-index: 1000;
-}
-
 .event__organiser-light {
     color: var(--clr-header);
 }
@@ -476,8 +461,82 @@
     color: var(--clr-paragraph)
 }
 .event-btn-dark {
-    
     color: #adadb8;
+}
+
+.events__organiser-desktop {
+    align-items: center;
+    align-self: end;
+    justify-content: center;
+}
+
+.events__organiser-mobile {
+    align-items: center;
+    align-self: start;
+    justify-content: start;
+}
+
+.events__organiser-info {
+    display: flex;
+    font-size: 0.6rem;
+    gap: 0.2rem;
+    transition: 0.2s;
+    text-decoration: none !important;
+    z-index: 900;
+}
+
+
+.events__card-display-mobile {
+    display: none;
+    flex-direction: column;
+    align-items: start;
+    border-radius: 0.3rem;
+    gap: 1rem;
+}
+
+.events__card-display-desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    border-radius: 0.3rem;
+    min-width: 15ch;
+}
+
+
+@media (max-width: 1400px) {
     
+    .events-statistics {
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+    
+    .events-filters__container {
+        flex-direction: column;
+    }
+
+    .filter-container {
+        max-width: initial;
+    }
+    
+    .events__card-display-mobile {
+        display: flex;
+    }
+    
+    .events__card-display-desktop {
+        display: none;
+    }
+
+    .events-page__locating {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .event-1 {
+        flex-direction: column;
+    }
 }
 

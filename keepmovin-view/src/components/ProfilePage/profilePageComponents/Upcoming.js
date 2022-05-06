@@ -3,8 +3,10 @@ import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsUpcomingMenu from "./EventsUpcomingMenu";
 import {useParams} from "react-router-dom";
+import EventsMenu from "./EventsMenu";
+import EventCardPrevious from "./EventCardPrevious";
+import EventCardUpcoming from "./EventCardUpcoming";
 
 function Upcoming(props) {
 
@@ -24,6 +26,7 @@ function Upcoming(props) {
     
 
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/Event/events-user/upcoming`, {
@@ -36,10 +39,15 @@ function Upcoming(props) {
                     }
                 })
                 .then(response => {
-                    setNumberOfPagesUpcoming(response.data["numberOfPages"])
-                    setUpcomingEvents(response.data["eventsFound"])
+                    if (isMounted) {
+                        setNumberOfPagesUpcoming(response.data["numberOfPages"])
+                        setUpcomingEvents(response.data["eventsFound"])
+                    }
                 })
         }
+        return () => {
+            isMounted = false;
+        };
     },[currentPageUpcoming, routeChange])
 
     useEffect(() => {
@@ -70,7 +78,7 @@ function Upcoming(props) {
     
     return (
         <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
-            <EventsUpcomingMenu content={upcomingEvents}/>
+            <EventsMenu CardTag={EventCardUpcoming} type={'upcoming'} content={upcomingEvents}/>
             <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackUpcoming ?
                     <div className="paginate-back__profile-upcoming">

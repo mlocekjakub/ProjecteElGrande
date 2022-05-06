@@ -57,12 +57,12 @@ function VisitedProfessionalEventsDiagram() {
         let sports = sportsList.map((sport) => sport.sportName);
         let counts = sportsList.map((sport) => sport.count)
         setData({
-            labels: sports.length !== 0 ? sportsList.map((sport) => sport.sportName) : ['none'],
+            labels: (sports && sports.length !== 0) ? sportsList.map((sport) => sport.sportName) : ['none'],
             datasets: [
                 {
                     label: 'Professional Events',
                     backgroundColor: [
-                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#FF4136'}`,
+                        `${(sports && sports.length === 0) ? 'rgba(38,38,44,0.2)' : '#FF4136'}`,
                         '#FF4136',
                         '#B21F00',
                         '#C9DE00',
@@ -74,7 +74,7 @@ function VisitedProfessionalEventsDiagram() {
                         '#6b5b95'
                     ],
                     hoverBackgroundColor: [
-                        `${sports.length === 0 ? 'rgba(38,38,44,0.2)' : '#865a55'}`,
+                        `${(sports && sports.length === 0) ? 'rgba(38,38,44,0.2)' : '#865a55'}`,
                         '#865a55',
                         '#501800',
                         '#4B5000',
@@ -85,7 +85,7 @@ function VisitedProfessionalEventsDiagram() {
                         '#a17c5a',
                         '#877f9a'
                     ],
-                    data: sports.length !== 0 ? sportsList.map((sport) => sport.count) : [1],
+                    data: (sports && sports.length !== 0) ? sportsList.map((sport) => sport.count) : [1],
                     borderColor: "rgba(247, 103, 7, 0)"
                 }
             ]

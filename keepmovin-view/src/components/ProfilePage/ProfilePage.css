@@ -295,6 +295,7 @@
 
 .event-card {
     text-align: center;
+    height: 17rem;
 }
 
 .event-card__light {
@@ -316,13 +317,15 @@
 .empty-card__light {
     background: #F3F3F3;
     border-radius: 0.15rem;
-    min-height: 18rem;
 }
 
 .empty-card__dark {
     background: #26262C;
     border-radius: 0.4rem;
-    min-height: 18rem;
+}
+
+.empty-card {
+    height: 17rem;
 }
 
 .profile-event-card__image {
@@ -358,7 +361,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 1.5rem;
-    min-height: 26rem;
+    /*min-height: 26rem;*/
 }
 
 
@@ -564,6 +567,96 @@
 
 .user-data-align {
     padding-left: 0.4rem;
+}
+
+
+@media (max-width: 1400px) {
+    .profile-page-wrapper {
+        flex-direction: column;
+    }
+
+    .profile-card__container {
+       justify-content: center;
+       align-items: center;
+    }
+
+    .personal-content {
+        align-items: center;
+    }
+
+    .socials-name__container__dark {
+        padding: 1rem;
+    }
+
+    .profile__socials-info {
+        justify-content: space-evenly;
+        padding-left: 0;
+        font-size: 1.5rem;
+    }
+
+    .statistics__container {
+        align-items: center;
+        padding: 0 0.5rem 0 0.5rem;
+    }
+
+    .events-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-gap: 1.5rem;
+    }
+    
+    .events-menu > div {
+        width: clamp(5rem, 13rem, 15rem);
+    }
+    
+    .statistics__container {
+        padding: 0 0.5rem 0 0.5rem;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    .profile__socials-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+    }
+
+    .events-menu {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-gap: 1.5rem;
+    }
+
+    .info__nav__dark {
+        flex-direction: column;
+        align-self: start;
+    }
+    
+    .info__nav {
+        flex-direction: column;
+        border-top: 0 !Important;
+    }
+    
+    .info__nav__dark > div{
+        border-top: 0 !Important;
+        padding-left: 1rem;
+        margin-left: -0.5rem;
+    }
+
+    .info__nav__dark > div:hover {
+        border-left: 2px solid rgba(66, 133, 244, 0.3);
+    }
+
+    .button-active__dark {
+        border-left: 2px solid var(--bg-btn-primary-blue) !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
+        
+    }
 }
 
 

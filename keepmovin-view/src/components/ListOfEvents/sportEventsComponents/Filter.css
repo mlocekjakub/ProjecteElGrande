@@ -201,6 +201,22 @@
     animation: icon-move-down 0.3s forwards 1;
 }
 
+@media (max-width: 1400px) {
+    .date-selector-container {
+        padding-left: 0;
+    }
+
+    .date-picker__first-date, .date-picker__second-date {
+        width: initial;
+    }
+
+    .date-picker {
+        top: 55rem;
+        z-index: 1000;
+    }
+    
+}
+
 
 
 

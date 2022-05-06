@@ -3,9 +3,10 @@ import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsHostedMenu from "../profilePageComponents/EventsHostedMenu";
 import {useParams} from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
+import EventsMenu from "../profilePageComponents/EventsMenu";
+import EventCardHosted from "../profilePageComponents/EventCardHosted";
 
 function VisitedHosted(props) {
     const theme = useSelector((state) => state.theme.value)
@@ -88,7 +89,7 @@ function VisitedHosted(props) {
             {isSectionPrivate 
                 ? <div className={`${theme === 'light' ? 'section-private-light' : 'section-private-dark'}`}><LockIcon /> This section is private</div> 
                 : <>
-                    <EventsHostedMenu content={hostedEvents}/>
+                    <EventsMenu CardTag={EventCardHosted} content={hostedEvents}/>
                     <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                         {isLimitBackHosted ?
                             <div className="paginate-back__profile-hosted">

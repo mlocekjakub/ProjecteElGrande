@@ -14,6 +14,7 @@ function EventCardUpcoming(props) {
     const navigate = useNavigate();
     
     useEffect(() => {
+        let isMounted = true;
         axios
             .get(`/api/Event/events-user`, {
                 headers: {
@@ -22,9 +23,10 @@ function EventCardUpcoming(props) {
                     "eventsId": props.eventCardId
                 }
             })
-            .then(response => {
-                setUsersJoined(response.data)
-            })
+            .then(response => isMounted && setUsersJoined(response.data))
+        return () => {
+            isMounted = false;
+        };
     }, []);
     
     return (

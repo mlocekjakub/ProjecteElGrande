@@ -23,11 +23,13 @@ function SportFilter() {
     
     
     useEffect(() => {
+        let isMounted = true;
         axios
             .get(`/api/sport/${sportSearch}`)
-            .then(response => {
-                setSports(response.data)
-            })
+            .then(response => isMounted && setSports(response.data))
+        return () => {
+            isMounted = false;
+        }
     }, [sportSearch])
     
     useEffect(() => {

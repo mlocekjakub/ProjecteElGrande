@@ -35,6 +35,7 @@ export default function ProfilePage() {
     
     
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/UserProfile/uploadProfileInformation`, {
@@ -44,8 +45,7 @@ export default function ProfilePage() {
                     'userId': localStorage.getItem("session")
                 }
                 })
-                .then(content => {
-                    setProfileDetails({
+                .then(content => content.status === 200 && isMounted && setProfileDetails({
                         userName: `${content.data.name ? content.data.name : ''}`,
                         surname: `${content.data.surname ? content.data.surname : ''}`,
                         location: {
@@ -59,9 +59,10 @@ export default function ProfilePage() {
                         organisation: {
                             name: `${content.data.organisation && content.data.organisation.name ? content.data.organisation.name : ''}`
                         },
-                        userId: localStorage.getItem('session')
-                    })
-                })
+                        userId: localStorage.getItem('session')}))
+        }
+        return () => {
+            isMounted = false;
         }
     }, [routeChange])
     

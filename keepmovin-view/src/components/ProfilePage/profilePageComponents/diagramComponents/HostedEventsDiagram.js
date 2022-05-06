@@ -19,6 +19,7 @@ function HostedEventsDiagram() {
     const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/Event/events-user/hosted-statistics`, {
@@ -28,10 +29,11 @@ function HostedEventsDiagram() {
                         "userId" : localStorage.getItem('session'),
                     }
                 })
-                .then(response => {
-                    SetSportData(response.data)
-                })
+                .then(response => isMounted && SetSportData(response.data))
         }
+        return () => {
+            isMounted = false;
+        };
     }, [])
 
     function SetSportData(events) {

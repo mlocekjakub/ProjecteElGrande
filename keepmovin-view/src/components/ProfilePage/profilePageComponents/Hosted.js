@@ -3,7 +3,8 @@ import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import EventsHostedMenu from "./EventsHostedMenu";
+import EventsMenu from "./EventsMenu";
+import EventCardHosted from "./EventCardHosted";
 
 function Hosted(props) {
     const theme = useSelector((state) => state.theme.value)
@@ -18,6 +19,7 @@ function Hosted(props) {
 
 
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/Event/events-user/hosted`, {
@@ -30,10 +32,15 @@ function Hosted(props) {
                     }
                 })
                 .then(response => {
-                    setNumberOfPagesHosted(response.data["numberOfPages"])
-                    setHostedEvents(response.data["eventsFound"])
+                    if (isMounted) {
+                        setNumberOfPagesHosted(response.data["numberOfPages"])
+                        setHostedEvents(response.data["eventsFound"])  
+                    }
                 })
         }
+        return () => {
+            isMounted = false;
+        };
     },[currentPageHosted])
 
     useEffect(() => {
@@ -65,7 +72,7 @@ function Hosted(props) {
 
     return (
         <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
-            <EventsHostedMenu content={hostedEvents}/>
+            <EventsMenu CardTag={EventCardHosted} type={'hosted'} content={hostedEvents}/>
             <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackHosted ?
                     <div className="paginate-back__profile-hosted">

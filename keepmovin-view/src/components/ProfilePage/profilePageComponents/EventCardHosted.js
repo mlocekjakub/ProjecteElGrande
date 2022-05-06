@@ -14,18 +14,19 @@ function EventCardHosted(props) {
     const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
-        let eventId = props.eventCardId
+        let isMounted = true;
         axios
             .get(`/api/Event/events-user`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    "eventsId": eventId
+                    "eventsId": props.eventCardId
                 }
             })
-            .then(response => {
-                setUsersJoined(response.data)
-            })
+            .then(response => isMounted && setUsersJoined(response.data))
+        return () => {
+            isMounted = false;
+        };
     }, []);
     
     return (

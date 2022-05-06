@@ -3,7 +3,9 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {ArrowBackIos} from "@material-ui/icons";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import EventsPreviousMenu from "./EventsPreviousMenu";
+import EventsMenu from "./EventsMenu";
+import EventCardHosted from "./EventCardHosted";
+import EventCardPrevious from "./EventCardPrevious";
 
 function Previous(props) {
     const theme = useSelector((state) => state.theme.value)
@@ -17,6 +19,7 @@ function Previous(props) {
     const isUserLogged = useSelector((state) => state.isLogged.value)
     
     useEffect(() => {
+        let isMounted = true;
         if (isUserLogged) {
             axios
                 .get(`/api/Event/events-user/previous`, {
@@ -28,10 +31,15 @@ function Previous(props) {
                     }
                 })
                 .then(response => {
-                    setNumberOfPagesPrevious(response.data["numberOfPages"])
-                    setPreviousEvents(response.data["eventsFound"])
+                    if (isMounted) {
+                        setNumberOfPagesPrevious(response.data["numberOfPages"])
+                        setPreviousEvents(response.data["eventsFound"]) 
+                    }
                 })
         }
+        return () => {
+            isMounted = false;
+        };
     }, [currentPagePrevious])
 
     useEffect(() => {
@@ -62,7 +70,7 @@ function Previous(props) {
     
     return (
         <div className={`info-content__container ${theme === 'light' ? 'info-content__container__light' : 'info-content__container__dark'}`}>
-            <EventsPreviousMenu content={previousEvents}/>
+            <EventsMenu CardTag={EventCardPrevious}  type={'previous'} content={previousEvents}/>
             <div className={`profile__paginate ${theme === 'light' ? 'profile__paginate__light' : 'profile__paginate__dark'}`}>
                 {isLimitBackPrevious ?
                     <div className="paginate-back__profile-previous">
