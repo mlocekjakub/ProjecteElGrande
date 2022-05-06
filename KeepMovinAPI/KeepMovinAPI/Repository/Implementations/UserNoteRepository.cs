@@ -22,7 +22,9 @@ namespace KeepMovinAPI.Repository.Implementations
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var noteToRemove = _context.UserNote.First(note => note.NoteId == id);
+            _context.UserNote.Remove(noteToRemove);
+            _context.SaveChanges();
         }
 
         public UserNote Get(Guid id)
