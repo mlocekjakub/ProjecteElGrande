@@ -607,7 +607,7 @@
     }
     
     .events-menu > div {
-        width: clamp(5rem, 13rem, 15rem);
+        width: 14rem;
     }
     
     .statistics__container {

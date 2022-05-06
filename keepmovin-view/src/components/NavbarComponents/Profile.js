@@ -1,5 +1,4 @@
 ﻿import React, {useEffect, useRef, useState} from 'react';
-import profileImage from "../../Images/pexels-photo-771742.jpeg";
 import defaultProfileImage from "../../Images/DefaultProfileImage.jpg"
 import {Link} from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
