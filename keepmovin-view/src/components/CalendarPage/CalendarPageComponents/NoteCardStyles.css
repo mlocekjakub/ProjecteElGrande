@@ -31,3 +31,7 @@
 .note-card:hover {
     background: #fafafa;
 }
+
+.note-card-edit {
+    margin-top: 0.5rem;
+}

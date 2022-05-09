@@ -8,9 +8,14 @@ export default function NoteModal({openNote, onClose, eventId}) {
     const [openNoteForm, setOpenNoteForm] = useState(false);
     const [fetchNoteData, setFetchNoteData] = useState(false); //dummy toggle state to rerender list of notes 
 
-    const handleOpenNoteForm = () => {
+    const edit = false;
+    
+    const handleOpenNoteForm = (edit) => {
+        console.log(edit);
         setFetchNoteData(!fetchNoteData);
-        setOpenNoteForm(true);
+        if (edit !== true) {
+            setOpenNoteForm(true);
+        }
     }
 
     const handleCloseNoteForm = () => {
@@ -44,7 +49,7 @@ export default function NoteModal({openNote, onClose, eventId}) {
                                                         closeForm={handleCloseNoteForm}/>}
                         </div>
                         <div className="note-modal-body">
-                            <NoteList eventId={eventId} reload={fetchNoteData} handleReload={handleRemoveOrEditNote} />
+                            <NoteList eventId={eventId} reload={fetchNoteData} handleReload={handleRemoveOrEditNote} handleOpenNoteForm={handleOpenNoteForm} handleCloseNoteForm={handleCloseNoteForm} />
                         </div>
                     </div>
                 </div>

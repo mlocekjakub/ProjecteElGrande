@@ -5,9 +5,9 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './NoteModalFormStyles.css';
 
-export default function NoteModalForm({openForm, eventId, closeForm}) {
-    const [noteTitle, setNoteTitle] = useState("");
-    const [noteData, setNoteData] = useState("");
+export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTitle = "", givenNoteMessage = ""}) {
+    const [noteTitle, setNoteTitle] = useState(givenNoteTitle);
+    const [noteData, setNoteData] = useState(givenNoteMessage);
 
     const handleTitleChange = (e) => {
         setNoteTitle(e.target.value);
