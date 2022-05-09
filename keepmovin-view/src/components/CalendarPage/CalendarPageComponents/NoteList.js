@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LoadingSpinner from "./LoadingSpinner";
 import NoteCard from "./NoteCard";
 
-export default function NoteList({eventId, reload, handleReload}) {
+export default function NoteList({eventId, reload, handleReload, handleOpenNoteForm, handleCloseNoteForm}) {
     const [notesData, setNotesData] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
@@ -43,11 +43,14 @@ export default function NoteList({eventId, reload, handleReload}) {
         } else {
             return notesData.map((note) =>
                 (<NoteCard key={note.noteId}
+                           eventId={eventId}
                            noteId={note.noteId}
                            time={note.time}
                            title={note.title}
                            message={note.message}
-                           handleReload={handleReload}/>))
+                           handleReload={handleReload}
+                           handleOpenNoteForm={handleOpenNoteForm}
+                           handleCloseNoteForm={handleCloseNoteForm}/>))
         }
     } else {
         return (
