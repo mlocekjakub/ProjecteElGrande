@@ -538,5 +538,9 @@
     .event-1 {
         flex-direction: column;
     }
+
+    .events-page-wrapper {
+        margin: 7rem 1rem;
+    }
 }
 

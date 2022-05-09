@@ -17,7 +17,10 @@ export default function WelcomePage() {
                         Welcome <span>to Keep Movin</span>
                         <hr className="welcome__separator"/>
                         <div className="web-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac ex sed ante lobortis dapibus ac in enim. Sed massa nisl, pellentesque vel est et, vulputate maximus eros.
+                            Lorem ipsum dolor sit amet, consectetur 
+                            adipiscing elit. Donec ac ex sed ante lobortis 
+                            dapibus ac in enim. Sed massa nisl, pellentesque 
+                            vel est et, vulputate maximus eros.
                         </div>
                     </div>
                     <div className="welcome__nav">

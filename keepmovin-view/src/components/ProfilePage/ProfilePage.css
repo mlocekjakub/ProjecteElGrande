@@ -657,6 +657,10 @@
         border-right: none !important;
         
     }
+    
+    .profile-page-wrapper {
+        margin: 7rem 1rem;
+    }
 }
 
 

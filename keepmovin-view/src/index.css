@@ -31,4 +31,5 @@ html {
 
 #body {
     background: var(--bg-website);
+    overflow-x: hidden;
 }
