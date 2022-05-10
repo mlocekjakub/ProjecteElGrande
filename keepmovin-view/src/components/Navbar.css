@@ -391,7 +391,7 @@ header {
    background: none;
    border: none;
    font-weight: bold;
-   color: var(--expanded-containers-color);
+   color: #efeff1;
    display: none;
    align-items: center;
    justify-content: center;
@@ -423,6 +423,7 @@ header {
    display: initial;
    animation: slide-in 0.5s forwards;
 }
+
 
 
 

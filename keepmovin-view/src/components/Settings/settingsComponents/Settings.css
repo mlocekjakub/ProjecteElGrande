@@ -96,7 +96,7 @@ html {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding-top: 3rem;
+    padding: 3rem;
 }
 
 .settings-password__dark > input[type=password] {
@@ -105,7 +105,7 @@ html {
     border: 2px solid hsla(0, 0%, 100%, 0.1);
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
-    min-width: 30ch;
+   /* min-width: 30ch;*/
 }
 
 .settings-password__dark > input[type=password]:focus {
@@ -357,6 +357,81 @@ label {
 
 /*______*/
 
+
+
+@media (max-width: 1400px) {
+    .settings__container {
+        flex-direction: column;
+        margin: 7rem 10% 2rem 10%;
+    }
+
+    .settings__change-password-container {
+        padding-bottom: 3rem;
+    }
+    
+    
+    .settings-page {
+        margin-bottom: 4rem;
+    }
+
+    
+    
+    
+}
+
+@media (max-width: 768px) {
+    .settings__container {
+        flex-direction: column;
+        margin: 2rem 1rem;
+    }
+
+    .settings__old-password > label,
+    .settings__new-password > label,
+    .settings__confirm-new-password > label {
+        min-width: initial;
+        text-align: center;
+    }
+
+    .settings__old-password,
+    .settings__new-password,
+    .settings__confirm-new-password {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .settings-page {
+        margin-top: 7rem;
+        margin-bottom: 3rem;
+    }
+
+    .settings__edit-profile-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 3rem 2rem 3rem 2rem;
+    }
+
+    .settings__privacy-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 3rem 2rem 3rem 2rem;
+    }
+
+    .settings__change-password-container {
+        padding: 3rem 2rem 3rem 2rem;
+    }
+
+    .settings-validation__error {
+        top: 8rem;
+        
+    }
+    .settings-validation__success {
+        top: 8rem;
+      
+    }
+}
 
 
 
