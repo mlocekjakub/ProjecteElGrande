@@ -359,7 +359,7 @@ label {
 
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
     .settings__container {
         flex-direction: column;
         margin: 7rem 10% 2rem 10%;

@@ -440,7 +440,7 @@ header {
 /*-------*/
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
    header {
       padding: 20px 5%;
    }
@@ -481,6 +481,12 @@ header {
       font-weight: bold;
    }
    
+}
+
+@media (max-width: 300px) {
+   .mobile-search-txt-header {
+      width: 75%;
+   }
 }
 
 @keyframes slideIn {
