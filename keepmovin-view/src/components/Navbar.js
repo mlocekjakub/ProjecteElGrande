@@ -11,7 +11,7 @@ import SignIn from "./NavbarComponents/SignIn";
 import {useDispatch, useSelector} from "react-redux";
 import burgerIcon from "../Images/icon-hamburger.svg"
 import closeIcon from "../Images/icon-close.svg"
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import MobileCalendar from "./NavbarComponents/MobileComponents/MobileCalendar";
 import MobileProfile from "./NavbarComponents/MobileComponents/MobileProfile";
 import MobileNotifications from "./NavbarComponents/MobileComponents/MobileNotifications";
@@ -59,6 +59,23 @@ export default function Navbar() {
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    const mobileMenuRef = useRef(null);
+
+    useEffect(() => {
+        const checkIfClickedOutside = (e) => {
+            if (
+                mobileMenuExpanded
+                && mobileMenuRef.current
+                && !mobileMenuRef.current.contains(e.target)) {
+                setMobileMenuExpanded(false)
+            }
+        };
+        document.addEventListener("mousedown", checkIfClickedOutside);
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside);
+        };
+    }, [mobileMenuExpanded]);
     
     return (
         <>
@@ -94,12 +111,12 @@ export default function Navbar() {
                     </button>
                 </nav>
             </header>
-            <div className={`mobile-menu-expanded 
+            <div ref={mobileMenuRef} className={`mobile-menu-expanded 
             ${(mobileMenuExpanded && windowSize < 768) ? 'mobile-menu-active' : 'mobile-menu-inactive'}`}>
-                {isUserLogged ? <MobileProfile /> : <SignIn />}
+                {isUserLogged ? <MobileProfile /> : <SignIn theme={theme} windowSize={windowSize}/>}
                 {isUserLogged && <MobileNotifications />}
                 {isUserLogged && <MobileCalendar />}
-                <MobileHome />
+                <MobileHome windowSize={windowSize}/>
             </div>
         </>
     );

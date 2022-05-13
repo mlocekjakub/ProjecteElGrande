@@ -414,7 +414,7 @@ header {
 }
 
 .mobile-search-txt-header:focus {
-   outline: none !important;
+   outline: none !Important;
    background: var(--searchbar-clr-focus);
    border: 0 !important;
 }
@@ -422,6 +422,10 @@ header {
 .mobile-search-menu-active {
    display: initial;
    animation: slide-in 0.5s forwards;
+}
+
+.sign-in-mobile-display {
+   color: #242626 !Important;
 }
 
 
