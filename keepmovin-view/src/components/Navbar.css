@@ -428,6 +428,15 @@ header {
    color: #242626 !Important;
 }
 
+.events-menu-mobile {
+   position: absolute;
+   background: var(--expanded-clr);
+   top: 5rem;
+   width: 13rem;
+   display: flex;
+   flex-direction: column;
+}
+
 
 
 

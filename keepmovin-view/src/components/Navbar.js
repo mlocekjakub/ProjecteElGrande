@@ -19,6 +19,8 @@ import MobileHome from "./NavbarComponents/MobileComponents/MobileHome";
 import SearchIcon from "@mui/icons-material/Search";
 import {changeSearchPhrase} from "../features/SearchPhraseNav";
 import axios from "axios";
+import EventsSearchedCard from "./NavbarComponents/EventsSearchedCard";
+import {useDetectClickOutside} from "react-detect-click-outside";
 
 
 export default function Navbar() {
@@ -37,13 +39,17 @@ export default function Navbar() {
     
     const burgerButtonRef = useRef(null);
 
+    const refFoundEvents = useRef(null);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log(typedInput)
         if (typedInput !== '') {
             axios
                 .get(`/api/Event/input/${typedInput}`)
                 .then(response => {
+                    console.log(response.data)
                     setEventsFound(response.data)
 
                 })
@@ -64,6 +70,14 @@ export default function Navbar() {
 
     const mobileMenuRef = useRef(null);
 
+    const refFoundEventsClickOutside = useDetectClickOutside(
+        { onTriggered: closeSearchMenu });
+
+    function closeSearchMenu() {
+        setEventsFound([])
+    }
+    
+
     useEffect(() => {
         const checkIfClickedOutside = (e) => {
             if (
@@ -80,6 +94,27 @@ export default function Navbar() {
         };
     }, [mobileMenuExpanded]);
     
+    function ExpandSearchMenu() {
+        if (searchMenuExpanded) {
+            dispatch(changeSearchPhrase(""))
+        }
+        setSearchMenuExpanded(!searchMenuExpanded)
+    }
+    
+
+    function EventsMenu() {
+        return eventsFound.map((event) =>
+            (<EventsSearchedCard key={event.eventId}
+                                 isMobile={true}
+                                 eventSearchedId={event.eventId}
+                                 eventName={event.name}
+                                 eventDateStart={event.startEvent}
+                                 sportName={event.sport}
+                                 experienceLevel={event.experienceLevel}
+                                 maxParticipants={event.maxParticipants}/>))
+    }
+
+    
     return (
         <>
             <header data-theme={theme}>
@@ -94,19 +129,24 @@ export default function Navbar() {
                         {isUserLogged && <Notifications />}
                         {isUserLogged ? <Profile /> : <SignIn />}
                     </div>
-                    <button className="search-mobile-menu">
-                        <input type="text" 
-                               className={`mobile-search-txt-header
-                               ${searchMenuExpanded && windowSize < 768 && 'mobile-search-menu-active'}`} 
-                               placeholder="Search for event.."
-                               required
-                               value = {typedInput}
-                               onChange = {(e) => { dispatch(changeSearchPhrase(e.target.value)) }
-                               }
-                        />
+                    <button className="search-mobile-menu" ref={refFoundEventsClickOutside}>
+                        <div>
+                            <input type="text"
+                                   className={`mobile-search-txt-header
+                               ${searchMenuExpanded && windowSize < 768 && 'mobile-search-menu-active'}`}
+                                   placeholder="Search for event.."
+                                   required
+                                   value = {typedInput}
+                                   onChange = {(e) => { dispatch(changeSearchPhrase(e.target.value)) }
+                                   }
+                            />
+                            <div className="events-menu-mobile">
+                                {typedInput && <EventsMenu />}
+                            </div>
+                        </div>
                         <SearchIcon 
                             className="mobile-header-search-icon" 
-                            onClick={() => setSearchMenuExpanded(!searchMenuExpanded)}/>
+                            onClick={() => ExpandSearchMenu()}/>
                     </button>
                     <button ref={burgerButtonRef} className="burger-menu" 
                             onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}>
