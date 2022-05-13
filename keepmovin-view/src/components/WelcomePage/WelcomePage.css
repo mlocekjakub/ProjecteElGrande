@@ -38,7 +38,7 @@
 }
 
 .welcome__events-details-button {
-    border: 1px solid var(--bg-btn-primary-blue);
+    border: 2px solid var(--bg-btn-primary-blue);
     color: var(--bg-btn-primary-blue);
 }
 

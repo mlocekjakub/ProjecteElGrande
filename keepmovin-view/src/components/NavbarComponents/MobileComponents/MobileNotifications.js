@@ -19,10 +19,10 @@ function MobileNotifications() {
                 ? 'mobile-expanded__profile-menu-active'
                 : 'mobile-expanded__profile-menu-inactive'}`}>
                 <div className="menu-notification">
-                    Filip Liked your photo
+                    Filip liked your photo
                 </div>
                 <div className="menu-notification">
-                    Filip Followed you
+                    Filip followed you
                 </div>
             </div>
         </div>

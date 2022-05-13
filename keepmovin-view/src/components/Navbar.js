@@ -34,6 +34,8 @@ export default function Navbar() {
     const typedInput = useSelector((state) => state.searchNav.value)
 
     const [eventsFound, setEventsFound] = useState([]);
+    
+    const burgerButtonRef = useRef(null);
 
     const dispatch = useDispatch();
 
@@ -67,7 +69,8 @@ export default function Navbar() {
             if (
                 mobileMenuExpanded
                 && mobileMenuRef.current
-                && !mobileMenuRef.current.contains(e.target)) {
+                && !mobileMenuRef.current.contains(e.target)
+                && !burgerButtonRef.current.contains(e.target)) {
                 setMobileMenuExpanded(false)
             }
         };
@@ -105,7 +108,7 @@ export default function Navbar() {
                             className="mobile-header-search-icon" 
                             onClick={() => setSearchMenuExpanded(!searchMenuExpanded)}/>
                     </button>
-                    <button className="burger-menu" 
+                    <button ref={burgerButtonRef} className="burger-menu" 
                             onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}>
                         <img src={(mobileMenuExpanded && windowSize < 768) ? closeIcon : burgerIcon} alt='burgerIcon' />
                     </button>
