@@ -17,10 +17,7 @@ export default function NoteCard({eventId, noteId, time, title, message, handleR
         handleCloseNoteForm();
         setEditNote(false);
     }
-
-    const handleEditNote = () => {
-    }
-
+    
     const handleRemoveNote = () => {
         fetch(`api/UserNote/remove-note`, {
             headers: {
