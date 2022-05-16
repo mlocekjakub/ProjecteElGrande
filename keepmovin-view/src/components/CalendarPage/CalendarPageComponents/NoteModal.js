@@ -6,9 +6,7 @@ import NoteModalForm from "./NoteModalForm";
 
 export default function NoteModal({openNote, onClose, eventId}) {
     const [openNoteForm, setOpenNoteForm] = useState(false);
-    const [fetchNoteData, setFetchNoteData] = useState(false); //dummy toggle state to rerender list of notes 
-
-    const edit = false;
+    const [fetchNoteData, setFetchNoteData] = useState(false); //dummy toggle state to rerender list of notes
     
     const handleOpenNoteForm = (edit) => {
         setFetchNoteData(!fetchNoteData);
