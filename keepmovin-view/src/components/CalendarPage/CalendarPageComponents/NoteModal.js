@@ -11,7 +11,6 @@ export default function NoteModal({openNote, onClose, eventId}) {
     const edit = false;
     
     const handleOpenNoteForm = (edit) => {
-        console.log(edit);
         setFetchNoteData(!fetchNoteData);
         if (edit !== true) {
             setOpenNoteForm(true);
