@@ -5,7 +5,7 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './NoteModalFormStyles.css';
 
-export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTitle = "", givenNoteMessage = ""}) {
+export default function NoteModalForm({openForm, noteId, eventId, closeForm, givenNoteTitle = "", givenNoteMessage = ""}) {
     const [noteTitle, setNoteTitle] = useState(givenNoteTitle);
     const [noteData, setNoteData] = useState(givenNoteMessage);
 
@@ -26,7 +26,7 @@ export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTi
             "userid": localStorage.getItem("session"),
         }
 
-    const handleNoteSave = () => {
+    const newNoteSave = () => {
         if (noteTitle !== "" && noteData !== "") {
             fetch("/api/UserNote/add-note", {
                 method: 'POST',
@@ -46,6 +46,38 @@ export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTi
                 .then(() => {
                     closeForm();
                 })
+        }
+    }
+
+    const editedNoteSave = () => {
+        if (noteTitle !== "" && noteData !== "") {
+            fetch("/api/UserNote/edit", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Note': `${noteId}`,
+                },
+                body: JSON.stringify(noteModel)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        //TODO add close modal after successful saved note
+                    } else {
+                        alert("ERROR!");
+                    }
+                })
+                .then(() => {
+                    closeForm();
+                })
+        }
+    }
+
+    const handleNoteSave = () => {
+        if (givenNoteTitle === "" && givenNoteMessage === "") {
+            newNoteSave();
+        } else {
+            editedNoteSave();
         }
     }
 
@@ -70,6 +102,7 @@ export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTi
                         label="Title" fullWidth
                         name="Title"
                         style={{backgroundColor: "white"}}
+                        defaultValue={noteTitle}
                         onChange={handleTitleChange}
                     />
                 </div>
@@ -80,7 +113,7 @@ export default function NoteModalForm({openForm, eventId, closeForm, givenNoteTi
                             toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "undo", "redo"],
                             removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed", "Table", "TableToolbar", "Indent", "BlockQuote"]
                         }}
-                        data=""
+                        data={noteData}
                         onChange={(event, editor) => {
                             handleMessageChange(editor.getData());
                         }}
