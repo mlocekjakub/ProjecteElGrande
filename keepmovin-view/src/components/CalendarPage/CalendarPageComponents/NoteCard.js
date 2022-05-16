@@ -5,7 +5,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import NoteModalForm from "./NoteModalForm";
 
-export default function NoteCard({eventId, noteId, time, title, message, handleReload, handleOpenNoteForm, handleCloseNoteForm}) {
+export default function NoteCard({
+                                     eventId,
+                                     noteId,
+                                     time,
+                                     title,
+                                     message,
+                                     handleReload,
+                                     handleOpenNoteForm,
+                                     handleCloseNoteForm
+                                 }) {
     const [editNote, setEditNote] = useState(false);
 
     const openEditNoteForm = () => {
@@ -17,7 +26,7 @@ export default function NoteCard({eventId, noteId, time, title, message, handleR
         handleCloseNoteForm();
         setEditNote(false);
     }
-    
+
     const handleRemoveNote = () => {
         fetch(`api/UserNote/remove-note`, {
             headers: {
@@ -60,7 +69,12 @@ export default function NoteCard({eventId, noteId, time, title, message, handleR
     } else {
         return (
             <div className="note-card-edit">
-                <NoteModalForm openForm={openEditNoteForm} eventId={eventId} closeForm={closeEditNoteForm}/>
+                <NoteModalForm openForm={openEditNoteForm}
+                               noteId={noteId}
+                               eventId={eventId}
+                               closeForm={closeEditNoteForm}
+                               givenNoteTitle={title}
+                               givenNoteMessage={message}/>
             </div>
         );
     }
