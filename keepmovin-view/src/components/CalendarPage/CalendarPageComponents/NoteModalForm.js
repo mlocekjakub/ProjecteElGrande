@@ -102,6 +102,7 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
                         label="Title" fullWidth
                         name="Title"
                         style={{backgroundColor: "white"}}
+                        defaultValue={noteTitle}
                         onChange={handleTitleChange}
                     />
                 </div>
@@ -112,7 +113,7 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
                             toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "undo", "redo"],
                             removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed", "Table", "TableToolbar", "Indent", "BlockQuote"]
                         }}
-                        data=""
+                        data={noteData}
                         onChange={(event, editor) => {
                             handleMessageChange(editor.getData());
                         }}
