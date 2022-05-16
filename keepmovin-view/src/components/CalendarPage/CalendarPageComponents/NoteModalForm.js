@@ -26,7 +26,7 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
             "userid": localStorage.getItem("session"),
         }
 
-    const handleNoteSave = () => {
+    const newNoteSave = () => {
         if (noteTitle !== "" && noteData !== "") {
             fetch("/api/UserNote/add-note", {
                 method: 'POST',
@@ -70,6 +70,14 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
                 .then(() => {
                     closeForm();
                 })
+        }
+    }
+
+    const handleNoteSave = () => {
+        if (givenNoteTitle === "" && givenNoteMessage === "") {
+            newNoteSave();
+        } else {
+            editedNoteSave();
         }
     }
 
