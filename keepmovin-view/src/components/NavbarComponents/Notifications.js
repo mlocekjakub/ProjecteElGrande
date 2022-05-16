@@ -25,10 +25,10 @@ function Notifications(props) {
                     <div className="notification-header">2 notifications here</div>
                     <div className="notification-container">
                         <div className="notification">
-                            Filip Liked your photo
+                            Filip liked your photo
                         </div>
                         <div className="notification">
-                            Filip Followed you
+                            Filip followed you
                         </div>
                     </div>
                 </div>

@@ -570,7 +570,7 @@
 }
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
     .profile-page-wrapper {
         flex-direction: column;
     }
@@ -659,7 +659,7 @@
     }
     
     .profile-page-wrapper {
-        margin: 8rem 1rem;
+        margin: 8rem 2rem;
     }
 }
 

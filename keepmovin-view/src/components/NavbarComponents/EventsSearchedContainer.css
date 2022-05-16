@@ -55,6 +55,7 @@
 .event-info-category__found {
     font-weight: 500;
     font-size: 0.7rem;
+    text-align: left;
 }
 .event-info-header__found {
     font-weight: bold;
@@ -62,6 +63,7 @@
     letter-spacing: 0.1rem;
     padding-bottom: 0.3rem;
     max-width: 15ch;
+    text-align: left;
     color: var(--expanded-card-title-clr);
 }
 .event-info-paragraph__found {
@@ -72,6 +74,15 @@
     align-items: center;
     padding-top: 0.5rem;
 }
+
+.event-info-paragraph__found-mobile {
+    gap: 1rem !Important;
+}
+
+.event-info-paragraph-level__found {
+    text-align: left;
+ }
+ 
 .Beginner {
     color: #4BB543;
 }

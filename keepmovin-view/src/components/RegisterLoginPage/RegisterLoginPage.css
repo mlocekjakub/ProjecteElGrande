@@ -306,11 +306,99 @@ input[type=submit]:disabled {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
 
 .open-modal__register-validation {
     top: 8rem;
     opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+    .register-login__container {
+        flex-direction: column;
+        min-height: 34rem;
+    }
+
+    .register-login__page {
+        min-height: 100vh;
+        margin: 7rem auto 0 auto;
+    }
+
+    .register-login__container {
+        margin-top: -5rem;
+    }
+
+    .go-to__login, .go-to__register {
+        border-radius: 0.7rem 0.7rem 0 0;
+        display: flex;
+        padding: 0.6rem 0 0.6rem 0;
+        width: 100%;
+        min-height: 4rem;
+        align-items: center;
+        justify-content:center;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    
+
+    .register-login__login {
+        padding-bottom: 1rem;
+    }
+
+    .register-login__register {
+        padding-bottom: 1rem;
+    }
+
+    .go-to__login:hover, .go-to__register:hover {
+        transform: initial;
+        background: rgba(66, 133, 244, 0.4);
+    }
+    
+    .register-login__bg-container::before {
+        border-radius: 0.7rem 0.7rem 0 0;
+    }
+
+    .register-login__bg-container {
+        min-width: initial;
+    }
+    
+    .register-login__forms {
+        justify-content: center;
+        align-items: center;
+        min-width: 24rem;
+    }
+
+    .login-register__info-container {
+        padding-top: 1rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .register__header {
+        font-size: 1.3rem;
+    }
+
+    .login-register__info-container {
+        padding-right: 0;
+    }
+
+    .input-container__register > input[type=email],
+    .input-container__register > input[type=password],
+    .input-container__register > input[type=password],
+    .email-container__login > input[type=email],
+    .password-input-container__login > input[type=password],
+    .password-input-container__login > input[type=text] {
+        min-width: initial;
+        padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    }
+    
+}
+
+@media (max-width: 500px) {
+    .register-login__forms {
+        min-width: 20rem;
+    }
 }
 
 

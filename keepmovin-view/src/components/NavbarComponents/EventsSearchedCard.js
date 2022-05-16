@@ -18,7 +18,7 @@ function EventsSearchedCard(props) {
                 <div className="event-info-header__found">
                     {props.eventName}
                 </div>
-                <div className="event-info-paragraph__found">
+                <div className={`event-info-paragraph__found ${props.isMobile && 'event-info-paragraph__found-mobile'}`}>
                     <div className="event-info-paragraph-level__found">
                         level: <span className={props.experienceLevel}>{props.experienceLevel}</span>
                     </div>

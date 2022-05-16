@@ -11,7 +11,7 @@ import SignIn from "./NavbarComponents/SignIn";
 import {useDispatch, useSelector} from "react-redux";
 import burgerIcon from "../Images/icon-hamburger.svg"
 import closeIcon from "../Images/icon-close.svg"
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import MobileCalendar from "./NavbarComponents/MobileComponents/MobileCalendar";
 import MobileProfile from "./NavbarComponents/MobileComponents/MobileProfile";
 import MobileNotifications from "./NavbarComponents/MobileComponents/MobileNotifications";
@@ -19,6 +19,8 @@ import MobileHome from "./NavbarComponents/MobileComponents/MobileHome";
 import SearchIcon from "@mui/icons-material/Search";
 import {changeSearchPhrase} from "../features/SearchPhraseNav";
 import axios from "axios";
+import EventsSearchedCard from "./NavbarComponents/EventsSearchedCard";
+import {useDetectClickOutside} from "react-detect-click-outside";
 
 
 export default function Navbar() {
@@ -34,14 +36,20 @@ export default function Navbar() {
     const typedInput = useSelector((state) => state.searchNav.value)
 
     const [eventsFound, setEventsFound] = useState([]);
+    
+    const burgerButtonRef = useRef(null);
+
+    const refFoundEvents = useRef(null);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log(typedInput)
         if (typedInput !== '') {
             axios
                 .get(`/api/Event/input/${typedInput}`)
                 .then(response => {
+                    console.log(response.data)
                     setEventsFound(response.data)
 
                 })
@@ -59,6 +67,53 @@ export default function Navbar() {
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    const mobileMenuRef = useRef(null);
+
+    const refFoundEventsClickOutside = useDetectClickOutside(
+        { onTriggered: closeSearchMenu });
+
+    function closeSearchMenu() {
+        setEventsFound([])
+    }
+    
+
+    useEffect(() => {
+        const checkIfClickedOutside = (e) => {
+            if (
+                mobileMenuExpanded
+                && mobileMenuRef.current
+                && !mobileMenuRef.current.contains(e.target)
+                && !burgerButtonRef.current.contains(e.target)) {
+                setMobileMenuExpanded(false)
+            }
+        };
+        document.addEventListener("mousedown", checkIfClickedOutside);
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside);
+        };
+    }, [mobileMenuExpanded]);
+    
+    function ExpandSearchMenu() {
+        if (searchMenuExpanded) {
+            dispatch(changeSearchPhrase(""))
+        }
+        setSearchMenuExpanded(!searchMenuExpanded)
+    }
+    
+
+    function EventsMenu() {
+        return eventsFound.map((event) =>
+            (<EventsSearchedCard key={event.eventId}
+                                 isMobile={true}
+                                 eventSearchedId={event.eventId}
+                                 eventName={event.name}
+                                 eventDateStart={event.startEvent}
+                                 sportName={event.sport}
+                                 experienceLevel={event.experienceLevel}
+                                 maxParticipants={event.maxParticipants}/>))
+    }
+
     
     return (
         <>
@@ -74,32 +129,37 @@ export default function Navbar() {
                         {isUserLogged && <Notifications />}
                         {isUserLogged ? <Profile /> : <SignIn />}
                     </div>
-                    <button className="search-mobile-menu">
-                        <input type="text" 
-                               className={`mobile-search-txt-header
-                               ${searchMenuExpanded && windowSize < 768 && 'mobile-search-menu-active'}`} 
-                               placeholder="Search for event.."
-                               required
-                               value = {typedInput}
-                               onChange = {(e) => { dispatch(changeSearchPhrase(e.target.value)) }
-                               }
-                        />
+                    <button className="search-mobile-menu" ref={refFoundEventsClickOutside}>
+                        <div>
+                            <input type="text"
+                                   className={`mobile-search-txt-header
+                               ${searchMenuExpanded && windowSize < 768 && 'mobile-search-menu-active'}`}
+                                   placeholder="Search for event.."
+                                   required
+                                   value = {typedInput}
+                                   onChange = {(e) => { dispatch(changeSearchPhrase(e.target.value)) }
+                                   }
+                            />
+                            <div className="events-menu-mobile">
+                                {typedInput && <EventsMenu />}
+                            </div>
+                        </div>
                         <SearchIcon 
                             className="mobile-header-search-icon" 
-                            onClick={() => setSearchMenuExpanded(!searchMenuExpanded)}/>
+                            onClick={() => ExpandSearchMenu()}/>
                     </button>
-                    <button className="burger-menu" 
+                    <button ref={burgerButtonRef} className="burger-menu" 
                             onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}>
                         <img src={(mobileMenuExpanded && windowSize < 768) ? closeIcon : burgerIcon} alt='burgerIcon' />
                     </button>
                 </nav>
             </header>
-            <div className={`mobile-menu-expanded 
+            <div ref={mobileMenuRef} className={`mobile-menu-expanded 
             ${(mobileMenuExpanded && windowSize < 768) ? 'mobile-menu-active' : 'mobile-menu-inactive'}`}>
-                {isUserLogged ? <MobileProfile /> : <SignIn />}
+                {isUserLogged ? <MobileProfile /> : <SignIn theme={theme} windowSize={windowSize}/>}
                 {isUserLogged && <MobileNotifications />}
                 {isUserLogged && <MobileCalendar />}
-                <MobileHome />
+                <MobileHome windowSize={windowSize}/>
             </div>
         </>
     );

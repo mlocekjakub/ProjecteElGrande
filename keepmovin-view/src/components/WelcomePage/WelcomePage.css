@@ -38,7 +38,7 @@
 }
 
 .welcome__events-details-button {
-    border: 1px solid var(--bg-btn-primary-blue);
+    border: 2px solid var(--bg-btn-primary-blue);
     color: var(--bg-btn-primary-blue);
 }
 
@@ -106,7 +106,7 @@
     
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
     .welcome-page {
         background-position: 80% 50%;
     }
@@ -114,8 +114,7 @@
 
 @media (max-width: 768px) {
     .welcome-page {
-        background-position: center 95%;
-        background-size: 15rem;
+        background-image: none;
         margin: 0 auto;
     }
 
@@ -147,11 +146,9 @@
 }
 
 @media (max-width: 500px) {
-    .welcome-page {
-        background-image: none;
-    }
-
+    
     .web-description {
         font-size: 1rem;
     }
+    
 }

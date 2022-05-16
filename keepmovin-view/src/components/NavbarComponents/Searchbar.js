@@ -46,6 +46,7 @@ function Searchbar(props) {
        else {
            return eventsFound.map((event) =>
                (<EventsSearchedCard key={event.eventId}
+                                    isMobile={false}
                                     eventSearchedId={event.eventId}
                                     eventName={event.name}
                                     eventDateStart={event.startEvent}
