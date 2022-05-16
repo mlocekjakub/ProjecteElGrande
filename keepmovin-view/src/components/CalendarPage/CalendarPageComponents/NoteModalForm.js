@@ -49,6 +49,30 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
         }
     }
 
+    const editedNoteSave = () => {
+        if (noteTitle !== "" && noteData !== "") {
+            fetch("/api/UserNote/edit", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Note': `${noteId}`,
+                },
+                body: JSON.stringify(noteModel)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        //TODO add close modal after successful saved note
+                    } else {
+                        alert("ERROR!");
+                    }
+                })
+                .then(() => {
+                    closeForm();
+                })
+        }
+    }
+
     if (!openForm) {
         return null;
     }
