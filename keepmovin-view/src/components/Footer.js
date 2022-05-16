@@ -12,7 +12,6 @@ export default function Footer() {
                 lacinia a, vestibulum eget orci.
             </div>
             <a className="go-to__github" href="https://github.com/mlocekjakub/ProjecteElGrande" target="_blank">Github <GitHubIcon /></a>
-            {/*<div>Copyright &copy;2022 Keep Movin</div>*/}
         </div>
     );
 }

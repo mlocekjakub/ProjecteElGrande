@@ -1,0 +1,140 @@
+﻿:root {
+    --bg-container: #FFFFFF;
+    --header-clr: #18181BFF;
+    --create-paragraph-clr: #8e8e8e;
+    --create-input-label-clr: #1D1E35FF;
+    --create-input-border: 2px solid rgba(5, 5, 5, 0.15);
+    --create-input-border-focus: 2px solid rgba(5, 5, 5, 0.5);
+    --create-input-background-clr: #FFFFFF;
+    
+}
+
+[data-theme='dark'] {
+    --bg-container: #1F1F23;
+    --header-clr: #efeff1;
+    --create-paragraph-clr: #adadb8;
+    --create-input-label-clr: #efeff1;
+    --create-input-border: 2px solid hsla(0, 0%, 100%, 0.1);
+    --create-input-border-focus: 2px solid #4285F4FF;
+    --create-input-background-clr: #464649;
+    
+
+}
+
+.create-event-page {
+    display: flex;
+    justify-content:center;
+    min-height: 100vh;
+    margin: 9rem 24%;
+    font-family: "Manrope", "sans-serif";
+    color: var(--header-clr);
+}
+
+.create-event-page > form {
+    padding: 3rem 5rem 2rem 5rem;
+    border-radius: 0.4rem;
+}
+
+.create-event-page > form {
+    background: var(--bg-container);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.create__header > p {
+    color: var(--create-paragraph-clr)
+}
+
+.create-event-page > form > input[type="submit"] {
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.create__sport,
+.create__event-name,
+.create__event-about,
+.create__max-participants,
+.create__type,
+.create__experience-level
+{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    gap: 1rem;
+}
+
+.create-event-page > form> div > input[type=text],
+.create-event-page > form> div > textarea,
+.create__event-location > div > input[type=text],
+.create__date-start > input[type=text],
+.create__date-end > input[type=text] {
+    background: var(--create-input-background-clr);
+    color: #efeff1;
+    border: var(--create-input-border);
+    outline: none;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+}
+
+.create-event-page > form > div > input[type=text]:focus,
+.create-event-page > form > div > textarea:focus,
+.create__event-location > div > input[type=text]:focus,
+.create__date-start > input[type=text]:focus,
+.create__date-end > input[type=text]:focus {
+    background: var(--create-input-background-clr);
+    color: #efeff1;
+    border: var(--create-input-border-focus);
+}
+
+.create-event-page > form > div > label {
+    color: var(--create-input-label-clr);
+}
+
+
+.create__event-location,
+.create__date {
+    display: flex;
+    gap: 2rem;
+}
+
+.create__date {
+    align-items: stretch;
+}
+
+.create__date > div {
+    flex: 1;
+}
+
+.create__event-location > div,
+.create__date > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: -1rem;
+}
+
+.create__event-location > div > label,
+.create__date > div > label {
+    color: var(--create-paragraph-clr);
+    font-size: 0.9rem;
+}
+
+
+@media (max-width: 1200px) {
+    .create__event-location,
+    .create__date {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .create-event-page {
+        margin: 9rem 2rem;
+    }
+}
+
+
+
+
+

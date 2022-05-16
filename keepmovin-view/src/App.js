@@ -3,13 +3,13 @@ import Layout from "./components/Layout";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage"
 import ListOfEvents from "./components/ListOfEvents/ListOfEvents";
-import EventForm from "./components/Event/EventForm";
 import RegisterLoginPage from "./components/RegisterLoginPage/RegisterLoginPage";
 import CalendarPage from "./components/CalendarPage/CalendarPage";
 import Settings from "./components/Settings/Settings";
 import './App.css';
 import UsersProfilePage from "./components/ProfilePage/UsersProfilePage";
 import EventPage from "./components/Event/EventPage";
+import CreateEventPage from "./components/Event/createEvent/CreateEventPage";
 
 
 
@@ -26,7 +26,7 @@ function App() {
               <Route path="register" element={<RegisterLoginPage />}/>
               <Route path="login" element={<RegisterLoginPage />}/>
               <Route path="event/:id" element={<EventPage />}/>
-              <Route path="event/create" element={<EventForm />} />
+              <Route path="event/create" element={<CreateEventPage />} /> 
               <Route path="list-of-events" element={<ListOfEvents />} />
               <Route path="settings" element={<Settings />} />
           </Route>

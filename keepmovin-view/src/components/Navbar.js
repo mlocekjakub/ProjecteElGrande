@@ -12,7 +12,6 @@ import {useDispatch, useSelector} from "react-redux";
 import burgerIcon from "../Images/icon-hamburger.svg"
 import closeIcon from "../Images/icon-close.svg"
 import {useEffect, useRef, useState} from "react";
-import MobileCalendar from "./NavbarComponents/MobileComponents/MobileCalendar";
 import MobileProfile from "./NavbarComponents/MobileComponents/MobileProfile";
 import MobileNotifications from "./NavbarComponents/MobileComponents/MobileNotifications";
 import MobileHome from "./NavbarComponents/MobileComponents/MobileHome";
@@ -44,7 +43,6 @@ export default function Navbar() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(typedInput)
         if (typedInput !== '') {
             axios
                 .get(`/api/Event/input/${typedInput}`)
@@ -158,7 +156,6 @@ export default function Navbar() {
             ${(mobileMenuExpanded && windowSize < 768) ? 'mobile-menu-active' : 'mobile-menu-inactive'}`}>
                 {isUserLogged ? <MobileProfile /> : <SignIn theme={theme} windowSize={windowSize}/>}
                 {isUserLogged && <MobileNotifications />}
-                {isUserLogged && <MobileCalendar />}
                 <MobileHome windowSize={windowSize}/>
             </div>
         </>
