@@ -9,6 +9,8 @@ namespace KeepMovinAPI.Repository
     {
         public new void Add(UserNote item);
         public new void Remove(Guid id);
+        public void Edit(Guid noteId, DateTime newTime, string newTitle, string newMessage);
+
         public IEnumerable<UserNote> GetAllUserNotesByEventId(Guid userId, Guid eventId);
         public IEnumerable<UserNote> GetAllByUser(Guid userId);
     }

@@ -102,6 +102,21 @@ namespace KeepMovinAPI.Controllers
             }
         }
         
+        [HttpPost("edit")]
+        public IActionResult EditNote([FromHeader(Name = "Note")] Guid noteId, UserNoteDto editedNote)
+        {
+            try
+            {
+                _userNoteRepository.Edit(noteId, editedNote.Time, editedNote.Title, editedNote.Message);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Convert.ToString(e));
+                return BadRequest();
+            }
+        }
+
         [HttpGet("remove-note")]
         public IActionResult RemoveNoteById([FromHeader(Name = "Session")] Guid userId, [FromHeader(Name = "Note")] Guid noteId)
         {

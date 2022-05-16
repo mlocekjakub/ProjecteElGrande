@@ -20,6 +20,15 @@ namespace KeepMovinAPI.Repository.Implementations
             _context.SaveChanges();
         }
 
+        public void Edit(Guid noteId, DateTime newTime, string newTitle, string newMessage)
+        {
+            var note = _context.UserNote.First(i => i.NoteId == noteId);
+            note.Time = newTime;
+            note.Title = newTitle;
+            note.Message = newMessage;
+            _context.SaveChanges();
+        }
+
         public void Remove(Guid id)
         {
             var noteToRemove = _context.UserNote.First(note => note.NoteId == id);
