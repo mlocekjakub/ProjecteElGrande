@@ -10,6 +10,8 @@ import {useSelector} from "react-redux";
 import "./CreateEventPage.css"
 import EventLocation from "./EventLocation";
 import EventDate from "./EventDate";
+import defaultImage from "../../../Images/DefaultProfileImage.jpg"
+import axios from "axios";
 
 export default function CreateEventPage(props) {
     
@@ -32,6 +34,27 @@ export default function CreateEventPage(props) {
         type: "",
         sports: "",
     });
+
+    const routeChange = useSelector((state) => state.isRouteChanged.value);
+    
+    const [organiserName, setOrganiserName] = useState("");
+
+
+    useEffect(() => {
+        let isMounted = true;
+        axios
+            .get(`/api/UserProfile/uploadProfileInformation`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'userId': localStorage.getItem("session")
+                }
+            })
+            .then(content => content.status === 200 && isMounted && setOrganiserName(content.data.name + " " + content.data.surname))
+        return () => {
+            isMounted = false;
+        }
+    }, [routeChange])
     
     const theme = useSelector((state) => state.theme.value)
     
@@ -70,14 +93,23 @@ export default function CreateEventPage(props) {
         <div className="create-event-page" data-theme={theme}>
             <form>
                 <div className="create__header">
-                    <h2>Create Event</h2>
-                    <p> This page allow you to
-                        create new event in which
-                        other users will be able to
-                        join in!
-                    </p>
+                    <h6>Create Event</h6>
+                    <h3>Event Details</h3>
+                </div>
+                <div className="create__organiser">
+                    <img src={defaultImage} alt="default-profile-image"/>
+                    <div className="create__organiser-info">
+                        <div className="create__organiser-nickname">{organiserName}</div>
+                        <div className="create__organiser-profile">
+                            Organiser -- your profile
+                        </div>
+                    </div>
                 </div>
                 <EventName 
+                    eventForm={eventForm}
+                    setEventForm={setEventForm}/>
+                <h5> Event Date </h5>
+                <EventDate
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
                 <EventAbout 
@@ -98,11 +130,7 @@ export default function CreateEventPage(props) {
                 <EventPrice  
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
-                <h4> Event Date </h4>
-                <EventDate
-                    eventForm={eventForm}
-                    setEventForm={setEventForm}/>
-                <h4> Event Location </h4>
+                <h5> Event Location </h5>
                 <EventLocation
                     eventForm={eventForm}
                     setEventForm={setEventForm}

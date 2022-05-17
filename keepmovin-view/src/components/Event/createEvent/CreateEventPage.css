@@ -42,6 +42,11 @@
     gap: 2.5rem;
 }
 
+.create__header > h6 {
+    color: var(--create-paragraph-clr);
+    opacity: 0.7;
+}
+
 .create__header > p {
     color: var(--create-paragraph-clr)
 }
@@ -118,6 +123,26 @@
 .create__date > div > label {
     color: var(--create-paragraph-clr);
     font-size: 0.9rem;
+}
+
+.create__organiser {
+    display: flex;
+    gap: 1rem;
+}
+
+.create__organiser > img {
+    border-radius: 50%;
+    max-width: 3rem;
+}
+
+.create__organiser-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.create__organiser-profile {
+    color: var(--create-paragraph-clr);
+    opacity: 0.7; 
 }
 
 
