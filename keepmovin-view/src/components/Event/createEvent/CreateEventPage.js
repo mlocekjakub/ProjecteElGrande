@@ -56,6 +56,10 @@ export default function CreateEventPage(props) {
         }
     }, [routeChange])
     
+    useEffect(() => {
+        console.log(eventForm)
+    }, [eventForm])
+    
     const theme = useSelector((state) => state.theme.value)
     
     function HandleSubmit(e) {
@@ -127,6 +131,7 @@ export default function CreateEventPage(props) {
                 <EventMaxParticipants 
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
+                <h5> Price </h5>
                 <EventPrice  
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
@@ -143,6 +148,9 @@ export default function CreateEventPage(props) {
                        onClick={(e) => HandleSubmit(e)}
                        value="Create Event"/>
             </form>
+            <div className="create__event-preview">
+                
+            </div> 
         </div>
     );
 }

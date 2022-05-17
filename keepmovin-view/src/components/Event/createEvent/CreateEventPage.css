@@ -6,6 +6,9 @@
     --create-input-border: 2px solid rgba(5, 5, 5, 0.15);
     --create-input-border-focus: 2px solid rgba(5, 5, 5, 0.5);
     --create-input-background-clr: #FFFFFF;
+    --create-dropdown-menu-bg: #EDEFF1;
+    --create-currency-button-bg: #EDEFF1;
+    --create-select-demo-clr: #18181BFF;
     
 }
 
@@ -17,7 +20,9 @@
     --create-input-border: 2px solid hsla(0, 0%, 100%, 0.1);
     --create-input-border-focus: 2px solid #4285F4FF;
     --create-input-background-clr: #464649;
-    
+    --create-dropdown-menu-bg: #1F1F23;
+    --create-currency-button-bg: #464649;
+
 
 }
 
@@ -69,11 +74,12 @@
     gap: 1rem;
 }
 
-.create-event-page > form> div > input[type=text],
-.create-event-page > form> div > textarea,
+.create-event-page > form > div > input[type=text],
+.create-event-page > form > div > textarea,
 .create__event-location > div > input[type=text],
 .create__date-start > input[type=text],
-.create__date-end > input[type=text] {
+.create__date-end > input[type=text],
+.create__price-amount > input[type=number] {
     background: var(--create-input-background-clr);
     color: #efeff1;
     border: var(--create-input-border);
@@ -86,7 +92,8 @@
 .create-event-page > form > div > textarea:focus,
 .create__event-location > div > input[type=text]:focus,
 .create__date-start > input[type=text]:focus,
-.create__date-end > input[type=text]:focus {
+.create__date-end > input[type=text]:focus,
+.create__price-amount > input[type=number]:focus {
     background: var(--create-input-background-clr);
     color: #efeff1;
     border: var(--create-input-border-focus);
@@ -98,21 +105,25 @@
 
 
 .create__event-location,
-.create__date {
+.create__date,
+.create__event-price {
     display: flex;
     gap: 2rem;
 }
 
-.create__date {
+.create__date, 
+.create__event-price {
     align-items: stretch;
 }
 
-.create__date > div {
+.create__date > div, 
+.create__event-price > div {
     flex: 1;
 }
 
 .create__event-location > div,
-.create__date > div {
+.create__date > div,
+.create__event-price > div{
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -120,7 +131,8 @@
 }
 
 .create__event-location > div > label,
-.create__date > div > label {
+.create__date > div > label,
+.create__price-amount > label {
     color: var(--create-paragraph-clr);
     font-size: 0.9rem;
 }
@@ -145,17 +157,109 @@
     opacity: 0.7; 
 }
 
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 0.4rem !Important;
+    color: #efeff1 !Important;
+    background: var(--create-input-background-clr) !Important;
+    border: var(--create-input-border) !Important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:focus {
+    border: var(--create-input-border-focus) !Important;
+    outline: none !Important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: var(--create-input-border-focus) !Important;
+}
+
+fieldset {
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.15em !Important;
+    padding-inline-end: 99% !Important;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: rgba(255, 0, 0, 0) !Important;
+    border-image: initial;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+    max-height: calc(100% - 96px);
+    color: var(--header-clr) !Important;
+    border-radius: 0 0 0.4rem 0.4rem !Important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: calc(100% - 32px);
+    outline: 0;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    color: var(--header-clr) !Important;
+}
+
+
+em {
+    font-style: normal;
+    opacity: 0.5;
+}
+
+.create__currency--polish > span, 
+.create__currency--dollar > span,
+.create__currency--euro > span {
+    color: var(--create-paragraph-clr);
+    font-size: 0.9rem;
+}
+
+.create__currency--polish > button,
+.create__currency--dollar > button,
+.create__currency--euro > button {
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: var(--create-currency-button-bg);
+    outline: none;
+    border: 0;
+    color: var(--header-clr);
+    transition: 0.3s;
+    height: 100%;
+}
+
+.create__currency--polish > button:hover,
+.create__currency--dollar > button:hover,
+.create__currency--euro > button:hover {
+    background: #4285F4FF;
+}
+
+.create__button-active {
+    background-color: #4285F4FF !Important;
+}
+
 
 @media (max-width: 1200px) {
     .create__event-location,
-    .create__date {
+    .create__date, 
+    .create__event-price {
         flex-direction: column;
     }
 }
 
 @media (max-width: 768px) {
     .create-event-page {
-        margin: 9rem 2rem;
+        margin: 8rem 2rem;
+    }
+
+    .create__organiser > img {
+        border-radius: 50%;
+        max-width: 2rem;
+        align-self: start;
     }
 }
 
