@@ -27,6 +27,7 @@ export default function EventType({eventForm, setEventForm}) {
             <FormControl>
                 <Select
                     MenuProps={{
+                        disableScrollLock: true,
                         PaperProps: {
                             sx: {
                                 backgroundColor: theme === 'light' ? '#EDEFF1' : '#1F1F23',

@@ -30,7 +30,7 @@
     display: flex;
     justify-content:center;
     min-height: 100vh;
-    margin: 9rem 24%;
+    margin: 9rem 0;
     font-family: "Manrope", "sans-serif";
     color: var(--header-clr);
 }
@@ -38,6 +38,7 @@
 .create-event-page > form {
     padding: 3rem 5rem 2rem 5rem;
     border-radius: 0.4rem;
+    
 }
 
 .create-event-page > form {
@@ -240,6 +241,9 @@ em {
 
 .create__button-active {
     background-color: #4285F4FF !Important;
+}
+
+.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
 }
 
 
