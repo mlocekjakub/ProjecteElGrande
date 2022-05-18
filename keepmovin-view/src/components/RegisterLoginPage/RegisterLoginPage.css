@@ -172,7 +172,7 @@
 
 
 
-input[type=submit] {
+.submit-container > input[type=submit] {
     background: var(--bg-btn-primary-blue);
     color: #FFFFFF;
     border: 0;
@@ -181,7 +181,7 @@ input[type=submit] {
     transition: 0.3s;
     user-select: none;
 }
-input[type=submit]:hover {
+.submit-container > input[type=submit]:hover {
     cursor: pointer;
     transform: translateY(-3px);
 }
