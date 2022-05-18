@@ -20,19 +20,38 @@ export default function EventType({eventForm, setEventForm}) {
             isMounted = false;
         }
     }, [routeChange])
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const handler = () => {
+            setIsOpen(false);
+        };
+        window.addEventListener('scroll', handler);
+        return () => {
+            window.removeEventListener('scroll', handler);
+        };
+    }, []);
     
     return (
         <div className="create__type">
             <label htmlFor="createType"> <h5>Event Type</h5> </label>
             <FormControl>
                 <Select
+                    open={isOpen}
+                    onOpen={() => {
+                        setIsOpen(true);
+                    }}
+                    onClose={() => {
+                        setIsOpen(false);
+                    }}
                     MenuProps={{
                         disableScrollLock: true,
                         PaperProps: {
                             sx: {
                                 backgroundColor: theme === 'light' ? '#EDEFF1' : '#1F1F23',
                                 '& .MuiMenuItem-root': {
-                                    color: theme === 'light' ? '#18181BFF': '#efeff1'
+                                    color: theme === 'light' ? '#18181BFF': '#efeff1',
                                 },
                             },
                         },

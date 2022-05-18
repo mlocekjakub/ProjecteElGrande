@@ -38,8 +38,7 @@ export default function CreateEventPage(props) {
     const routeChange = useSelector((state) => state.isRouteChanged.value);
     
     const [organiserName, setOrganiserName] = useState("");
-
-
+    
     useEffect(() => {
         let isMounted = true;
         axios
@@ -93,6 +92,8 @@ export default function CreateEventPage(props) {
         setEventForm(previousState)
     }
     
+    
+    
     return (
         <div className="create-event-page" data-theme={theme}>
             <form>
@@ -119,13 +120,13 @@ export default function CreateEventPage(props) {
                 <EventAbout 
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
-                <EventSport 
+                <EventSport
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
-                <EventType 
+                <EventType
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
-                <EventExperienceLevel 
+                <EventExperienceLevel
                     eventForm={eventForm}
                     setEventForm={setEventForm}/>
                 <EventMaxParticipants 

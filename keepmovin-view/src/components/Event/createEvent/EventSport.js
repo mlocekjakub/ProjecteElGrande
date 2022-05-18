@@ -21,18 +21,38 @@ export default function EventSport({eventForm, setEventForm}) {
         }
     }, [routeChange])
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const handler = () => {
+            setIsOpen(false);
+        };
+        window.addEventListener('scroll', handler);
+        return () => {
+            window.removeEventListener('scroll', handler);
+        };
+    }, []);
+    
+
     return (
         <div className="create__sport">
             <label htmlFor="createSport"> <h5>Sports Discipline</h5> </label>
             <FormControl>
                 <Select
+                    open={isOpen}
+                    onOpen={() => {
+                        setIsOpen(true);
+                    }}
+                    onClose={() => {
+                        setIsOpen(false);
+                    }}
                     MenuProps={{
                         disableScrollLock: true,
                         PaperProps: {
                             sx: {
                                 backgroundColor: theme === 'light' ? '#EDEFF1' : '#1F1F23',
                                 '& .MuiMenuItem-root': {
-                                    color: theme === 'light' ? '#18181BFF': '#efeff1'
+                                    color: theme === 'light' ? '#18181BFF': '#efeff1',
                                 },
                             },
                         },
