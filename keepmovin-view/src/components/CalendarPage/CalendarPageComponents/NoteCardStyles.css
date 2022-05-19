@@ -1,6 +1,16 @@
-﻿.note-card {
+﻿:root {
+    --note-border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+    --note-card-hover: #fafafa;
+}
+
+[data-theme='dark'] {
+    --note-border-bottom: 1px solid rgba(201, 201, 201, 0.2);
+    --note-card-hover: #2a2a2a;
+}
+
+.note-card {
     display: flex;
-    border-bottom: 1px solid rgba(5, 5, 5, 0.20);
+    border-bottom: var(--note-border-bottom);
 }
 
 .note-card-content {
@@ -29,7 +39,7 @@
 }
 
 .note-card:hover {
-    background: #fafafa;
+    background: var(--note-card-hover);
 }
 
 .note-card-edit {
