@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from 'react';
+﻿import React, {useEffect, useRef, useState} from 'react';
 import EventName from "./EventName";
 import EventAbout from "./EventAbout";
 import EventSport from "./EventSport";
@@ -12,6 +12,8 @@ import EventLocation from "./EventLocation";
 import EventDate from "./EventDate";
 import defaultImage from "../../../Images/DefaultProfileImage.jpg"
 import axios from "axios";
+import {useDetectClickOutside} from "react-detect-click-outside";
+import {useNavigate} from "react-router-dom";
 
 export default function CreateEventPage() {
     
@@ -22,7 +24,7 @@ export default function CreateEventPage() {
         experienceLevel: "",
         eventInfo: "",
         maxParticipants: "",
-        status: "",
+        status: "upcoming",
         currency: "",
         link: "",
         price: "",
@@ -41,7 +43,14 @@ export default function CreateEventPage() {
     
     const [progressState, setProgressState] = useState(1);
 
+    const [redirectToMainPage, setRedirectToMainPage] = useState(false);
+
     const theme = useSelector((state) => state.theme.value)
+
+    const navigate = useNavigate()
+
+    const modalClickOutside = useDetectClickOutside(
+        { onTriggered: closeModalCreate });
     
     useEffect(() => {
         let isMounted = true;
@@ -58,6 +67,10 @@ export default function CreateEventPage() {
             isMounted = false;
         }
     }, [routeChange])
+
+    const modalSuccessRef = useRef(null);
+
+    const modalErrorRef = useRef(null);
     
     
     function HandleSubmit(e) {
@@ -69,9 +82,36 @@ export default function CreateEventPage() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: eventForm
+            body: JSON.stringify(eventForm)
+        }).then(response => {
+            if(response.status === 200) {
+                setRedirectToMainPage(true);
+                modalSuccessRef.current.classList.add("create__modal-active")
+            }
+            else {
+                modalErrorRef.current.classList.add("create__modal-active")
+            }
         })
     }
+
+    useEffect(() => {
+        const handler = () => {
+            modalSuccessRef.current.classList.remove("create__modal-active")
+            modalErrorRef.current.classList.remove("create__modal-active")
+        };
+        window.addEventListener('scroll', handler);
+        return () => {
+            window.removeEventListener('scroll', handler);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (redirectToMainPage) {
+            setTimeout(() => {
+                navigate("/list-of-events")
+            }, 1000)
+        }
+    }, [redirectToMainPage])
 
     function HandleZipCode(e) {
         let previousState = {...eventForm}
@@ -96,19 +136,59 @@ export default function CreateEventPage() {
         progressState < 4 && setProgressState(progressState + 1)
     }
     
+    
     function DecrementProgress(e) {
         e.preventDefault()
         progressState > 1 && setProgressState(progressState - 1)
     }
     
+    function closeModalCreate() {
+        modalSuccessRef.current.classList.remove("create__modal-active")
+        modalErrorRef.current.classList.remove("create__modal-active")
+    }
     
+    const isDetails = eventForm.name !== ""
+        && eventForm.details !== ""
+        && eventForm.startEvent !== ""
+        && eventForm.endEvent !== ""
+    
+
+    const isSportsPreferences = eventForm.sports !== "" 
+            && eventForm.type !== ""
+            && eventForm.experienceLevel !== ""
+            && eventForm.maxParticipants !== ""
+    
+
+    const isLocation = eventForm.location.country !== ""
+            && eventForm.location.city !== ""
+            && eventForm.location.zipCode !== ""
+
+    const isPrice = eventForm.price !== ""
+            && eventForm.currency !== ""
+
+    const isBlockFilled = (progressState === 1 && isDetails) ||
+        (progressState === 2 && isSportsPreferences) ||
+        (progressState === 3 && isLocation) ||
+        (progressState === 4 && isPrice)
+    
+    useEffect(() => {
+        console.log(eventForm)
+    })
     
     return (
         <div className="create-event-page" data-theme={theme}>
-            <form>
+            <div className="create__status-modal" ref={modalClickOutside}>
+                <div className="create__modal-success" ref={modalSuccessRef}>
+                    Successfully created event
+                </div>
+                <div className="create__modal-error" ref={modalErrorRef}>
+                    Something went wrong
+                </div>
+            </div>
+            <form className={`${progressState === 1 && 'initial-width'}`}>
                 <div className="create__header">
                     <h6>Create Event</h6>
-                    <h3>
+                    <h3 className="create__event-header">
                         {progressState === 1 && "Event Details"}
                         {progressState === 2 && "Sport Preferences"}
                         {progressState === 3 && "Location"}
@@ -135,7 +215,7 @@ export default function CreateEventPage() {
                         <EventAbout
                             eventForm={eventForm}
                             setEventForm={setEventForm}/>
-                        <h5> Event Date </h5>
+                        <h5 className="create__event-date-header"> Event Date </h5>
                         <EventDate 
                             eventForm={eventForm} 
                             setEventForm={setEventForm}/>
@@ -187,7 +267,8 @@ export default function CreateEventPage() {
                     </button>
                     {progressState !== 4 && 
                         <button 
-                            className="create__next-page-button" 
+                            disabled={isBlockFilled === false}
+                            className={`create__next-page-button ${isBlockFilled ? 'create__next-page-button-active' : 'create__next-page-button-inactive'}`}
                             onClick={e => IncrementProgress(e)}>
                             Next
                         </button>

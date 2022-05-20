@@ -11,6 +11,8 @@
     --create-select-demo-clr: #18181BFF;
     
     
+    
+    
     --create-previous-button-bg: #E4E6EB;
     --create-previous-button-bg-hover: rgba(228, 230, 235, 0.7);
     
@@ -28,6 +30,8 @@
     --create-currency-button-bg: #464649;
     
     
+    
+    
     --create-previous-button-bg: rgba(255,255,255,.1);
     --create-previous-button-bg-hover: rgba(255, 255, 255, 0.2);
     
@@ -37,6 +41,7 @@
 
 .create-event-page {
     display: flex;
+    flex-direction: column;
     justify-content:center;
     align-items: center;
     min-height: 100vh;
@@ -48,7 +53,13 @@
 .create-event-page > form {
     padding: 3rem 4rem 3rem 4rem;
     border-radius: 0.4rem;
-    
+    margin-top: -3rem;
+    height: 60rem;
+    width: clamp(40rem, 50%, 45rem);
+}
+
+.initial-width {
+    height: initial !Important;
 }
 
 .create-event-page > form {
@@ -57,6 +68,8 @@
     flex-direction: column;
     gap: 2.5rem;
 }
+
+
 
 .create__header > h6 {
     color: var(--create-paragraph-clr);
@@ -89,14 +102,15 @@
     gap: 1rem;
 }
 
+
 .create-event-page > form > div > input[type=text],
 .create-event-page > form > div > textarea,
 .create__event-location > div > input[type=text],
-.create__date-start > input[type=text],
-.create__date-end > input[type=text],
+.create__date-start > input[type=datetime-local],
+.create__date-end > input[type=datetime-local],
 .create__price-amount > input[type=number] {
     background: var(--create-input-background-clr);
-    color: #efeff1;
+    color: var(--header-clr);
     border: var(--create-input-border);
     outline: none;
     padding: 0.5rem;
@@ -106,25 +120,38 @@
 .create-event-page > form > div > input[type=text]:focus,
 .create-event-page > form > div > textarea:focus,
 .create__event-location > div > input[type=text]:focus,
-.create__date-start > input[type=text]:focus,
-.create__date-end > input[type=text]:focus,
+.create__date-start > input[type=datetime-local]:focus,
+.create__date-end > input[type=datetime-local]:focus,
 .create__price-amount > input[type=number]:focus {
     background: var(--create-input-background-clr);
-    color: #efeff1;
+    color: var(--header-clr);
     border: var(--create-input-border-focus);
+}
+
+.create__date-start > input[type=datetime-local]:hover,
+.create__date-end > input[type=datetime-local]:hover {
+    cursor: pointer;
 }
 
 .create-event-page > form > div > label {
     color: var(--create-input-label-clr);
 }
 
+::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(65%) sepia(49%) saturate(6984%) hue-rotate(200deg) brightness(95%) contrast(102%);
+}
 
-.create__event-location,
+
+
+
+
 .create__date,
 .create__event-price {
     display: flex;
     gap: 2rem;
 }
+
 
 .create__date, 
 .create__event-price {
@@ -136,14 +163,32 @@
     flex: 1;
 }
 
-.create__event-location > div,
 .create__date > div,
-.create__event-price > div{
+.create__event-price > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: -1rem;
 }
+
+.create__event-location > div{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create__event-location {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/*.create__zip-code {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: start;
+}*/
 
 .create__event-location > div > label,
 .create__date > div > label,
@@ -174,7 +219,7 @@
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     border-radius: 0.4rem !Important;
-    color: #efeff1 !Important;
+    color: var(--header-clr) !Important;
     background: var(--create-input-background-clr) !Important;
     border: var(--create-input-border) !Important;
 }
@@ -261,7 +306,7 @@ em {
 .create__navigation-buttons {
     display: flex;
     gap: 1rem;
-    align-items: stretch;
+    align-items: end;
     font-weight: 700;
     margin-top: -1rem;
     user-select: none;
@@ -302,10 +347,17 @@ em {
     transition: 100ms ease-in-out;
 }
 
-.create__next-page-button:hover,
+.create__next-page-button-active:hover,
 .create__submit-button:hover {
     background-color: #73a7ff;
 }
+
+.create__next-page-button-inactive {
+    background-color: var(--create-previous-button-bg) !Important;
+    opacity: 0.5;
+}
+
+
 
 .create__submit-button:hover {
     transform: translateY(-3px);
@@ -318,7 +370,8 @@ em {
 
 .create__progress-bar {
     display: flex;
-    align-items: stretch;
+    align-items: end;
+    height: 100%;
     gap: 0.5rem;
 }
 
@@ -333,8 +386,43 @@ em {
 }
 
 .create__progress-bar-filled {
-    /*background: #4285F4FF !Important;*/
     background-position: left;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+
+    color: var(--header-clr) !Important;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root:hover {
+    cursor: pointer !Important;
+}
+
+.create__status-modal > div {
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content:center;
+    display: flex;
+    visibility: hidden;
+    position: relative;
+    top: -5rem;
+    z-index: 1000;
+    transition: 100ms ease-in-out;
+    opacity: 0
+}
+
+.create__modal-active {
+    visibility: visible !Important;
+    top: -3rem !Important;
+    opacity: 1 !Important;
+}
+
+.create__modal-success {
+    background: #4BB543;
+}
+.create__modal-error {
+    background: #B81D13;
 }
 
 
@@ -342,6 +430,12 @@ em {
 @media (max-width: 768px) {
     .create-event-page {
         margin: 0 2rem;
+    }
+
+    .create-event-page > form {
+        width: initial;
+        height: 65rem;
+
     }
 
     .create__event-location,
@@ -356,6 +450,7 @@ em {
         align-self: start;
     }
 }
+
 
 
 
