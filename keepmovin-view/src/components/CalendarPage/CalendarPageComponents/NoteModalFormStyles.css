@@ -1,11 +1,22 @@
-﻿.note-form-buttons-box {
+﻿:root {
+    --bg-note-form: #FFFFFF;
+    --border-note-input: rgba(5, 5, 5, 0.20);
+}
+
+[data-theme='dark'] {
+    --bg-note-form: #1F1F23;
+    --border-note-input: rgb(255, 255, 255, 0.2);
+}
+
+.note-form-buttons-box {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 0.1rem;
 }
 
 .note-form-button {
     text-decoration: none;
-    color: #FFFFFF;
+    color: var(--bg-note-form);
     text-align: center;
     letter-spacing: 0.03rem;
     padding: 0.7rem 0;
@@ -29,4 +40,21 @@
 
 .note-save:hover, .note-dismiss:hover {
     transform: translateY(-3px);
+}
+
+.MuiOutlinedInput-input {
+    border: 1px solid var(--border-note-input) !important;
+    border-radius: 0.3rem !important;
+}
+
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+    color: rgb(66, 133, 244) !important;
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    color: var(--header-clr-event) !important;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    color: var(--header-clr-event) !important;
 }

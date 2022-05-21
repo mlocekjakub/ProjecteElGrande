@@ -101,7 +101,6 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
                         id="note-title"
                         label="Title" fullWidth
                         name="Title"
-                        style={{backgroundColor: "white"}}
                         defaultValue={noteTitle}
                         onChange={handleTitleChange}
                     />
