@@ -1,11 +1,15 @@
 ﻿:root {
     --bg-note-form: #FFFFFF;
     --border-note-input: rgba(5, 5, 5, 0.20);
+    --note-form-ck-buttons-hover: #fafafa;
+    --note-form-ck-buttons-active: #f3f3f3;
 }
 
 [data-theme='dark'] {
     --bg-note-form: #1F1F23;
     --border-note-input: rgb(255, 255, 255, 0.2);
+    --note-form-ck-buttons-hover: #2a2a2a;
+    --note-form-ck-buttons-active: #3d3d3d;
 }
 
 .note-form-buttons-box {
@@ -57,4 +61,46 @@
 
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     color: var(--header-clr-event) !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+    background: var(--bg-note-form) !important;
+    border: 1px solid var(--border-note-input) !important;
+    border-radius: 0 0 0.3rem 0.3rem !important;
+}
+
+.ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel {
+    background: var(--bg-note-form) !important;
+}
+
+.ck.ck-icon {
+    fill: currentColor;
+    color: var(--header-clr-event) !important;
+}
+
+.ck-button:hover {
+    background: var(--note-form-ck-buttons-hover) !important;
+}
+
+.ck-on {
+    background: var(--note-form-ck-buttons-active) !important;
+}
+
+.ck-dropdown__button {
+    color: var(--header-clr-event) !important;
+}
+
+.ck.ck-list__item .ck-button {
+    background: var(--bg-note-form) !important;
+    color: var(--header-clr-event) !important;
+}
+
+.ck.ck-toolbar__separator {
+    background: var(--border-note-input) !important;
+}
+
+.ck.ck-toolbar {
+    border: 1px solid var(--border-note-input) !important;
+    border-radius: 0.3rem 0.3rem 0 0 !important;
+    border-bottom: none !important;
 }
