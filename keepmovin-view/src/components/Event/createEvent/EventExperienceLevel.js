@@ -32,10 +32,15 @@ export default function EventExperienceLevel({eventForm, setEventForm}) {
             window.removeEventListener('scroll', handler);
         };
     }, []);
+    
+    useEffect(() => {
+        console.log(experienceLevels)
+    })
 
     return (
         <div className="create__experience-level">
             <label htmlFor="createExperienceLevel"> <h5>Experience Level</h5></label>
+            {experienceLevels && 
             <FormControl>
                 <Select
                     open={isOpen}
@@ -61,12 +66,19 @@ export default function EventExperienceLevel({eventForm, setEventForm}) {
                     displayEmpty
                     inputProps={{ 'aria-label': 'With label' }}
                 >
-                    <MenuItem value="">
-                        <em>Select Experience Level</em>
-                    </MenuItem>
+                    {eventForm.experienceLevel &&
+                        <MenuItem value={eventForm.experienceLevel}>
+                            <em>{eventForm.experienceLevel.name}</em>
+                        </MenuItem>
+                    }
+                        <MenuItem value="">
+                            <em>Select Experience Level</em>
+                        </MenuItem>
+                    
                     {experienceLevels && experienceLevels.map(exp => <MenuItem key={exp.experienceLevelId} value={exp}>{exp.name}</MenuItem>)}
                 </Select>
             </FormControl>
+            }
         </div>
     );
 }

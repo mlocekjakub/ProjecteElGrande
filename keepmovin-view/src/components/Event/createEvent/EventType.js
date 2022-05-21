@@ -36,6 +36,7 @@ export default function EventType({eventForm, setEventForm}) {
     return (
         <div className="create__type">
             <label htmlFor="createType"> <h5>Event Type</h5> </label>
+            {types &&
             <FormControl>
                 <Select
                     open={isOpen}
@@ -61,12 +62,20 @@ export default function EventType({eventForm, setEventForm}) {
                     displayEmpty
                     inputProps={{ 'aria-label': 'With label' }}
                 >
-                    <MenuItem value="">
-                        <em>Select Type</em>
-                    </MenuItem>
+                    {eventForm.type &&
+                        <MenuItem value={eventForm.type}>
+                            <em>{eventForm.type.name}</em>
+                        </MenuItem>
+                    }
+                    
+                        <MenuItem value="">
+                            <em>Select Type</em>
+                        </MenuItem>
+                    
                     {types && types.map(type => <MenuItem key={type.typeId} value={type}>{type.name}</MenuItem>)}
                 </Select>
             </FormControl>
+            }
         </div>
     );
 }

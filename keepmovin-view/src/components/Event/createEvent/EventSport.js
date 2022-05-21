@@ -37,6 +37,7 @@ export default function EventSport({eventForm, setEventForm}) {
     return (
         <div className="create__sport">
             <label htmlFor="createSport"> <h5>Sports Discipline</h5> </label>
+            {sports &&
             <FormControl>
                 <Select
                     open={isOpen}
@@ -62,12 +63,20 @@ export default function EventSport({eventForm, setEventForm}) {
                     displayEmpty
                     inputProps={{ 'aria-label': 'With label' }}
                 >
-                    <MenuItem value="">
-                        <em>Select Sport</em>
-                    </MenuItem>
+                    {eventForm.sports &&
+                        <MenuItem value={eventForm.sports}>
+                            <em>{eventForm.sports.name}</em>
+                        </MenuItem>
+                    }
+                    
+                        <MenuItem value="">
+                            <em>Select Sport</em>
+                        </MenuItem>
+                    
                     {sports && sports.map(sport => <MenuItem key={sport.sportId} value={sport}>{sport.name}</MenuItem>)}
                 </Select>
             </FormControl>
+            }
         </div>
     );
 }
