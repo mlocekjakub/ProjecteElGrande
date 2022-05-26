@@ -109,7 +109,7 @@ export default function NoteModalForm({openForm, noteId, eventId, closeForm, giv
                     <CKEditor
                         editor={ClassicEditor}
                         config={{
-                            toolbar: ["heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "undo", "redo"],
+                            toolbar: ["heading", "|", "bold", "italic", "bulletedList", "numberedList", "undo", "redo"],
                             removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed", "Table", "TableToolbar", "Indent", "BlockQuote"]
                         }}
                         data={noteData}
